@@ -33,15 +33,24 @@ def scan_audit(
     has_compliance_ref = False
     has_pii_in_logs = False
 
-    for py_file in target.rglob("*.py"):
-        if _should_skip(py_file):
-            continue
-        if _progress:
-            _progress()
-        try:
-            source = py_file.read_text(encoding="utf-8", errors="ignore")
-        except OSError:
-            continue
+    import os
+
+    skip_dirs = {
+        ".venv", "venv", "node_modules", ".git", "__pycache__",
+        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
+    }
+    for dirpath, dirnames, filenames in os.walk(target):
+        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        for fname in filenames:
+            if not fname.endswith(".py"):
+                continue
+            py_file = Path(dirpath) / fname
+            if _progress:
+                _progress()
+            try:
+                source = py_file.read_text(encoding="utf-8", errors="ignore")
+            except OSError:
+                continue
 
         # Check for audit logging
         if re.search(r"audit.*log|log.*audit|AuditLog|audit_trail", source, re.IGNORECASE):

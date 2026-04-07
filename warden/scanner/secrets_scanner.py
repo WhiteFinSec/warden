@@ -135,26 +135,18 @@ def scan_secrets(
 
 def _iter_scannable_files(target: Path) -> list[Path]:
     """Iterate over files that should be scanned for secrets."""
+    import os
+
     files: list[Path] = []
-
-    for filepath in target.rglob("*"):
-        if _should_skip(filepath):
-            continue
-        try:
-            if not filepath.is_file():
+    for dirpath, dirnames, filenames in os.walk(target):
+        dirnames[:] = [d for d in dirnames if d not in NEVER_SCAN_DIRS]
+        for fname in filenames:
+            if fname in SKIP_FILENAMES:
                 continue
-        except OSError:
-            continue
-
-        # Always scan .env files
-        if filepath.name in ALWAYS_SCAN:
-            files.append(filepath)
-            continue
-
-        # Scan known extensions
-        if filepath.suffix.lower() in SCAN_EXTENSIONS:
-            files.append(filepath)
-
+            if fname in ALWAYS_SCAN:
+                files.append(Path(dirpath) / fname)
+            elif Path(fname).suffix.lower() in SCAN_EXTENSIONS:
+                files.append(Path(dirpath) / fname)
     return files
 
 

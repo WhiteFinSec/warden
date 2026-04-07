@@ -41,34 +41,45 @@ def scan_dependencies(target: Path) -> tuple[list[Finding], dict[str, int]]:
         findings.extend(_analyze_lockfile(lock_file))
 
     # Node: package.json
-    for pkg_json in target.rglob("package.json"):
-        if not _should_skip(pkg_json):
-            findings.extend(_analyze_package_json(pkg_json))
+    for pkg_json in _find_files_by_name(target, "package.json"):
+        findings.extend(_analyze_package_json(pkg_json))
 
     scores = _calculate_scores(findings, target)
     return findings, scores
 
 
-def _find_requirement_files(target: Path) -> list[Path]:
+def _find_files_by_name(target: Path, *names: str) -> list[Path]:
+    """Walk tree once, collect files matching any of the given names."""
+    import os
+
+    skip_dirs = {
+        ".venv", "venv", "node_modules", ".git", "__pycache__",
+        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
+    }
+    name_set = set(names)
     results: list[Path] = []
-    for name in ("requirements.txt", "requirements-dev.txt", "requirements-prod.txt"):
-        for f in target.rglob(name):
-            if not _should_skip(f):
-                results.append(f)
-    for f in target.rglob("pyproject.toml"):
-        if not _should_skip(f):
-            results.append(f)
+    for dirpath, dirnames, filenames in os.walk(target):
+        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        for fname in filenames:
+            if fname in name_set:
+                results.append(Path(dirpath) / fname)
     return results
+
+
+def _find_requirement_files(target: Path) -> list[Path]:
+    return _find_files_by_name(
+        target,
+        "requirements.txt", "requirements-dev.txt", "requirements-prod.txt",
+        "pyproject.toml",
+    )
 
 
 def _find_lockfiles(target: Path) -> list[Path]:
-    results: list[Path] = []
-    for name in ("Pipfile.lock", "poetry.lock", "pdm.lock", "uv.lock",
-                 "package-lock.json", "yarn.lock", "pnpm-lock.yaml"):
-        for f in target.rglob(name):
-            if not _should_skip(f):
-                results.append(f)
-    return results
+    return _find_files_by_name(
+        target,
+        "Pipfile.lock", "poetry.lock", "pdm.lock", "uv.lock",
+        "package-lock.json", "yarn.lock", "pnpm-lock.yaml",
+    )
 
 
 def _analyze_requirements(filepath: Path) -> list[Finding]:

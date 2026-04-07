@@ -39,28 +39,46 @@ def scan_infra(target: Path) -> tuple[list[Finding], dict[str, int]]:
 
 
 def _find_files(target: Path, patterns: list[str]) -> list[Path]:
+    import fnmatch
+    import os
+
+    skip_dirs = {
+        ".venv", "venv", "node_modules", ".git", "__pycache__",
+        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
+    }
     results: list[Path] = []
-    for pattern in patterns:
-        if "*" in pattern:
-            results.extend(f for f in target.rglob(pattern) if not _should_skip(f))
-        else:
-            # Exact name match
-            for f in target.rglob(pattern):
-                if not _should_skip(f) and f.name == pattern:
-                    results.append(f)
-    return list(set(results))
+    for dirpath, dirnames, filenames in os.walk(target):
+        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        for fname in filenames:
+            for pattern in patterns:
+                if "*" in pattern:
+                    if fnmatch.fnmatch(fname, pattern):
+                        results.append(Path(dirpath) / fname)
+                        break
+                elif fname == pattern:
+                    results.append(Path(dirpath) / fname)
+                    break
+    return results
 
 
 def _find_k8s_manifests(target: Path) -> list[Path]:
+    import os
+
+    skip_dirs = {
+        ".venv", "venv", "node_modules", ".git", "__pycache__",
+        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
+    }
     results: list[Path] = []
-    for ext in ("*.yml", "*.yaml"):
-        for f in target.rglob(ext):
-            if _should_skip(f):
+    for dirpath, dirnames, filenames in os.walk(target):
+        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        for fname in filenames:
+            if not (fname.endswith(".yml") or fname.endswith(".yaml")):
                 continue
+            fpath = Path(dirpath) / fname
             try:
-                content = f.read_text(encoding="utf-8", errors="ignore")[:500]
+                content = fpath.read_text(encoding="utf-8", errors="ignore")[:500]
                 if "apiVersion:" in content and "kind:" in content:
-                    results.append(f)
+                    results.append(fpath)
             except OSError:
                 pass
     return results
@@ -196,8 +214,8 @@ def _calculate_scores(findings: list[Finding], target: Path) -> dict[str, int]:
     scores: dict[str, int] = {}
 
     # Check for infra governance signals
-    has_dockerfile = bool(list(target.rglob("Dockerfile")))
-    has_compose = bool(list(target.rglob("docker-compose.yml")) or list(target.rglob("compose.yml")))
+    has_dockerfile = bool(_find_files(target, ["Dockerfile"]))
+    has_compose = bool(_find_files(target, ["docker-compose.yml", "compose.yml"]))
     has_k8s = bool(_find_k8s_manifests(target))
 
     d4_deductions = sum(1 for f in findings if f.dimension == "D4")

@@ -16,10 +16,17 @@ def scan_agent_arch(target: Path) -> tuple[list[Finding], dict[str, int]]:
     """
     findings: list[Finding] = []
 
-    for py_file in target.rglob("*.py"):
-        if _should_skip(py_file):
-            continue
-        findings.extend(_analyze_agent_file(py_file))
+    import os
+
+    skip_dirs = {
+        ".venv", "venv", "node_modules", ".git", "__pycache__",
+        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
+    }
+    for dirpath, dirnames, filenames in os.walk(target):
+        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        for fname in filenames:
+            if fname.endswith(".py"):
+                findings.extend(_analyze_agent_file(Path(dirpath) / fname))
 
     scores = _calculate_scores(findings, target)
     return findings, scores
@@ -188,19 +195,29 @@ def _calculate_scores(findings: list[Finding], target: Path) -> dict[str, int]:
 
 
 def _count_signals(target: Path, patterns: list[str]) -> int:
+    import os
+
+    skip_dirs = {
+        ".venv", "venv", "node_modules", ".git", "__pycache__",
+        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
+    }
     count = 0
     compiled = [re.compile(p, re.IGNORECASE) for p in patterns]
-    for py_file in target.rglob("*.py"):
-        if _should_skip(py_file):
-            continue
-        try:
-            content = py_file.read_text(encoding="utf-8", errors="ignore")
-        except OSError:
-            continue
-        for pat in compiled:
-            if pat.search(content):
-                count += 1
-                break
+    for dirpath, dirnames, filenames in os.walk(target):
+        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        for fname in filenames:
+            if not fname.endswith(".py"):
+                continue
+            try:
+                content = (Path(dirpath) / fname).read_text(
+                    encoding="utf-8", errors="ignore"
+                )
+            except OSError:
+                continue
+            for pat in compiled:
+                if pat.search(content):
+                    count += 1
+                    break
     return count
 
 

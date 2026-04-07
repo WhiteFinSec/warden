@@ -314,46 +314,62 @@ def detect_competitors(target: Path) -> tuple[list[CompetitorMatch], str]:
 
 
 def _collect_source(target: Path) -> str:
+    import os
+
+    skip_dirs = {
+        ".venv", "venv", "node_modules", ".git", "__pycache__",
+        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
+    }
+    scan_exts = {".py", ".js", ".ts", ".yaml", ".yml", ".json", ".toml"}
     sources: list[str] = []
-    for ext in ("*.py", "*.js", "*.ts", "*.yaml", "*.yml", "*.json", "*.toml"):
-        for f in target.rglob(ext):
-            if _should_skip(f):
-                continue
-            try:
-                sources.append(f.read_text(encoding="utf-8", errors="ignore"))
-            except OSError:
-                continue
+    for dirpath, dirnames, filenames in os.walk(target):
+        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        for fname in filenames:
+            if Path(fname).suffix.lower() in scan_exts:
+                try:
+                    sources.append(
+                        (Path(dirpath) / fname).read_text(
+                            encoding="utf-8", errors="ignore"
+                        )
+                    )
+                except OSError:
+                    continue
     return "\n".join(sources)
 
 
 def _get_installed_packages(target: Path) -> set[str]:
     """Get installed packages from requirements files and lockfiles."""
+    import os
+
+    skip_dirs = {
+        ".venv", "venv", "node_modules", ".git", "__pycache__",
+        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
+    }
     packages: set[str] = set()
 
-    # requirements.txt
-    for req in target.rglob("requirements*.txt"):
-        if _should_skip(req):
-            continue
-        try:
-            for line in req.read_text(encoding="utf-8", errors="ignore").splitlines():
-                line = line.strip()
-                if line and not line.startswith("#") and not line.startswith("-"):
-                    pkg = re.match(r"([a-zA-Z0-9_\-]+)", line)
-                    if pkg:
-                        packages.add(pkg.group(1).lower())
-        except OSError:
-            continue
-
-    # package.json
-    for pkg_json in target.rglob("package.json"):
-        if _should_skip(pkg_json):
-            continue
-        try:
-            data = json.loads(pkg_json.read_text(encoding="utf-8"))
-            for dep_type in ("dependencies", "devDependencies"):
-                packages.update(d.lower() for d in data.get(dep_type, {}))
-        except (json.JSONDecodeError, OSError):
-            continue
+    for dirpath, dirnames, filenames in os.walk(target):
+        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        for fname in filenames:
+            fpath = Path(dirpath) / fname
+            if fname.startswith("requirements") and fname.endswith(".txt"):
+                try:
+                    for line in fpath.read_text(
+                        encoding="utf-8", errors="ignore"
+                    ).splitlines():
+                        line = line.strip()
+                        if line and not line.startswith("#") and not line.startswith("-"):
+                            pkg = re.match(r"([a-zA-Z0-9_\-]+)", line)
+                            if pkg:
+                                packages.add(pkg.group(1).lower())
+                except OSError:
+                    continue
+            elif fname == "package.json":
+                try:
+                    data = json.loads(fpath.read_text(encoding="utf-8"))
+                    for dep_type in ("dependencies", "devDependencies"):
+                        packages.update(d.lower() for d in data.get(dep_type, {}))
+                except (json.JSONDecodeError, OSError):
+                    continue
 
     return packages
 

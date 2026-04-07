@@ -234,14 +234,25 @@ def _check_testing(check: dict, all_source: str) -> bool:
 
 def _collect_source(target: Path) -> str:
     """Collect all Python source code from the target."""
+    import os
+
+    skip_dirs = {
+        ".venv", "venv", "node_modules", ".git", "__pycache__",
+        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
+    }
     sources: list[str] = []
-    for py_file in target.rglob("*.py"):
-        if _should_skip(py_file):
-            continue
-        try:
-            sources.append(py_file.read_text(encoding="utf-8", errors="ignore"))
-        except OSError:
-            continue
+    for dirpath, dirnames, filenames in os.walk(target):
+        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        for fname in filenames:
+            if fname.endswith(".py"):
+                try:
+                    sources.append(
+                        (Path(dirpath) / fname).read_text(
+                            encoding="utf-8", errors="ignore"
+                        )
+                    )
+                except OSError:
+                    continue
     return "\n".join(sources)
 
 

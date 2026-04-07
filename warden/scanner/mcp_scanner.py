@@ -12,6 +12,7 @@ MCP_CONFIG_FILENAMES = [
     "mcp_config.json",
     ".mcp.json",
     "claude_desktop_config.json",
+    "settings.json",
 ]
 
 MCP_CONFIG_DIRS = [
@@ -75,9 +76,19 @@ def _find_mcp_configs(target: Path) -> list[Path]:
                     configs.append(candidate)
 
     # Recursive search for mcp*.json
-    for f in target.rglob("mcp*.json"):
-        if f not in configs and not _should_skip(f):
-            configs.append(f)
+    import os
+
+    skip_dirs = {
+        ".venv", "venv", "node_modules", ".git", "__pycache__",
+        "dist", "build", "site-packages", "out", ".next", ".omc",
+    }
+    for dirpath, dirnames, filenames in os.walk(target):
+        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        for fname in filenames:
+            if fname.startswith("mcp") and fname.endswith(".json"):
+                f = Path(dirpath) / fname
+                if f not in configs:
+                    configs.append(f)
 
     return configs
 
