@@ -367,10 +367,18 @@ def _scan_js_file(filepath: Path) -> list[Finding]:
     except (OSError, UnicodeDecodeError):
         return []
 
+    # Strip single-line comment lines to reduce false positives
+    lines = source.splitlines(keepends=True)
+    cleaned_lines = [
+        ln if not ln.lstrip().startswith("//") else "\n"
+        for ln in lines
+    ]
+    cleaned = "".join(cleaned_lines)
+
     findings: list[Finding] = []
     for pattern, dim, severity, message, remediation in JS_PATTERNS:
-        for match in pattern.finditer(source):
-            line = source[:match.start()].count("\n") + 1
+        for match in pattern.finditer(cleaned):
+            line = cleaned[:match.start()].count("\n") + 1
             findings.append(Finding(
                 layer=1, scanner="code_analyzer",
                 file=str(filepath), line=line,

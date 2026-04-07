@@ -9,7 +9,6 @@ from __future__ import annotations
 import json
 import os
 import re
-import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -237,8 +236,14 @@ def detect_competitors(target: Path) -> tuple[list[CompetitorMatch], str]:
     matches: list[CompetitorMatch] = []
     primary_gtm = ""
 
-    # Collect source for code pattern matching
-    all_source = _collect_source(target)
+    # Build compiled patterns for per-file matching
+    all_patterns: dict[str, list[re.Pattern[str]]] = {}
+    for cid, prof in COMPETITORS.items():
+        if prof.code_patterns:
+            all_patterns[cid] = [re.compile(p, re.IGNORECASE) for p in prof.code_patterns]
+
+    # Per-file code pattern matching (memory-efficient, early exit)
+    code_matches = _match_code_patterns(target, all_patterns)
 
     # Collect installed packages
     installed_packages = _get_installed_packages(target)
@@ -266,14 +271,7 @@ def detect_competitors(target: Path) -> tuple[list[CompetitorMatch], str]:
                 if "env_vars" not in layers:
                     layers.append("env_vars")
 
-        # Layer 2: Running processes (best-effort, non-blocking)
-        if profile.processes:
-            running = _check_processes(profile.processes)
-            if running:
-                signals.extend(f"process:{p}" for p in running)
-                layers.append("processes")
-
-        # Layer 2b: Docker images (from docker-compose files)
+        # Layer 2: Docker images (from docker-compose files)
         for img in profile.docker_images:
             if any(img.lower() in di.lower() for di in docker_images):
                 signals.append(f"docker:{img}")
@@ -294,14 +292,13 @@ def detect_competitors(target: Path) -> tuple[list[CompetitorMatch], str]:
                 if "packages" not in layers:
                     layers.append("packages")
 
-        # Layer 5: Code patterns (count all matches for confidence boost)
-        code_match_count = 0
-        for pattern in profile.code_patterns:
-            if re.search(pattern, all_source, re.IGNORECASE):
-                signals.append(f"code:{pattern}")
-                code_match_count += 1
-                if "code_patterns" not in layers:
-                    layers.append("code_patterns")
+        # Layer 5: Code patterns (pre-computed per-file matching)
+        matched_patterns = code_matches.get(comp_id, set())
+        code_match_count = len(matched_patterns)
+        if matched_patterns:
+            layers.append("code_patterns")
+            for pat_str in matched_patterns:
+                signals.append(f"code:{pat_str}")
 
         if not signals:
             continue
@@ -378,26 +375,60 @@ def _collect_docker_images(target: Path) -> list[str]:
     return images
 
 
-def _collect_source(target: Path) -> str:
+def _match_code_patterns(
+    target: Path,
+    all_patterns: dict[str, list[re.Pattern[str]]],
+) -> dict[str, set[str]]:
+    """Per-file code pattern matching with early exit.
+
+    Returns {competitor_id: {matched_pattern_str, ...}} for each competitor.
+    Stops checking a competitor's patterns once all are found.
+    Much more memory-efficient than concatenating all source into one string.
+    """
     import os
 
     scan_exts = {".py", ".js", ".ts", ".yaml", ".yml", ".json", ".toml"}
-    max_file_size = 2_000_000  # 2MB — skip database dumps, logs, binaries
-    sources: list[str] = []
+    max_file_size = 2_000_000
+
+    # Track which patterns still need matching per competitor
+    remaining: dict[str, list[re.Pattern[str]]] = {
+        cid: list(patterns) for cid, patterns in all_patterns.items()
+    }
+    matched: dict[str, set[str]] = {cid: set() for cid in all_patterns}
+
     for dirpath, dirnames, filenames in os.walk(target):
         dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
+
+        # Stop walking if every competitor's patterns are fully matched
+        if not any(remaining.values()):
+            break
+
         for fname in filenames:
-            if Path(fname).suffix.lower() in scan_exts:
-                filepath = Path(dirpath) / fname
-                try:
-                    if filepath.stat().st_size > max_file_size:
-                        continue
-                    sources.append(
-                        filepath.read_text(encoding="utf-8", errors="ignore")
-                    )
-                except (OSError, MemoryError):
+            if Path(fname).suffix.lower() not in scan_exts:
+                continue
+            filepath = Path(dirpath) / fname
+            try:
+                if filepath.stat().st_size > max_file_size:
                     continue
-    return "\n".join(sources)
+                content = filepath.read_text(encoding="utf-8", errors="ignore")
+            except (OSError, MemoryError):
+                continue
+
+            for cid in list(remaining):
+                still_needed = []
+                for pat in remaining[cid]:
+                    if pat.search(content):
+                        matched[cid].add(pat.pattern)
+                    else:
+                        still_needed.append(pat)
+                remaining[cid] = still_needed
+                if not still_needed:
+                    del remaining[cid]  # all patterns found, stop checking
+
+            if not remaining:
+                break
+
+    return matched
 
 
 def _get_installed_packages(target: Path) -> set[str]:
@@ -432,29 +463,6 @@ def _get_installed_packages(target: Path) -> set[str]:
 
     return packages
 
-
-def _check_processes(process_names: list[str]) -> list[str]:
-    """Check for running processes. Best-effort, never fails.
-
-    On Windows tasklist can hang under constrained I/O — skip entirely
-    when the WARDEN_SKIP_PROCS env var is set or when running in test mode.
-    """
-    if os.environ.get("WARDEN_SKIP_PROCS") or os.environ.get("PYTEST_CURRENT_TEST"):
-        return []
-    try:
-        cmd = ["tasklist", "/FO", "CSV", "/NH"] if os.name == "nt" else ["ps", "aux"]
-        proc = subprocess.Popen(
-            cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True,
-        )
-        try:
-            output, _ = proc.communicate(timeout=3)
-        except subprocess.TimeoutExpired:
-            proc.kill()
-            proc.wait()
-            return []
-        return [p for p in process_names if p.lower() in output.lower()]
-    except (FileNotFoundError, OSError):
-        return []
 
 
 def _should_skip(filepath: Path) -> bool:

@@ -40,7 +40,11 @@ SECRET_PATTERNS = [
     SecretPattern("Groq API Key",        r"gsk_[a-zA-Z0-9]{20,}",                          "CRITICAL"),
     SecretPattern("HuggingFace Token",   r"hf_[a-zA-Z0-9]{20,}",                           "HIGH"),
     SecretPattern("Slack Token",         r"xox[bpors]-[0-9a-zA-Z\-]+",                     "HIGH"),
-    SecretPattern("Database URL",        r"(?:postgres|mysql|mongodb)://[^\s\"']+",         "CRITICAL"),
+    SecretPattern(
+        "Database URL",
+        r"(?:postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis|amqp)://[^\s\"']+",
+        "CRITICAL",
+    ),
     SecretPattern("Private Key",         r"-----BEGIN (?:RSA|EC|OPENSSH) PRIVATE KEY-----", "CRITICAL"),
     SecretPattern("JWT Secret",          r"(?:jwt[_\-]?secret|JWT_SECRET)\s*[=:]\s*['\"][^'\"]+", "HIGH"),
     SecretPattern("Stripe Key",          r"sk_live_[0-9a-zA-Z]{24,}",                      "CRITICAL"),
