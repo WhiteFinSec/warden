@@ -84,10 +84,14 @@ def scan(
     from warden.scanner.code_analyzer import _walk_files
 
     with console.status("[bright_cyan]Indexing files...[/bright_cyan]"):
-        _py_files, _js_files = _walk_files(target)
+        _py_files, _js_files, _other_files = _walk_files(target)
         py_count = len(_py_files)
         js_count = len(_js_files)
-    console.print(f"  Found: {py_count} Python, {js_count} JS/TS files")
+        other_count = len(_other_files)
+    found_parts = [f"{py_count} Python", f"{js_count} JS/TS"]
+    if other_count:
+        found_parts.append(f"{other_count} Go/Rust/Java")
+    console.print(f"  Found: {', '.join(found_parts)} files")
     console.print("[bright_blue]" + "-" * 50 + "[/bright_blue]")
 
     import warnings

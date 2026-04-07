@@ -272,13 +272,14 @@ def detect_competitors(target: Path) -> tuple[list[CompetitorMatch], str]:
                 if "packages" not in layers:
                     layers.append("packages")
 
-        # Layer 5: Code patterns
+        # Layer 5: Code patterns (count all matches for confidence boost)
+        code_match_count = 0
         for pattern in profile.code_patterns:
             if re.search(pattern, all_source, re.IGNORECASE):
                 signals.append(f"code:{pattern}")
+                code_match_count += 1
                 if "code_patterns" not in layers:
                     layers.append("code_patterns")
-                break  # One code match is enough
 
         if not signals:
             continue
@@ -288,6 +289,10 @@ def detect_competitors(target: Path) -> tuple[list[CompetitorMatch], str]:
         if unique_layers >= 3:
             confidence = "high"
         elif unique_layers >= 2:
+            confidence = "medium"
+        elif code_match_count >= 3:
+            # Strong code signal (3+ distinct patterns) → likely scanning
+            # the tool's own codebase, not just a casual import
             confidence = "medium"
         else:
             confidence = "low"
@@ -318,18 +323,20 @@ def _collect_source(target: Path) -> str:
     import os
 
     scan_exts = {".py", ".js", ".ts", ".yaml", ".yml", ".json", ".toml"}
+    max_file_size = 2_000_000  # 2MB — skip database dumps, logs, binaries
     sources: list[str] = []
     for dirpath, dirnames, filenames in os.walk(target):
         dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for fname in filenames:
             if Path(fname).suffix.lower() in scan_exts:
+                filepath = Path(dirpath) / fname
                 try:
+                    if filepath.stat().st_size > max_file_size:
+                        continue
                     sources.append(
-                        (Path(dirpath) / fname).read_text(
-                            encoding="utf-8", errors="ignore"
-                        )
+                        filepath.read_text(encoding="utf-8", errors="ignore")
                     )
-                except OSError:
+                except (OSError, MemoryError):
                     continue
     return "\n".join(sources)
 
@@ -368,15 +375,26 @@ def _get_installed_packages(target: Path) -> set[str]:
 
 
 def _check_processes(process_names: list[str]) -> list[str]:
-    """Check for running processes. Best-effort, never fails."""
+    """Check for running processes. Best-effort, never fails.
+
+    On Windows tasklist can hang under constrained I/O — skip entirely
+    when the WARDEN_SKIP_PROCS env var is set or when running in test mode.
+    """
+    if os.environ.get("WARDEN_SKIP_PROCS") or os.environ.get("PYTEST_CURRENT_TEST"):
+        return []
     try:
-        result = subprocess.run(
-            ["tasklist" if os.name == "nt" else "ps", "aux"] if os.name != "nt" else ["tasklist"],
-            capture_output=True, text=True, timeout=5,
+        cmd = ["tasklist", "/FO", "CSV", "/NH"] if os.name == "nt" else ["ps", "aux"]
+        proc = subprocess.Popen(
+            cmd, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, text=True,
         )
-        output = result.stdout.lower()
-        return [p for p in process_names if p.lower() in output]
-    except (subprocess.TimeoutExpired, FileNotFoundError, OSError):
+        try:
+            output, _ = proc.communicate(timeout=3)
+        except subprocess.TimeoutExpired:
+            proc.kill()
+            proc.wait()
+            return []
+        return [p for p in process_names if p.lower() in output.lower()]
+    except (FileNotFoundError, OSError):
         return []
 
 

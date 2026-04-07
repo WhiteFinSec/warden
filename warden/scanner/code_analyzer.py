@@ -380,19 +380,24 @@ def _scan_js_file(filepath: Path) -> list[Finding]:
     return findings
 
 
-def _walk_files(target: Path) -> tuple[list[Path], list[Path]]:
-    """Walk the tree ONCE and return (python_files, js_ts_files).
+def _walk_files(
+    target: Path,
+) -> tuple[list[Path], list[Path], list[Path]]:
+    """Walk the tree ONCE and return (python_files, js_ts_files, other_lang_files).
 
     Uses os.walk to prune skip_dirs at the directory level — avoids
     traversing node_modules, .git, etc. entirely.
+    other_lang_files includes Go, Rust, and Java files.
     """
     import os
 
     py_exts = {".py"}
     js_exts = {".js", ".ts", ".jsx", ".tsx"}
+    other_exts = {".go", ".rs", ".java"}
 
     py_files: list[Path] = []
     js_files: list[Path] = []
+    other_files: list[Path] = []
 
     for dirpath, dirnames, filenames in os.walk(target):
         # Prune skip dirs IN-PLACE so os.walk doesn't descend into them
@@ -403,8 +408,10 @@ def _walk_files(target: Path) -> tuple[list[Path], list[Path]]:
                 py_files.append(Path(dirpath) / fname)
             elif ext in js_exts:
                 js_files.append(Path(dirpath) / fname)
+            elif ext in other_exts:
+                other_files.append(Path(dirpath) / fname)
 
-    return py_files, js_files
+    return py_files, js_files, other_files
 
 
 def scan_code(
@@ -419,7 +426,7 @@ def scan_code(
     findings: list[Finding] = []
     _progress = on_file if callable(on_file) else None
 
-    py_files, js_files = _walk_files(target)
+    py_files, js_files, _other = _walk_files(target)
 
     # Read all Python files in parallel (I/O-bound — threads help a lot)
     from concurrent.futures import ThreadPoolExecutor
