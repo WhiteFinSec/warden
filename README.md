@@ -1,6 +1,6 @@
 # Warden — AI Agent Governance Scanner
 
-Open-source, local-only CLI scanner that evaluates AI agent governance posture. Scans code patterns, MCP configs, infrastructure, secrets, agent architecture, dependencies, and audit compliance. **No data leaves the machine.**
+Open-source, local-only CLI scanner that evaluates AI agent governance posture across **10 scan layers** and **17 dimensions**. Scans code patterns, MCP configs, infrastructure, secrets, agent architecture, dependencies, audit compliance, CI/CD pipelines, IaC security, and framework-specific governance. **No data leaves the machine.**
 
 ## Quick Start
 
@@ -43,6 +43,12 @@ warden scan .
 warden scan /path/to/project --format json
 warden scan /path/to/project --output-dir /path/to/reports
 
+# Skip specific layers
+warden scan . --skip secrets,deps
+
+# Run only specific layers
+warden scan . --only code,mcp,cicd
+
 # View the scoring methodology
 warden methodology
 
@@ -50,7 +56,22 @@ warden methodology
 warden leaderboard
 ```
 
-## 7 Scan Layers
+### Layer Keys for --skip / --only
+
+| Key | Layer |
+|-----|-------|
+| `code` | Code Patterns (Python AST + JS/TS regex) |
+| `mcp` | MCP Server Configs |
+| `infra` | Infrastructure (Docker, K8s) |
+| `secrets` | Secrets & Credentials |
+| `agent` | Agent Architecture |
+| `deps` | Supply Chain / Dependencies |
+| `audit` | Audit & Compliance |
+| `cicd` | CI/CD Governance |
+| `iac` | IaC Security (Terraform) |
+| `frameworks` | Framework-Specific Governance |
+
+## 10 Scan Layers
 
 1. **Code Patterns** -- AST-based Python + regex JS/TS analysis (unprotected LLM calls, agent loops, unrestricted tool access)
 2. **MCP Servers** -- Config file analysis (write tools without auth, missing schemas, non-TLS transport)
@@ -59,6 +80,9 @@ warden leaderboard
 5. **Agent Architecture** -- Agent class analysis (no permissions, no cost tracking, unlimited sub-agent spawning)
 6. **Supply Chain** -- Dependency analysis (unpinned AI packages, typosquat detection via Levenshtein distance)
 7. **Audit & Compliance** -- Audit logging, structured logging, retention policies, compliance framework mapping
+8. **CI/CD Governance** -- GitHub Actions analysis (missing approvals, exposed secrets, no branch protection, CODEOWNERS)
+9. **IaC Security** -- Terraform analysis (unencrypted S3, open security groups, IAM wildcards, local state)
+10. **Framework Governance** -- LangChain callbacks, CrewAI guardrails, AutoGen sandboxing, LlamaIndex limits
 
 Plus **D17: Adversarial Resilience** -- 8 sub-checks based on Google DeepMind's "AI Agent Traps" paper (Franklin et al., March 2026).
 
@@ -68,35 +92,9 @@ Warden detects **17 governance and security tools** across 5 signal layers (env 
 
 ## Output Formats
 
-- **CLI summary** -- colorized terminal output with score, findings, and D17 warning
-- **warden_report.html** -- self-contained HTML report (no external requests, works air-gapped)
+- **CLI summary** -- colorized terminal output with per-layer elapsed time, progress bars, and D17 warning
+- **warden_report.html** -- self-contained dark-theme report with SVG score ring, expandable findings, benchmark bars, and market comparison (no external requests, works air-gapped)
 - **warden_report.json** -- machine-readable with `scoring_version` field
-
-## Example Output
-
-```
-  ____    __              __   ___            __
- / __/__ / /  ___ _____  / /__/ _ \___  __ __/ /____  ____
-_\ \/ _ \/ _ \/ _ `/ __/_/  '_/ , _/ _ \/ // / __/ -_)/ __/
-/___/_//_/_//_/\_,_/_/ /_/\_\/_/|_|\___/\_,_/\__/\__/_/
-
-Warden v1.0.0 -- AI Agent Governance Scanner
-Scanning: /home/user/my-agent-project
---------------------------------------------
-  Layer 1: Code Patterns ...... 12 findings
-  Layer 2: MCP Servers ........ 3 findings
-  Layer 3: Infrastructure ..... 5 findings
-  Layer 4: Secrets ............ 2 findings (2 CRITICAL)
-  Layer 5: Agent Architecture . 4 findings
-  Layer 6: Supply Chain ....... 1 finding
-  Layer 7: Audit & Compliance . 6 findings
-
-  Governance tools detected: Pangea (CrowdStrike)
-  Competitors in registry: 17
---------------------------------------------
-  GOVERNANCE SCORE: 19 / 100 -- UNGOVERNED
---------------------------------------------
-```
 
 ## Architecture Constraints
 
@@ -119,21 +117,12 @@ pip install -e ".[dev]"
 pytest tests/ -v
 ```
 
-## Test Suite
-
-94 tests covering:
-- Scoring model (17 dimensions, normalization math, all 4 score levels)
-- All 7 scan layers with fixture-based tests
-- D17 trap defense (env var detection, code pattern detection, full defense max score)
-- Competitor detection (confidence levels, multi-signal detection)
-- JSON/HTML report generation
-- **Security tests**: no network imports, no SharkRouter imports, secrets masking, HTML self-contained
-
 ## Known Limitations
 
-- **Language coverage:** v1.0 scans Python and JS/TS code patterns. Go/Rust/Java code analysis is planned for v2.0. Infrastructure, secrets, and dependency scanning apply to all languages.
+- **Language coverage:** v1.1 scans Python and JS/TS code patterns. Go/Rust/Java code analysis is planned for a future version. Infrastructure, secrets, and dependency scanning apply to all languages.
 - **Framework vocabulary:** Scoring is optimized for recognized AI frameworks. Custom frameworks may score lower despite equivalent governance.
 - **Static analysis:** Warden detects governance *patterns*, not enforcement. High score = controls present, not proven correct.
+- **IaC coverage:** Currently supports Terraform. Pulumi, CloudFormation, and CDK planned for future versions.
 
 See [SCORING.md](SCORING.md) for full details.
 
