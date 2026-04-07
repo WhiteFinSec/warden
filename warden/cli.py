@@ -154,8 +154,11 @@ def scan(path: str, output_format: str, output_dir: str | None) -> None:
             1 for f in findings if f.severity.value == "CRITICAL"
         )
         extra = f" ([red]{critical} CRITICAL[/red])" if critical else ""
+        elapsed_so_far = time.monotonic() - start
+        mins, secs = divmod(int(elapsed_so_far), 60)
+        ts = f"{mins}m{secs:02d}s" if mins else f"{secs}s"
         dots = "." * (28 - len(label))
-        console.print(f"  {label} {dots} {count} {suffix}{extra}")
+        console.print(f"  {label} {dots} {count} {suffix}{extra}  [dim]{ts}[/dim]")
 
     # D17 trap defense
     from rich.status import Status
@@ -229,7 +232,8 @@ def scan(path: str, output_format: str, output_dir: str | None) -> None:
         write_json_report(result, json_path)
         file_url = json_path.as_uri()
         console.print(
-            f"\n  Full data: [link={file_url}]{json_path}[/link]"
+            f"\n  Full data: [bright_cyan][link={file_url}]"
+            f"{json_path}[/link][/bright_cyan]"
         )
 
     if output_format in ("html", "all"):
