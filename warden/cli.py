@@ -6,15 +6,20 @@ import time
 from pathlib import Path
 
 import click
+from rich.console import Console
 
 from warden import __scoring_model__, __version__
 
 BANNER = r"""
-  ____    __              __   ___            __
- / __/__ / /  ___ _____  / /__/ _ \___  __ __/ /____  ____
-_\ \/ _ \/ _ \/ _ `/ __/_/  '_/ , _/ _ \/ // / __/ -_)/ __/
-/___/_//_/_//_/\_,_/_/ /_/\_\/_/|_|\___/\_,_/\__/\__/_/
+ __        __            _
+ \ \      / /_ _ _ __ __| | ___ _ __
+  \ \ /\ / / _` | '__/ _` |/ _ \ '_ \
+   \ V  V / (_| | | | (_| |  __/ | | |
+    \_/\_/ \__,_|_|  \__,_|\___|_| |_|
+         by SharkRouter
 """
+
+console = Console()
 
 
 @click.group(invoke_without_command=True)
@@ -23,11 +28,15 @@ _\ \/ _ \/ _ \/ _ `/ __/_/  '_/ , _/ _ \/ // / __/ -_)/ __/
 def cli(ctx: click.Context) -> None:
     """Warden -- AI Agent Governance Scanner."""
     if ctx.invoked_subcommand is None:
-        click.echo(BANNER)
-        click.echo(f"Warden v{__version__} -- AI Agent Governance Scanner")
-        click.echo("Run 'warden scan <path>' to scan a project.")
-        click.echo("Run 'warden methodology' to see the scoring model.")
-        click.echo("Run 'warden leaderboard' to see vendor scores.")
+        console.print(BANNER, style="bold blue", highlight=False)
+        console.print(
+            f"[bold]Warden v{__version__}[/bold] -- "
+            "[dim]AI Agent Governance Scanner[/dim]"
+        )
+        console.print()
+        console.print("  warden [bold]scan[/bold] <path>       Scan a project")
+        console.print("  warden [bold]methodology[/bold]       Scoring model")
+        console.print("  warden [bold]leaderboard[/bold]       Vendor scores")
 
 
 @cli.command()
@@ -41,17 +50,20 @@ def scan(path: str, output_format: str, output_dir: str | None) -> None:
     target = Path(path).resolve()
     out_dir = Path(output_dir).resolve() if output_dir else Path.cwd()
 
-    click.echo(BANNER)
-    click.echo(f"Warden v{__version__} -- AI Agent Governance Scanner")
-    click.echo(f"Scanning: {target}")
+    console.print(BANNER, style="bold blue", highlight=False)
+    console.print(
+        f"[bold]Warden v{__version__}[/bold] -- "
+        "[dim]AI Agent Governance Scanner[/dim]"
+    )
+    console.print(f"Scanning: [cyan]{target}[/cyan]")
 
     # Count analyzable files
     from warden.scanner.code_analyzer import _should_skip
     py_count = sum(1 for f in target.rglob("*.py") if not _should_skip(f))
     js_count = sum(1 for ext in ("*.js", "*.ts", "*.jsx", "*.tsx")
                    for f in target.rglob(ext) if not _should_skip(f))
-    click.echo(f"  Analyzable: {py_count} Python, {js_count} JS/TS files")
-    click.echo("-" * 44)
+    console.print(f"  Analyzable: {py_count} Python, {js_count} JS/TS files")
+    console.print("[blue]" + "-" * 50 + "[/blue]")
 
     start = time.monotonic()
 
@@ -83,50 +95,102 @@ def scan(path: str, output_format: str, output_dir: str | None) -> None:
 
     raw_scores: dict[str, int] = {}
 
-    for label, scanner_fn in scanners:
-        findings, scores = scanner_fn(target)
-        result.findings.extend(findings)
-        for dim_id, score in scores.items():
+    # Add D17 + competitor detection to the pipeline
+    all_steps = [
+        *scanners,
+        ("D17: Adversarial Resilience", None),
+        ("Competitor Detection", None),
+    ]
+
+    from rich.progress import BarColumn, Progress, TextColumn
+
+    layer_results: list[str] = []
+
+    with Progress(
+        TextColumn("[blue]{task.description}[/blue]"),
+        BarColumn(bar_width=20),
+        TextColumn("[dim]{task.percentage:>3.0f}%[/dim]"),
+        console=console,
+        transient=True,
+    ) as progress:
+        task = progress.add_task("Scanning...", total=len(all_steps))
+
+        for label, scanner_fn in scanners:
+            progress.update(task, description=label)
+            findings, scores = scanner_fn(target)
+            result.findings.extend(findings)
+            for dim_id, score in scores.items():
+                raw_scores[dim_id] = raw_scores.get(dim_id, 0) + score
+            count = len(findings)
+            suffix = "finding" if count == 1 else "findings"
+            critical = sum(
+                1 for f in findings if f.severity.value == "CRITICAL"
+            )
+            extra = f" ([red]{critical} CRITICAL[/red])" if critical else ""
+            dots = "." * (28 - len(label))
+            layer_results.append(
+                f"  {label} {dots} {count} {suffix}{extra}"
+            )
+            progress.advance(task)
+
+        # D17 trap defense
+        progress.update(task, description="D17: Adversarial Resilience")
+        trap_findings, trap_scores, trap_status = scan_trap_defense(target)
+        result.findings.extend(trap_findings)
+        result.trap_defense = trap_status
+        for dim_id, score in trap_scores.items():
             raw_scores[dim_id] = raw_scores.get(dim_id, 0) + score
-        count = len(findings)
-        suffix = "finding" if count == 1 else "findings"
-        critical = sum(1 for f in findings if f.severity.value == "CRITICAL")
-        extra = f" ({critical} CRITICAL)" if critical else ""
-        click.echo(f"  {label} {'.' * (28 - len(label))} {count} {suffix}{extra}")
+        progress.advance(task)
 
-    # D17 trap defense
-    trap_findings, trap_scores, trap_status = scan_trap_defense(target)
-    result.findings.extend(trap_findings)
-    result.trap_defense = trap_status
-    for dim_id, score in trap_scores.items():
-        raw_scores[dim_id] = raw_scores.get(dim_id, 0) + score
+        # Competitor detection
+        progress.update(task, description="Competitor Detection")
+        competitors, comp_gtm = detect_competitors(target)
+        result.competitors = competitors
+        result.gtm_signal = comp_gtm
+        progress.advance(task)
 
-    # Competitor detection
-    competitors, comp_gtm = detect_competitors(target)
-    result.competitors = competitors
-    result.gtm_signal = comp_gtm
+    # Print layer results after progress bar clears
+    for line in layer_results:
+        console.print(line)
 
     if competitors:
         names = ", ".join(c.display_name for c in competitors if c.confidence != "low")
         if names:
-            click.echo(f"\n  Governance tools detected: {names}")
-    click.echo("  Competitors in registry: 17")
+            console.print(f"\n  Governance tools detected: [cyan]{names}[/cyan]")
+    console.print("  Competitors in registry: 17")
 
     # Apply scores
     apply_scores(result, raw_scores)
 
     elapsed = time.monotonic() - start
-    click.echo("-" * 44)
-    click.echo(f"  GOVERNANCE SCORE: {result.total_score} / 100 -- {result.level.value}")
+    console.print("[blue]" + "-" * 50 + "[/blue]")
+
+    # Color the score based on level
+    level = result.level.value
+    score_color = {
+        "GOVERNED": "bold green",
+        "PARTIAL": "bold yellow",
+        "AT_RISK": "bold red",
+        "UNGOVERNED": "bold red",
+    }.get(level, "bold")
+    console.print(
+        f"  GOVERNANCE SCORE: [{score_color}]{result.total_score} / 100 "
+        f"-- {level}[/{score_color}]"
+    )
 
     # D17 warning when score is 0
     d17 = result.dimension_scores.get("D17")
     if d17 and d17.raw == 0:
-        click.echo()
-        click.echo("  WARNING: Your environment is exposed to 6 trap types with")
-        click.echo("    documented 80%+ attack success rates.")
-        click.echo('    (Franklin, Tomasev, Jacobs, Leibo, Osindero.')
-        click.echo('     "AI Agent Traps." Google DeepMind, March 2026)')
+        console.print()
+        console.print(
+            "  [bold red]WARNING:[/bold red] Your environment is exposed "
+            "to 6 trap types with"
+        )
+        console.print("    documented 80%+ attack success rates.")
+        console.print(
+            '    [dim](Franklin, Tomasev, Jacobs, Leibo, Osindero.\n'
+            '     "AI Agent Traps." Google DeepMind, March 2026)[/dim]'
+        )
 
     # Generate reports
     from warden.report.html_writer import write_html_report
@@ -135,15 +199,15 @@ def scan(path: str, output_format: str, output_dir: str | None) -> None:
     if output_format in ("json", "all"):
         json_path = out_dir / "warden_report.json"
         write_json_report(result, json_path)
-        click.echo(f"\n  Full data: {json_path}")
+        console.print(f"\n  Full data: [dim]{json_path}[/dim]")
 
     if output_format in ("html", "all"):
         html_path = out_dir / "warden_report.html"
         write_html_report(result, html_path)
-        click.echo(f"  Report saved: {html_path}")
+        console.print(f"  Report saved: [bold cyan]{html_path}[/bold cyan]")
 
-    click.echo("-" * 44)
-    click.echo(f"  Completed in {elapsed:.1f}s")
+    console.print("[blue]" + "-" * 50 + "[/blue]")
+    console.print(f"  [dim]Completed in {elapsed:.1f}s[/dim]")
 
 
 @cli.command()
