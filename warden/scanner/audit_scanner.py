@@ -52,53 +52,53 @@ def scan_audit(
             except OSError:
                 continue
 
-        # Check for audit logging
-        if re.search(r"audit.*log|log.*audit|AuditLog|audit_trail", source, re.IGNORECASE):
-            has_audit_logging = True
+            # Check for audit logging
+            if re.search(r"audit.*log|log.*audit|AuditLog|audit_trail", source, re.IGNORECASE):
+                has_audit_logging = True
 
-        # Check for structured logging
-        if re.search(r"structlog|import logging|logging\.getLogger", source):
-            has_structured_logging = True
+            # Check for structured logging
+            if re.search(r"structlog|import logging|logging\.getLogger", source):
+                has_structured_logging = True
 
-        # Check for retention/rotation
-        if re.search(r"retention|rotation|max_age|log_retention|RotatingFileHandler", source, re.IGNORECASE):
-            has_retention_policy = True
+            # Check for retention/rotation
+            if re.search(r"retention|rotation|max_age|log_retention|RotatingFileHandler", source, re.IGNORECASE):
+                has_retention_policy = True
 
-        # Check for compliance references
-        for keyword in COMPLIANCE_KEYWORDS:
-            if keyword in source.lower():
-                has_compliance_ref = True
-                break
+            # Check for compliance references
+            for keyword in COMPLIANCE_KEYWORDS:
+                if keyword in source.lower():
+                    has_compliance_ref = True
+                    break
 
-        # Check for PII in logs
-        try:
-            tree = ast.parse(source, filename=str(py_file))
-        except SyntaxError:
-            continue
+            # Check for PII in logs
+            try:
+                tree = ast.parse(source, filename=str(py_file))
+            except SyntaxError:
+                continue
 
-        for node in ast.walk(tree):
-            if isinstance(node, ast.Call):
-                chain = _call_chain(node)
-                if any(k in chain for k in ("logger.info", "logger.debug", "logging.info", "log.info")):
-                    for arg in node.args:
-                        if isinstance(arg, ast.JoinedStr):  # f-string
-                            src_snippet = ast.dump(arg).lower()
-                            if any(k in src_snippet for k in (
-                                "request", "body", "message", "content",
-                                "prompt", "response", "password", "email",
-                            )):
-                                has_pii_in_logs = True
-                                findings.append(Finding(
-                                    layer=7, scanner="audit_scanner",
-                                    file=str(py_file), line=node.lineno,
-                                    severity=Severity.HIGH, dimension="D5",
-                                    message="Potential PII/sensitive data logged via f-string",
-                                    remediation="Redact sensitive fields before logging",
-                                    compliance=ComplianceMapping(
-                                        eu_ai_act="Article 15",
-                                        owasp_llm="LLM06",
-                                    ),
-                                ))
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Call):
+                    chain = _call_chain(node)
+                    if any(k in chain for k in ("logger.info", "logger.debug", "logging.info", "log.info")):
+                        for arg in node.args:
+                            if isinstance(arg, ast.JoinedStr):  # f-string
+                                src_snippet = ast.dump(arg).lower()
+                                if any(k in src_snippet for k in (
+                                    "request", "body", "message", "content",
+                                    "prompt", "response", "password", "email",
+                                )):
+                                    has_pii_in_logs = True
+                                    findings.append(Finding(
+                                        layer=7, scanner="audit_scanner",
+                                        file=str(py_file), line=node.lineno,
+                                        severity=Severity.HIGH, dimension="D5",
+                                        message="Potential PII/sensitive data logged via f-string",
+                                        remediation="Redact sensitive fields before logging",
+                                        compliance=ComplianceMapping(
+                                            eu_ai_act="Article 15",
+                                            owasp_llm="LLM06",
+                                        ),
+                                    ))
 
     # Generate findings for missing controls
     if not has_audit_logging:

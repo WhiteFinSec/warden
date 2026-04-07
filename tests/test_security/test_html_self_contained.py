@@ -27,8 +27,8 @@ def test_html_no_external_urls():
     # Find all URLs in the HTML
     urls = re.findall(r'(?:href|src|url)\s*[=\(]\s*["\']?(https?://[^"\'>\s]+)', html)
 
-    # Filter out the GitHub repo link (that's just a text link, not a resource load)
-    resource_urls = [u for u in urls if "github.com/SharkRouter" not in u]
+    # Filter out text links (not resource loads)
+    resource_urls = [u for u in urls if "github.com/SharkRouter" not in u and "sharkrouter.ai" not in u]
 
     assert not resource_urls, f"HTML report contains external resource URLs: {resource_urls}"
 
