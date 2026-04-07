@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 from warden.models import ComplianceMapping, Finding, Severity
+from warden.scanner._common import SKIP_DIRS
 
 # --- Patterns ---
 
@@ -20,11 +21,6 @@ _BACKEND_BLOCK = re.compile(r'backend\s+"(s3|gcs|azurerm|consul|http)"')
 _REQUIRED_PROVIDERS = re.compile(r"required_providers\s*\{")
 _PROVIDER_VERSION = re.compile(r'version\s*=\s*"[~><=!]+')
 
-SKIP_DIRS = {
-    ".venv", "venv", "node_modules", ".git", "__pycache__",
-    ".tox", ".mypy_cache", ".pytest_cache", "dist", "build",
-    ".eggs", "site-packages", "out", ".next", ".omc", ".claude",
-}
 
 
 def scan_iac(target: Path) -> tuple[list[Finding], dict[str, int]]:

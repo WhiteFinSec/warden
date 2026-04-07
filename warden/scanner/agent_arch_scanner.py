@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 from warden.models import ComplianceMapping, Finding, Severity
+from warden.scanner._common import SKIP_DIRS
 
 
 def scan_agent_arch(target: Path) -> tuple[list[Finding], dict[str, int]]:
@@ -18,12 +19,8 @@ def scan_agent_arch(target: Path) -> tuple[list[Finding], dict[str, int]]:
 
     import os
 
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
-    }
     for dirpath, dirnames, filenames in os.walk(target):
-        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for fname in filenames:
             if fname.endswith(".py"):
                 findings.extend(_analyze_agent_file(Path(dirpath) / fname))
@@ -197,14 +194,10 @@ def _calculate_scores(findings: list[Finding], target: Path) -> dict[str, int]:
 def _count_signals(target: Path, patterns: list[str]) -> int:
     import os
 
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
-    }
     count = 0
     compiled = [re.compile(p, re.IGNORECASE) for p in patterns]
     for dirpath, dirnames, filenames in os.walk(target):
-        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for fname in filenames:
             if not fname.endswith(".py"):
                 continue
@@ -223,8 +216,4 @@ def _count_signals(target: Path, patterns: list[str]) -> int:
 
 def _should_skip(filepath: Path) -> bool:
     parts = filepath.parts
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
-    }
-    return bool(skip_dirs.intersection(parts))
+    return bool(SKIP_DIRS.intersection(parts))

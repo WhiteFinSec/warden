@@ -13,6 +13,8 @@ import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from warden.scanner._common import SKIP_DIRS
+
 from warden.models import CompetitorMatch
 
 
@@ -316,14 +318,10 @@ def detect_competitors(target: Path) -> tuple[list[CompetitorMatch], str]:
 def _collect_source(target: Path) -> str:
     import os
 
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
-    }
     scan_exts = {".py", ".js", ".ts", ".yaml", ".yml", ".json", ".toml"}
     sources: list[str] = []
     for dirpath, dirnames, filenames in os.walk(target):
-        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for fname in filenames:
             if Path(fname).suffix.lower() in scan_exts:
                 try:
@@ -341,14 +339,10 @@ def _get_installed_packages(target: Path) -> set[str]:
     """Get installed packages from requirements files and lockfiles."""
     import os
 
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
-    }
     packages: set[str] = set()
 
     for dirpath, dirnames, filenames in os.walk(target):
-        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for fname in filenames:
             fpath = Path(dirpath) / fname
             if fname.startswith("requirements") and fname.endswith(".txt"):
@@ -389,8 +383,4 @@ def _check_processes(process_names: list[str]) -> list[str]:
 
 def _should_skip(filepath: Path) -> bool:
     parts = filepath.parts
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
-    }
-    return bool(skip_dirs.intersection(parts))
+    return bool(SKIP_DIRS.intersection(parts))

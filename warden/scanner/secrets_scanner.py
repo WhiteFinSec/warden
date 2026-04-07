@@ -11,6 +11,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from warden.models import ComplianceMapping, Finding, SecretMatch, Severity
+from warden.scanner._common import SKIP_DIRS
 
 
 @dataclass(frozen=True)
@@ -61,11 +62,7 @@ ALWAYS_SCAN = {
 }
 
 # Files to never scan
-NEVER_SCAN_DIRS = {
-    ".venv", "venv", "node_modules", ".git", "__pycache__",
-    "dist", "build", ".eggs", "site-packages", ".tox",
-    ".mypy_cache", ".pytest_cache", "out", ".next", ".omc", ".claude",
-}
+NEVER_SCAN_DIRS = SKIP_DIRS
 
 # Files that commonly contain false-positive secret patterns
 SKIP_FILENAMES = {

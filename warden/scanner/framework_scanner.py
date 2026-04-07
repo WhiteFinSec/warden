@@ -7,12 +7,7 @@ import re
 from pathlib import Path
 
 from warden.models import ComplianceMapping, Finding, Severity
-
-SKIP_DIRS = {
-    ".venv", "venv", "node_modules", ".git", "__pycache__",
-    ".tox", ".mypy_cache", ".pytest_cache", "dist", "build",
-    ".eggs", "site-packages", "out", ".next", ".omc", ".claude",
-}
+from warden.scanner._common import SKIP_DIRS
 
 # --- Framework detection patterns ---
 

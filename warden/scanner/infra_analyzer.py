@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 
 from warden.models import ComplianceMapping, Finding, Severity
+from warden.scanner._common import SKIP_DIRS
 
 API_KEY_PATTERN = re.compile(
     r"(API_KEY|SECRET|TOKEN|PASSWORD|PRIVATE_KEY)\s*[=:]\s*\S+",
@@ -42,13 +43,9 @@ def _find_files(target: Path, patterns: list[str]) -> list[Path]:
     import fnmatch
     import os
 
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
-    }
     results: list[Path] = []
     for dirpath, dirnames, filenames in os.walk(target):
-        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for fname in filenames:
             for pattern in patterns:
                 if "*" in pattern:
@@ -64,13 +61,9 @@ def _find_files(target: Path, patterns: list[str]) -> list[Path]:
 def _find_k8s_manifests(target: Path) -> list[Path]:
     import os
 
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
-    }
     results: list[Path] = []
     for dirpath, dirnames, filenames in os.walk(target):
-        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for fname in filenames:
             if not (fname.endswith(".yml") or fname.endswith(".yaml")):
                 continue
@@ -230,8 +223,4 @@ def _calculate_scores(findings: list[Finding], target: Path) -> dict[str, int]:
 
 def _should_skip(filepath: Path) -> bool:
     parts = filepath.parts
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
-    }
-    return bool(skip_dirs.intersection(parts))
+    return bool(SKIP_DIRS.intersection(parts))

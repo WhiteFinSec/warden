@@ -11,6 +11,7 @@ import re
 from pathlib import Path
 
 from warden.models import ComplianceMapping, Finding, Severity, TrapDefenseStatus
+from warden.scanner._common import SKIP_DIRS
 
 # --- Sub-check definitions ---
 
@@ -236,13 +237,9 @@ def _collect_source(target: Path) -> str:
     """Collect all Python source code from the target."""
     import os
 
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
-    }
     sources: list[str] = []
     for dirpath, dirnames, filenames in os.walk(target):
-        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for fname in filenames:
             if fname.endswith(".py"):
                 try:
@@ -258,8 +255,4 @@ def _collect_source(target: Path) -> str:
 
 def _should_skip(filepath: Path) -> bool:
     parts = filepath.parts
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
-    }
-    return bool(skip_dirs.intersection(parts))
+    return bool(SKIP_DIRS.intersection(parts))

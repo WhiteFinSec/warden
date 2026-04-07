@@ -7,6 +7,7 @@ import re
 from pathlib import Path
 
 from warden.models import ComplianceMapping, Finding, Severity
+from warden.scanner._common import SKIP_DIRS
 
 # --- Patterns ---
 
@@ -18,11 +19,6 @@ _CONCURRENCY_BLOCK = re.compile(r"^concurrency\s*:", re.MULTILINE)
 _PULL_REQUEST_TRIGGER = re.compile(r"^\s*-?\s*pull_request", re.MULTILINE)
 _BRANCH_PROTECTION = re.compile(r"""if:\s*github\.ref\s*==\s*['"]refs/heads/main['"]""")
 
-SKIP_DIRS = {
-    ".venv", "venv", "node_modules", ".git", "__pycache__",
-    ".tox", ".mypy_cache", ".pytest_cache", "dist", "build",
-    ".eggs", "site-packages", "out", ".next", ".omc", ".claude",
-}
 
 
 def scan_cicd(target: Path) -> tuple[list[Finding], dict[str, int]]:

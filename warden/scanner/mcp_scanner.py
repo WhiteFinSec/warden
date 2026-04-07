@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 
 from warden.models import ComplianceMapping, Finding, Severity
+from warden.scanner._common import SKIP_DIRS
 
 MCP_CONFIG_FILENAMES = [
     "mcp.json",
@@ -78,10 +79,7 @@ def _find_mcp_configs(target: Path) -> list[Path]:
     # Recursive search for mcp*.json
     import os
 
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        "dist", "build", "site-packages", "out", ".next", ".omc",
-    }
+    skip_dirs = SKIP_DIRS - {".claude"}  # MCP configs live in .claude/
     for dirpath, dirnames, filenames in os.walk(target):
         dirnames[:] = [d for d in dirnames if d not in skip_dirs]
         for fname in filenames:
@@ -181,8 +179,4 @@ def _analyze_mcp_config(config_file: Path) -> list[Finding]:
 
 def _should_skip(filepath: Path) -> bool:
     parts = filepath.parts
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        "dist", "build", "site-packages", "out", ".next", ".omc", ".claude",
-    }
-    return bool(skip_dirs.intersection(parts))
+    return bool(SKIP_DIRS.intersection(parts))

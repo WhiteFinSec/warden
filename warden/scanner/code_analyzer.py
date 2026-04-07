@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from warden.models import ComplianceMapping, Finding, Severity
+from warden.scanner._common import SKIP_DIRS
 
 # --- AST Detectors ---
 
@@ -387,11 +388,6 @@ def _walk_files(target: Path) -> tuple[list[Path], list[Path]]:
     """
     import os
 
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        ".tox", ".mypy_cache", ".pytest_cache", "dist", "build",
-        ".eggs", "site-packages", "out", ".next", ".omc", ".claude",
-    }
     py_exts = {".py"}
     js_exts = {".js", ".ts", ".jsx", ".tsx"}
 
@@ -400,7 +396,7 @@ def _walk_files(target: Path) -> tuple[list[Path], list[Path]]:
 
     for dirpath, dirnames, filenames in os.walk(target):
         # Prune skip dirs IN-PLACE so os.walk doesn't descend into them
-        dirnames[:] = [d for d in dirnames if d not in skip_dirs]
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
         for fname in filenames:
             ext = Path(fname).suffix.lower()
             if ext in py_exts:
@@ -425,15 +421,20 @@ def scan_code(
 
     py_files, js_files = _walk_files(target)
 
-    # Cache Python file contents — read once, reuse for governance signal scoring
-    py_contents: dict[str, str] = {}
-    for py_file in py_files:
+    # Read all Python files in parallel (I/O-bound — threads help a lot)
+    from concurrent.futures import ThreadPoolExecutor
+
+    def _read_file(path: Path) -> tuple[str, str | None]:
         try:
-            py_contents[str(py_file)] = py_file.read_text(
-                encoding="utf-8", errors="ignore"
-            )
+            return str(path), path.read_text(encoding="utf-8", errors="ignore")
         except OSError:
-            pass
+            return str(path), None
+
+    py_contents: dict[str, str] = {}
+    with ThreadPoolExecutor() as pool:
+        for key, content in pool.map(_read_file, py_files):
+            if content is not None:
+                py_contents[key] = content
 
     # Scan Python files using cached content
     for py_file in py_files:
@@ -461,12 +462,7 @@ def scan_code(
 def _should_skip(filepath: Path) -> bool:
     """Skip virtual envs, node_modules, test files, and non-project files."""
     parts = filepath.parts
-    skip_dirs = {
-        ".venv", "venv", "node_modules", ".git", "__pycache__",
-        ".tox", ".mypy_cache", ".pytest_cache", "dist", "build",
-        ".eggs", "site-packages", "out", ".next", ".omc", ".claude",
-    }
-    if skip_dirs.intersection(parts):
+    if SKIP_DIRS.intersection(parts):
         return True
     return False
 
