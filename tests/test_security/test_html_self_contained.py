@@ -27,8 +27,13 @@ def test_html_no_external_urls():
     # Find all URLs in the HTML
     urls = re.findall(r'(?:href|src|url)\s*[=\(]\s*["\']?(https?://[^"\'>\s]+)', html)
 
-    # Filter out text links (not resource loads)
-    resource_urls = [u for u in urls if "github.com/SharkRouter" not in u and "sharkrouter.ai" not in u]
+    # Filter out text links and the email form action (not resource loads)
+    resource_urls = [
+        u for u in urls
+        if "github.com/SharkRouter" not in u
+        and "sharkrouter.ai" not in u
+        and "api.sharkrouter.ai/v1/warden" not in u
+    ]
 
     assert not resource_urls, f"HTML report contains external resource URLs: {resource_urls}"
 

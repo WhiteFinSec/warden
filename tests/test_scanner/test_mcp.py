@@ -20,7 +20,7 @@ def test_detects_write_tools_no_auth():
     }
     with tempfile.TemporaryDirectory() as tmpdir:
         (Path(tmpdir) / "mcp.json").write_text(json.dumps(config))
-        findings, _ = scan_mcp(Path(tmpdir))
+        findings, _, _ = scan_mcp(Path(tmpdir))
         assert any("write tools without authentication" in f.message for f in findings)
 
 
@@ -37,11 +37,11 @@ def test_no_findings_for_authed_server():
     }
     with tempfile.TemporaryDirectory() as tmpdir:
         (Path(tmpdir) / "mcp.json").write_text(json.dumps(config))
-        findings, _ = scan_mcp(Path(tmpdir))
+        findings, _, _ = scan_mcp(Path(tmpdir))
         assert not any("without authentication" in f.message for f in findings)
 
 
 def test_no_mcp_config_no_findings():
     with tempfile.TemporaryDirectory() as tmpdir:
-        findings, _ = scan_mcp(Path(tmpdir))
+        findings, _, _ = scan_mcp(Path(tmpdir))
         assert len(findings) == 0

@@ -5,8 +5,17 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from warden.models import ComplianceMapping, Finding, Severity
+from warden.models import ComplianceMapping, Finding, McpToolInfo, Severity
 from warden.scanner._common import SKIP_DIRS
+
+# Risk classification keywords
+_RISK_KEYWORDS: dict[str, list[str]] = {
+    "destructive": ["delete", "remove", "drop", "destroy", "reset", "overwrite", "truncate", "wipe", "purge", "kill"],
+    "financial": ["payment", "fund", "transfer", "billing", "invoice", "charge", "refund", "payout", "stripe", "price"],
+    "exfiltration": ["email", "send", "upload", "post", "notify", "message", "webhook", "export", "slack", "sms"],
+    "write-access": ["write", "create", "insert", "update", "modify", "execute", "run", "put", "patch", "set"],
+    "read-only": ["read", "get", "list", "search", "query", "fetch", "describe", "show", "find", "view"],
+}
 
 MCP_CONFIG_FILENAMES = [
     "mcp.json",
@@ -22,18 +31,21 @@ MCP_CONFIG_DIRS = [
 ]
 
 
-def scan_mcp(target: Path) -> tuple[list[Finding], dict[str, int]]:
+def scan_mcp(target: Path) -> tuple[list[Finding], dict[str, int], list[McpToolInfo]]:
     """Layer 2: Scan MCP server configurations.
 
-    Returns (findings, raw_dimension_scores).
+    Returns (findings, raw_dimension_scores, mcp_tools).
     """
     findings: list[Finding] = []
+    mcp_tools: list[McpToolInfo] = []
     configs_found = 0
 
     # Search for MCP config files
     for config_file in _find_mcp_configs(target):
         configs_found += 1
-        findings.extend(_analyze_mcp_config(config_file))
+        file_findings, file_tools = _analyze_mcp_config(config_file)
+        findings.extend(file_findings)
+        mcp_tools.extend(file_tools)
 
     scores: dict[str, int] = {}
 
@@ -54,7 +66,7 @@ def scan_mcp(target: Path) -> tuple[list[Finding], dict[str, int]]:
         tls_findings = [f for f in findings if f.dimension == "D4"]
         scores["D4"] = max(0, 4 - len(tls_findings) * 2)
 
-    return findings, scores
+    return findings, scores, mcp_tools
 
 
 def _find_mcp_configs(target: Path) -> list[Path]:
@@ -91,19 +103,44 @@ def _find_mcp_configs(target: Path) -> list[Path]:
     return configs
 
 
-def _analyze_mcp_config(config_file: Path) -> list[Finding]:
+def _classify_tool_risk(tool_name: str, tool_desc: str) -> list[str]:
+    """Classify a tool's risk tags from its name and description."""
+    text = f"{tool_name} {tool_desc}".lower()
+    tags = []
+    for tag, keywords in _RISK_KEYWORDS.items():
+        if any(kw in text for kw in keywords):
+            tags.append(tag)
+    # If no tags matched, classify as read-only by default
+    if not tags:
+        tags.append("read-only")
+    return tags
+
+
+def _severity_from_risk_tags(tags: list[str]) -> Severity:
+    """Compute severity from risk tags."""
+    if "destructive" in tags or "financial" in tags:
+        return Severity.CRITICAL
+    if "exfiltration" in tags:
+        return Severity.HIGH
+    if "write-access" in tags:
+        return Severity.MEDIUM
+    return Severity.LOW
+
+
+def _analyze_mcp_config(config_file: Path) -> tuple[list[Finding], list[McpToolInfo]]:
     """Analyze a single MCP configuration file."""
     findings: list[Finding] = []
+    mcp_tools: list[McpToolInfo] = []
 
     try:
         content = config_file.read_text(encoding="utf-8")
         config = json.loads(content)
     except (json.JSONDecodeError, OSError):
-        return findings
+        return findings, mcp_tools
 
     servers = config.get("mcpServers", config.get("servers", {}))
     if not isinstance(servers, dict):
-        return findings
+        return findings, mcp_tools
 
     for server_name, server_config in servers.items():
         if not isinstance(server_config, dict):
@@ -174,7 +211,24 @@ def _analyze_mcp_config(config_file: Path) -> list[Finding]:
                 remediation="Add descriptions to all tools for discoverability",
             ))
 
-    return findings
+        # Classify each tool for risk
+        for tool in tools:
+            if not isinstance(tool, dict):
+                continue
+            tool_name = str(tool.get("name", ""))
+            tool_desc = str(tool.get("description", ""))
+            risk_tags = _classify_tool_risk(tool_name, tool_desc)
+            mcp_tools.append(McpToolInfo(
+                name=tool_name,
+                server=server_name,
+                risk_tags=risk_tags,
+                has_auth=bool(auth),
+                has_schema=bool(tool.get("inputSchema") or tool.get("schema")),
+                has_description=bool(tool_desc),
+                severity=_severity_from_risk_tags(risk_tags),
+            ))
+
+    return findings, mcp_tools
 
 
 def _should_skip(filepath: Path) -> bool:

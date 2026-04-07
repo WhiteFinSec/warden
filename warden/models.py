@@ -95,6 +95,18 @@ class TrapDefenseStatus:
 
 
 @dataclass
+class McpToolInfo:
+    """Per-tool risk classification from MCP config analysis."""
+    name: str
+    server: str
+    risk_tags: list[str] = field(default_factory=list)  # destructive, financial, exfiltration, write-access, read-only
+    has_auth: bool = False
+    has_schema: bool = False
+    has_description: bool = False
+    severity: Severity = Severity.LOW  # computed from risk_tags
+
+
+@dataclass
 class ScanResult:
     target_path: str
     findings: list[Finding] = field(default_factory=list)
@@ -104,5 +116,7 @@ class ScanResult:
     competitors: list[CompetitorMatch] = field(default_factory=list)
     secrets: list[SecretMatch] = field(default_factory=list)
     trap_defense: TrapDefenseStatus = field(default_factory=TrapDefenseStatus)
+    mcp_tools: list[McpToolInfo] = field(default_factory=list)
+    file_counts: dict[str, int] = field(default_factory=dict)
     gtm_signal: str = ""
     unknown_governance_detected: bool = False

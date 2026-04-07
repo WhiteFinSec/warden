@@ -126,6 +126,7 @@ def scan(
     from warden.scoring.engine import apply_scores
 
     result = ScanResult(target_path=str(target))
+    result.file_counts = {"python": py_count, "js": js_count, "other": other_count}
     raw_scores: dict[str, int] = {}
 
     # Layers with per-file progress support
@@ -190,6 +191,16 @@ def scan(
                     _p.advance(_t)
 
                 findings, scores = scanner_fn(target, on_file=advance)
+        elif _layer_key == "mcp":
+            from rich.status import Status
+
+            with Status(
+                f"  [bright_cyan]{label}[/bright_cyan]",
+                console=console,
+                spinner="dots",
+            ):
+                findings, scores, mcp_tools = scanner_fn(target)
+            result.mcp_tools = mcp_tools
         else:
             from rich.status import Status
 
@@ -676,7 +687,11 @@ def _run_scan(target: Path, skip_layers: str | None = None, only_layers: str | N
         all_scan_layers = [t for t in all_scan_layers if t[1] not in skip_set]
 
     for scanner_fn, _key in all_scan_layers:
-        findings, scores = scanner_fn(target)
+        if _key == "mcp":
+            findings, scores, mcp_tools = scanner_fn(target)
+            result.mcp_tools = mcp_tools
+        else:
+            findings, scores = scanner_fn(target)
         result.findings.extend(findings)
         for dim_id, score in scores.items():
             raw_scores[dim_id] = raw_scores.get(dim_id, 0) + score
