@@ -55,7 +55,7 @@ def scan(path: str, output_format: str, output_dir: str | None) -> None:
         f"[bold]Warden v{__version__}[/bold] -- "
         "[white]AI Agent Governance Scanner[/white]"
     )
-    console.print(f"Scanning: [bright_cyan]{target}[/bright_cyan]")
+    console.print(f"Scanning: [white]{target}[/white]")
 
     # Count analyzable files (can be slow on large repos)
     from warden.scanner.code_analyzer import _should_skip
@@ -114,20 +114,18 @@ def scan(path: str, output_format: str, output_dir: str | None) -> None:
         BarColumn,
         MofNCompleteColumn,
         Progress,
-        SpinnerColumn,
+        TaskProgressColumn,
         TextColumn,
-        TimeElapsedColumn,
     )
 
     for label, scanner_fn in all_layers:
         if label in progress_layers:
             _, total_files = progress_layers[label]
             with Progress(
-                SpinnerColumn(),
-                TextColumn(f"[bright_cyan]{label}[/bright_cyan]"),
+                TextColumn(f"  [bright_cyan]{label}[/bright_cyan]"),
                 BarColumn(bar_width=25),
+                TaskProgressColumn(),
                 MofNCompleteColumn(),
-                TimeElapsedColumn(),
                 console=console,
                 transient=True,
             ) as progress:
@@ -141,7 +139,7 @@ def scan(path: str, output_format: str, output_dir: str | None) -> None:
             from rich.status import Status
 
             with Status(
-                f"[bright_cyan]{label}[/bright_cyan]",
+                f"  [bright_cyan]{label}[/bright_cyan]",
                 console=console,
                 spinner="dots",
             ):

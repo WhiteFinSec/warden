@@ -138,9 +138,12 @@ def _iter_scannable_files(target: Path) -> list[Path]:
     files: list[Path] = []
 
     for filepath in target.rglob("*"):
-        if not filepath.is_file():
-            continue
         if _should_skip(filepath):
+            continue
+        try:
+            if not filepath.is_file():
+                continue
+        except OSError:
             continue
 
         # Always scan .env files
