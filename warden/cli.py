@@ -65,7 +65,12 @@ def scan(path: str, output_format: str, output_dir: str | None) -> None:
     console.print(f"  Analyzable: {py_count} Python, {js_count} JS/TS files")
     console.print("[bright_blue]" + "-" * 50 + "[/bright_blue]")
 
+    import warnings
+
     start = time.monotonic()
+
+    # Suppress SyntaxWarnings from target code (e.g. invalid escape sequences)
+    warnings.filterwarnings("ignore", category=SyntaxWarning)
 
     # Import scanners lazily to keep CLI startup fast
     from warden.models import ScanResult
@@ -81,9 +86,17 @@ def scan(path: str, output_format: str, output_dir: str | None) -> None:
     from warden.scoring.engine import apply_scores
 
     result = ScanResult(target_path=str(target))
+    raw_scores: dict[str, int] = {}
 
-    # Run all 7 layers + D17 + competitor detection
-    scanners = [
+    # Layers with per-file progress support
+    progress_layers = {
+        "Layer 1: Code Patterns": (scan_code, py_count + js_count),
+        "Layer 4: Secrets": (scan_secrets, py_count + js_count),
+        "Layer 7: Audit & Compliance": (scan_audit, py_count),
+    }
+
+    # All layers in order
+    all_layers = [
         ("Layer 1: Code Patterns", scan_code),
         ("Layer 2: MCP Servers", scan_mcp),
         ("Layer 3: Infrastructure", scan_infra),
@@ -93,17 +106,43 @@ def scan(path: str, output_format: str, output_dir: str | None) -> None:
         ("Layer 7: Audit & Compliance", scan_audit),
     ]
 
-    raw_scores: dict[str, int] = {}
+    from rich.progress import (
+        BarColumn,
+        MofNCompleteColumn,
+        Progress,
+        SpinnerColumn,
+        TextColumn,
+        TimeElapsedColumn,
+    )
 
-    from rich.status import Status
+    for label, scanner_fn in all_layers:
+        if label in progress_layers:
+            _, total_files = progress_layers[label]
+            with Progress(
+                SpinnerColumn(),
+                TextColumn(f"[bright_cyan]{label}[/bright_cyan]"),
+                BarColumn(bar_width=25),
+                MofNCompleteColumn(),
+                TimeElapsedColumn(),
+                console=console,
+                transient=True,
+            ) as progress:
+                task = progress.add_task(label, total=total_files)
 
-    for label, scanner_fn in scanners:
-        with Status(
-            f"[bright_cyan]{label}[/bright_cyan]",
-            console=console,
-            spinner="dots",
-        ):
-            findings, scores = scanner_fn(target)
+                def advance(_t=task, _p=progress):
+                    _p.advance(_t)
+
+                findings, scores = scanner_fn(target, on_file=advance)
+        else:
+            from rich.status import Status
+
+            with Status(
+                f"[bright_cyan]{label}[/bright_cyan]",
+                console=console,
+                spinner="dots",
+            ):
+                findings, scores = scanner_fn(target)
+
         result.findings.extend(findings)
         for dim_id, score in scores.items():
             raw_scores[dim_id] = raw_scores.get(dim_id, 0) + score
@@ -117,6 +156,8 @@ def scan(path: str, output_format: str, output_dir: str | None) -> None:
         console.print(f"  {label} {dots} {count} {suffix}{extra}")
 
     # D17 trap defense
+    from rich.status import Status
+
     with Status(
         "[bright_cyan]D17: Adversarial Resilience[/bright_cyan]",
         console=console,

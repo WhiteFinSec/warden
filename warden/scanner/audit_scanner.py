@@ -16,11 +16,16 @@ COMPLIANCE_KEYWORDS = {
 }
 
 
-def scan_audit(target: Path) -> tuple[list[Finding], dict[str, int]]:
+def scan_audit(
+    target: Path,
+    on_file: object = None,
+) -> tuple[list[Finding], dict[str, int]]:
     """Layer 7: Scan for audit logging and compliance patterns.
 
     Returns (findings, raw_dimension_scores).
+    on_file: optional callable invoked per file scanned (for progress).
     """
+    _progress = on_file if callable(on_file) else None
     findings: list[Finding] = []
     has_audit_logging = False
     has_structured_logging = False
@@ -31,6 +36,8 @@ def scan_audit(target: Path) -> tuple[list[Finding], dict[str, int]]:
     for py_file in target.rglob("*.py"):
         if _should_skip(py_file):
             continue
+        if _progress:
+            _progress()
         try:
             source = py_file.read_text(encoding="utf-8", errors="ignore")
         except OSError:

@@ -87,13 +87,18 @@ def _mask_secret(value: str) -> str:
     return value[:3] + "..." + value[-4:]
 
 
-def scan_secrets(target: Path) -> tuple[list[Finding], dict[str, int]]:
+def scan_secrets(
+    target: Path,
+    on_file: object = None,
+) -> tuple[list[Finding], dict[str, int]]:
     """Layer 4: Scan for exposed secrets and credentials.
 
     Returns (findings, raw_dimension_scores).
+    on_file: optional callable invoked per file scanned (for progress).
     """
     findings: list[Finding] = []
     secrets: list[SecretMatch] = []
+    _progress = on_file if callable(on_file) else None
 
     for filepath in _iter_scannable_files(target):
         # Skip test files — they legitimately contain fake secret patterns
@@ -109,6 +114,8 @@ def scan_secrets(target: Path) -> tuple[list[Finding], dict[str, int]]:
         file_findings, file_secrets = _scan_file(filepath)
         findings.extend(file_findings)
         secrets.extend(file_secrets)
+        if _progress:
+            _progress()
 
     scores: dict[str, int] = {}
 

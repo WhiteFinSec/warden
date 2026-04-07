@@ -374,18 +374,25 @@ def _scan_js_file(filepath: Path) -> list[Finding]:
     return findings
 
 
-def scan_code(target: Path) -> tuple[list[Finding], dict[str, int]]:
+def scan_code(
+    target: Path,
+    on_file: object = None,
+) -> tuple[list[Finding], dict[str, int]]:
     """Layer 1: Scan code for governance patterns.
 
     Returns (findings, raw_dimension_scores).
+    on_file: optional callable invoked per file scanned (for progress).
     """
     findings: list[Finding] = []
+    _progress = on_file if callable(on_file) else None
 
     # Scan Python files
     for py_file in target.rglob("*.py"):
         if _should_skip(py_file):
             continue
         findings.extend(_scan_python_file(py_file))
+        if _progress:
+            _progress()
 
     # Scan JS/TS files (skip frontend/UI — focus on agent/backend code)
     for ext in ("*.js", "*.ts", "*.jsx", "*.tsx"):
@@ -393,6 +400,8 @@ def scan_code(target: Path) -> tuple[list[Finding], dict[str, int]]:
             if _should_skip(js_file) or _is_test_file(js_file) or _is_frontend_file(js_file):
                 continue
             findings.extend(_scan_js_file(js_file))
+            if _progress:
+                _progress()
 
     # Calculate dimension scores based on findings (inverse — fewer findings = higher score)
     scores = _calculate_layer_scores(findings, target)
