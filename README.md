@@ -1,6 +1,6 @@
 # Warden — AI Agent Governance Scanner
 
-Open-source, local-only CLI scanner that evaluates AI agent governance posture across **10 scan layers** and **17 dimensions**. Scans code patterns, MCP configs, infrastructure, secrets, agent architecture, dependencies, audit compliance, CI/CD pipelines, IaC security, and framework-specific governance. **No data leaves the machine.**
+Open-source, local-only CLI scanner that evaluates AI agent governance posture across **12 scan layers** and **17 dimensions**. Scans code patterns, MCP configs, infrastructure, secrets, agent architecture, dependencies, audit compliance, CI/CD pipelines, IaC security, framework-specific governance, multi-language code, and cloud AI services. **No data leaves the machine.**
 
 ## Quick Start
 
@@ -47,7 +47,7 @@ warden scan /path/to/project --output-dir /path/to/reports
 warden scan . --skip secrets,deps
 
 # Run only specific layers
-warden scan . --only code,mcp,cicd
+warden scan . --only code,mcp,cloud
 
 # View the scoring methodology
 warden methodology
@@ -68,23 +68,40 @@ warden leaderboard
 | `deps` | Supply Chain / Dependencies |
 | `audit` | Audit & Compliance |
 | `cicd` | CI/CD Governance |
-| `iac` | IaC Security (Terraform) |
+| `iac` | IaC Security (Terraform, Pulumi, CloudFormation) |
 | `frameworks` | Framework-Specific Governance |
+| `multilang` | Multi-Language Governance (Go, Rust, Java) |
+| `cloud` | Cloud AI Governance (AWS, Azure, GCP) |
 
-## 10 Scan Layers
+## 12 Scan Layers
 
-1. **Code Patterns** -- AST-based Python + regex JS/TS analysis (unprotected LLM calls, agent loops, unrestricted tool access)
-2. **MCP Servers** -- Config file analysis (write tools without auth, missing schemas, non-TLS transport)
-3. **Infrastructure** -- Dockerfile, docker-compose, K8s manifests (root containers, exposed secrets, missing healthchecks)
-4. **Secrets** -- 15+ credential patterns with value masking (OpenAI, Anthropic, AWS, GitHub, Stripe, etc.)
-5. **Agent Architecture** -- Agent class analysis (no permissions, no cost tracking, unlimited sub-agent spawning)
-6. **Supply Chain** -- Dependency analysis (unpinned AI packages, typosquat detection via Levenshtein distance)
-7. **Audit & Compliance** -- Audit logging, structured logging, retention policies, compliance framework mapping
-8. **CI/CD Governance** -- GitHub Actions analysis (missing approvals, exposed secrets, no branch protection, CODEOWNERS)
-9. **IaC Security** -- Terraform analysis (unencrypted S3, open security groups, IAM wildcards, local state)
-10. **Framework Governance** -- LangChain callbacks, CrewAI guardrails, AutoGen sandboxing, LlamaIndex limits
+1. **Code Patterns** — AST-based Python + regex JS/TS analysis (unprotected LLM calls, agent loops, unrestricted tool access)
+2. **MCP Servers** — Config file analysis (write tools without auth, missing schemas, non-TLS transport)
+3. **Infrastructure** — Dockerfile, docker-compose, K8s manifests (root containers, exposed secrets, missing healthchecks)
+4. **Secrets** — 15+ credential patterns with value masking (OpenAI, Anthropic, AWS, GitHub, Stripe, etc.)
+5. **Agent Architecture** — Agent class analysis (no permissions, no cost tracking, unlimited sub-agent spawning)
+6. **Supply Chain** — Dependency analysis (unpinned AI packages, typosquat detection via Levenshtein distance)
+7. **Audit & Compliance** — Audit logging, structured logging, retention policies, compliance framework mapping
+8. **CI/CD Governance** — GitHub Actions analysis (missing approvals, exposed secrets, no branch protection, CODEOWNERS)
+9. **IaC Security** — Terraform, Pulumi, and CloudFormation analysis (unencrypted storage, open security groups, IAM wildcards, missing remote backend)
+10. **Framework Governance** — LangChain callbacks, CrewAI guardrails, AutoGen sandboxing, LlamaIndex limits
+11. **Multi-Language Governance** — Go (context timeouts, unsafe exec), Rust (unsafe blocks, .unwrap() on API calls), Java (Spring AI @Tool auth, audit logging)
+12. **Cloud AI Governance** — AWS Bedrock guardrails, Azure AI Content Safety, GCP Vertex AI safety settings, managed identity vs hardcoded keys
 
-Plus **D17: Adversarial Resilience** -- 8 sub-checks based on Google DeepMind's "AI Agent Traps" paper (Franklin et al., March 2026).
+Plus **D17: Adversarial Resilience** — 8 sub-checks based on Google DeepMind's "AI Agent Traps" paper (Franklin et al., March 2026).
+
+## Language Support
+
+| Language | Code Patterns | Secrets | Dependencies | Framework-Specific | Cloud AI |
+|----------|:---:|:---:|:---:|:---:|:---:|
+| Python | AST | Yes | pip/poetry/uv | LangChain, CrewAI, AutoGen, LlamaIndex | Bedrock, Azure AI, Vertex AI |
+| JavaScript/TypeScript | Regex | Yes | npm/yarn/pnpm | — | — |
+| Go | Regex | Yes | go.mod | context, exec, rate limiting | — |
+| Rust | Regex | Yes | Cargo.toml | tracing, tokio, unsafe blocks | — |
+| Java | Regex | Yes | Maven/Gradle | Spring AI, Spring Security | — |
+| Terraform | HCL regex | — | Provider versions | — | — |
+| Pulumi | Via TS/PY | — | — | — | — |
+| CloudFormation | YAML/JSON regex | — | — | — | — |
 
 ## Competitor Detection
 
@@ -92,16 +109,16 @@ Warden detects **17 governance and security tools** across 5 signal layers (env 
 
 ## Output Formats
 
-- **CLI summary** -- colorized terminal output with per-layer elapsed time, progress bars, and D17 warning
-- **warden_report.html** -- self-contained dark-theme report with SVG score ring, expandable findings, benchmark bars, and market comparison (no external requests, works air-gapped)
-- **warden_report.json** -- machine-readable with `scoring_version` field
+- **CLI summary** — colorized terminal output with per-layer elapsed time, progress bars, and D17 warning
+- **warden_report.html** — self-contained dark-theme report with SVG score ring, expandable findings, benchmark bars, and market comparison (no external requests, works air-gapped)
+- **warden_report.json** — machine-readable with `scoring_version` field
 
 ## Architecture Constraints
 
-1. **Zero network access** -- Scanners never import httpx/requests/urllib. CI-enforced.
-2. **Zero SharkRouter imports** -- Standalone package with no internal dependencies. CI-enforced.
-3. **Secrets never stored** -- Only file, line, pattern name, and masked preview (first 3 + last 4 chars).
-4. **HTML report self-contained** -- No CDN, no Google Fonts. Works in air-gapped environments.
+1. **Zero network access** — Scanners never import httpx/requests/urllib. CI-enforced.
+2. **Zero SharkRouter imports** — Standalone package with no internal dependencies. CI-enforced.
+3. **Secrets never stored** — Only file, line, pattern name, and masked preview (first 3 + last 4 chars).
+4. **HTML report self-contained** — No CDN, no Google Fonts. Works in air-gapped environments.
 
 ## Development
 
@@ -119,10 +136,10 @@ pytest tests/ -v
 
 ## Known Limitations
 
-- **Language coverage:** v1.1 scans Python and JS/TS code patterns. Go/Rust/Java code analysis is planned for a future version. Infrastructure, secrets, and dependency scanning apply to all languages.
 - **Framework vocabulary:** Scoring is optimized for recognized AI frameworks. Custom frameworks may score lower despite equivalent governance.
 - **Static analysis:** Warden detects governance *patterns*, not enforcement. High score = controls present, not proven correct.
-- **IaC coverage:** Currently supports Terraform. Pulumi, CloudFormation, and CDK planned for future versions.
+- **IaC depth:** Terraform has the deepest analysis. Pulumi and CloudFormation checks are regex-based heuristics.
+- **Multi-language AST:** Go/Rust/Java analysis uses regex, not AST parsing. Fewer patterns detected than Python.
 
 See [SCORING.md](SCORING.md) for full details.
 

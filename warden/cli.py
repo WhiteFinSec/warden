@@ -50,6 +50,8 @@ LAYER_NAMES = {
     "cicd": "Layer 8: CI/CD Governance",
     "iac": "Layer 9: IaC Security",
     "frameworks": "Layer 10: Framework Governance",
+    "multilang": "Layer 11: Multi-Language Governance",
+    "cloud": "Layer 12: Cloud AI Governance",
 }
 
 
@@ -100,6 +102,7 @@ def scan(
     from warden.scanner.agent_arch_scanner import scan_agent_arch
     from warden.scanner.audit_scanner import scan_audit
     from warden.scanner.cicd_scanner import scan_cicd
+    from warden.scanner.cloud_scanner import scan_cloud
     from warden.scanner.code_analyzer import scan_code
     from warden.scanner.competitors import detect_competitors
     from warden.scanner.dependency_scanner import scan_dependencies
@@ -107,6 +110,7 @@ def scan(
     from warden.scanner.iac_scanner import scan_iac
     from warden.scanner.infra_analyzer import scan_infra
     from warden.scanner.mcp_scanner import scan_mcp
+    from warden.scanner.multilang_scanner import scan_multilang
     from warden.scanner.secrets_scanner import scan_secrets
     from warden.scanner.trap_defense_scanner import scan_trap_defense
     from warden.scoring.engine import apply_scores
@@ -133,6 +137,8 @@ def scan(
         ("Layer 8: CI/CD Governance", scan_cicd, "cicd"),
         ("Layer 9: IaC Security", scan_iac, "iac"),
         ("Layer 10: Framework Governance", scan_frameworks, "frameworks"),
+        ("Layer 11: Multi-Language Governance", scan_multilang, "multilang"),
+        ("Layer 12: Cloud AI Governance", scan_cloud, "cloud"),
     ]
 
     # Apply --skip / --only filters
