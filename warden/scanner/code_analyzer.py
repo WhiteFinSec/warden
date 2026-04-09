@@ -555,7 +555,7 @@ def _calculate_layer_scores(
               r"policy.*mode", r"yaml.*polic"],
         strong_pts=2, weak_pts=1, cap=6, require_co_occurrence=3)
 
-    # D4: Credential Management (max 20 — Layer 1 up to 8, infra 6, mcp 4, cloud 3)
+    # D4: Credential Management (max 20 — Layer 1 up to 8, infra 6, mcp 4, cloud 3, secrets 3)
     scores["D4"] = _score_governance_signals(py_contents,
         strong=[r"secrets.*manager", r"key.*rotation", r"credential.*lifecycle",
                 r"nhi.*credential", r"KMS.*encrypt"],
@@ -629,7 +629,7 @@ def _calculate_layer_scores(
         weak=[r"rollback", r"snapshot", r"restore", r"backup"],
         strong_pts=3, weak_pts=1, cap=10, require_co_occurrence=2)
 
-    # D14: Compliance Maturity (max 10 — Layer 1 up to 2, audit 4, cicd 3, deps 4)
+    # D14: Compliance Maturity (max 10 — Layer 1 up to 2, audit 4, cicd 3, deps 1)
     scores["D14"] = _score_governance_signals(py_contents,
         strong=[r"compliance.*report.*generat", r"regulatory.*map.*dimen",
                 r"evidence.*collect.*audit"],

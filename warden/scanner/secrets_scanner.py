@@ -125,14 +125,16 @@ def scan_secrets(
 
     scores: dict[str, int] = {}
 
-    # D4: Credential Management
+    # D4: Credential Management — reward positive practices, not just absence.
+    # "No secrets found" could mean great hygiene OR nothing to scan.
     critical_secrets = sum(1 for s in secrets if s.severity == Severity.CRITICAL)
-    high_secrets = sum(1 for s in secrets if s.severity == Severity.HIGH)
 
-    if critical_secrets == 0 and high_secrets == 0:
-        scores["D4"] = 10  # Clean — good credential management
+    if critical_secrets == 0 and len(secrets) == 0:
+        # Truly clean — but only modest credit; real D4 points come from
+        # code_analyzer (secrets manager, key rotation, KMS patterns).
+        scores["D4"] = 3
     elif critical_secrets == 0:
-        scores["D4"] = 5   # Some concerns but no critical exposure
+        scores["D4"] = 2   # Some findings but no critical exposure
     else:
         scores["D4"] = 0   # Critical secrets exposed
 

@@ -209,17 +209,16 @@ def _levenshtein_distance(s1: str, s2: str) -> int:
 def _calculate_scores(findings: list[Finding], target: Path) -> dict[str, int]:
     scores: dict[str, int] = {}
 
-    critical = sum(1 for f in findings if f.severity == Severity.CRITICAL)
-    medium = sum(1 for f in findings if f.severity == Severity.MEDIUM)
+    # D14: Compliance Maturity — reward positive supply-chain practices,
+    # not merely "no vulnerabilities found" (absence ≠ compliance).
+    d14 = 0
+    has_lockfile = bool(_find_lockfiles(target))
+    has_critical = any(f.severity == Severity.CRITICAL for f in findings)
 
-    # D14: Compliance Maturity (from dependency hygiene)
-    if critical == 0 and medium == 0:
-        scores["D14"] = 4
-    elif critical == 0:
-        scores["D14"] = 2
-    else:
-        scores["D14"] = 0
+    if has_lockfile and not has_critical:
+        d14 = 1  # Lockfile present + no critical supply chain issues
 
+    scores["D14"] = d14
     return scores
 
 
