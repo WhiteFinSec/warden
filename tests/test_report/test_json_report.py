@@ -30,7 +30,7 @@ def test_json_has_scoring_version():
         write_json_report(result, path)
         data = json.loads(path.read_text())
         assert "scoring_version" in data
-        assert data["scoring_version"] == "4.2"
+        assert data["scoring_version"] == "4.3"
 
 
 def test_json_has_all_dimensions():
