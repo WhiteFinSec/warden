@@ -23,13 +23,13 @@ From zero to governance score in under 60 seconds.
 
 ## HTML Report
 
-Warden generates a self-contained HTML report with interactive score breakdown, market comparison, and actionable recommendations — works offline and in air-gapped environments.
+Warden generates a self-contained HTML report with interactive score breakdown, actionable recommendations, and a comparison card — works offline and in air-gapped environments.
 
 ![Warden HTML Report](docs/images/warden-report-preview.png)
 
 ## What It Does
 
-Warden scores your AI agent project across **17 governance dimensions** (out of 235 raw, normalized to /100):
+Warden scores your AI agent project across **17 governance dimensions** (out of 235 raw points, normalized to /100):
 
 | Group | Dimensions |
 |-------|-----------|
@@ -50,9 +50,10 @@ Warden scores your AI agent project across **17 governance dimensions** (out of 
 ## CLI Commands
 
 ```bash
-# Scan a project (generates HTML + JSON reports)
+# Scan a project (generates HTML + JSON + SARIF reports)
 warden scan .
 warden scan /path/to/project --format json
+warden scan /path/to/project --format sarif
 warden scan /path/to/project --output-dir /path/to/reports
 
 # Skip specific layers
@@ -102,20 +103,37 @@ warden leaderboard
 
 Plus **D17: Adversarial Resilience** — 8 sub-checks based on Google DeepMind's "AI Agent Traps" paper (Franklin et al., March 2026).
 
+## Scoring Integrity
+
+Warden v1.5+ includes 6 anti-inflation mechanisms to prevent score gaming:
+
+- **Strong/weak pattern tiers** — generic matches (e.g., `import logging`) score 1 point; governance-specific patterns (e.g., `audit_log_tamper_proof`) score 3
+- **Co-occurrence requirements** — dimensions like D3 (Policy) and D11 (Cloud/Platform) require 3+ distinct patterns to score, preventing single-keyword inflation
+- **Boolean dimension scoring** — each dimension scores from code patterns OR absence, never both
+- **CRITICAL finding deductions** — each CRITICAL finding deducts 2 points (capped at 60% of earned score)
+- **MCP absence-vs-compliance fix** — "no tools found = no violations" no longer counts as compliant; only inline tool definitions earn credit
+- **Positive-signal scoring** — clean dependencies and zero secrets earn modest credit (1-3 pts), not full dimension scores; real points require active governance patterns (secrets managers, compliance frameworks, lockfiles)
+
 ## HTML Report Features
 
 The HTML report is fully self-contained (no CDN, no external fonts, no network requests):
 
-- **Score gauge** with per-dimension breakdown bars (expandable to show findings)
-- **Scan scope** — file counts, languages detected, layers scanned
-- **Summary grid** — adaptive (MCP-focused when MCP tools exist, findings-focused otherwise)
-- **Solutions comparison table** — per-dimension scores (D1-D17) for your scan vs SharkRouter vs detected tools
+- **Score gauge** with per-dimension breakdown bars
+- **Summary grid** — MCP-focused when MCP tools detected, findings-focused otherwise
 - **Discovered tools** — MCP tool inventory with risk classification (destructive, financial, exfiltration, write-access, read-only)
 - **Governance detection** — which governance layers were found in your codebase
 - **Recommendations** — prioritized remediation steps mapped to compliance frameworks
-- **Workaround Tax** — cost analysis of manual governance vs automated enforcement
-- **Comparison card** — side-by-side score vs SharkRouter with biggest gap dimensions
+- **Comparison card** — side-by-side score projection with biggest gap dimensions
 - **Email form** — optional report delivery (score metadata only, never source code or secrets)
+
+## Output Formats
+
+| Format | File | Description |
+|--------|------|-------------|
+| **HTML** | `warden_report.html` | Self-contained dark-theme report with SVG gauge, expandable findings, benchmark bars |
+| **JSON** | `warden_report.json` | Machine-readable with `scoring_version` field for CI/CD integration |
+| **SARIF** | `warden_report.sarif` | GitHub Code Scanning compatible — native PR annotations |
+| **CLI** | stdout | Colorized terminal output with per-layer timing and progress bars |
 
 ## Language Support
 
@@ -130,22 +148,13 @@ The HTML report is fully self-contained (no CDN, no external fonts, no network r
 | Pulumi | Via TS/PY | — | — | — | — |
 | CloudFormation | YAML/JSON regex | — | — | — | — |
 
-## Competitor Detection
-
-Warden detects **17 governance and security tools** across 5 signal layers (env vars, processes, MCP configs, packages, Docker containers). Detection requires 2+ signals from different layers to prevent false positives.
-
-## Output Formats
-
-- **CLI summary** — colorized terminal output with per-layer elapsed time, progress bars, and D17 warning
-- **warden_report.html** — self-contained dark-theme report with SVG score ring, expandable findings, benchmark bars, and market comparison (no external requests, works air-gapped)
-- **warden_report.json** — machine-readable with `scoring_version` field
-
 ## Architecture Constraints
 
 1. **Zero network access** — Scanners never import httpx/requests/urllib. CI-enforced.
 2. **Zero SharkRouter imports** — Standalone package with no internal dependencies. CI-enforced.
 3. **Secrets never stored** — Only file, line, pattern name, and masked preview (first 3 + last 4 chars).
 4. **HTML report self-contained** — No CDN, no Google Fonts. Works in air-gapped environments.
+5. **2 runtime dependencies** — click + rich. Nothing else.
 
 ## Development
 
@@ -163,18 +172,13 @@ pytest tests/ -v
 
 ## Known Limitations
 
-- **Framework vocabulary:** Scoring is optimized for recognized AI frameworks. Custom frameworks may score lower despite equivalent governance.
 - **Static analysis:** Warden detects governance *patterns*, not enforcement. High score = controls present, not proven correct.
+- **Framework vocabulary:** Scoring is optimized for recognized AI frameworks. Custom frameworks may score lower despite equivalent governance.
 - **IaC depth:** Terraform has the deepest analysis. Pulumi and CloudFormation checks are regex-based heuristics.
 - **Multi-language AST:** Go/Rust/Java analysis uses regex, not AST parsing. Fewer patterns detected than Python.
+- **Local filesystem scope:** Warden scans files on disk, including gitignored files. Secrets in `.env` files are flagged even if not committed.
 
-See [SCORING.md](SCORING.md) for full details.
-
-## Methodology
-
-Full scoring methodology: [SCORING.md](SCORING.md)
-
-Run `warden methodology` to see it in your terminal.
+See [SCORING.md](SCORING.md) for full methodology details.
 
 ## License
 
