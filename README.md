@@ -62,6 +62,10 @@ warden scan . --skip secrets,deps
 # Run only specific layers
 warden scan . --only code,mcp,cloud
 
+# CI mode: exit code reflects governance level
+warden scan . --ci                    # 0=governed, 1=partial, 2=at_risk, 3=ungoverned
+warden scan . --min-score 60          # exit 1 if score < 60
+
 # View the scoring methodology
 warden methodology
 

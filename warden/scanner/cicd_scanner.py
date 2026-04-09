@@ -153,7 +153,6 @@ def _calculate_scores(
         return scores
 
     d3_deductions = sum(1 for f in findings if f.dimension == "D3")
-    d14_deductions = sum(1 for f in findings if f.dimension == "D14")
 
     # D3: Policy Coverage — max contribution 4
     d3 = 4
@@ -162,9 +161,24 @@ def _calculate_scores(
         d3 = min(d3 + 1, 4)
     scores["D3"] = max(0, d3)
 
-    # D14: Compliance Maturity — max contribution 3
-    d14 = 3
-    d14 -= min(d14_deductions, 3)
-    scores["D14"] = max(0, d14)
+    # D14: Compliance Maturity — earn points for governance signals,
+    # not "has CI minus deductions". Having workflows is baseline, not compliance.
+    d14 = 0
+    all_content = ""
+    for wf in workflow_files:
+        try:
+            all_content += wf.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            pass
+    # +1 for environment blocks (required reviewers for deploys)
+    if _ENVIRONMENT_BLOCK.search(all_content):
+        d14 += 1
+    # +1 for branch protection guards
+    if _BRANCH_PROTECTION.search(all_content):
+        d14 += 1
+    # +1 for OIDC (no static secrets)
+    if _ID_TOKEN_WRITE.search(all_content):
+        d14 += 1
+    scores["D14"] = min(d14, 3)
 
     return scores
