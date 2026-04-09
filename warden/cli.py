@@ -121,10 +121,11 @@ def scan(
     from warden.scanner.infra_analyzer import scan_infra
     from warden.scanner.mcp_scanner import scan_mcp
     from warden.scanner.multilang_scanner import scan_multilang
-    from warden.scanner.secrets_scanner import scan_secrets
+    from warden.scanner.secrets_scanner import _iter_scannable_files, scan_secrets
     from warden.scanner.trap_defense_scanner import scan_trap_defense
     from warden.scoring.engine import apply_scores
 
+    secrets_file_count = len(_iter_scannable_files(target))
     result = ScanResult(target_path=str(target))
     result.file_counts = {"python": py_count, "js": js_count, "other": other_count}
     raw_scores: dict[str, int] = {}
@@ -132,7 +133,7 @@ def scan(
     # Layers with per-file progress support
     progress_layers = {
         "Layer 1: Code Patterns": (scan_code, py_count + js_count),
-        "Layer 4: Secrets": (scan_secrets, py_count + js_count),
+        "Layer 4: Secrets": (scan_secrets, secrets_file_count),
         "Layer 7: Audit & Compliance": (scan_audit, py_count),
     }
 
