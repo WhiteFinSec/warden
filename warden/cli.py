@@ -130,11 +130,11 @@ def scan(
     result.file_counts = {"python": py_count, "js": js_count, "other": other_count}
     raw_scores: dict[str, int] = {}
 
-    # Layers with per-file progress support
-    progress_layers = {
-        "Layer 1: Code Patterns": (scan_code, py_count + js_count),
-        "Layer 4: Secrets": (scan_secrets, secrets_file_count),
-        "Layer 7: Audit & Compliance": (scan_audit, py_count),
+    # Layers with per-file progress support (run sequentially with progress bars)
+    progress_layer_config = {
+        "code": py_count + js_count,
+        "secrets": secrets_file_count,
+        "audit": py_count,
     }
 
     # All layers in order
@@ -174,58 +174,84 @@ def scan(
         TimeElapsedColumn,
     )
 
-    for label, scanner_fn, _layer_key in all_layers:
-        if label in progress_layers:
-            _, total_files = progress_layers[label]
-            with Progress(
-                TextColumn(f"  [bright_cyan]{label}[/bright_cyan]"),
-                BarColumn(bar_width=25),
-                TaskProgressColumn(),
-                MofNCompleteColumn(),
-                TimeElapsedColumn(),
-                console=console,
-                transient=True,
-            ) as progress:
-                task = progress.add_task(label, total=total_files)
+    # Split into foreground (progress bar) and background (parallel) layers
+    foreground_layers = [(lb, fn, k) for lb, fn, k in all_layers if k in progress_layer_config]
+    background_layers = [(lb, fn, k) for lb, fn, k in all_layers if k not in progress_layer_config]
 
-                def advance(_t=task, _p=progress):
-                    _p.advance(_t)
+    # Launch background layers in parallel immediately
+    from concurrent.futures import Future, ThreadPoolExecutor
 
-                findings, scores = scanner_fn(target, on_file=advance)
-        elif _layer_key == "mcp":
-            from rich.status import Status
+    def _run_layer(label: str, scanner_fn, layer_key: str):
+        if layer_key == "mcp":
+            findings, scores, tools = scanner_fn(target)
+            return label, layer_key, findings, scores, tools
+        return label, layer_key, *scanner_fn(target), None
 
-            with Status(
-                f"  [bright_cyan]{label}[/bright_cyan]",
-                console=console,
-                spinner="dots",
-            ):
-                findings, scores, mcp_tools = scanner_fn(target)
-            result.mcp_tools = mcp_tools
-        else:
-            from rich.status import Status
+    bg_futures: list[Future] = []
+    executor = ThreadPoolExecutor(max_workers=min(len(background_layers), 6)) if background_layers else None
+    if executor:
+        for label, scanner_fn, layer_key in background_layers:
+            bg_futures.append(executor.submit(_run_layer, label, scanner_fn, layer_key))
 
-            with Status(
-                f"  [bright_cyan]{label}[/bright_cyan]",
-                console=console,
-                spinner="dots",
-            ):
-                findings, scores = scanner_fn(target)
-
-        result.findings.extend(findings)
-        for dim_id, score in scores.items():
-            raw_scores[dim_id] = raw_scores.get(dim_id, 0) + score
+    def _print_layer_result(label: str, findings: list, layer_key: str):
+        """Print a completed layer's summary line."""
         count = len(findings)
         suffix = "finding" if count == 1 else "findings"
-        critical = sum(
-            1 for f in findings if f.severity.value == "CRITICAL"
-        )
+        critical = sum(1 for f in findings if f.severity.value == "CRITICAL")
         extra = f" ([red]{critical} CRITICAL[/red])" if critical else ""
         elapsed_so_far = time.monotonic() - start
         mins, secs = divmod(int(elapsed_so_far), 60)
         ts = f"{mins}m{secs:02d}s" if mins else f"{secs}s"
         dots = "." * (28 - len(label))
         console.print(f"  {label} {dots} {count} {suffix}{extra}  [dim]{ts}[/dim]")
+
+    # Run foreground layers sequentially with progress bars
+    for label, scanner_fn, layer_key in foreground_layers:
+        total_files = progress_layer_config[layer_key]
+        with Progress(
+            TextColumn(f"  [bright_cyan]{label}[/bright_cyan]"),
+            BarColumn(bar_width=25),
+            TaskProgressColumn(),
+            MofNCompleteColumn(),
+            TimeElapsedColumn(),
+            console=console,
+            transient=True,
+        ) as progress:
+            task = progress.add_task(label, total=total_files)
+
+            def advance(_t=task, _p=progress):
+                _p.advance(_t)
+
+            findings, scores = scanner_fn(target, on_file=advance)
+
+        result.findings.extend(findings)
+        for dim_id, score in scores.items():
+            raw_scores[dim_id] = raw_scores.get(dim_id, 0) + score
+        _print_layer_result(label, findings, layer_key)
+
+    # Collect background layer results (most will already be done)
+    if executor:
+        from rich.status import Status
+
+        with Status(
+            "  [bright_cyan]Collecting parallel layers...[/bright_cyan]",
+            console=console,
+            spinner="dots",
+        ):
+            bg_results = [f.result() for f in bg_futures]
+        executor.shutdown(wait=False)
+
+        # Sort by original layer order for consistent output
+        layer_order = {k: i for i, (_, _, k) in enumerate(all_layers)}
+        bg_results.sort(key=lambda r: layer_order.get(r[1], 99))
+
+        for label, layer_key, findings, scores, mcp_tools in bg_results:
+            if layer_key == "mcp" and mcp_tools is not None:
+                result.mcp_tools = mcp_tools
+            result.findings.extend(findings)
+            for dim_id, score in scores.items():
+                raw_scores[dim_id] = raw_scores.get(dim_id, 0) + score
+            _print_layer_result(label, findings, layer_key)
 
     # D17 trap defense
     from rich.status import Status
