@@ -12,3 +12,4 @@ build/
 .mypy_cache/
 warden_report.html
 warden_report.json
+warden_report.*
