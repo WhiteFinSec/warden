@@ -9,27 +9,6 @@ import click
 from rich.console import Console
 
 from warden import __scoring_model__, __version__
-from warden.scoring.dimensions import DIMENSIONS_BY_ID
-
-
-def _diminishing_add(
-    raw_scores: dict[str, int], dim_id: str, new_score: int,
-) -> int:
-    """Add score to a dimension with diminishing returns.
-
-    Once a dimension has accumulated > 50% of its max from previous layers,
-    additional contributions are halved. This prevents easy maxing from
-    cross-layer stacking of generic signals.
-    """
-    current = raw_scores.get(dim_id, 0)
-    dim = DIMENSIONS_BY_ID.get(dim_id)
-    if dim is None:
-        return current + new_score
-    threshold = dim.max_score * 0.5
-    if current >= threshold:
-        return current + new_score // 2
-    return current + new_score
-
 
 BANNER = r"""
  __        __            _
@@ -235,7 +214,7 @@ def scan(
 
         result.findings.extend(findings)
         for dim_id, score in scores.items():
-            raw_scores[dim_id] = _diminishing_add(raw_scores, dim_id, score)
+            raw_scores[dim_id] = raw_scores.get(dim_id, 0) + score
         count = len(findings)
         suffix = "finding" if count == 1 else "findings"
         critical = sum(
@@ -260,7 +239,7 @@ def scan(
     result.findings.extend(trap_findings)
     result.trap_defense = trap_status
     for dim_id, score in trap_scores.items():
-        raw_scores[dim_id] = _diminishing_add(raw_scores, dim_id, score)
+        raw_scores[dim_id] = raw_scores.get(dim_id, 0) + score
 
     # Competitor detection
     with Status(
@@ -716,14 +695,14 @@ def _run_scan(target: Path, skip_layers: str | None = None, only_layers: str | N
             findings, scores = scanner_fn(target)
         result.findings.extend(findings)
         for dim_id, score in scores.items():
-            raw_scores[dim_id] = _diminishing_add(raw_scores, dim_id, score)
+            raw_scores[dim_id] = raw_scores.get(dim_id, 0) + score
 
     # D17 trap defense
     trap_findings, trap_scores, trap_status = scan_trap_defense(target)
     result.findings.extend(trap_findings)
     result.trap_defense = trap_status
     for dim_id, score in trap_scores.items():
-        raw_scores[dim_id] = _diminishing_add(raw_scores, dim_id, score)
+        raw_scores[dim_id] = raw_scores.get(dim_id, 0) + score
 
     # Competitor detection
     competitors, comp_gtm = detect_competitors(target)
