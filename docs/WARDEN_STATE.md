@@ -1,4 +1,4 @@
-# Warden — Complete State (v1.5.3)
+# Warden — Complete State (v1.5.6)
 
 Last updated: 2026-04-10
 
@@ -32,9 +32,9 @@ Warden is an open-source, local-only CLI scanner that evaluates AI agent governa
 
 | File | Lines | Purpose |
 |------|-------|---------|
-| `warden/__init__.py` | 8 | Version (`1.5.3`) and scoring model (`4.3`) |
+| `warden/__init__.py` | 8 | Version (`1.5.6`) and scoring model (`4.3`) |
 | `warden/__main__.py` | — | `python -m warden` entry point |
-| `warden/cli.py` | 722 | Click CLI — `scan`, `methodology`, `leaderboard` commands. Orchestrates all layers, aggregates scores, writes reports |
+| `warden/cli.py` | ~900 | Click CLI — `scan`, `methodology`, `leaderboard`, `baseline`, `diff`, `fix` commands. Orchestrates all layers (parallel), aggregates scores, writes reports |
 | `warden/models.py` | 124 | Data models: `Finding`, `ScanResult`, `McpToolInfo`, `ComplianceMapping`, `Severity` enum |
 
 ### Scanners (`warden/scanner/`)
@@ -142,7 +142,7 @@ Only Python file contents (`py_contents`) are scored for governance signals. JS/
 3. **Boolean scoring** — each file contributes to only one pattern match per dimension
 4. **CRITICAL deductions** — 2 pts per CRITICAL finding, capped at 60% of earned score; HIGH findings deduct 1 pt (max 3)
 5. **MCP absence ≠ compliance** — no inline tool definitions → no D2/D3/D4 points from MCP
-6. **Positive-signal scoring** — D4 (secrets): clean = 3 pts, not 10; D14 (deps): lockfile = 1 pt, not 4
+6. **Positive-signal scoring** — D4 (credentials): clean = 3 pts not 10; D14 (CI/CD): environment blocks, branch protection, OIDC each earn +1
 
 ### Score Normalization
 
@@ -207,7 +207,7 @@ Self-contained, dark-theme, neon-accented report. No external requests — works
 ```json
 {
   "scoring_version": "4.3",
-  "version": "1.5.3",
+  "version": "1.5.6",
   "score": { "normalized": 70, "raw": 165, "raw_max": 235, "level": "PARTIAL", "dimensions": [...] },
   "findings": [...],
   "trap_defense": { "deepmind_citation": "...", "checks": [...] }
@@ -224,11 +224,17 @@ GitHub Code Scanning compatible. Each finding becomes a SARIF `result` with `rul
 
 | Command | Description |
 |---------|-------------|
-| `warden scan <path>` | Run all 12 layers, generate reports |
+| `warden scan <path>` | Run all 12 layers (parallel), generate reports |
 | `warden scan <path> --format json\|html\|sarif\|all` | Specific output format |
 | `warden scan <path> --skip secrets,deps` | Skip named layers |
 | `warden scan <path> --only code,mcp` | Run only named layers |
 | `warden scan <path> --output-dir <dir>` | Custom output directory |
+| `warden scan <path> --ci` | CI mode — exit 0 GOVERNED, 1 PARTIAL, 2 AT_RISK, 3 UNGOVERNED |
+| `warden scan <path> --min-score 60` | Fail CI if normalized score is below threshold |
+| `warden scan <path> --baseline .warden-baseline.json` | Show only NEW findings not in baseline |
+| `warden baseline <path>` | Save current findings as `.warden-baseline.json` for brownfield adoption |
+| `warden diff <old.json> <new.json>` | Compare two JSON reports — score delta + new/resolved findings |
+| `warden fix <path>` | Auto-remediate `.gitignore`, dependency pinning, Dockerfile `USER` |
 | `warden methodology` | Print scoring methodology to terminal |
 | `warden leaderboard` | Show 17-vendor x 17-dimension market comparison |
 
@@ -357,7 +363,7 @@ Two GitHub Actions workflows:
 | `build` | Install, test, `uv build`, upload dist artifact |
 | `publish` | Download artifact, `uv publish` with trusted publishing (OIDC, no API token) |
 
-**Trusted publishing:** PyPI configured with GitHub Actions OIDC — no stored secrets. Tag `v1.5.3` → automatic build + test + publish.
+**Trusted publishing:** PyPI configured with GitHub Actions OIDC — no stored secrets. Tag `v1.5.6` → automatic build + test + publish.
 
 ---
 
@@ -374,6 +380,9 @@ Two GitHub Actions workflows:
 | 1.5.1 | 4.2 | Progress bar fix, HTML footer contrast fix |
 | 1.5.2 | 4.3 | Scoring accuracy overhaul — 6 anti-inflation mechanisms, secrets false positive reduction |
 | 1.5.3 | 4.3 | Eliminate absence-based scoring in D4 and D14 |
+| 1.5.4 | 4.3 | Gitignore-aware secrets scanning — `.env` secrets downgraded to INFO |
+| 1.5.5 | 4.3 | Parallel scanning — 9 layers run concurrently, 2.2x faster (47s on 2554-file project) |
+| 1.5.6 | 4.3 | `warden baseline` command, competitor score refresh (Zenity 55, Portkey 32, Noma 40) |
 
 ---
 
@@ -390,7 +399,7 @@ Two GitHub Actions workflows:
 
 ## Calibration Reference
 
-Tested against real projects (v1.5.3):
+Tested against real projects (v1.5.6):
 
 | Project | Type | Score | Level | Notes |
 |---------|------|-------|-------|-------|
