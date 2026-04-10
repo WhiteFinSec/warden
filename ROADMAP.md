@@ -243,36 +243,35 @@ check **Execution Order** at the bottom of this file.
 
 ## Execution Order (current)
 
-### Shipped in v1.5.6 (committed 2026-04-10, tagged next as v1.6.0)
+### Shipped in v1.6.0 (tagged and released 2026-04-11)
 
 1. ~~**G** — GitHub Action~~ (shipped 2026-04-10)
 2. ~~**B** — Config file~~ (shipped 2026-04-10 — `.warden.toml` + `[tool.warden]`)
 3. ~~**C** — PDF reports~~ (shipped 2026-04-10 — `warden-ai[pdf]` extra)
 4. ~~**F** — Parallel secrets scanning~~ (shipped 2026-04-10 — `ThreadPoolExecutor` over `_scan_file`)
 5. ~~**E** — Add Protect AI + HiddenLayer~~ (shipped 2026-04-10 — 20-vendor registry)
-6. ~~**J** — Sample gallery site~~ (shipped 2026-04-10 — `gallery/` builder with 10 targets, 3 validated, SEO landing pages ready to deploy)
+6. ~~**J** — Sample gallery site~~ (shipped 2026-04-10 — `gallery/` builder with 10 targets)
 7. ~~**VigIA fix batch**~~ (committed 2026-04-11 — coverage warning, dynamic competitor count, `file_counts` + `coverage_warning` in JSON report)
+8. ~~**Tier 0 #1** — Push `main` to origin~~ (2026-04-11)
+9. ~~**Tier 0 #2** — Version bump 1.5.6 → 1.6.0, tag `v1.6.0`, PyPI publish~~ (2026-04-11, live at `pypi.org/project/warden-ai/1.6.0/`)
+10. ~~**Tier 0 #3** — GitHub Release created with full notes~~ (2026-04-11 — Marketplace checkbox is a one-click manual step at `releases/tag/v1.6.0`)
+11. ~~**Tier 0 #4** — Full 10-target gallery build + deploy~~ (2026-04-11 — live at `https://sharkrouter.github.io/warden/`, published from orphan `gh-pages` branch; Windows long-path fix committed so future fresh clones work on Windows too)
 
-**All six committed TODO items plus the VigIA fix batch are now on `main`, ahead of origin.**
+**Gallery scores captured for blog post series:**
+langchain 13, langgraph 14, crewai 19, autogen 6, haystack 15, llamaindex 13, semantic-kernel 14, pydantic-ai 24, metagpt 11, langflow 18 — all UNGOVERNED.
 
 ### Next up (in order, not time — decision gates, not calendar days)
 
-1. **Tier 0 — Ship v1.6.0**
-   - `git push origin main` (9 commits ahead)
-   - Bump version 1.5.6 → 1.6.0, tag `v1.6.0`, publish to PyPI
-   - Click-through GitHub Marketplace listing for the composite Action
-   - Full 10-target gallery build, deploy `gallery/out/` to Caddy (or GH Pages)
-
-2. **Tier 1 — C#/.NET scanner + absence-vs-coverage fix (v1.7.0)**
+1. **Tier 1 — C#/.NET scanner + absence-vs-coverage fix (v1.7.0)**
    - Implement C# / .NET regex scanner in `warden/scanner/multilang_scanner.py` extension
    - Ship absence-vs-coverage scoring fix in `scoring/engine.py` at the same time
    - Validate both against VigIA-Orchestrator as the test fixture — target: VigIA scores ≥ 60 (PARTIAL), down from the current 2/100 coverage-failure artifact
    - Add VigIA as gallery target #11 as proof-by-example
 
-3. **Tier 3 — Blog post series**
+2. **Tier 3 — Blog post series**
    - Post #1: "Why LangChain scores X/100" — walkthrough of the first validated gallery target, using the fresh gallery site as evidence
    - Post #2: "How we fixed the 2/100 problem — C# scanner + coverage gating"
      (only possible after Tier 1 lands, uses VigIA as the before/after case study)
    - Post #3+: one per gallery target, rolling cadence
 
-4. **Conference talk / paper** — methodology writeup for a security venue. No concrete target yet; unblocked but waiting for a venue, not for code.
+3. **Conference talk / paper** — methodology writeup for a security venue. No concrete target yet; unblocked but waiting for a venue, not for code.
