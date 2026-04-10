@@ -58,7 +58,7 @@ Status tags:
   `action.yml` at repo root is ready and tests green. The listing is
   a one-time click-through on the release page once `v1.6.0` is
   tagged: pick a category ("Security"), write a short description,
-  upload the icon. Unlocks `uses: JordanCT/warden-ai@v1` for any
+  upload the icon. Unlocks `uses: SharkRouter/warden@v1` for any
   GitHub workflow and opens the passive-lead-gen channel Web-Claude
   flagged as the main GTM lever.
 
