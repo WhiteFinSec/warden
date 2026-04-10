@@ -6,7 +6,9 @@ and preview (first 3 + last 4 chars of the match).
 
 from __future__ import annotations
 
+import os
 import re
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -93,11 +95,37 @@ def _mask_secret(value: str) -> str:
     return value[:3] + "..." + value[-4:]
 
 
+def _should_scan_path(filepath: Path) -> bool:
+    """Return True if a file should be scanned for secrets.
+
+    Filters out test files, fixtures, and lockfiles that legitimately
+    contain fake secret patterns.
+    """
+    name_lower = filepath.name.lower()
+    if any(ind in name_lower for ind in TEST_INDICATORS):
+        return False
+    parts_lower = {p.lower() for p in filepath.parts}
+    if {"tests", "test", "__tests__", "fixtures"}.intersection(parts_lower):
+        return False
+    if filepath.name in SKIP_FILENAMES:
+        return False
+    return True
+
+
+# Below this file count, threading overhead isn't worth it.
+_PARALLEL_THRESHOLD = 8
+
+
 def scan_secrets(
     target: Path,
     on_file: object = None,
 ) -> tuple[list[Finding], dict[str, int]]:
     """Layer 4: Scan for exposed secrets and credentials.
+
+    Parallelized: per-file scanning runs on a ThreadPoolExecutor. regex +
+    file I/O release the GIL, so threading delivers a real speedup without
+    the memory cost of multiprocessing. Small targets fall back to a
+    sequential loop to avoid pool-startup overhead.
 
     Returns (findings, raw_dimension_scores).
     on_file: optional callable invoked per file scanned (for progress).
@@ -112,22 +140,15 @@ def scan_secrets(
     all_files = _iter_scannable_files(target)
     gitignored = _get_gitignored_files(target, all_files)
 
-    for filepath in all_files:
-        # Skip test files — they legitimately contain fake secret patterns
-        name_lower = filepath.name.lower()
-        if any(ind in name_lower for ind in TEST_INDICATORS):
-            continue
-        parts_lower = {p.lower() for p in filepath.parts}
-        if {"tests", "test", "__tests__", "fixtures"}.intersection(parts_lower):
-            continue
-        if filepath.name in SKIP_FILENAMES:
-            continue
+    # Pre-filter so threads only do real work.
+    scan_targets = [f for f in all_files if _should_scan_path(f)]
 
-        file_findings, file_secrets = _scan_file(filepath)
-
-        # Downgrade gitignored file findings to INFO — these secrets
-        # exist locally but won't leak via version control.
-        # Normalize path separators for cross-platform matching.
+    def _apply_gitignore(
+        filepath: Path,
+        file_findings: list[Finding],
+        file_secrets: list[SecretMatch],
+    ) -> None:
+        """Downgrade gitignored secrets to INFO (they can't leak via VCS)."""
         filepath_str = str(filepath).replace("\\", "/")
         if filepath_str in gitignored or str(filepath) in gitignored:
             for f in file_findings:
@@ -136,10 +157,29 @@ def scan_secrets(
             for s in file_secrets:
                 s.severity = Severity.INFO
 
-        findings.extend(file_findings)
-        secrets.extend(file_secrets)
-        if _progress:
-            _progress()
+    if len(scan_targets) < _PARALLEL_THRESHOLD:
+        # Small scan — sequential avoids thread-pool startup cost.
+        for filepath in scan_targets:
+            file_findings, file_secrets = _scan_file(filepath)
+            _apply_gitignore(filepath, file_findings, file_secrets)
+            findings.extend(file_findings)
+            secrets.extend(file_secrets)
+            if _progress:
+                _progress()
+    else:
+        max_workers = min(32, (os.cpu_count() or 4) * 4)
+        with ThreadPoolExecutor(max_workers=max_workers) as ex:
+            future_to_path = {
+                ex.submit(_scan_file, fp): fp for fp in scan_targets
+            }
+            for future in as_completed(future_to_path):
+                filepath = future_to_path[future]
+                file_findings, file_secrets = future.result()
+                _apply_gitignore(filepath, file_findings, file_secrets)
+                findings.extend(file_findings)
+                secrets.extend(file_secrets)
+                if _progress:
+                    _progress()
 
     scores: dict[str, int] = {}
 
