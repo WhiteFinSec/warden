@@ -1,0 +1,1237 @@
+{
+  "version": "1.6.0",
+  "scoring_model": "v4.3",
+  "scoring_version": "4.3",
+  "timestamp": "2026-04-10T23:07:44.253189+00:00",
+  "target_path": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph",
+  "file_counts": {
+    "python": 119,
+    "js": 0,
+    "other": 0
+  },
+  "coverage_warning": false,
+  "score": {
+    "total": 14,
+    "max": 100,
+    "level": "UNGOVERNED",
+    "raw_total": 34,
+    "raw_max": 235,
+    "dimensions": {
+      "D1": {
+        "name": "Tool Inventory",
+        "raw": 0,
+        "max": 25,
+        "pct": 0
+      },
+      "D2": {
+        "name": "Risk Detection",
+        "raw": 0,
+        "max": 20,
+        "pct": 0
+      },
+      "D3": {
+        "name": "Policy Coverage",
+        "raw": 6,
+        "max": 20,
+        "pct": 30
+      },
+      "D4": {
+        "name": "Credential Management",
+        "raw": 3,
+        "max": 20,
+        "pct": 15
+      },
+      "D5": {
+        "name": "Log Hygiene",
+        "raw": 2,
+        "max": 10,
+        "pct": 20
+      },
+      "D6": {
+        "name": "Framework Coverage",
+        "raw": 0,
+        "max": 5,
+        "pct": 0
+      },
+      "D7": {
+        "name": "Human-in-the-Loop",
+        "raw": 3,
+        "max": 15,
+        "pct": 20
+      },
+      "D8": {
+        "name": "Agent Identity",
+        "raw": 11,
+        "max": 15,
+        "pct": 73
+      },
+      "D9": {
+        "name": "Threat Detection",
+        "raw": 0,
+        "max": 20,
+        "pct": 0
+      },
+      "D10": {
+        "name": "Prompt Security",
+        "raw": 0,
+        "max": 15,
+        "pct": 0
+      },
+      "D11": {
+        "name": "Cloud / Platform",
+        "raw": 0,
+        "max": 10,
+        "pct": 0
+      },
+      "D12": {
+        "name": "LLM Observability",
+        "raw": 2,
+        "max": 10,
+        "pct": 20
+      },
+      "D13": {
+        "name": "Data Recovery",
+        "raw": 2,
+        "max": 10,
+        "pct": 20
+      },
+      "D14": {
+        "name": "Compliance Maturity",
+        "raw": 4,
+        "max": 10,
+        "pct": 40
+      },
+      "D15": {
+        "name": "Post-Exec Verification",
+        "raw": 0,
+        "max": 10,
+        "pct": 0
+      },
+      "D16": {
+        "name": "Data Flow Governance",
+        "raw": 0,
+        "max": 10,
+        "pct": 0
+      },
+      "D17": {
+        "name": "Adversarial Resilience",
+        "raw": 1,
+        "max": 10,
+        "pct": 10
+      }
+    }
+  },
+  "findings": [
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\bench\\fanout_to_subgraph.py",
+      "line": 134,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\bench\\pydantic_state.py",
+      "line": 324,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\bench\\sequential.py",
+      "line": 48,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\bench\\wide_dict.py",
+      "line": 148,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\bench\\wide_state.py",
+      "line": 160,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\config.py",
+      "line": 24,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\constants.py",
+      "line": 61,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\graph\\state.py",
+      "line": 745,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\graph\\_branch.py",
+      "line": 77,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\graph\\_branch.py",
+      "line": 115,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\graph\\_branch.py",
+      "line": 166,
+      "severity": "HIGH",
+      "dimension": "D15",
+      "message": "Tool result assigned directly without verification",
+      "remediation": "Verify tool result status/validity before using",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\main.py",
+      "line": 3645,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\main.py",
+      "line": 3655,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_call.py",
+      "line": 74,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_executor.py",
+      "line": 85,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_executor.py",
+      "line": 118,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_executor.py",
+      "line": 210,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_io.py",
+      "line": 51,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_fields.py",
+      "line": 150,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_fields.py",
+      "line": 160,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_future.py",
+      "line": 24,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_queue.py",
+      "line": 23,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Agent loop with LLM call has no exit condition — potential infinite loop",
+      "remediation": "Add max_iterations, timeout, or explicit break condition",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_queue.py",
+      "line": 33,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_runnable.py",
+      "line": 275,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_runnable.py",
+      "line": 280,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_runnable.py",
+      "line": 363,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_runnable.py",
+      "line": 435,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_runnable.py",
+      "line": 658,
+      "severity": "HIGH",
+      "dimension": "D15",
+      "message": "Tool result assigned directly without verification",
+      "remediation": "Verify tool result status/validity before using",
+      "compliance": {}
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D5",
+      "message": "No audit logging for tool calls detected",
+      "remediation": "Add audit logging for all tool/agent executions",
+      "compliance": {
+        "eu_ai_act": "Article 12"
+      }
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\pyproject.toml",
+      "line": 37,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\pyproject.toml",
+      "line": 38,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\pyproject.toml",
+      "line": 39,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\pyproject.toml",
+      "line": 40,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\pyproject.toml",
+      "line": 41,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\pyproject.toml",
+      "line": 42,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\pyproject.toml",
+      "line": 43,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\pyproject.toml",
+      "line": 128,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\example_app\\requirements.txt",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\bench\\__main__.py",
+      "line": 4,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\config.py",
+      "line": 5,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\types.py",
+      "line": 19,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\graph\\state.py",
+      "line": 27,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\graph\\ui.py",
+      "line": 6,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\graph\\_branch.py",
+      "line": 21,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\graph\\_node.py",
+      "line": 7,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\debug.py",
+      "line": 8,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\main.py",
+      "line": 32,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\protocol.py",
+      "line": 7,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\remote.py",
+      "line": 15,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_algo.py",
+      "line": 21,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_call.py",
+      "line": 13,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_draw.py",
+      "line": 7,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_executor.py",
+      "line": 16,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_loop.py",
+      "line": 24,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_read.py",
+      "line": 9,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_retry.py",
+      "line": 12,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_runner.py",
+      "line": 25,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_utils.py",
+      "line": 10,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\pregel\\_write.py",
+      "line": 11,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_replay.py",
+      "line": 10,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_runnable.py",
+      "line": 28,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\langgraph\\_internal\\_serde.py",
+      "line": 19,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\fake_tracer.py",
+      "line": 4,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\memory_assert.py",
+      "line": 7,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\messages.py",
+      "line": 12,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_deprecation.py",
+      "line": 7,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_large_cases_async.py",
+      "line": 12,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_messages_state.py",
+      "line": 4,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_parent_command_async.py",
+      "line": 4,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_pregel.py",
+      "line": 18,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_pregel_async.py",
+      "line": 22,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_remote_graph.py",
+      "line": 9,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_runnable.py",
+      "line": 6,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_serde_allowlist.py",
+      "line": 82,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_state.py",
+      "line": 9,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_stream_v2.py",
+      "line": 15,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_subgraph_persistence.py",
+      "line": 13,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_subgraph_persistence_async.py",
+      "line": 15,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_time_travel.py",
+      "line": 22,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_time_travel_async.py",
+      "line": 24,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_tracing_interops.py",
+      "line": 10,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\test_type_checking.py",
+      "line": 6,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph\\tests\\example_app\\example_graph.py",
+      "line": 3,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D17",
+      "message": "No content injection defense — hidden HTML/CSS/zero-width instructions pass to agents undetected. (86% attack success rate)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D17",
+      "message": "No RAG poisoning protection — knowledge base documents not scanned for embedded instructions. (<0.1% contamination = >80% attack success)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0049"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph",
+      "line": 0,
+      "severity": "HIGH",
+      "dimension": "D17",
+      "message": "No behavioral trap detection — post-execution behavioral changes not monitored. (10/10 M365 Copilot attacks succeeded)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 14",
+        "owasp_llm": "LLM07",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph",
+      "line": 0,
+      "severity": "HIGH",
+      "dimension": "D17",
+      "message": "No approval integrity verification -- agent summaries for approval not cross-checked against actual actions. (Approval fatigue exploitation)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 14",
+        "owasp_llm": "LLM07",
+        "mitre_atlas": "AML.T0048"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No adversarial testing evidence — no red team, no prompt injection tests",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No tool-call attack simulation — agent tool calls not tested against adversarial inputs",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langgraph\\libs\\langgraph",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No multi-agent chaos engineering — agent swarms not stress tested",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    }
+  ],
+  "competitors_detected": [],
+  "gtm_signal": "",
+  "trap_defense": {
+    "content_injection": false,
+    "rag_poisoning": false,
+    "behavioral_traps": false,
+    "approval_integrity": false,
+    "adversarial_testing": false,
+    "tool_attack_simulation": false,
+    "chaos_engineering": false,
+    "before_after_comparison": true,
+    "deepmind_citation": "Franklin, Tomašev, Jacobs, Leibo, Osindero. \"AI Agent Traps.\" Google DeepMind, March 2026."
+  }
+}

@@ -1,0 +1,2650 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/main/sarif-2.1/schema/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "warden-ai",
+          "version": "1.6.0",
+          "informationUri": "https://github.com/SharkRouter/warden",
+          "rules": [
+            {
+              "id": "code_analyzer/D9",
+              "shortDescription": {
+                "text": "code_analyzer/D9"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Log the exception or handle it explicitly"
+              }
+            },
+            {
+              "id": "code_analyzer/D12",
+              "shortDescription": {
+                "text": "code_analyzer/D12"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "text": "Use model routing or configuration instead of hardcoded names"
+              }
+            },
+            {
+              "id": "code_analyzer/D2",
+              "shortDescription": {
+                "text": "code_analyzer/D2"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Add input validation (pydantic, jsonschema, or manual checks)"
+              }
+            },
+            {
+              "id": "code_analyzer/D5",
+              "shortDescription": {
+                "text": "code_analyzer/D5"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "text": "Use logging.* or structlog.* for structured, searchable logs"
+              }
+            },
+            {
+              "id": "secrets_scanner/D4",
+              "shortDescription": {
+                "text": "secrets_scanner/D4"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "text": "Move to secrets manager or .env file (excluded from VCS)"
+              }
+            },
+            {
+              "id": "audit_scanner/D5",
+              "shortDescription": {
+                "text": "audit_scanner/D5"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Redact sensitive fields before logging"
+              }
+            },
+            {
+              "id": "dependency_scanner/D14",
+              "shortDescription": {
+                "text": "dependency_scanner/D14"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "text": "Pin version: openai==<specific_version>"
+              }
+            },
+            {
+              "id": "dependency_scanner/D4",
+              "shortDescription": {
+                "text": "dependency_scanner/D4"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Verify this is the intended package, not a typosquat of 'transformers'"
+              }
+            },
+            {
+              "id": "framework_scanner/D6",
+              "shortDescription": {
+                "text": "framework_scanner/D6"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Add CallbackManager with on_tool_start/on_chain_start handlers"
+              }
+            },
+            {
+              "id": "framework_scanner/D7",
+              "shortDescription": {
+                "text": "framework_scanner/D7"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Add guardrail= parameter to agent/task config for output validation"
+              }
+            },
+            {
+              "id": "trap_defense_scanner/D17",
+              "shortDescription": {
+                "text": "trap_defense_scanner/D17"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Deploy trap defense layer on tool results"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/langflow_launcher.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 9
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/__main__.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 58
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'TranslationFlow - Language Detection, Translation, and Intent Classification.\n\nThis flow translates user input to English and classifies intent as either\n'generate_component' or 'question'.\n\nUsage:\n    from langflow.agentic.flows.translation_flow import get_graph\n    graph = await get_graph(provider=\"OpenAI\", model_name=\"gpt-4o-mini\")\n' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/flows/translation_flow.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'Create and return the TranslationFlow graph.\n\n    Args:\n        provider: Model provider (e.g., \"OpenAI\", \"Anthropic\"). Defaults to OpenAI.\n        model_name: Model name (e.g., \"gpt-4o-mini\"). Defaults to gpt-4o-mini.\n        api_key_var: Optional API key variable name (e.g., \"OPENAI_API_KEY\").\n\n    Returns:\n        Graph: The configured translation flow graph.\n    ' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/flows/translation_flow.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 79
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-4o-mini' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/flows/translation_flow.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 91
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 91
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 114
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 129
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 144
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 231
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 262
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 278
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 332
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 366
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 390
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 422
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 455
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 491
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 525
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool function without input validation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/mcp/server.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 569
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'Inject model configuration into the flow's Agent component.\n\n    Args:\n        flow_data: The flow JSON as a dict\n        provider: The provider name (e.g., \"OpenAI\", \"Anthropic\")\n        model_name: The model name (e.g., \"gpt-4o\", \"claude-sonnet-4-5-20250929\")\n        api_key_var: Optional API key variable name. If not provided, uses provider's default.\n\n    Returns:\n        Modified flow data with the model configuration injected\n\n    Raises:\n        ValueError: If provider is unknown\n    ' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/services/flow_preparation.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 16
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/services/helpers/event_consumer.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 59
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'Load a Graph from a Python flow file.\n\n    The Python file must define a function `get_graph()` that returns a Graph.\n    The function can optionally accept provider, model_name, and api_key_var parameters.\n\n    Args:\n        flow_path: Path to the Python flow file.\n        provider: Optional model provider (e.g., \"OpenAI\").\n        model_name: Optional model name (e.g., \"gpt-4o-mini\").\n        api_key_var: Optional API key variable name.\n\n    Returns:\n        Graph: The loaded and configured graph.\n\n    Raises:\n        HTTPException: If the flow file cannot be loaded or executed.\n    ' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/services/helpers/flow_loader.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 119
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/006b3990db50_add_unique_constraints.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 39
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/006b3990db50_add_unique_constraints.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 62
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/0882f9657f22_encrypt_existing_mcp_auth_settings_.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 68
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/0882f9657f22_encrypt_existing_mcp_auth_settings_.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 72
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/0882f9657f22_encrypt_existing_mcp_auth_settings_.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 118
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/0882f9657f22_encrypt_existing_mcp_auth_settings_.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 122
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/2ac71eb9c3ae_adds_credential_table.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 41
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/2ac71eb9c3ae_adds_credential_table.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 51
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/369268b9af8b_add_job_id_to_vertex_build_create_job_.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 73
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/67cc006d50bf_add_profile_image_column.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 39
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/67cc006d50bf_add_profile_image_column.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 54
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/7843803a87b5_store_updates.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 32
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/7843803a87b5_store_updates.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 38
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/7843803a87b5_store_updates.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 52
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/7d2162acc8b2_adds_updated_at_and_folder_cols.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 34
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/7d2162acc8b2_adds_updated_at_and_folder_cols.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 43
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/7d2162acc8b2_adds_updated_at_and_folder_cols.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 60
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/7d2162acc8b2_adds_updated_at_and_folder_cols.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 66
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/f5ee9749d1a6_user_id_can_be_null_in_flow.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 27
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/f5ee9749d1a6_user_id_can_be_null_in_flow.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 38
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/fd531f8868b1_fix_credential_table.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 36
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/alembic/versions/fd531f8868b1_fix_credential_table.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 55
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/utils/kb_helpers.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 64
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/utils/kb_helpers.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 94
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/endpoints.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 717
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'Expand a compact flow format to full flow format.\n\n    This endpoint takes a minimal flow representation (as generated by AI agents)\n    and expands it to the full format expected by the Langflow UI.\n\n    The compact format only requires:\n    - nodes: list of {id, type, values?}\n    - edges: list of {source, source_output, target, target_input}\n\n    The endpoint returns the full flow data with complete component templates.\n\n    Example input:\n    ```json\n    {\n        \"nodes\": [\n            {\"id\": \"1\", \"type\": \"ChatInput\"},\n            {\"id\": \"2\", \"type\": \"OpenAIModel\", \"values\": {\"model_name\": \"gpt-4\"}}\n        ],\n        \"edges\": [\n            {\"source\": \"1\", \"source_output\": \"message\", \"target\": \"2\", \"target_input\": \"input_value\"}\n        ]\n    }\n    ```\n    ' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/flows.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 905
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/knowledge_bases.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 457
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/models.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 366
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/models.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 399
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/models.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 744
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/models.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 855
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Agent loop with LLM call has no exit condition — potential infinite loop"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/voice_mode.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1244
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/voice_mode.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 971
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/voice_mode.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1088
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-4o-transcribe' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/voice_mode.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 220
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'wss://api.openai.com/v1/realtime?model=gpt-4o-mini-realtime-preview' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/voice_mode.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 753
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-4o-mini-tts' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/voice_mode.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1300
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-4o-mini' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/initial_setup/starter_projects/complex_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 12
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-4o' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/initial_setup/starter_projects/complex_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 13
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-4o-mini' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/initial_setup/starter_projects/hierarchical_tasks_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 12
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-4o' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/initial_setup/starter_projects/hierarchical_tasks_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 13
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'Expand a compact flow format to full flow format.\n\n    Args:\n        compact_data: The compact flow data with nodes and edges\n        all_types_dict: The component types dictionary from component_cache\n\n    Returns:\n        Full flow data structure ready for Langflow UI\n\n    Example compact input:\n        {\n            \"nodes\": [\n                {\"id\": \"1\", \"type\": \"ChatInput\"},\n                {\"id\": \"2\", \"type\": \"OpenAIModel\", \"values\": {\"model_name\": \"gpt-4\"}}\n            ],\n            \"edges\": [\n                {\"source\": \"1\", \"source_output\": \"message\", \"target\": \"2\", \"target_input\": \"input_value\"}\n            ]\n        }\n    ' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/processing/expand_flow.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 252
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'The source of the message. Normally used to display the model name (e.g. 'gpt-4o')' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/schema/properties.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/services/event_manager.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 215
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/services/store/service.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 397
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/services/store/service.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 434
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 1,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'Format a span name following the OTel semantic convention ``\"{operation} {model}\"``.\n\n        Args:\n            operation: Human-readable operation name (e.g. ``\"ChatOpenAI\"``).\n            model_name: Optional model identifier (e.g. ``\"gpt-4o\"``).\n\n        Returns:\n            ``\"{operation} {model_name}\"`` when model is known, otherwise just\n            ``operation``.\n        ' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/services/tracing/native_callback.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 139
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/services/tracing/openlayer.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 328
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/services/tracing/openlayer.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 677
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/services/tracing/openlayer.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 687
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/services/tracing/openlayer.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 784
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/utils/data_structure.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 52
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/utils/template_validation.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 191
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/utils/version.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 38
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "secrets_scanner/D4",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Exposed Database URL (no credentials): red...t}/0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/core/celeryconfig.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 9
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "secrets_scanner/D4",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Exposed Database URL (no credentials): red...t}/0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/core/celeryconfig.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 10
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "secrets_scanner/D4",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Exposed Database URL with credentials: amq...72//"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/core/celeryconfig.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 15
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "secrets_scanner/D4",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Exposed Database URL (no credentials): red...79/0"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/core/celeryconfig.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 16
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/agentic/services/assistant_service.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 156
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/voice_mode.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 605
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/voice_mode.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 618
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/voice_mode.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 586
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/voice_mode.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 591
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v2/registration.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 126
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v2/registration.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 136
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v2/registration.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 88
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 5,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v2/registration.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 82
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: openai"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: openai"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 385
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: anthropic"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 386
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: litellm"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 425
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 449
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 450
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 452
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D4",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "Possible typosquat: 'ctransformers' is 1 edit from 'transformers'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D4",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "Possible typosquat: 'ctransformers' is 1 edit from 'transformers'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/main.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 60
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/memory.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/utils/kb_helpers.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 17
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/api/v1/knowledge_bases.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/helpers/data.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/helpers/flow.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 303
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 9,
+          "level": "error",
+          "message": {
+            "text": "CrewAI agent without guardrail — no output validation gate"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/initial_setup/starter_projects/complex_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 8,
+          "level": "warning",
+          "message": {
+            "text": "CrewAI agent without max_iter or timeout — unbounded execution"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/initial_setup/starter_projects/complex_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 9,
+          "level": "error",
+          "message": {
+            "text": "CrewAI agent without guardrail — no output validation gate"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/initial_setup/starter_projects/hierarchical_tasks_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 8,
+          "level": "warning",
+          "message": {
+            "text": "CrewAI agent without max_iter or timeout — unbounded execution"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/initial_setup/starter_projects/hierarchical_tasks_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/serialization/serialization.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 10
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langflow/utils/schemas.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "No content injection defense — hidden HTML/CSS/zero-width instructions pass to agents undetected. (86% attack success rate)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "No RAG poisoning protection — knowledge base documents not scanned for embedded instructions. (<0.1% contamination = >80% attack success)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "No behavioral trap detection — post-execution behavioral changes not monitored. (10/10 M365 Copilot attacks succeeded)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "No approval integrity verification -- agent summaries for approval not cross-checked against actual actions. (Approval fatigue exploitation)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "warning",
+          "message": {
+            "text": "No adversarial testing evidence — no red team, no prompt injection tests"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "warning",
+          "message": {
+            "text": "No tool-call attack simulation — agent tool calls not tested against adversarial inputs"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "warning",
+          "message": {
+            "text": "No multi-agent chaos engineering — agent swarms not stress tested"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

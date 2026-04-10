@@ -1,0 +1,2430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warden Governance Report — 6/100</title>
+<style>
+:root {
+  --bg:#0a0c10;--surface:#10131a;--surface2:#161b24;
+  --border:#1e2535;--border2:#252d3d;
+  --text:#e2e8f0;--text2:#94a3b8;--muted:#4b5563;
+  --critical:#ff3b3b;--high:#ff8c00;--medium:#f5c518;--low:#4ade80;
+  --info:#60a5fa;--purple:#a78bfa;--teal:#00bcd4;
+  --mono:'SF Mono','Cascadia Code','JetBrains Mono','Fira Code',Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+
+.hdr{background:var(--surface);border-bottom:1px solid var(--border);padding:22px 40px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.logo-name{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--info);letter-spacing:1px}
+.logo-tag{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.meta{font-family:var(--mono);font-size:11px;color:var(--text2);line-height:2.1}
+.meta strong{color:var(--text)}
+.priv{font-family:var(--mono);font-size:10px;color:var(--text2);background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.15);border-radius:4px;padding:8px 12px;line-height:2;max-width:280px}
+
+.body{max-width:1100px;margin:0 auto;padding:28px 40px 80px;display:flex;flex-direction:column;gap:22px}
+
+/* --- Section cards --- */
+.sec{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.sec-head{display:flex;align-items:center;justify-content:space-between;padding:13px 24px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.01)}
+.sec-title{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text2)}
+.sec-count{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.sec-body{padding:0}
+
+/* --- Hero --- */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;padding:28px 32px}
+.hero-left{display:flex;flex-direction:column;align-items:center;gap:12px}
+.gauge{position:relative;width:150px;height:150px}
+.gauge svg{transform:rotate(-90deg)}
+.gauge-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.g-num{font-family:var(--mono);font-size:38px;font-weight:700;line-height:1}
+.g-denom{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.g-raw{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:2px}
+.lvl-badge{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:2px;padding:4px 14px;border-radius:20px}
+.lvl-governed{background:rgba(74,222,128,.1);color:var(--low);border:1px solid rgba(74,222,128,.3)}
+.lvl-partial{background:rgba(255,140,0,.1);color:var(--high);border:1px solid rgba(255,140,0,.3)}
+.lvl-at_risk{background:rgba(255,59,59,.1);color:var(--critical);border:1px solid rgba(255,59,59,.3)}
+.lvl-ungoverned{background:rgba(255,59,59,.1);color:var(--critical);border:1px solid rgba(255,59,59,.3)}
+
+.dims{display:flex;flex-direction:column;gap:0}
+.dim-group{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;padding:10px 0 4px;border-top:1px solid var(--border);margin-top:4px}
+.dim-group:first-child{border-top:none;margin-top:0;padding-top:0}
+.dim-row{display:grid;grid-template-columns:190px 1fr 58px;align-items:center;gap:10px;padding:3px 0}
+.dim-label{font-size:12px;color:var(--text2);display:flex;align-items:center;gap:5px}
+.bar-track{height:5px;background:var(--border2);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px}
+.dim-val{font-family:var(--mono);font-size:11px;color:var(--text2);text-align:right}
+.dim-details{cursor:pointer}.dim-details summary{list-style:none}.dim-details summary::-webkit-details-marker{display:none}
+.dim-details summary .dim-label::after{content:'\25B8';font-size:9px;color:var(--muted);transition:transform 0.15s}
+.dim-details[open] summary .dim-label::after{transform:rotate(90deg)}
+.dim-detail-body{padding:4px 0 8px 12px;border-left:2px solid var(--border2);margin:2px 0 6px 8px}
+.dim-detail-item{font-size:11px;color:var(--text2);padding:2px 0;line-height:1.5}
+.dim-subtotal{font-family:var(--mono);font-size:10px;color:var(--info);text-align:right;margin:3px 0}
+.caveat{font-size:11px;color:var(--text2);font-style:italic;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+
+/* --- Summary grid --- */
+.sum-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border)}
+.sum-cell{background:var(--surface);padding:18px 22px}
+.sum-label{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+.sum-val{font-family:var(--mono);font-size:24px;font-weight:700;line-height:1;margin-bottom:4px}
+.sum-sub{font-size:11px;color:var(--text2)}
+
+/* --- Discovered tools --- */
+.tool-item{display:grid;grid-template-columns:22px 1fr;gap:0 14px;padding:16px 24px;border-bottom:1px solid var(--border);align-items:start}
+.tool-item:last-child{border-bottom:none}
+.rdot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex-shrink:0}
+.rdot.critical{background:var(--critical);box-shadow:0 0 5px var(--critical)}
+.rdot.high{background:var(--high)}
+.rdot.medium{background:var(--medium)}
+.rdot.low{background:var(--low)}
+.rdot.info{background:var(--info)}
+.tname{font-family:var(--mono);font-size:13px;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.tdesc{font-size:13px;color:var(--text2);margin-bottom:7px;line-height:1.5}
+.ttags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:3px;border:1px solid}
+.tag.d{color:var(--critical);border-color:rgba(255,59,59,.3);background:rgba(255,59,59,.06)}
+.tag.f{color:var(--high);border-color:rgba(255,140,0,.3);background:rgba(255,140,0,.06)}
+.tag.e{color:var(--high);border-color:rgba(255,140,0,.3);background:rgba(255,140,0,.06)}
+.tag.w{color:var(--medium);border-color:rgba(245,197,24,.3);background:rgba(245,197,24,.06)}
+.tag.r{color:var(--low);border-color:rgba(74,222,128,.3);background:rgba(74,222,128,.06)}
+.tag.u{color:var(--critical);border-color:rgba(255,59,59,.3);background:rgba(255,59,59,.06)}
+.tag.n{color:var(--info);border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.06)}
+.rbadge{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:1px}
+.rbadge.critical{background:rgba(255,59,59,.12);color:var(--critical)}
+.rbadge.high{background:rgba(255,140,0,.12);color:var(--high)}
+.rbadge.medium{background:rgba(245,197,24,.12);color:var(--medium)}
+.rbadge.low{background:rgba(74,222,128,.12);color:var(--low)}
+
+/* --- Governance detection --- */
+.gov-row{display:flex;align-items:flex-start;gap:14px;padding:15px 24px;border-bottom:1px solid var(--border)}
+.gov-row:last-child{border-bottom:none}
+.gov-ico{font-size:16px;flex-shrink:0;width:22px;margin-top:2px}
+.gov-name{font-family:var(--mono);font-size:13px;font-weight:600;margin-bottom:3px}
+.gov-desc{font-size:12px;color:var(--text2);margin-bottom:7px;line-height:1.5}
+.gov-pts{font-family:var(--mono);font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;flex-shrink:0;white-space:nowrap}
+.gov-pts.pos{color:var(--low);background:rgba(74,222,128,.1)}
+.gov-pts.zero{color:var(--muted);background:var(--border)}
+
+/* --- Findings --- */
+.fg-hdr{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;display:flex;align-items:center;gap:8px;padding:8px 24px;user-select:none}
+.fg-cnt{padding:2px 9px;border-radius:10px;font-size:11px}
+.fg-body{display:none;padding:0 24px 8px}.fg-body.open{display:block}
+.f-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:6px;cursor:pointer}
+.f-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.f-sev{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.f-dim{font-family:var(--mono);font-size:10px;color:var(--text2);background:var(--surface);padding:2px 6px;border-radius:3px}
+.f-msg{font-size:13px;color:var(--text);margin:6px 0 2px}
+.f-loc{font-family:var(--mono);font-size:11px;color:var(--info)}
+.f-detail{font-size:12px;color:var(--text2);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);display:none}
+.f-card.exp .f-detail{display:block}
+.f-rem{color:var(--low)}
+.f-compliance{font-family:var(--mono);font-size:10px;color:var(--text2);margin-top:4px}
+.f-compliance span{background:rgba(96,165,250,.08);color:var(--info);padding:1px 6px;border-radius:3px;margin-right:4px}
+.arrow{transition:transform .2s;display:inline-block}.arrow.open{transform:rotate(90deg)}
+
+/* --- Recommendations --- */
+.rec{display:grid;grid-template-columns:30px 1fr;gap:0 14px;padding:18px 24px;border-bottom:1px solid var(--border);align-items:start}
+.rec:last-child{border-bottom:none}
+.rec-n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--info);margin-top:2px}
+.rec-title{font-weight:600;margin-bottom:5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rec-body{font-size:13px;color:var(--text2);line-height:1.6}
+.rec-pts{font-family:var(--mono);font-size:11px;color:var(--low);padding:2px 8px;border:1px solid rgba(74,222,128,.25);border-radius:3px;background:rgba(74,222,128,.06)}
+
+/* --- Workaround tax --- */
+.workaround-box{margin-top:14px;padding:16px 20px;background:rgba(255,140,0,0.05);border:1px solid rgba(255,140,0,0.25);border-left:3px solid var(--high);border-radius:6px}
+.workaround-label{font-family:var(--mono);font-size:10px;color:var(--high);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.workaround-text{font-size:13px;color:var(--text2);line-height:1.6}
+.workaround-text strong{color:var(--text)}
+
+/* --- Comparison card --- */
+.cmp{border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:18px}
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.cmp-col{padding:18px 20px}
+.cmp-cur{background:var(--surface2)}
+.cmp-sr{background:#090f0a;border-left:2px solid rgba(74,222,128,.35)}
+.cmp-lbl{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.cmp-lbl.c{color:var(--muted)}
+.cmp-lbl.s{color:rgba(74,222,128,.6)}
+.cmp-score{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1}
+.cmp-score.c{color:var(--critical)}
+.cmp-score.s{color:var(--low)}
+.cmp-denom{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.cmp-lvl{font-family:var(--mono);font-size:10px;letter-spacing:1px;margin-top:4px;margin-bottom:14px}
+.cmp-lvl.c{color:var(--critical)}
+.cmp-lvl.w{color:var(--medium)}
+.cmp-lvl.s{color:var(--low)}
+.cmp-grp{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;padding:8px 0 3px;border-top:1px solid var(--border);margin-top:4px}
+.cmp-grp:first-child{border-top:none;margin-top:0;padding-top:0}
+.cmp-dim{display:grid;grid-template-columns:140px 1fr 50px;align-items:center;gap:8px;padding:3px 0;font-size:11px}
+.cmp-dim-lbl{color:var(--text2)}
+.cmp-bt{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.cmp-bf{height:100%;border-radius:3px}
+.cmp-val{font-family:var(--mono);font-size:10px;text-align:right}
+.cmp-val.c{color:var(--muted)}
+.cmp-val.s{color:var(--low);font-weight:700}
+.delta{color:rgba(74,222,128,.5);font-weight:400;font-size:9px}
+.cmp-foot{background:rgba(74,222,128,.04);border-top:1px solid var(--border);padding:10px 20px;font-family:var(--mono);font-size:11px;color:var(--text2);display:flex;justify-content:space-between;align-items:center}
+.cmp-foot a{color:var(--info);text-decoration:none}
+.cmp-delta{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--low)}
+
+/* --- Solutions table --- */
+.sol-table{border-collapse:collapse;font-size:12px;font-family:var(--mono);white-space:nowrap;width:100%}
+.sol-table th{text-align:center;padding:8px 12px;color:var(--text2);font-weight:600;border-bottom:1px solid var(--border2)}
+.sol-table th:first-child{text-align:left}
+.sol-table td{text-align:center;padding:7px 12px;border-bottom:1px solid var(--border)}
+.sol-table td:first-child{text-align:left;color:var(--text2)}
+.sol-table tr.sr{background:rgba(74,222,128,0.06)}
+.sol-table tr.sr td{color:var(--low);font-weight:700}
+.sol-table tfoot td{font-weight:700;border-top:2px solid var(--border2)}
+
+/* --- Email form --- */
+.email-wrap{display:grid;grid-template-columns:1fr auto;gap:24px;padding:28px 32px;align-items:center}
+.email-info{font-size:13px;color:var(--text2);line-height:1.6}
+.email-cols{display:flex;gap:32px;margin-top:16px}
+.email-col-hdr{font-family:var(--mono);font-size:10px;letter-spacing:1px;margin-bottom:6px}
+.email-col li{list-style:none;font-size:12px;color:var(--text2);padding:2px 0}
+.email-form{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:24px;min-width:280px;display:flex;flex-direction:column;gap:10px}
+.email-input{background:#0a0c10;border:1px solid var(--border2);border-radius:5px;padding:10px 14px;font-family:var(--mono);font-size:13px;color:var(--text);outline:none;width:100%}
+.email-input:focus{border-color:var(--info)}
+.email-btn{background:var(--info);color:#000;border:none;border-radius:5px;padding:10px 20px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;width:100%;transition:background 0.2s}
+.email-btn:hover{background:#93c5fd}
+.email-bar{padding:12px 32px;background:rgba(0,0,0,0.2);border-top:1px solid var(--border);font-size:12px;color:var(--text2);display:flex;align-items:center;justify-content:space-between}
+
+/* --- Footer --- */
+.foot{text-align:center;padding:28px 40px;font-family:var(--mono);font-size:11px;color:var(--text2);line-height:2.2;max-width:1100px;margin:0 auto}
+.foot a{color:var(--info);text-decoration:none}
+.foot-cta{display:inline-block;margin-top:12px;background:#fff;color:#000 !important;padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none !important;letter-spacing:0.5px}
+.foot-cta:hover{background:#e2e8f0;color:#000 !important}
+.foot-priv{color:var(--muted);font-size:10px;margin-top:8px}
+
+/* --- Responsive --- */
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr}
+  .sum-grid{grid-template-columns:repeat(2,1fr)}
+  .cmp-grid{grid-template-columns:1fr}
+  .dim-row{grid-template-columns:140px 1fr 50px}
+  .email-wrap{grid-template-columns:1fr}
+  .hdr{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="hdr">
+
+  <div>
+    <div class="logo">
+      <span style="font-size:20px">&#129416;</span>
+      <div><div class="logo-name">WARDEN</div><div class="logo-tag">AI Agent Governance Report</div></div>
+    </div>
+    <div class="meta">
+      <strong>Scan path:</strong> C:\Users\gilad\Projects\warden\gallery\repos\autogen\python\packages\autogen-core<br>
+      <strong>Scanned:</strong> 2026-04-10 23:08 UTC<br>
+      <strong>Warden:</strong> v1.6.0 &middot; Scoring model v4.3 &middot; 17 dimensions (weighted) &middot; 235 pts
+    </div>
+  </div>
+  <div class="priv">&#128274; Privacy guarantee<br>All data collected locally &mdash; nothing left this machine.<br>API keys: partial hashes only.<br>Log content: never stored.</div>
+</div>
+
+  <div style="font-family:var(--mono);font-size:11px;color:var(--text2);padding:10px 32px;border-bottom:1px solid var(--border);background:var(--surface)">
+    &#128202; Scanned 92 files (92 Python) in <strong style="color:var(--text)">autogen-core</strong> across 7 scan layers
+  </div>
+<div class="body">
+
+  <div class="sec">
+    <div class="hero">
+      <div class="hero-left">
+        <div class="gauge">
+      <svg width="150" height="150" viewBox="0 0 150 150">
+        <circle cx="75" cy="75" r="60" fill="none" stroke="#1e2535" stroke-width="8"/>
+        <circle cx="75" cy="75" r="60" fill="none" stroke="#ff3b3b" stroke-width="8" stroke-dasharray="23 377" stroke-linecap="round"/>
+      </svg>
+      <div class="gauge-center">
+        <div class="g-num" style="color:#ff3b3b">6</div>
+        <div class="g-denom">/ 100</div>
+        <div class="g-raw">15 / 235 raw</div>
+      </div>
+    </div>
+        <div class="lvl-badge lvl-ungoverned">UNGOVERNED</div>
+      </div>
+      <div class="dims">
+        <div class="dim-group">Core Governance (9 / 100)</div><div class="dim-row"><div class="dim-label">D1 Tool Inventory</div><div class="bar-track"><div class="bar-fill" style="width:16%;background:var(--critical)"></div></div><div class="dim-val">4 / 25</div></div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D2 Risk Detection</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 20</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> Agent loop with LLM call has no exit condition — potential infinite loop</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> Agent loop with LLM call has no exit condition — potential infinite loop</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> Agent loop with LLM call has no exit condition — potential infinite loop</div></div></details><div class="dim-row"><div class="dim-label">D3 Policy Coverage</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:var(--critical)"></div></div><div class="dim-val">2 / 20</div></div><div class="dim-row"><div class="dim-label">D4 Credential Management</div><div class="bar-track"><div class="bar-fill" style="width:15%;background:var(--critical)"></div></div><div class="dim-val">3 / 20</div></div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D5 Log Hygiene</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 10</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Potential PII/sensitive data logged via f-string</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Potential PII/sensitive data logged via f-string</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Potential PII/sensitive data logged via f-string</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Potential PII/sensitive data logged via f-string</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Potential PII/sensitive data logged via f-string</div><div class="dim-detail-item" style="color:var(--text2)">+ 3 more findings</div></div></details><details class="dim-details"><summary class="dim-row"><div class="dim-label">D6 Framework Coverage</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 5</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> AutoGen code execution without Docker sandboxing</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> AutoGen code execution without Docker sandboxing</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> AutoGen code execution without Docker sandboxing</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> AutoGen code execution without Docker sandboxing</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> AutoGen code execution without Docker sandboxing</div><div class="dim-detail-item" style="color:var(--text2)">+ 33 more findings</div></div></details><div class="dim-group">Advanced Controls (2 / 50)</div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D7 Human-in-the-Loop</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 15</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> AutoGen agent without is_termination_msg — no conversation exit condition</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> AutoGen agent without is_termination_msg — no conversation exit condition</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> AutoGen agent without is_termination_msg — no conversation exit condition</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> AutoGen agent without is_termination_msg — no conversation exit condition</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> AutoGen agent without is_termination_msg — no conversation exit condition</div><div class="dim-detail-item" style="color:var(--text2)">+ 32 more findings</div></div></details><details class="dim-details"><summary class="dim-row"><div class="dim-label">D8 Agent Identity</div><div class="bar-track"><div class="bar-fill" style="width:13%;background:var(--critical)"></div></div><div class="dim-val">2 / 15</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Agent class 'Agent' has no permission model</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Agent class 'BaseAgent' has no permission model</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Agent class 'ClosureAgent' has no permission model</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Agent class 'RoutedAgent' has no permission model</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Agent class 'RoutedAgent' has no defined lifecycle states</div><div class="dim-detail-item" style="color:var(--text2)">+ 15 more findings</div></div></details><details class="dim-details"><summary class="dim-row"><div class="dim-label">D9 Threat Detection</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 20</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Empty exception handler — errors silently swallowed</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Empty exception handler — errors silently swallowed</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Empty exception handler — errors silently swallowed</div></div></details><div class="dim-group">Ecosystem (4 / 55)</div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D10 Prompt Security</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 15</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Azure AI used without ContentSafetyClient — no content moderation</div></div></details><div class="dim-row"><div class="dim-label">D11 Cloud / Platform</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:var(--critical)"></div></div><div class="dim-val">1 / 10</div></div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D12 LLM Observability</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 10</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Hardcoded model name: 'gpt-41' — no routing/fallback</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Hardcoded model name: 'gpt-45' — no routing/fallback</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Hardcoded model name: 'gpt-4o' — no routing/fallback</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Hardcoded model name: 'gpt-4' — no routing/fallback</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Hardcoded model name: 'gemini-1.5-flash' — no routing/fallback</div><div class="dim-detail-item" style="color:var(--text2)">+ 31 more findings</div></div></details><div class="dim-row"><div class="dim-label">D13 Data Recovery</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 10</div></div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D14 Compliance Maturity</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:var(--critical)"></div></div><div class="dim-val">3 / 10</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Unpinned AI dependency: autogen</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Unpinned AI dependency: autogen</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Unpinned AI dependency: autogen</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Unpinned AI dependency: langchain</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Unpinned AI dependency: openai</div><div class="dim-detail-item" style="color:var(--text2)">+ 11 more findings</div></div></details><div class="dim-group">Unique Capabilities (0 / 30)</div><div class="dim-row"><div class="dim-label">D15 Post-Exec Verification</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 10</div></div><div class="dim-row"><div class="dim-label">D16 Data Flow Governance</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 10</div></div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D17 Adversarial Resilience</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 10</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> No content injection defense — hidden HTML/CSS/zero-width instructions pass to agents undetected. (86% attack success ra</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> No RAG poisoning protection — knowledge base documents not scanned for embedded instructions. (&lt;0.1% contamination = &gt;80</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> No behavioral trap detection — post-execution behavioral changes not monitored. (10/10 M365 Copilot attacks succeeded)</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> No approval integrity verification -- agent summaries for approval not cross-checked against actual actions. (Approval f</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> No adversarial testing evidence — no red team, no prompt injection tests</div><div class="dim-detail-item" style="color:var(--text2)">+ 3 more findings</div></div></details>
+        <div class="caveat">Score reflects only what Warden can observe locally. Undetected controls are scored as 0, not assumed good. Dimensions are weighted by governance impact. Methodology: <a href="https://github.com/sharkrouter/warden/blob/main/SCORING.md" style="color:var(--info);text-decoration:none">SCORING.md</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sum-grid">
+      <div class="sum-cell"><div class="sum-label">Total Findings</div><div class="sum-val" style="color:var(--high)">170</div><div class="sum-sub">44 CRITICAL &middot; 61 HIGH</div></div><div class="sum-cell"><div class="sum-label">Tools Detected</div><div class="sum-val" style="color:var(--low)">0</div><div class="sum-sub">None detected</div></div><div class="sum-cell"><div class="sum-label">Credentials</div><div class="sum-val" style="color:var(--high)">0</div><div class="sum-sub">None detected</div></div><div class="sum-cell"><div class="sum-label">Governance Gaps</div><div class="sum-val" style="color:var(--critical)">11</div><div class="sum-sub">of 17 dimensions</div></div><div class="sum-cell"><div class="sum-label">Compliance Refs</div><div class="sum-val" style="color:var(--info)">10</div><div class="sum-sub">EU AI Act / OWASP / MITRE</div></div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><span class="sec-title">&#128737; Governance Layer Detection</span><span class="sec-count">0 tools detected &middot; 17 dimensions</span></div>
+    <div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D2: Risk Detection &mdash; none detected</div>
+    <div class="gov-desc">Risk classification, semantic analysis, intent-parameter consistency</div>
+  </div>
+  <div class="gov-pts zero">0 / 20 pts</div>
+</div><div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D5: Log Hygiene &mdash; none detected</div>
+    <div class="gov-desc">PII in logs, WORM/immutable storage, hash chain integrity, retention policy</div>
+  </div>
+  <div class="gov-pts zero">0 / 10 pts</div>
+</div><div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D6: Framework Coverage &mdash; none detected</div>
+    <div class="gov-desc">LangChain/AutoGen/CrewAI/custom framework detection</div>
+  </div>
+  <div class="gov-pts zero">0 / 5 pts</div>
+</div><div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D7: Human-in-the-Loop &mdash; none detected</div>
+    <div class="gov-desc">Approval gates, dry-run preview, plan-execute separation</div>
+  </div>
+  <div class="gov-pts zero">0 / 15 pts</div>
+</div><div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D9: Threat Detection &mdash; none detected</div>
+    <div class="gov-desc">Behavioral baselines, anomaly detection, cross-session tracking, kill switch</div>
+  </div>
+  <div class="gov-pts zero">0 / 20 pts</div>
+</div><div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D10: Prompt Security &mdash; none detected</div>
+    <div class="gov-desc">Prompt injection detection, jailbreak prevention, content filtering</div>
+  </div>
+  <div class="gov-pts zero">0 / 15 pts</div>
+</div><div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D12: LLM Observability &mdash; none detected</div>
+    <div class="gov-desc">Cost tracking, latency monitoring, model analytics</div>
+  </div>
+  <div class="gov-pts zero">0 / 10 pts</div>
+</div><div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D13: Data Recovery &mdash; none detected</div>
+    <div class="gov-desc">Rollback, undo, point-in-time recovery for agent actions</div>
+  </div>
+  <div class="gov-pts zero">0 / 10 pts</div>
+</div><div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D15: Post-Exec Verification &mdash; none detected</div>
+    <div class="gov-desc">Result validation, PASS/FAIL verdicts, failure fingerprinting</div>
+  </div>
+  <div class="gov-pts zero">0 / 10 pts</div>
+</div><div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D16: Data Flow Governance &mdash; none detected</div>
+    <div class="gov-desc">Taint labels, data classification, cross-tool leakage prevention</div>
+  </div>
+  <div class="gov-pts zero">0 / 10 pts</div>
+</div><div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D17: Adversarial Resilience &mdash; none detected</div>
+    <div class="gov-desc">Trap defense + adversarial testing (DeepMind AI Agent Traps)</div>
+  </div>
+  <div class="gov-pts zero">0 / 10 pts</div>
+</div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><span class="sec-title">&#128202; Solutions Comparison</span><span class="sec-count">2 rows &middot; 17 dimensions &middot; 235 max pts</span></div>
+    <div style="padding:16px 24px 8px;overflow-x:auto">
+      <table class="sol-table">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border2)">
+            <th style="text-align:left;padding:6px 10px;color:var(--muted);font-weight:400">Tool</th>
+            <th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Tool Inventory /25">D1</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Risk Detection /20">D2</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Policy Coverage /20">D3</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Credential Management /20">D4</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Log Hygiene /10">D5</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Framework Coverage /5">D6</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Human-in-the-Loop /15">D7</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Agent Identity /15">D8</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Threat Detection /20">D9</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Prompt Security /15">D10</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Cloud / Platform /10">D11</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="LLM Observability /10">D12</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Data Recovery /10">D13</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Compliance Maturity /10">D14</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Post-Exec Verification /10">D15</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Data Flow Governance /10">D16</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Adversarial Resilience /10">D17</th>
+            <th style="text-align:center;padding:6px 8px;color:var(--text2);font-weight:700;border-left:1px solid var(--border2)">/235</th>
+            <th style="text-align:center;padding:6px 8px;color:var(--text2);font-weight:700">/100</th>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)"><th style="text-align:left;padding:3px 10px;font-size:10px;color:var(--muted)">Max pts</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">25</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">20</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">20</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">20</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">5</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">15</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">15</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">20</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">15</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted);border-left:1px solid var(--border2)">235</th><th></th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(74,222,128,0.06);border-bottom:2px solid rgba(74,222,128,0.2)"><td style="padding:7px 10px;color:var(--low);font-weight:700">SharkRouter</td><td style="text-align:center;color:var(--low)">23</td><td style="text-align:center;color:var(--low)">18</td><td style="text-align:center;color:var(--low)">18</td><td style="text-align:center;color:var(--low)">18</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">5</td><td style="text-align:center;color:var(--low)">14</td><td style="text-align:center;color:var(--low)">14</td><td style="text-align:center;color:var(--low)">18</td><td style="text-align:center;color:var(--low)">14</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low);font-weight:700;border-left:1px solid var(--border2)">214</td><td style="text-align:center;color:var(--low);font-weight:700">91</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:7px 10px;color:#ff3b3b;font-weight:700">Your Scan</td><td style="text-align:center;color:var(--critical)">4</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--critical)">2</td><td style="text-align:center;color:var(--critical)">3</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--critical)">2</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--critical)">1</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--critical)">3</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;font-weight:700;border-left:1px solid var(--border2);color:#ff3b3b">15</td><td style="text-align:center;font-weight:700;color:#ff3b3b">6</td></tr>
+          
+        </tbody>
+      </table>
+    </div>
+    <div style="font-size:11px;color:var(--muted);font-style:italic;padding:12px 24px;font-family:var(--mono)">SharkRouter per-dimension scores are proportional estimates from total score. Detected tool scores are totals only (per-dimension breakdown not available). Methodology: <a href="https://github.com/sharkrouter/warden/blob/main/SCORING.md" style="color:var(--info);text-decoration:none">SCORING.md</a></div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><span class="sec-title">&#128270; Findings</span><span class="sec-count">170 total</span></div>
+    <div>
+  <div class="fg-hdr" style="color:#ff3b3b" onclick="toggleGroup('fg-critical')">
+    <span id="fg-critical-arrow" class="arrow open">&#9654;</span>
+    CRITICAL <span class="fg-cnt" style="background:rgba(255,59,59,.12);color:#ff3b3b">44</span>
+  </div>
+  <div id="fg-critical" class="fg-body open"><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Agent loop with LLM call has no exit condition — potential infinite loop</div>
+  <div class="f-loc">...n\python\packages\autogen-core\src\autogen_core\_queue.py:118</div>
+  <div class="f-detail">
+    <div class="f-rem">Add max_iterations, timeout, or explicit break condition</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Agent loop with LLM call has no exit condition — potential infinite loop</div>
+  <div class="f-loc">...n\python\packages\autogen-core\src\autogen_core\_queue.py:165</div>
+  <div class="f-detail">
+    <div class="f-rem">Add max_iterations, timeout, or explicit break condition</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Agent loop with LLM call has no exit condition — potential infinite loop</div>
+  <div class="f-loc">...\autogen-core\src\autogen_core\tool_agent\_caller_loop.py:46</div>
+  <div class="f-detail">
+    <div class="f-rem">Add max_iterations, timeout, or explicit break condition</div>
+    
+  </div>
+</div><details style="margin-top:4px">
+    <summary style="cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--text2);margin-bottom:8px;padding-left:24px">Show 41 more CRITICAL findings</summary>
+    <div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">No audit logging for tool calls detected</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Add audit logging for all tool/agent executions</div>
+    <div class="f-compliance"><span>EU AI Act Article 12</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...\python\packages\autogen-core\src\autogen_core\logging.py:33</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\_agent_instantiation.py:26</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...\packages\autogen-core\src\autogen_core\_agent_runtime.py:94</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...\packages\autogen-core\src\autogen_core\_closure_agent.py:162</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...ckages\autogen-core\src\autogen_core\_component_config.py:214</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...n\python\packages\autogen-core\src\autogen_core\_image.py:25</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...n\packages\autogen-core\src\autogen_core\_intervention.py:33</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...n\packages\autogen-core\src\autogen_core\_routed_agent.py:427</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...n-core\src\autogen_core\_single_threaded_agent_runtime.py:175</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...utogen-core\src\autogen_core\_type_prefix_subscription.py:19</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...kages\autogen-core\src\autogen_core\_type_subscription.py:19</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...en-core\src\autogen_core\code_executor\_func_with_reqs.py:179</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...ages\autogen-core\src\autogen_core\memory\_list_memory.py:37</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...rc\autogen_core\model_context\_chat_completion_context.py:28</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\tools\_function_tool.py:59</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...\autogen-core\src\autogen_core\utils\_json_to_pydantic.py:411</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...gen\python\packages\autogen-core\tests\test_base_agent.py:2</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...en\python\packages\autogen-core\tests\test_cache_store.py:3</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_cancellation.py:5</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...\python\packages\autogen-core\tests\test_closure_agent.py:5</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...\python\packages\autogen-core\tests\test_code_executor.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...thon\packages\autogen-core\tests\test_component_config.py:7</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_intervention.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...ython\packages\autogen-core\tests\test_json_extraction.py:2</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...thon\packages\autogen-core\tests\test_json_to_pydantic.py:6</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...autogen\python\packages\autogen-core\tests\test_memory.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...autogen\python\packages\autogen-core\tests\test_models.py:2</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...\python\packages\autogen-core\tests\test_model_context.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_routed_agent.py:6</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...utogen\python\packages\autogen-core\tests\test_runtime.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...\python\packages\autogen-core\tests\test_serialization.py:5</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...\autogen\python\packages\autogen-core\tests\test_state.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...ges\autogen-core\tests\test_static_workbench_overrides.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_subscription.py:2</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...\autogen\python\packages\autogen-core\tests\test_tools.py:7</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...gen\python\packages\autogen-core\tests\test_tool_agent.py:7</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...\autogen\python\packages\autogen-core\tests\test_types.py:5</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">AutoGen code execution without Docker sandboxing</div>
+  <div class="f-loc">...ogen\python\packages\autogen-core\tests\test_workbench.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Set code_execution_config={'use_docker': True} for safe code execution</div>
+    <div class="f-compliance"><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No content injection defense — hidden HTML/CSS/zero-width instructions pass to agents undetected. (86% attack success rate)</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Deploy trap defense layer on tool results</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No RAG poisoning protection — knowledge base documents not scanned for embedded instructions. (&lt;0.1% contamination = &gt;80% attack success)</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Deploy trap defense layer on tool results</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM01</span><span>MITRE AML.T0049</span></div>
+  </div>
+</div>
+  </details></div>
+</div><div>
+  <div class="fg-hdr" style="color:#ff8c00" onclick="toggleGroup('fg-high')">
+    <span id="fg-high-arrow" class="arrow">&#9654;</span>
+    HIGH <span class="fg-cnt" style="background:rgba(255,140,0,.12);color:#ff8c00">61</span>
+  </div>
+  <div id="fg-high" class="fg-body"><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...hon\packages\autogen-core\src\autogen_core\_base_agent.py:204</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...n\python\packages\autogen-core\src\autogen_core\_queue.py:130</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...n\python\packages\autogen-core\src\autogen_core\_queue.py:177</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><details style="margin-top:4px">
+    <summary style="cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--text2);margin-bottom:8px;padding-left:24px">Show 58 more HIGH findings</summary>
+    <div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...n\packages\autogen-core\src\autogen_core\_routed_agent.py:491</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...n-core\src\autogen_core\_single_threaded_agent_runtime.py:369</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...n-core\src\autogen_core\_single_threaded_agent_runtime.py:405</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...n-core\src\autogen_core\_single_threaded_agent_runtime.py:648</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...n-core\src\autogen_core\_single_threaded_agent_runtime.py:475</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...n-core\src\autogen_core\_single_threaded_agent_runtime.py:571</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'Agent' has no permission model</div>
+  <div class="f-loc">...n\python\packages\autogen-core\src\autogen_core\_agent.py:13</div>
+  <div class="f-detail">
+    <div class="f-rem">Add role/permission checks before tool dispatch</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'BaseAgent' has no permission model</div>
+  <div class="f-loc">...hon\packages\autogen-core\src\autogen_core\_base_agent.py:60</div>
+  <div class="f-detail">
+    <div class="f-rem">Add role/permission checks before tool dispatch</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'ClosureAgent' has no permission model</div>
+  <div class="f-loc">...\packages\autogen-core\src\autogen_core\_closure_agent.py:76</div>
+  <div class="f-detail">
+    <div class="f-rem">Add role/permission checks before tool dispatch</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'RoutedAgent' has no permission model</div>
+  <div class="f-loc">...n\packages\autogen-core\src\autogen_core\_routed_agent.py:415</div>
+  <div class="f-detail">
+    <div class="f-rem">Add role/permission checks before tool dispatch</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'ToolAgent' has no permission model</div>
+  <div class="f-loc">...s\autogen-core\src\autogen_core\tool_agent\_tool_agent.py:40</div>
+  <div class="f-detail">
+    <div class="f-rem">Add role/permission checks before tool dispatch</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'LongRunningAgent' has no permission model</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_cancellation.py:25</div>
+  <div class="f-detail">
+    <div class="f-rem">Add role/permission checks before tool dispatch</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'NestingLongRunningAgent' has no permission model</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_cancellation.py:44</div>
+  <div class="f-detail">
+    <div class="f-rem">Add role/permission checks before tool dispatch</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'CounterAgent' has no permission model</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_routed_agent.py:28</div>
+  <div class="f-detail">
+    <div class="f-rem">Add role/permission checks before tool dispatch</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'EventAgent' has no permission model</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_routed_agent.py:130</div>
+  <div class="f-detail">
+    <div class="f-rem">Add role/permission checks before tool dispatch</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'RPCAgent' has no permission model</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_routed_agent.py:176</div>
+  <div class="f-detail">
+    <div class="f-rem">Add role/permission checks before tool dispatch</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'FailingAgent' has no permission model</div>
+  <div class="f-loc">...utogen\python\packages\autogen-core\tests\test_runtime.py:332</div>
+  <div class="f-detail">
+    <div class="f-rem">Add role/permission checks before tool dispatch</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'StatefulAgent' has no permission model</div>
+  <div class="f-loc">...\autogen\python\packages\autogen-core\tests\test_state.py:7</div>
+  <div class="f-detail">
+    <div class="f-rem">Add role/permission checks before tool dispatch</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...\python\packages\autogen-core\src\autogen_core\logging.py:33</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\_agent_instantiation.py:26</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...\packages\autogen-core\src\autogen_core\_agent_runtime.py:94</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...\packages\autogen-core\src\autogen_core\_closure_agent.py:162</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...n\python\packages\autogen-core\src\autogen_core\_image.py:25</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...n\packages\autogen-core\src\autogen_core\_intervention.py:33</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...n\packages\autogen-core\src\autogen_core\_routed_agent.py:427</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...n-core\src\autogen_core\_single_threaded_agent_runtime.py:175</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...utogen-core\src\autogen_core\_type_prefix_subscription.py:19</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...kages\autogen-core\src\autogen_core\_type_subscription.py:19</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...en-core\src\autogen_core\code_executor\_func_with_reqs.py:179</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...ages\autogen-core\src\autogen_core\memory\_list_memory.py:37</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...rc\autogen_core\model_context\_chat_completion_context.py:28</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\tools\_function_tool.py:59</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...\autogen-core\src\autogen_core\utils\_json_to_pydantic.py:411</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...gen\python\packages\autogen-core\tests\test_base_agent.py:2</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...en\python\packages\autogen-core\tests\test_cache_store.py:3</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_cancellation.py:5</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...\python\packages\autogen-core\tests\test_closure_agent.py:5</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...\python\packages\autogen-core\tests\test_code_executor.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...thon\packages\autogen-core\tests\test_component_config.py:7</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_intervention.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...ython\packages\autogen-core\tests\test_json_extraction.py:2</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...thon\packages\autogen-core\tests\test_json_to_pydantic.py:6</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...autogen\python\packages\autogen-core\tests\test_memory.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...autogen\python\packages\autogen-core\tests\test_models.py:2</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...\python\packages\autogen-core\tests\test_model_context.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_routed_agent.py:6</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...utogen\python\packages\autogen-core\tests\test_runtime.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...\python\packages\autogen-core\tests\test_serialization.py:5</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...\autogen\python\packages\autogen-core\tests\test_state.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...ges\autogen-core\tests\test_static_workbench_overrides.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_subscription.py:2</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...\autogen\python\packages\autogen-core\tests\test_tools.py:7</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...gen\python\packages\autogen-core\tests\test_tool_agent.py:7</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...\autogen\python\packages\autogen-core\tests\test_types.py:5</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">AutoGen agent without is_termination_msg — no conversation exit condition</div>
+  <div class="f-loc">...ogen\python\packages\autogen-core\tests\test_workbench.py:4</div>
+  <div class="f-detail">
+    <div class="f-rem">Define is_termination_msg function to control when agents stop</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D10</span>
+  </div>
+  <div class="f-msg">Azure AI used without ContentSafetyClient — no content moderation</div>
+  <div class="f-loc">...ckages\autogen-core\src\autogen_core\_component_config.py:48</div>
+  <div class="f-detail">
+    <div class="f-rem">Add Azure ContentSafetyClient to analyse prompts/responses for harmful content</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM02</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No behavioral trap detection — post-execution behavioral changes not monitored. (10/10 M365 Copilot attacks succeeded)</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Deploy trap defense layer on tool results</div>
+    <div class="f-compliance"><span>EU AI Act Article 14</span><span>OWASP LLM07</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No approval integrity verification -- agent summaries for approval not cross-checked against actual actions. (Approval fatigue exploitation)</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Deploy trap defense layer on tool results</div>
+    <div class="f-compliance"><span>EU AI Act Article 14</span><span>OWASP LLM07</span><span>MITRE AML.T0048</span></div>
+  </div>
+</div>
+  </details></div>
+</div><div>
+  <div class="fg-hdr" style="color:#f5c518" onclick="toggleGroup('fg-medium')">
+    <span id="fg-medium-arrow" class="arrow">&#9654;</span>
+    MEDIUM <span class="fg-cnt" style="background:rgba(245,197,24,.12);color:#f5c518">65</span>
+  </div>
+  <div id="fg-medium" class="fg-body"><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-41' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:22</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-45' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:23</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-4o' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:24</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><details style="margin-top:4px">
+    <summary style="cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--text2);margin-bottom:8px;padding-left:24px">Show 62 more MEDIUM findings</summary>
+    <div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-4' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:28</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gemini-1.5-flash' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:31</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gemini-1.5-pro' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:32</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'claude-3-haiku' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:36</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'claude-3-sonnet' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:37</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'claude-3-opus' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:38</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'claude-3-5-haiku' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:39</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'claude-3-5-sonnet' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:40</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'claude-3-7-sonnet' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:41</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-41' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:58</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-45' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:59</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-4o' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:60</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-4' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:64</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gemini-1.5-flash' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:68</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gemini-1.5-pro' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:69</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'claude-3-haiku' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:74</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'claude-3-sonnet' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:75</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'claude-3-opus' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:76</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'claude-3-5-haiku' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:77</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'claude-3-5-sonnet' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:78</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'claude-3-7-sonnet' — no routing/fallback</div>
+  <div class="f-loc">...ges\autogen-core\src\autogen_core\models\_model_client.py:79</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">No log retention policy detected</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Configure log rotation and retention periods</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Agent class 'Agent' has no cost tracking</div>
+  <div class="f-loc">...n\python\packages\autogen-core\src\autogen_core\_agent.py:13</div>
+  <div class="f-detail">
+    <div class="f-rem">Track token usage and costs per agent execution</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Agent class 'BaseAgent' has no cost tracking</div>
+  <div class="f-loc">...hon\packages\autogen-core\src\autogen_core\_base_agent.py:60</div>
+  <div class="f-detail">
+    <div class="f-rem">Track token usage and costs per agent execution</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Agent class 'ClosureAgent' has no cost tracking</div>
+  <div class="f-loc">...\packages\autogen-core\src\autogen_core\_closure_agent.py:76</div>
+  <div class="f-detail">
+    <div class="f-rem">Track token usage and costs per agent execution</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Agent class 'RoutedAgent' has no cost tracking</div>
+  <div class="f-loc">...n\packages\autogen-core\src\autogen_core\_routed_agent.py:415</div>
+  <div class="f-detail">
+    <div class="f-rem">Track token usage and costs per agent execution</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'RoutedAgent' has no defined lifecycle states</div>
+  <div class="f-loc">...n\packages\autogen-core\src\autogen_core\_routed_agent.py:415</div>
+  <div class="f-detail">
+    <div class="f-rem">Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Agent class 'ToolAgent' has no cost tracking</div>
+  <div class="f-loc">...s\autogen-core\src\autogen_core\tool_agent\_tool_agent.py:40</div>
+  <div class="f-detail">
+    <div class="f-rem">Track token usage and costs per agent execution</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'ToolAgent' has no defined lifecycle states</div>
+  <div class="f-loc">...s\autogen-core\src\autogen_core\tool_agent\_tool_agent.py:40</div>
+  <div class="f-detail">
+    <div class="f-rem">Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Agent class 'LongRunningAgent' has no cost tracking</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_cancellation.py:25</div>
+  <div class="f-detail">
+    <div class="f-rem">Track token usage and costs per agent execution</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'LongRunningAgent' has no defined lifecycle states</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_cancellation.py:25</div>
+  <div class="f-detail">
+    <div class="f-rem">Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Agent class 'NestingLongRunningAgent' has no cost tracking</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_cancellation.py:44</div>
+  <div class="f-detail">
+    <div class="f-rem">Track token usage and costs per agent execution</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'NestingLongRunningAgent' has no defined lifecycle states</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_cancellation.py:44</div>
+  <div class="f-detail">
+    <div class="f-rem">Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Agent class 'CounterAgent' has no cost tracking</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_routed_agent.py:28</div>
+  <div class="f-detail">
+    <div class="f-rem">Track token usage and costs per agent execution</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'CounterAgent' has no defined lifecycle states</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_routed_agent.py:28</div>
+  <div class="f-detail">
+    <div class="f-rem">Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Agent class 'EventAgent' has no cost tracking</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_routed_agent.py:130</div>
+  <div class="f-detail">
+    <div class="f-rem">Track token usage and costs per agent execution</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'EventAgent' has no defined lifecycle states</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_routed_agent.py:130</div>
+  <div class="f-detail">
+    <div class="f-rem">Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Agent class 'RPCAgent' has no cost tracking</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_routed_agent.py:176</div>
+  <div class="f-detail">
+    <div class="f-rem">Track token usage and costs per agent execution</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'RPCAgent' has no defined lifecycle states</div>
+  <div class="f-loc">...n\python\packages\autogen-core\tests\test_routed_agent.py:176</div>
+  <div class="f-detail">
+    <div class="f-rem">Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Agent class 'FailingAgent' has no cost tracking</div>
+  <div class="f-loc">...utogen\python\packages\autogen-core\tests\test_runtime.py:332</div>
+  <div class="f-detail">
+    <div class="f-rem">Track token usage and costs per agent execution</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D8</span>
+  </div>
+  <div class="f-msg">Agent class 'FailingAgent' has no defined lifecycle states</div>
+  <div class="f-loc">...utogen\python\packages\autogen-core\tests\test_runtime.py:332</div>
+  <div class="f-detail">
+    <div class="f-rem">Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Agent class 'StatefulAgent' has no cost tracking</div>
+  <div class="f-loc">...\autogen\python\packages\autogen-core\tests\test_state.py:7</div>
+  <div class="f-detail">
+    <div class="f-rem">Track token usage and costs per agent execution</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: autogen</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:6</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: autogen==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: autogen</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:9</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: autogen==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: autogen</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:31</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: autogen==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: langchain</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:35</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: langchain==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: openai</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:35</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: openai==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: llama-index</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:37</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: llama-index==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: openai</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:37</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: openai==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: llama-index</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:38</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: llama-index==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: openai</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:38</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: openai==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: llama-index</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:39</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: llama-index==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: llama-index</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:40</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: llama-index==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: llama-index</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:41</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: llama-index==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: llama-index</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:42</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: llama-index==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: autogen</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:65</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: autogen==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: autogen</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:71</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: autogen==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: autogen</div>
+  <div class="f-loc">...repos\autogen\python\packages\autogen-core\pyproject.toml:86</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: autogen==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No adversarial testing evidence — no red team, no prompt injection tests</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Implement adversarial testing for agent systems</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No tool-call attack simulation — agent tool calls not tested against adversarial inputs</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Implement adversarial testing for agent systems</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No multi-agent chaos engineering — agent swarms not stress tested</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Implement adversarial testing for agent systems</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No before/after governance comparison — no A/B testing of governance effectiveness</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Implement adversarial testing for agent systems</div>
+    
+  </div>
+</div>
+  </details></div>
+</div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><span class="sec-title">&#128161; Recommendations</span><span class="sec-count">ordered by score impact</span></div>
+    <div class="rec">
+  <div class="rec-n">#1</div>
+  <div>
+    <div class="rec-title">Establish a live tool inventory <span class="rec-pts">+21 pts</span></div>
+    <div class="rec-body">No tool catalog detected. Without a centralized inventory of MCP tools and their schemas, governance policies have nothing to enforce against. Deploy a tool registry with auto-discovery.</div>
+    <div class="workaround-box">
+  <div class="workaround-label">&#9888; The Workaround Tax</div>
+  <div class="workaround-text">
+    <strong>Stop paying the Workaround Tax.</strong>
+    Relying on prompt-filters and out-of-band monitoring forces your developers to write
+    manual security logic scattered across every agent and service.
+    A centralized gateway enforces policy automatically &mdash; at the interception layer,
+    on every tool call, without code changes in your agents.
+  </div>
+</div><div class="cmp">
+  <div class="cmp-grid">
+    <div class="cmp-col cmp-cur">
+      <div class="cmp-lbl c">Current state</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
+        <span class="cmp-score c">6</span><span class="cmp-denom">/ 100</span>
+      </div>
+      <div class="cmp-lvl c">&#10007; UNGOVERNED</div>
+      <div class="cmp-dim"><span class="cmp-dim-lbl">D1 Tool Inventory</span><div class="cmp-bt"><div class="cmp-bf" style="width:16%;background:var(--critical)"></div></div><span class="cmp-val">4/25</span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D2 Risk Detection</span><div class="cmp-bt"><div class="cmp-bf" style="width:0%;background:var(--muted)"></div></div><span class="cmp-val" style="color:var(--critical)">0/20</span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D9 Threat Detection</span><div class="cmp-bt"><div class="cmp-bf" style="width:0%;background:var(--muted)"></div></div><span class="cmp-val" style="color:var(--critical)">0/20</span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D3 Policy Coverage</span><div class="cmp-bt"><div class="cmp-bf" style="width:10%;background:var(--critical)"></div></div><span class="cmp-val">2/20</span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D4 Credential Management</span><div class="cmp-bt"><div class="cmp-bf" style="width:15%;background:var(--critical)"></div></div><span class="cmp-val">3/20</span></div>
+    </div>
+    <div class="cmp-col cmp-sr">
+      <div class="cmp-lbl s">+ SharkRouter (full deployment)</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
+        <span class="cmp-score s">91</span><span class="cmp-denom">/ 100</span>
+      </div>
+      <div class="cmp-lvl s">&#10003; GOVERNED</div>
+      <div class="cmp-dim"><span class="cmp-dim-lbl">D1 Tool Inventory</span><div class="cmp-bt"><div class="cmp-bf" style="width:92%;background:var(--low)"></div></div><span class="cmp-val s">23 <span class="delta">+19</span></span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D2 Risk Detection</span><div class="cmp-bt"><div class="cmp-bf" style="width:90%;background:var(--low)"></div></div><span class="cmp-val s">18 <span class="delta">+18</span></span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D9 Threat Detection</span><div class="cmp-bt"><div class="cmp-bf" style="width:90%;background:var(--low)"></div></div><span class="cmp-val s">18 <span class="delta">+18</span></span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D3 Policy Coverage</span><div class="cmp-bt"><div class="cmp-bf" style="width:90%;background:var(--low)"></div></div><span class="cmp-val s">18 <span class="delta">+16</span></span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D4 Credential Management</span><div class="cmp-bt"><div class="cmp-bf" style="width:90%;background:var(--low)"></div></div><span class="cmp-val s">18 <span class="delta">+15</span></span></div>
+    </div>
+  </div>
+  <div class="cmp-foot">
+    <span>* Projection based on SharkRouter's estimated score. Actual results may vary.&nbsp;&nbsp;<a href="https://sharkrouter.ai">sharkrouter.ai &rarr;</a></span>
+    <span class="cmp-delta">6 &rarr; 91 &middot; +85 pts</span>
+  </div>
+</div>
+  </div>
+</div><div class="rec">
+  <div class="rec-n">#2</div>
+  <div>
+    <div class="rec-title">Deploy risk classification for tool calls <span class="rec-pts">+20 pts</span></div>
+    <div class="rec-body">No risk scoring on tool invocations. Every tool call carries the same implicit trust level. Classify tools by risk (destructive, financial, exfiltration) and enforce approval gates for high-risk categories. (3 findings in this dimension)</div>
+    
+  </div>
+</div><div class="rec">
+  <div class="rec-n">#3</div>
+  <div>
+    <div class="rec-title">Deploy behavioral detection and kill switch <span class="rec-pts">+20 pts</span></div>
+    <div class="rec-body">No behavioral baselines, no anomaly detection, no auto-suspend capability. A compromised agent can operate indefinitely. Salami slicing across sessions is undetectable. (3 findings in this dimension)</div>
+    
+  </div>
+</div><div class="rec">
+  <div class="rec-n">#4</div>
+  <div>
+    <div class="rec-title">Implement policy enforcement on tool calls <span class="rec-pts">+18 pts</span></div>
+    <div class="rec-body">No deny/allow/audit policies detected. Agents can invoke any tool without restriction. Deploy an inline policy engine with deny-by-default for destructive and financial tools.</div>
+    
+  </div>
+</div><div class="rec">
+  <div class="rec-n">#5</div>
+  <div>
+    <div class="rec-title">Move credentials to a secrets manager <span class="rec-pts">+17 pts</span></div>
+    <div class="rec-body">API keys or credentials found in source code. Move to HashiCorp Vault, AWS Secrets Manager, or environment-level secret stores. Rotate all exposed keys immediately. Add .env to .gitignore.</div>
+    
+  </div>
+</div>
+  </div>
+  <div class="sec" style="border-color:rgba(96,165,250,0.25)">
+    <div class="email-wrap">
+      <div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--info);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">&#9993; Get your remediation guide</div>
+        <div style="font-size:18px;font-weight:700;margin-bottom:6px">Personalized remediation plan for your <span style="color:var(--critical);font-weight:600">44 CRITICAL</span> findings</div>
+        <div class="email-info">
+          We'll email you a prioritized remediation guide with the exact steps to fix your
+          biggest governance gaps — ranked by point impact, with actionable instructions per dimension.
+        </div>
+        <div class="email-cols">
+          <div>
+            <div class="email-col-hdr" style="color:var(--low)">&#10003; WE SEND</div>
+            <ul>
+              <li>&rarr; Your score (6/100)</li>
+              <li>&rarr; Top dimension gaps + fixes</li>
+              <li>&rarr; Finding counts by severity</li>
+              <li>&rarr; Detected tools summary</li>
+            </ul>
+          </div>
+          <div>
+            <div class="email-col-hdr" style="color:var(--critical)">&#10007; WE NEVER SEND</div>
+            <ul>
+              <li>&rarr; API key values</li>
+              <li>&rarr; Log file content</li>
+              <li>&rarr; File paths or hostnames</li>
+              <li>&rarr; Any PII</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="email-form">
+        <div style="font-size:13px;color:var(--text2);margin-bottom:4px;line-height:1.5">Enter your work email to receive the report and remediation guide.</div>
+        <input type="email" class="email-input" placeholder="you@company.com">
+        <input type="text" id="warden-company" class="email-input" placeholder="Company (optional)">
+        <button class="email-btn" onclick="submitEmail(this)">SEND REPORT &rarr;</button>
+        <div id="email-status" style="font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;min-height:16px"></div>
+        <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);line-height:1.7">
+          Max 3 emails total. Unsubscribe anytime.<br>
+          <a href="https://sharkrouter.ai/privacy" style="color:var(--info);text-decoration:none">Privacy policy &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <div class="email-bar">
+      <span>Prefer to keep it local? Report saved at <span style="font-family:var(--mono);color:var(--text)">./warden_report.html</span></span>
+      <span style="font-family:var(--mono);font-size:10px">warden scan --no-email for CI/headless use</span>
+    </div>
+    <script type="application/json" id="warden-data">{"score": 6, "level": "UNGOVERNED", "total_findings": 170, "critical_count": 44, "finding_counts": {"CRITICAL": 44, "HIGH": 61, "MEDIUM": 65, "LOW": 0, "INFO": 0}, "detected_tools": [], "mcp_tool_count": 0, "dimensions": {"D1": 4, "D2": 0, "D3": 2, "D4": 3, "D5": 0, "D6": 0, "D7": 0, "D8": 2, "D9": 0, "D10": 0, "D11": 1, "D12": 0, "D13": 0, "D14": 3, "D15": 0, "D16": 0, "D17": 0}, "warden_version": "1.6.0", "scoring_model": "4.3", "source": "html_report"}</script>
+  </div>
+  <div class="foot">
+    Generated by <strong>Warden v1.6.0</strong> &middot; Open Source &middot; MIT License &middot;
+    <a href="https://github.com/SharkRouter/warden">github.com/sharkrouter/warden</a><br>
+    Scoring model v4.3 &middot; 17 weighted dimensions &middot; 235 pts &middot; methodology in SCORING.md<br>
+    <div class="foot-priv">Scan data stays on your machine. Email delivery is opt-in only.<br>
+    When opted in: score + metadata only. Never: keys, logs, paths, or PII.</div>
+    <a href="https://sharkrouter.ai/privacy" style="font-size:10px">Privacy policy</a> &middot;
+    To enforce policies on what Warden found &rarr; <a href="https://sharkrouter.ai" class="foot-cta">Explore what 91/100 looks like &rarr;</a>
+  </div>
+</div>
+<script>
+function toggleGroup(id){
+  var b=document.getElementById(id);
+  var a=document.getElementById(id+'-arrow');
+  if(b){b.classList.toggle('open');if(a)a.classList.toggle('open')}
+}
+function toggleFinding(el){el.classList.toggle('exp')}
+function submitEmail(btn){
+  var input=btn.parentElement.querySelector('input[type=email]');
+  var status=document.getElementById('email-status');
+  var email=input.value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    status.style.color='var(--critical)';
+    status.textContent='Please enter a valid email address.';
+    return;
+  }
+  btn.disabled=true;btn.textContent='SENDING...';
+  var data=JSON.parse(document.getElementById('warden-data').textContent);
+  data.email=email;
+  var company=document.getElementById('warden-company');
+  if(company&&company.value)data.company=company.value;
+  fetch('https://api.sharkrouter.ai/v1/warden/submit',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(data)
+  }).then(function(r){
+    if(r.ok){btn.style.background='var(--low)';btn.style.color='#000';btn.textContent='\u2713 SENT';input.disabled=true;
+      status.style.color='var(--low)';status.textContent='Check your inbox \u2014 report and guide on their way.';}
+    else{btn.textContent='SEND REPORT \u2192';btn.disabled=false;
+      status.style.color='var(--critical)';status.textContent='Failed to send. Try again.';}
+  }).catch(function(){btn.textContent='SEND REPORT \u2192';btn.disabled=false;
+    status.style.color='var(--critical)';status.textContent='Network error. Try again.';});
+}
+</script>
+</body>
+</html>

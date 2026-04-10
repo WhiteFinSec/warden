@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Warden Gallery — AI agent framework governance audits</title>
+<meta name="description" content="Automated AI-agent governance scans of popular open-source frameworks: LangChain, CrewAI, AutoGen, Haystack, LlamaIndex, Semantic Kernel, and more. Run by Warden, the open-source scanner.">
+<link rel="canonical" href="https://warden.sharkrouter.ai/gallery/">
+<meta property="og:title" content="Warden Gallery — AI framework governance audits">
+<meta property="og:description" content="Automated AI-agent governance scans of popular open-source frameworks: LangChain, CrewAI, AutoGen, Haystack, LlamaIndex, Semantic Kernel, and more. Run by Warden, the open-source scanner.">
+<meta property="og:url" content="https://warden.sharkrouter.ai/gallery/">
+<link rel="stylesheet" href="assets/gallery.css">
+</head>
+<body>
+<header class="gallery-header">
+  <h1>Warden Gallery</h1>
+  <p class="sub">
+    Automated governance audits of the most popular open-source
+    AI-agent frameworks — scored on 17 dimensions across 12 scan layers.
+  </p>
+  <p class="meta">Last rebuilt: 2026-04-10 · 10 projects scanned</p>
+</header>
+
+<section class="intro">
+  <p>
+    <strong>What is this?</strong> Warden is an open-source CLI scanner that evaluates
+    AI-agent projects across 17 governance dimensions: tool-call enforcement,
+    agent identity, audit trails, credential management, supply-chain, trap defense,
+    and more. Every project below was scanned with the latest version of Warden,
+    producing the same HTML report you'd get locally by running
+    <code>pip install warden-ai &amp;&amp; warden scan &lt;path&gt;</code>.
+  </p>
+  <p>
+    <strong>What do the scores mean?</strong> These scores reflect the governance
+    posture of the framework's <em>own source code</em>, not of applications built
+    on top of it. Most general-purpose frameworks land in AT_RISK or PARTIAL
+    territory — that's expected. They are <em>libraries</em>, not governance platforms.
+    If your team needs full gateway-level enforcement, you probably want a dedicated
+    runtime layer on top.
+  </p>
+</section>
+
+<table class="gallery-table">
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Category</th>
+      <th>Description</th>
+      <th>Score</th>
+      <th>Level</th>
+      <th>Critical</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+        <tr>
+          <td><a href="pydantic-ai/index.html"><strong>PydanticAI</strong></a></td>
+          <td class="muted">Framework</td>
+          <td class="desc">Agent framework from the Pydantic team, designed for type-safe LLM applications.</td>
+          <td class="score" style="color:#ef4444"><strong>24</strong>/100</td>
+          <td class="level" style="color:#ef4444">UNGOVERNED</td>
+          <td class="crit-count">17</td>
+          <td><a href="pydantic-ai/index.html">Audit →</a></td>
+        </tr>
+        <tr>
+          <td><a href="crewai/index.html"><strong>CrewAI</strong></a></td>
+          <td class="muted">Multi-Agent</td>
+          <td class="desc">Framework for orchestrating role-playing autonomous AI agents that collaborate on tasks.</td>
+          <td class="score" style="color:#ef4444"><strong>19</strong>/100</td>
+          <td class="level" style="color:#ef4444">UNGOVERNED</td>
+          <td class="crit-count">21</td>
+          <td><a href="crewai/index.html">Audit →</a></td>
+        </tr>
+        <tr>
+          <td><a href="langflow/index.html"><strong>Langflow</strong></a></td>
+          <td class="muted">Low-Code</td>
+          <td class="desc">Visual low-code tool for building and deploying AI agents and workflows.</td>
+          <td class="score" style="color:#ef4444"><strong>18</strong>/100</td>
+          <td class="level" style="color:#ef4444">UNGOVERNED</td>
+          <td class="crit-count">21</td>
+          <td><a href="langflow/index.html">Audit →</a></td>
+        </tr>
+        <tr>
+          <td><a href="haystack/index.html"><strong>Haystack</strong></a></td>
+          <td class="muted">RAG</td>
+          <td class="desc">End-to-end framework for building production-ready LLM and RAG applications.</td>
+          <td class="score" style="color:#ef4444"><strong>15</strong>/100</td>
+          <td class="level" style="color:#ef4444">UNGOVERNED</td>
+          <td class="crit-count">45</td>
+          <td><a href="haystack/index.html">Audit →</a></td>
+        </tr>
+        <tr>
+          <td><a href="langgraph/index.html"><strong>LangGraph</strong></a></td>
+          <td class="muted">Orchestrator</td>
+          <td class="desc">Graph-based orchestration for multi-agent LLM workflows by the LangChain team.</td>
+          <td class="score" style="color:#ef4444"><strong>14</strong>/100</td>
+          <td class="level" style="color:#ef4444">UNGOVERNED</td>
+          <td class="crit-count">4</td>
+          <td><a href="langgraph/index.html">Audit →</a></td>
+        </tr>
+        <tr>
+          <td><a href="semantic-kernel/index.html"><strong>Semantic Kernel</strong></a></td>
+          <td class="muted">Framework</td>
+          <td class="desc">Microsoft&#x27;s open-source SDK for integrating LLMs into conventional applications.</td>
+          <td class="score" style="color:#ef4444"><strong>14</strong>/100</td>
+          <td class="level" style="color:#ef4444">UNGOVERNED</td>
+          <td class="crit-count">15</td>
+          <td><a href="semantic-kernel/index.html">Audit →</a></td>
+        </tr>
+        <tr>
+          <td><a href="langchain/index.html"><strong>LangChain</strong></a></td>
+          <td class="muted">Framework</td>
+          <td class="desc">The most-starred framework for building LLM applications with chains, agents, and tools.</td>
+          <td class="score" style="color:#ef4444"><strong>13</strong>/100</td>
+          <td class="level" style="color:#ef4444">UNGOVERNED</td>
+          <td class="crit-count">3</td>
+          <td><a href="langchain/index.html">Audit →</a></td>
+        </tr>
+        <tr>
+          <td><a href="llamaindex/index.html"><strong>LlamaIndex</strong></a></td>
+          <td class="muted">RAG</td>
+          <td class="desc">Data framework for connecting custom data sources to LLMs, the standard for RAG pipelines.</td>
+          <td class="score" style="color:#ef4444"><strong>13</strong>/100</td>
+          <td class="level" style="color:#ef4444">UNGOVERNED</td>
+          <td class="crit-count">13</td>
+          <td><a href="llamaindex/index.html">Audit →</a></td>
+        </tr>
+        <tr>
+          <td><a href="metagpt/index.html"><strong>MetaGPT</strong></a></td>
+          <td class="muted">Multi-Agent</td>
+          <td class="desc">Multi-agent framework that assigns different roles to GPT agents to collaborate on complex tasks.</td>
+          <td class="score" style="color:#ef4444"><strong>11</strong>/100</td>
+          <td class="level" style="color:#ef4444">UNGOVERNED</td>
+          <td class="crit-count">11</td>
+          <td><a href="metagpt/index.html">Audit →</a></td>
+        </tr>
+        <tr>
+          <td><a href="autogen/index.html"><strong>AutoGen</strong></a></td>
+          <td class="muted">Multi-Agent</td>
+          <td class="desc">Microsoft&#x27;s framework for building multi-agent conversational AI applications.</td>
+          <td class="score" style="color:#ef4444"><strong>6</strong>/100</td>
+          <td class="level" style="color:#ef4444">UNGOVERNED</td>
+          <td class="crit-count">44</td>
+          <td><a href="autogen/index.html">Audit →</a></td>
+        </tr>
+  </tbody>
+</table>
+
+<section class="cta">
+  <h2>Run Warden on your own project</h2>
+  <pre><code>pip install warden-ai
+warden scan /path/to/your/project</code></pre>
+  <p>
+    Zero telemetry, zero cloud calls. Everything runs locally.
+    See <a href="https://github.com/SharkRouter/warden">github.com/SharkRouter/warden</a>
+    for the source, scoring model, and methodology.
+  </p>
+</section>
+
+<footer>
+  <p>
+    Generated by <a href="https://github.com/SharkRouter/warden">Warden</a>
+    · MIT licensed · Scans are automated and vendor-neutral
+    · Framework maintainers: <a href="https://github.com/SharkRouter/warden/issues">open an issue</a>
+    for corrections.
+  </p>
+</footer>
+</body>
+</html>

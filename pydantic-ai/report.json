@@ -1,0 +1,4683 @@
+{
+  "version": "1.6.0",
+  "scoring_model": "v4.3",
+  "scoring_version": "4.3",
+  "timestamp": "2026-04-10T23:11:00.560415+00:00",
+  "target_path": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai",
+  "file_counts": {
+    "python": 509,
+    "js": 4,
+    "other": 0
+  },
+  "coverage_warning": false,
+  "score": {
+    "total": 24,
+    "max": 100,
+    "level": "UNGOVERNED",
+    "raw_total": 56,
+    "raw_max": 235,
+    "dimensions": {
+      "D1": {
+        "name": "Tool Inventory",
+        "raw": 7,
+        "max": 25,
+        "pct": 28
+      },
+      "D2": {
+        "name": "Risk Detection",
+        "raw": 0,
+        "max": 20,
+        "pct": 0
+      },
+      "D3": {
+        "name": "Policy Coverage",
+        "raw": 5,
+        "max": 20,
+        "pct": 25
+      },
+      "D4": {
+        "name": "Credential Management",
+        "raw": 0,
+        "max": 20,
+        "pct": 0
+      },
+      "D5": {
+        "name": "Log Hygiene",
+        "raw": 2,
+        "max": 10,
+        "pct": 20
+      },
+      "D6": {
+        "name": "Framework Coverage",
+        "raw": 1,
+        "max": 5,
+        "pct": 20
+      },
+      "D7": {
+        "name": "Human-in-the-Loop",
+        "raw": 9,
+        "max": 15,
+        "pct": 60
+      },
+      "D8": {
+        "name": "Agent Identity",
+        "raw": 2,
+        "max": 15,
+        "pct": 13
+      },
+      "D9": {
+        "name": "Threat Detection",
+        "raw": 0,
+        "max": 20,
+        "pct": 0
+      },
+      "D10": {
+        "name": "Prompt Security",
+        "raw": 3,
+        "max": 15,
+        "pct": 20
+      },
+      "D11": {
+        "name": "Cloud / Platform",
+        "raw": 6,
+        "max": 10,
+        "pct": 60
+      },
+      "D12": {
+        "name": "LLM Observability",
+        "raw": 8,
+        "max": 10,
+        "pct": 80
+      },
+      "D13": {
+        "name": "Data Recovery",
+        "raw": 3,
+        "max": 10,
+        "pct": 30
+      },
+      "D14": {
+        "name": "Compliance Maturity",
+        "raw": 6,
+        "max": 10,
+        "pct": 60
+      },
+      "D15": {
+        "name": "Post-Exec Verification",
+        "raw": 3,
+        "max": 10,
+        "pct": 30
+      },
+      "D16": {
+        "name": "Data Flow Governance",
+        "raw": 0,
+        "max": 10,
+        "pct": 0
+      },
+      "D17": {
+        "name": "Adversarial Resilience",
+        "raw": 1,
+        "max": 10,
+        "pct": 10
+      }
+    }
+  },
+  "findings": [
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\set_docs_main_preview_url.py",
+      "line": 23,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\set_docs_main_preview_url.py",
+      "line": 45,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\set_docs_main_preview_url.py",
+      "line": 56,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\set_docs_pr_preview_url.py",
+      "line": 21,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\set_docs_pr_preview_url.py",
+      "line": 31,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\set_docs_pr_preview_url.py",
+      "line": 36,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\set_docs_pr_preview_url.py",
+      "line": 38,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\set_docs_pr_preview_url.py",
+      "line": 65,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\set_docs_pr_preview_url.py",
+      "line": 68,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\set_docs_pr_preview_url.py",
+      "line": 71,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\.hooks\\algolia.py",
+      "line": 153,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\.hooks\\algolia.py",
+      "line": 156,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\.hooks\\algolia.py",
+      "line": 160,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\.hooks\\algolia.py",
+      "line": 184,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\bank_support.py",
+      "line": 72,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\bank_support.py",
+      "line": 92,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\bank_support.py",
+      "line": 98,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\data_analyst.py",
+      "line": 77,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\data_analyst.py",
+      "line": 95,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\data_analyst.py",
+      "line": 107,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\flight_booking.py",
+      "line": 70,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\flight_booking.py",
+      "line": 201,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\flight_booking.py",
+      "line": 205,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\flight_booking.py",
+      "line": 235,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\flight_booking.py",
+      "line": 240,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\pydantic_model.py",
+      "line": 26,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\pydantic_model.py",
+      "line": 31,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\pydantic_model.py",
+      "line": 32,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\question_graph.py",
+      "line": 101,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\question_graph.py",
+      "line": 115,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\question_graph.py",
+      "line": 137,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\question_graph.py",
+      "line": 139,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\question_graph.py",
+      "line": 140,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\question_graph.py",
+      "line": 143,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\question_graph.py",
+      "line": 156,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\question_graph.py",
+      "line": 168,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\rag.py",
+      "line": 56,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\rag.py",
+      "line": 96,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\rag.py",
+      "line": 255,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\roulette_wheel.py",
+      "line": 35,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\roulette_wheel.py",
+      "line": 57,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\roulette_wheel.py",
+      "line": 63,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\weather_agent.py",
+      "line": 67,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\weather_agent.py",
+      "line": 101,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\__main__.py",
+      "line": 42,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\__main__.py",
+      "line": 51,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\__main__.py",
+      "line": 63,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\evals\\agent.py",
+      "line": 34,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\evals\\example_03_unit_testing.py",
+      "line": 30,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\concurrency.py",
+      "line": 183,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\concurrency.py",
+      "line": 52,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'Acquire a slot, waiting if necessary.\n\n        Args:\n            source: Identifier for observability (e.g., 'model:gpt-4o').\n        ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\concurrency.py",
+      "line": 172,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'Acquire a slot, creating a span if waiting is required.\n\n        Args:\n            source: Identifier for the source of this acquisition (e.g., 'agent:my-agent' or 'model:gpt-4').\n        ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\concurrency.py",
+      "line": 260,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'Get an async context manager for the concurrency limiter.\n\n    If limiter is None, returns a no-op context manager.\n\n    Args:\n        limiter: The AbstractConcurrencyLimiter or None.\n        source: Identifier for the source of this acquisition (e.g., 'agent:my-agent' or 'model:gpt-4').\n\n    Returns:\n        An async context manager.\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\mcp.py",
+      "line": 822,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\messages.py",
+      "line": 1007,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\messages.py",
+      "line": 1897,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\result.py",
+      "line": 81,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\retries.py",
+      "line": 375,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\run.py",
+      "line": 253,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\usage.py",
+      "line": 176,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\_agent_graph.py",
+      "line": 666,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\_agent_graph.py",
+      "line": 1041,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\agent\\spec.py",
+      "line": 346,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\agent\\__init__.py",
+      "line": 1442,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\agent\\__init__.py",
+      "line": 668,
+      "severity": "CRITICAL",
+      "dimension": "D3",
+      "message": "Agent with unrestricted tool access — all tools passed without allowlist",
+      "remediation": "Scope tools to only what the agent needs",
+      "compliance": {
+        "eu_ai_act": "Article 15"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\dbos\\_agent.py",
+      "line": 115,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\dbos\\_agent.py",
+      "line": 130,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\dbos\\_mcp.py",
+      "line": 119,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\dbos\\_mcp.py",
+      "line": 125,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\prefect\\_toolset.py",
+      "line": 58,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\temporal\\_mcp.py",
+      "line": 128,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\temporal\\_mcp.py",
+      "line": 134,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\temporal\\_toolset.py",
+      "line": 221,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\temporal\\_toolset.py",
+      "line": 239,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\temporal\\__init__.py",
+      "line": 40,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\embeddings\\instrumented.py",
+      "line": 146,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\embeddings\\instrumented.py",
+      "line": 191,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 144,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic.claude-3-5-sonnet-20241022-v2:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 145,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'us.anthropic.claude-3-5-sonnet-20241022-v2:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 146,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic.claude-3-5-haiku-20241022-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 147,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'us.anthropic.claude-3-5-haiku-20241022-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 151,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic.claude-3-sonnet-20240229-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 152,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'us.anthropic.claude-3-sonnet-20240229-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 153,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic.claude-3-haiku-20240307-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 154,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'us.anthropic.claude-3-haiku-20240307-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 155,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic.claude-3-opus-20240229-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 156,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'us.anthropic.claude-3-opus-20240229-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 157,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic.claude-3-5-sonnet-20240620-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 158,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'us.anthropic.claude-3-5-sonnet-20240620-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 159,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic.claude-3-7-sonnet-20250219-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\bedrock.py",
+      "line": 160,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'us.anthropic.claude-3-7-sonnet-20250219-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\concurrency.py",
+      "line": 28,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'A model wrapper that limits concurrent requests to the underlying model.\n\n    This wrapper applies concurrency limiting at the model level, ensuring that\n    the number of concurrent requests to the model does not exceed the configured\n    limit. This is useful for:\n\n    - Respecting API rate limits\n    - Managing resource usage\n    - Sharing a concurrency pool across multiple models\n\n    Example usage:\n    ```python\n    from pydantic_ai import Agent\n    from pydantic_ai.models.concurrency import ConcurrencyLimitedModel\n\n    # Limit to 5 concurrent requests\n    model = ConcurrencyLimitedModel('openai:gpt-4o', limiter=5)\n    agent = Agent(model)\n\n    # Or share a limiter across multiple models\n    from pydantic_ai import ConcurrencyLimiter  # noqa E402\n\n    shared_limiter = ConcurrencyLimiter(max_running=10, name='openai-pool')\n    model1 = ConcurrencyLimitedModel('openai:gpt-4o', limiter=shared_limiter)\n    model2 = ConcurrencyLimitedModel('openai:gpt-4o-mini', limiter=shared_limiter)\n    ```\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\concurrency.py",
+      "line": 118,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'Wrap a model with concurrency limiting.\n\n    This is a convenience function to wrap a model with concurrency limiting.\n    If the limiter is None, the model is returned unchanged.\n\n    Args:\n        model: The model to wrap.\n        limiter: The concurrency limit configuration.\n\n    Returns:\n        The wrapped model with concurrency limiting, or the original model if limiter is None.\n\n    Example:\n    ```python\n    from pydantic_ai.models.concurrency import limit_model_concurrency\n\n    model = limit_model_concurrency('openai:gpt-4o', limiter=5)\n    ```\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\instrumented.py",
+      "line": 507,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\instrumented.py",
+      "line": 552,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\openai.py",
+      "line": 342,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\openai.py",
+      "line": 168,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'chatgpt-4o-latest' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\openai.py",
+      "line": 172,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4-0125-preview' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\openai.py",
+      "line": 173,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4-1106-preview' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\openai.py",
+      "line": 174,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4-turbo-preview' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\openai.py",
+      "line": 176,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4-32k' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\openai.py",
+      "line": 177,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4-32k-0314' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\openai.py",
+      "line": 178,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4-32k-0613' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\openai.py",
+      "line": 179,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4-vision-preview' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\openai.py",
+      "line": 181,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o-audio-preview-2024-10-01' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\openai.py",
+      "line": 3151,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'Compaction capability for OpenAI Responses API.\n\n    Calls the `responses.compact` endpoint via a `before_model_request` hook\n    when the trigger condition is met. The compacted history replaces the\n    original messages, keeping conversation context within manageable limits.\n\n    Example usage::\n\n        from pydantic_ai import Agent\n        from pydantic_ai.models.openai import OpenAICompaction\n\n        agent = Agent(\n            'openai-responses:gpt-4o',\n            capabilities=[OpenAICompaction(message_count_threshold=10)],\n        )\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\openrouter.py",
+      "line": 663,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 68,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic:claude-3-5-haiku-20241022' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 69,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic:claude-3-5-haiku-latest' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 70,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic:claude-3-7-sonnet-20250219' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 71,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic:claude-3-7-sonnet-latest' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 72,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic:claude-3-haiku-20240307' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 73,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic:claude-3-opus-20240229' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 74,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'anthropic:claude-3-opus-latest' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 93,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:anthropic.claude-3-5-haiku-20241022-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 94,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:anthropic.claude-3-5-sonnet-20240620-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 95,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:anthropic.claude-3-5-sonnet-20241022-v2:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 96,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:anthropic.claude-3-7-sonnet-20250219-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 97,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:anthropic.claude-3-haiku-20240307-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 98,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:anthropic.claude-3-opus-20240229-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 99,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:anthropic.claude-3-sonnet-20240229-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 130,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:us.anthropic.claude-3-5-haiku-20241022-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 131,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:us.anthropic.claude-3-5-sonnet-20240620-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 132,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:us.anthropic.claude-3-5-sonnet-20241022-v2:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 133,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:us.anthropic.claude-3-7-sonnet-20250219-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 134,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:us.anthropic.claude-3-haiku-20240307-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 135,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:us.anthropic.claude-3-opus-20240229-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 136,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'bedrock:us.anthropic.claude-3-sonnet-20240229-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 161,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/anthropic:claude-3-haiku-20240307' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 177,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/bedrock:anthropic.claude-3-5-sonnet-20240620-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 178,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/bedrock:anthropic.claude-3-haiku-20240307-v1:0' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 201,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-3.5-turbo-0125' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 202,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-3.5-turbo-1106' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 203,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-3.5-turbo-16k' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 204,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-3.5-turbo' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 205,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4-0613' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 206,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4-turbo-2024-04-09' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 207,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4-turbo' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 208,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4.1-2025-04-14' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 209,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4.1-mini-2025-04-14' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 210,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4.1-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 211,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4.1-nano-2025-04-14' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 212,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4.1-nano' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 213,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4.1' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 214,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 215,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4o-2024-05-13' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 216,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4o-2024-08-06' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 217,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4o-2024-11-20' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 218,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4o-mini-2024-07-18' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 219,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4o-mini-search-preview-2025-03-11' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 220,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4o-mini-search-preview' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 221,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4o-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 222,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4o-search-preview-2025-03-11' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 223,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4o-search-preview' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 224,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gateway/openai:gpt-4o' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 336,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'heroku:claude-3-5-haiku' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 337,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'heroku:claude-3-5-sonnet-latest' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 338,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'heroku:claude-3-7-sonnet' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 339,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'heroku:claude-3-haiku' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 382,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-3.5-turbo-0125' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 383,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-3.5-turbo-0301' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 384,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-3.5-turbo-0613' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 385,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-3.5-turbo-1106' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 386,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-3.5-turbo-16k-0613' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 387,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-3.5-turbo-16k' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 388,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-3.5-turbo' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 389,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4-0314' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 390,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4-0613' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 391,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4-turbo-2024-04-09' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 392,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4-turbo' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 393,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4.1-2025-04-14' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 394,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4.1-mini-2025-04-14' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 395,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4.1-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 396,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4.1-nano-2025-04-14' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 397,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4.1-nano' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 398,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4.1' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 399,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 400,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-2024-05-13' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 401,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-2024-08-06' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 402,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-2024-11-20' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 403,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-audio-preview-2024-12-17' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 404,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-audio-preview-2025-06-03' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 405,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-audio-preview' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 406,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-mini-2024-07-18' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 407,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-mini-audio-preview-2024-12-17' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 408,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-mini-audio-preview' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 409,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-mini-search-preview-2025-03-11' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 410,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-mini-search-preview' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 411,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 412,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-search-preview-2025-03-11' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 413,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o-search-preview' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 414,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'openai:gpt-4o' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 1171,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'Backward compat: allows prefix-only model names like `gpt-4` without `provider:`.' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\__init__.py",
+      "line": 1175,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'Parse a model id string into its provider and model name components.\n\n    Handles both the modern `provider:model` format and legacy model names\n    that start with known prefixes (e.g., `gpt-4`, `claude-3`).\n\n    Emits a `DeprecationWarning` when a legacy prefix-based model name is used.\n\n    Args:\n        model: A model identifier string, either `provider:model_name` or a legacy\n            prefix-based name.\n\n    Returns:\n        A tuple of `(provider_name, model_name)`. If the provider can't be inferred,\n        returns `(None, model)` so callers can decide how to handle unknown providers.\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\providers\\xai.py",
+      "line": 40,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\ui\\ag_ui\\_adapter.py",
+      "line": 388,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\ui\\vercel_ai\\_adapter.py",
+      "line": 336,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\_cli\\__init__.py",
+      "line": 322,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_evals\\pydantic_evals\\generation.py",
+      "line": 84,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_evals\\pydantic_evals\\online.py",
+      "line": 523,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_evals\\pydantic_evals\\online.py",
+      "line": 572,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_evals\\pydantic_evals\\online.py",
+      "line": 1031,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_graph\\pydantic_graph\\beta\\graph.py",
+      "line": 809,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_graph\\pydantic_graph\\beta\\graph.py",
+      "line": 819,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_graph\\pydantic_graph\\beta\\graph_builder.py",
+      "line": 393,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 115,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 118,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 120,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 123,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 132,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 141,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 145,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 146,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 149,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 150,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 152,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 153,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 154,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 155,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\check_cassettes.py",
+      "line": 158,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\scrub_cassette.py",
+      "line": 25,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\scrub_cassette.py",
+      "line": 27,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\upload_test_files.py",
+      "line": 25,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\upload_test_files.py",
+      "line": 31,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\upload_test_files.py",
+      "line": 41,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\upload_test_files.py",
+      "line": 45,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\upload_test_files.py",
+      "line": 60,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\upload_test_files.py",
+      "line": 66,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\upload_test_files.py",
+      "line": 86,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\upload_test_files.py",
+      "line": 106,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\upload_test_files.py",
+      "line": 129,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\upload_test_files.py",
+      "line": 136,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\upload_test_files.py",
+      "line": 150,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 17,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 18,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 19,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 20,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 23,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 29,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 31,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 33,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 36,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 37,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 51,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 53,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 56,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 57,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 94,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_bedrock_access.py",
+      "line": 96,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs.py",
+      "line": 52,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs.py",
+      "line": 54,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs.py",
+      "line": 58,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs.py",
+      "line": 59,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs.py",
+      "line": 60,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs_all_types.py",
+      "line": 64,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs_all_types.py",
+      "line": 66,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs_all_types.py",
+      "line": 70,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs_all_types.py",
+      "line": 71,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs_all_types.py",
+      "line": 72,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs_tool_result.py",
+      "line": 62,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs_tool_result.py",
+      "line": 64,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs_tool_result.py",
+      "line": 91,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\scripts\\verify_vertex_gcs_tool_result.py",
+      "line": 93,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\chat_app.ts",
+      "line": 17,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "JavaScript: Agent loop without exit condition",
+      "remediation": "Add max_iterations or break condition",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\chat_app.ts",
+      "line": 31,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "JavaScript: Console logging with potential sensitive data",
+      "remediation": "Use structured logging and redact sensitive fields",
+      "compliance": {}
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\retries.md",
+      "line": 297,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\gateway.md",
+      "line": 120,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...v...",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\gateway.md",
+      "line": 142,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...v...",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\gateway.md",
+      "line": 238,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...v...",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\gateway.md",
+      "line": 256,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...v...",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\gateway.md",
+      "line": 278,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: tok...v...",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\gateway.md",
+      "line": 297,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: tok...v...",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\embeddings.md",
+      "line": 157,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\embeddings.md",
+      "line": 171,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\cerebras.md",
+      "line": 55,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\cerebras.md",
+      "line": 73,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\mistral.md",
+      "line": 55,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\mistral.md",
+      "line": 73,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\anthropic.md",
+      "line": 55,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\anthropic.md",
+      "line": 75,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\anthropic.md",
+      "line": 139,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\cohere.md",
+      "line": 54,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\cohere.md",
+      "line": 71,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\groq.md",
+      "line": 55,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\groq.md",
+      "line": 73,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 55,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 90,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 251,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 277,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 309,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 328,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 355,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 371,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 448,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 503,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 531,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 559,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...oken",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 581,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 610,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 638,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 666,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 689,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...key>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 724,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 758,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 792,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openai.md",
+      "line": 812,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\huggingface.md",
+      "line": 64,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...oken",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\huggingface.md",
+      "line": 85,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...oken",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\rag.py",
+      "line": 196,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: pos...4320",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\google.md",
+      "line": 45,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\google.md",
+      "line": 135,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\google.md",
+      "line": 216,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\xai.md",
+      "line": 54,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\xai.md",
+      "line": 69,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openrouter.md",
+      "line": 33,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\docs\\models\\openrouter.md",
+      "line": 49,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\examples\\pydantic_ai_examples\\sql_gen.py",
+      "line": 143,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: pos...4320",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\common_tools\\exa.py",
+      "line": 417,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\providers\\openai.py",
+      "line": 75,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-set",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D5",
+      "message": "No audit logging for tool calls detected",
+      "remediation": "Add audit logging for all tool/agent executions",
+      "compliance": {
+        "eu_ai_act": "Article 12"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\agent\\abstract.py",
+      "line": 85,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'AbstractAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\agent\\wrapper.py",
+      "line": 32,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'WrapperAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\agent\\wrapper.py",
+      "line": 32,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'WrapperAgent' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\agent\\__init__.py",
+      "line": 141,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'Agent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\agent\\__init__.py",
+      "line": 668,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\dbos\\_agent.py",
+      "line": 53,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'DBOSAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\dbos\\_agent.py",
+      "line": 53,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'DBOSAgent' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\prefect\\_agent.py",
+      "line": 46,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'PrefectAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\prefect\\_agent.py",
+      "line": 46,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'PrefectAgent' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\temporal\\_agent.py",
+      "line": 58,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'TemporalAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\durable_exec\\temporal\\_agent.py",
+      "line": 58,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'TemporalAgent' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\after-ci.yml",
+      "line": 38,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\after-ci.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\at-claude.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\at-claude.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\at-claude.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Push trigger without branch protection guard",
+      "remediation": "Add if: github.ref == 'refs/heads/main' or restrict push trigger branches",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\bots.yml",
+      "line": 140,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\bots.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\ci.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\ci.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Push trigger without branch protection guard",
+      "remediation": "Add if: github.ref == 'refs/heads/main' or restrict push trigger branches",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\gateway-model-health.yml",
+      "line": 25,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\gateway-model-health.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\manually-deploy-docs.yml",
+      "line": 19,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\manually-deploy-docs.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\manually-deploy-docs.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\pr-guard.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\stale.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\workflows\\stale.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\.github\\CODEOWNERS",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No .github/CODEOWNERS file — no code ownership enforcement",
+      "remediation": "Add CODEOWNERS to enforce review requirements per path",
+      "compliance": {
+        "eu_ai_act": "Article 9"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\ext\\test_langchain.py",
+      "line": 8,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\models\\google.py",
+      "line": 924,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\providers\\azure.py",
+      "line": 21,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\pydantic_ai_slim\\pydantic_ai\\providers\\google_gla.py",
+      "line": 25,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\test_agent.py",
+      "line": 6450,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\test_agent.py",
+      "line": 6537,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "API key appears alongside cloud AI provider URL — credential in source code",
+      "remediation": "Remove API keys from source; use secrets manager, env vars, or managed identity",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\test_dbos.py",
+      "line": 1197,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\test_embeddings.py",
+      "line": 100,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\test_examples.py",
+      "line": 200,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\test_mcp.py",
+      "line": 367,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\test_messages.py",
+      "line": 845,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\test_streaming_errors.py",
+      "line": 241,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\test_temporal.py",
+      "line": 2216,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\models\\mock_openai.py",
+      "line": 34,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\models\\test_anthropic.py",
+      "line": 139,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\models\\test_bedrock.py",
+      "line": 132,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\models\\test_cohere.py",
+      "line": 571,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\models\\test_gemini.py",
+      "line": 572,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\models\\test_google.py",
+      "line": 142,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\models\\test_instrumented.py",
+      "line": 138,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\models\\test_mistral.py",
+      "line": 2445,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\models\\test_multimodal_tool_returns.py",
+      "line": 326,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\models\\test_openai.py",
+      "line": 68,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\models\\test_openai.py",
+      "line": 111,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\models\\test_openai_responses.py",
+      "line": 110,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\providers\\test_anthropic.py",
+      "line": 19,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\providers\\test_azure.py",
+      "line": 21,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\providers\\test_azure.py",
+      "line": 36,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\providers\\test_bedrock.py",
+      "line": 39,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\providers\\test_google_gla.py",
+      "line": 20,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai\\tests\\providers\\test_litellm.py",
+      "line": 32,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "API key appears alongside cloud AI provider URL — credential in source code",
+      "remediation": "Remove API keys from source; use secrets manager, env vars, or managed identity",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D17",
+      "message": "No content injection defense — hidden HTML/CSS/zero-width instructions pass to agents undetected. (86% attack success rate)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D17",
+      "message": "No RAG poisoning protection — knowledge base documents not scanned for embedded instructions. (<0.1% contamination = >80% attack success)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0049"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai",
+      "line": 0,
+      "severity": "HIGH",
+      "dimension": "D17",
+      "message": "No behavioral trap detection — post-execution behavioral changes not monitored. (10/10 M365 Copilot attacks succeeded)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 14",
+        "owasp_llm": "LLM07",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai",
+      "line": 0,
+      "severity": "HIGH",
+      "dimension": "D17",
+      "message": "No approval integrity verification -- agent summaries for approval not cross-checked against actual actions. (Approval fatigue exploitation)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 14",
+        "owasp_llm": "LLM07",
+        "mitre_atlas": "AML.T0048"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No adversarial testing evidence — no red team, no prompt injection tests",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No tool-call attack simulation — agent tool calls not tested against adversarial inputs",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\pydantic-ai",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No multi-agent chaos engineering — agent swarms not stress tested",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    }
+  ],
+  "competitors_detected": [],
+  "gtm_signal": "",
+  "trap_defense": {
+    "content_injection": false,
+    "rag_poisoning": false,
+    "behavioral_traps": false,
+    "approval_integrity": false,
+    "adversarial_testing": false,
+    "tool_attack_simulation": false,
+    "chaos_engineering": false,
+    "before_after_comparison": true,
+    "deepmind_citation": "Franklin, Tomašev, Jacobs, Leibo, Osindero. \"AI Agent Traps.\" Google DeepMind, March 2026."
+  }
+}

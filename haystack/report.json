@@ -1,0 +1,4038 @@
+{
+  "version": "1.6.0",
+  "scoring_model": "v4.3",
+  "scoring_version": "4.3",
+  "timestamp": "2026-04-10T23:09:07.207002+00:00",
+  "target_path": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack",
+  "file_counts": {
+    "python": 553,
+    "js": 20,
+    "other": 0
+  },
+  "coverage_warning": false,
+  "score": {
+    "total": 15,
+    "max": 100,
+    "level": "UNGOVERNED",
+    "raw_total": 35,
+    "raw_max": 235,
+    "dimensions": {
+      "D1": {
+        "name": "Tool Inventory",
+        "raw": 4,
+        "max": 25,
+        "pct": 16
+      },
+      "D2": {
+        "name": "Risk Detection",
+        "raw": 0,
+        "max": 20,
+        "pct": 0
+      },
+      "D3": {
+        "name": "Policy Coverage",
+        "raw": 4,
+        "max": 20,
+        "pct": 20
+      },
+      "D4": {
+        "name": "Credential Management",
+        "raw": 0,
+        "max": 20,
+        "pct": 0
+      },
+      "D5": {
+        "name": "Log Hygiene",
+        "raw": 2,
+        "max": 10,
+        "pct": 20
+      },
+      "D6": {
+        "name": "Framework Coverage",
+        "raw": 0,
+        "max": 5,
+        "pct": 0
+      },
+      "D7": {
+        "name": "Human-in-the-Loop",
+        "raw": 8,
+        "max": 15,
+        "pct": 53
+      },
+      "D8": {
+        "name": "Agent Identity",
+        "raw": 1,
+        "max": 15,
+        "pct": 7
+      },
+      "D9": {
+        "name": "Threat Detection",
+        "raw": 0,
+        "max": 20,
+        "pct": 0
+      },
+      "D10": {
+        "name": "Prompt Security",
+        "raw": 0,
+        "max": 15,
+        "pct": 0
+      },
+      "D11": {
+        "name": "Cloud / Platform",
+        "raw": 4,
+        "max": 10,
+        "pct": 40
+      },
+      "D12": {
+        "name": "LLM Observability",
+        "raw": 0,
+        "max": 10,
+        "pct": 0
+      },
+      "D13": {
+        "name": "Data Recovery",
+        "raw": 2,
+        "max": 10,
+        "pct": 20
+      },
+      "D14": {
+        "name": "Compliance Maturity",
+        "raw": 5,
+        "max": 10,
+        "pct": 50
+      },
+      "D15": {
+        "name": "Post-Exec Verification",
+        "raw": 2,
+        "max": 10,
+        "pct": 20
+      },
+      "D16": {
+        "name": "Data Flow Governance",
+        "raw": 2,
+        "max": 10,
+        "pct": 20
+      },
+      "D17": {
+        "name": "Adversarial Resilience",
+        "raw": 1,
+        "max": 10,
+        "pct": 10
+      }
+    }
+  },
+  "findings": [
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\check_imports.py",
+      "line": 63,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\check_imports.py",
+      "line": 67,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\check_imports.py",
+      "line": 70,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\check_imports.py",
+      "line": 73,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\check_imports.py",
+      "line": 75,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\check_imports.py",
+      "line": 77,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\check_imports.py",
+      "line": 79,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\check_imports.py",
+      "line": 80,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\create_unstable_docs_docusaurus.py",
+      "line": 50,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\create_unstable_docs_docusaurus.py",
+      "line": 55,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\docstrings_checksum.py",
+      "line": 46,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\docs_search_sync.py",
+      "line": 73,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\docs_search_sync.py",
+      "line": 75,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\docs_search_sync.py",
+      "line": 77,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\docs_search_sync.py",
+      "line": 80,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\docs_search_sync.py",
+      "line": 83,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\docs_search_sync.py",
+      "line": 94,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\docs_search_sync.py",
+      "line": 96,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\docs_search_sync.py",
+      "line": 99,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\docs_search_sync.py",
+      "line": 109,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\docs_search_sync.py",
+      "line": 111,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\docs_search_sync.py",
+      "line": 118,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\docs_search_sync.py",
+      "line": 120,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\promote_unstable_docs_docusaurus.py",
+      "line": 42,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\promote_unstable_docs_docusaurus.py",
+      "line": 117,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\utils\\update_haystack_dc_custom_nodes.py",
+      "line": 54,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\logging.py",
+      "line": 236,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\logging.py",
+      "line": 231,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\connectors\\openapi.py",
+      "line": 102,
+      "severity": "HIGH",
+      "dimension": "D15",
+      "message": "Tool result assigned directly without verification",
+      "remediation": "Verify tool result status/validity before using",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\connectors\\openapi_service.py",
+      "line": 262,
+      "severity": "HIGH",
+      "dimension": "D15",
+      "message": "Tool result assigned directly without verification",
+      "remediation": "Verify tool result status/validity before using",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\converters\\csv.py",
+      "line": 161,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\fetchers\\link_content.py",
+      "line": 222,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\azure.py",
+      "line": 19,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n    Generates text using OpenAI's large language models (LLMs).\n\n    It works with the gpt-4 - type models and supports streaming responses\n    from OpenAI API.\n\n    You can customize how the text is generated by passing parameters to the\n    OpenAI API. Use the `**generation_kwargs` argument when you initialize\n    the component or when you run it. Any parameter that works with\n    `openai.ChatCompletion.create` will work here too.\n\n\n    For details on OpenAI API parameters, see\n    [OpenAI documentation](https://platform.openai.com/docs/api-reference/chat).\n\n\n    ### Usage example\n    <!-- test-ignore -->\n    ```python\n    from haystack.components.generators import AzureOpenAIGenerator\n    from haystack.utils import Secret\n    client = AzureOpenAIGenerator(\n        azure_endpoint=\"<Your Azure endpoint e.g. `https://your-company.azure.openai.com/>\",\n        api_key=Secret.from_token(\"<your-api-key>\"),\n        azure_deployment=\"<this a model name, e.g.  gpt-4.1-mini>\")\n    response = client.run(\"What's Natural Language Processing? Be brief.\")\n    print(response)\n    ```\n\n    ```\n    # >> {'replies': ['Natural Language Processing (NLP) is a branch of artificial intelligence that focuses on\n    # >> the interaction between computers and human language. It involves enabling computers to understand, interpret,\n    # >> and respond to natural human language in a way that is both meaningful and useful.'], 'meta': [{'model':\n    # >> 'gpt-4.1-mini', 'index': 0, 'finish_reason': 'stop', 'usage': {'prompt_tokens': 16,\n    # >> 'completion_tokens': 49, 'total_tokens': 65}}]}\n    ```\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\azure.py",
+      "line": 61,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\azure.py",
+      "line": 146,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\openai.py",
+      "line": 33,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n    Generates text using OpenAI's large language models (LLMs).\n\n    It works with the gpt-4 and gpt-5 series models and supports streaming responses\n    from OpenAI API. It uses strings as input and output.\n\n    You can customize how the text is generated by passing parameters to the\n    OpenAI API. Use the `**generation_kwargs` argument when you initialize\n    the component or when you run it. Any parameter that works with\n    `openai.ChatCompletion.create` will work here too.\n\n\n    For details on OpenAI API parameters, see\n    [OpenAI documentation](https://platform.openai.com/docs/api-reference/chat).\n\n    ### Usage example\n\n    ```python\n    from haystack.components.generators import OpenAIGenerator\n    client = OpenAIGenerator()\n    response = client.run(\"What's Natural Language Processing? Be brief.\")\n    print(response)\n\n    # >> {'replies': ['Natural Language Processing (NLP) is a branch of artificial intelligence that focuses on\n    # >> the interaction between computers and human language. It involves enabling computers to understand, interpret,\n    # >> and respond to natural human language in a way that is both meaningful and useful.'], 'meta': [{'model':\n    # >> 'gpt-5-mini', 'index': 0, 'finish_reason': 'stop', 'usage': {'prompt_tokens': 16,\n    # >> 'completion_tokens': 49, 'total_tokens': 65}}]}\n    ```\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\utils.py",
+      "line": 31,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\utils.py",
+      "line": 45,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\utils.py",
+      "line": 47,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\utils.py",
+      "line": 51,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\utils.py",
+      "line": 57,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\utils.py",
+      "line": 63,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\utils.py",
+      "line": 64,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\utils.py",
+      "line": 70,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\utils.py",
+      "line": 71,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\utils.py",
+      "line": 76,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure.py",
+      "line": 29,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n    Generates text using OpenAI's models on Azure.\n\n    It works with the gpt-4 - type models and supports streaming responses\n    from OpenAI API. It uses [ChatMessage](https://docs.haystack.deepset.ai/docs/chatmessage)\n    format in input and output.\n\n    You can customize how the text is generated by passing parameters to the\n    OpenAI API. Use the `**generation_kwargs` argument when you initialize\n    the component or when you run it. Any parameter that works with\n    `openai.ChatCompletion.create` will work here too.\n\n    For details on OpenAI API parameters, see\n    [OpenAI documentation](https://platform.openai.com/docs/api-reference/chat).\n\n    ### Usage example\n    <!-- test-ignore -->\n    ```python\n    from haystack.components.generators.chat import AzureOpenAIChatGenerator\n    from haystack.dataclasses import ChatMessage\n    from haystack.utils import Secret\n\n    messages = [ChatMessage.from_user(\"What's Natural Language Processing?\")]\n\n    client = AzureOpenAIChatGenerator(\n        azure_endpoint=\"<Your Azure endpoint e.g. `https://your-company.azure.openai.com/>\",\n        api_key=Secret.from_token(\"<your-api-key>\"),\n        azure_deployment=\"<this a model name, e.g. gpt-4.1-mini>\")\n    response = client.run(messages)\n    print(response)\n    ```\n\n    ```\n    {'replies':\n        [ChatMessage(_role=<ChatRole.ASSISTANT: 'assistant'>, _content=[TextContent(text=\n        \"Natural Language Processing (NLP) is a branch of artificial intelligence that focuses on\n         enabling computers to understand, interpret, and generate human language in a way that is useful.\")],\n         _name=None,\n         _meta={'model': 'gpt-4.1-mini', 'index': 0, 'finish_reason': 'stop',\n         'usage': {'prompt_tokens': 15, 'completion_tokens': 36, 'total_tokens': 51}})]\n    }\n    ```\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure.py",
+      "line": 88,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure.py",
+      "line": 89,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure.py",
+      "line": 90,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-nano' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure.py",
+      "line": 91,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure.py",
+      "line": 92,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure.py",
+      "line": 93,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o-audio-preview' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure.py",
+      "line": 102,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure.py",
+      "line": 116,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure.py",
+      "line": 131,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n        Initialize the Azure OpenAI Chat Generator component.\n\n        :param azure_endpoint: The endpoint of the deployed model, for example `\"https://example-resource.azure.openai.com/\"`.\n        :param api_version: The version of the API to use. Defaults to 2024-12-01-preview.\n        :param azure_deployment: The deployment of the model, usually the model name.\n        :param api_key: The API key to use for authentication.\n        :param azure_ad_token: [Azure Active Directory token](https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-id).\n        :param organization: Your organization ID, defaults to `None`. For help, see\n        [Setting up your organization](https://platform.openai.com/docs/guides/production-best-practices/setting-up-your-organization).\n        :param streaming_callback: A callback function called when a new token is received from the stream.\n            It accepts [StreamingChunk](https://docs.haystack.deepset.ai/docs/data-classes#streamingchunk)\n            as an argument.\n        :param timeout: Timeout for OpenAI client calls. If not set, it defaults to either the\n            `OPENAI_TIMEOUT` environment variable, or 30 seconds.\n        :param max_retries: Maximum number of retries to contact OpenAI after an internal error.\n            If not set, it defaults to either the `OPENAI_MAX_RETRIES` environment variable, or set to 5.\n        :param generation_kwargs: Other parameters to use for the model. These parameters are sent directly to\n            the OpenAI endpoint. For details, see [OpenAI documentation](https://platform.openai.com/docs/api-reference/chat).\n            Some of the supported parameters:\n            - `max_completion_tokens`: An upper bound for the number of tokens that can be generated for a completion,\n                including visible output tokens and reasoning tokens.\n            - `temperature`: The sampling temperature to use. Higher values mean the model takes more risks.\n                Try 0.9 for more creative applications and 0 (argmax sampling) for ones with a well-defined answer.\n            - `top_p`: Nucleus sampling is an alternative to sampling with temperature, where the model considers\n                tokens with a top_p probability mass. For example, 0.1 means only the tokens comprising\n                the top 10% probability mass are considered.\n            - `n`: The number of completions to generate for each prompt. For example, with 3 prompts and n=2,\n                the LLM will generate two completions per prompt, resulting in 6 completions total.\n            - `stop`: One or more sequences after which the LLM should stop generating tokens.\n            - `presence_penalty`: The penalty applied if a token is already present.\n                Higher values make the model less likely to repeat the token.\n            - `frequency_penalty`: Penalty applied if a token has already been generated.\n                Higher values make the model less likely to repeat the token.\n            - `logit_bias`: Adds a logit bias to specific tokens. The keys of the dictionary are tokens, and the\n                values are the bias to add to that token.\n            - `response_format`: A JSON schema or a Pydantic model that enforces the structure of the model's response.\n                If provided, the output will always be validated against this\n                format (unless the model returns a tool call).\n                For details, see the [OpenAI Structured Outputs documentation](https://platform.openai.com/docs/guides/structured-outputs).\n                Notes:\n                - This parameter accepts Pydantic models and JSON schemas for latest models starting from GPT-4o.\n                  Older models only support basic version of structured outputs through `{\"type\": \"json_object\"}`.\n                  For detailed information on JSON mode, see the [OpenAI Structured Outputs documentation](https://platform.openai.com/docs/guides/structured-outputs#json-mode).\n                - For structured outputs with streaming,\n                  the `response_format` must be a JSON schema and not a Pydantic model.\n        :param default_headers: Default headers to use for the AzureOpenAI client.\n        :param tools:\n            A list of Tool and/or Toolset objects, or a single Toolset for which the model can prepare calls.\n        :param tools_strict:\n            Whether to enable strict schema adherence for tool calls. If set to `True`, the model will follow exactly\n            the schema provided in the `parameters` field of the tool definition, but this may increase latency.\n        :param azure_ad_token_provider: A function that returns an Azure Active Directory token, will be invoked on\n            every request.\n        :param http_client_kwargs:\n            A dictionary of keyword arguments to configure a custom `httpx.Client`or `httpx.AsyncClient`.\n            For more information, see the [HTTPX documentation](https://www.python-httpx.org/api/#client).\n        ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure.py",
+      "line": 213,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure_responses.py",
+      "line": 72,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure_responses.py",
+      "line": 73,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure_responses.py",
+      "line": 75,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure_responses.py",
+      "line": 76,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-nano' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure_responses.py",
+      "line": 77,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure_responses.py",
+      "line": 107,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n        Initialize the AzureOpenAIResponsesChatGenerator component.\n\n        :param api_key: The API key to use for authentication. Can be:\n            - A `Secret` object containing the API key.\n            - A `Secret` object containing the [Azure Active Directory token](https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-id).\n            - A function that returns an Azure Active Directory token.\n        :param azure_endpoint: The endpoint of the deployed model, for example `\"https://example-resource.azure.openai.com/\"`.\n        :param azure_deployment: The deployment of the model, usually the model name.\n        :param organization: Your organization ID, defaults to `None`. For help, see\n        [Setting up your organization](https://platform.openai.com/docs/guides/production-best-practices/setting-up-your-organization).\n        :param streaming_callback: A callback function called when a new token is received from the stream.\n            It accepts [StreamingChunk](https://docs.haystack.deepset.ai/docs/data-classes#streamingchunk)\n            as an argument.\n        :param timeout: Timeout for OpenAI client calls. If not set, it defaults to either the\n            `OPENAI_TIMEOUT` environment variable, or 30 seconds.\n        :param max_retries: Maximum number of retries to contact OpenAI after an internal error.\n            If not set, it defaults to either the `OPENAI_MAX_RETRIES` environment variable, or set to 5.\n        :param generation_kwargs: Other parameters to use for the model. These parameters are sent\n           directly to the OpenAI endpoint.\n           See OpenAI [documentation](https://platform.openai.com/docs/api-reference/responses) for\n            more details.\n            Some of the supported parameters:\n            - `temperature`: What sampling temperature to use. Higher values like 0.8 will make the output more random,\n                while lower values like 0.2 will make it more focused and deterministic.\n            - `top_p`: An alternative to sampling with temperature, called nucleus sampling, where the model\n                considers the results of the tokens with top_p probability mass. For example, 0.1 means only the tokens\n                comprising the top 10% probability mass are considered.\n            - `previous_response_id`: The ID of the previous response.\n                Use this to create multi-turn conversations.\n            - `text_format`: A Pydantic model that enforces the structure of the model's response.\n                If provided, the output will always be validated against this\n                format (unless the model returns a tool call).\n                For details, see the [OpenAI Structured Outputs documentation](https://platform.openai.com/docs/guides/structured-outputs).\n            - `text`: A JSON schema that enforces the structure of the model's response.\n                If provided, the output will always be validated against this\n                format (unless the model returns a tool call).\n                Notes:\n                - Both JSON Schema and Pydantic models are supported for latest models starting from GPT-4o.\n                - If both are provided, `text_format` takes precedence and json schema passed to `text` is ignored.\n                - Currently, this component doesn't support streaming for structured outputs.\n                - Older models only support basic version of structured outputs through `{\"type\": \"json_object\"}`.\n                    For detailed information on JSON mode, see the [OpenAI Structured Outputs documentation](https://platform.openai.com/docs/guides/structured-outputs#json-mode).\n            - `reasoning`: A dictionary of parameters for reasoning. For example:\n                - `summary`: The summary of the reasoning.\n                - `effort`: The level of effort to put into the reasoning. Can be `low`, `medium` or `high`.\n                - `generate_summary`: Whether to generate a summary of the reasoning.\n                Note: OpenAI does not return the reasoning tokens, but we can view summary if its enabled.\n                For details, see the [OpenAI Reasoning documentation](https://platform.openai.com/docs/guides/reasoning).\n        :param tools:\n            A list of Tool and/or Toolset objects, or a single Toolset for which the model can prepare calls.\n        :param tools_strict:\n            Whether to enable strict schema adherence for tool calls. If set to `True`, the model will follow exactly\n            the schema provided in the `parameters` field of the tool definition, but this may increase latency.\n        :param http_client_kwargs:\n            A dictionary of keyword arguments to configure a custom `httpx.Client`or `httpx.AsyncClient`.\n            For more information, see the [HTTPX documentation](https://www.python-httpx.org/api/#client).\n        ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai.py",
+      "line": 55,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n    Completes chats using OpenAI's large language models (LLMs).\n\n    It works with the gpt-4 and gpt-5 series models and supports streaming responses\n    from OpenAI API. It uses [ChatMessage](https://docs.haystack.deepset.ai/docs/chatmessage)\n    format in input and output.\n\n    You can customize how the text is generated by passing parameters to the\n    OpenAI API. Use the `**generation_kwargs` argument when you initialize\n    the component or when you run it. Any parameter that works with\n    `openai.ChatCompletion.create` will work here too.\n\n    For details on OpenAI API parameters, see\n    [OpenAI documentation](https://platform.openai.com/docs/api-reference/chat).\n\n    ### Usage example\n    ```python\n    from haystack.components.generators.chat import OpenAIChatGenerator\n    from haystack.dataclasses import ChatMessage\n\n    messages = [ChatMessage.from_user(\"What's Natural Language Processing?\")]\n\n    client = OpenAIChatGenerator()\n    response = client.run(messages)\n    print(response)\n    ```\n    Output:\n    ```\n    {'replies':\n        [ChatMessage(_role=<ChatRole.ASSISTANT: 'assistant'>, _content=\n        [TextContent(text=\"Natural Language Processing (NLP) is a branch of artificial intelligence\n            that focuses on enabling computers to understand, interpret, and generate human language in\n            a way that is meaningful and useful.\")],\n         _name=None,\n         _meta={'model': 'gpt-5-mini', 'index': 0, 'finish_reason': 'stop',\n         'usage': {'prompt_tokens': 15, 'completion_tokens': 36, 'total_tokens': 51}})\n        ]\n    }\n    ```\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai.py",
+      "line": 105,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai.py",
+      "line": 106,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai.py",
+      "line": 107,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-nano' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai.py",
+      "line": 108,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai.py",
+      "line": 109,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai.py",
+      "line": 110,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4-turbo' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai.py",
+      "line": 111,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai.py",
+      "line": 112,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-3.5-turbo' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai.py",
+      "line": 131,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n        Creates an instance of OpenAIChatGenerator. Unless specified otherwise in `model`, uses OpenAI's gpt-5-mini\n\n        Before initializing the component, you can set the 'OPENAI_TIMEOUT' and 'OPENAI_MAX_RETRIES'\n        environment variables to override the `timeout` and `max_retries` parameters respectively\n        in the OpenAI client.\n\n        :param api_key: The OpenAI API key.\n            You can set it with an environment variable `OPENAI_API_KEY`, or pass with this parameter\n            during initialization.\n        :param model: The name of the model to use.\n        :param streaming_callback: A callback function that is called when a new token is received from the stream.\n            The callback function accepts [StreamingChunk](https://docs.haystack.deepset.ai/docs/data-classes#streamingchunk)\n            as an argument.\n        :param api_base_url: An optional base URL.\n        :param organization: Your organization ID, defaults to `None`. See\n        [production best practices](https://platform.openai.com/docs/guides/production-best-practices/setting-up-your-organization).\n        :param generation_kwargs: Other parameters to use for the model. These parameters are sent directly to\n            the OpenAI endpoint. See OpenAI [documentation](https://platform.openai.com/docs/api-reference/chat) for\n            more details.\n            Some of the supported parameters:\n            - `max_completion_tokens`: An upper bound for the number of tokens that can be generated for a completion,\n                including visible output tokens and reasoning tokens.\n            - `temperature`: What sampling temperature to use. Higher values mean the model will take more risks.\n                Try 0.9 for more creative applications and 0 (argmax sampling) for ones with a well-defined answer.\n            - `top_p`: An alternative to sampling with temperature, called nucleus sampling, where the model\n                considers the results of the tokens with top_p probability mass. For example, 0.1 means only the tokens\n                comprising the top 10% probability mass are considered.\n            - `n`: How many completions to generate for each prompt. For example, if the LLM gets 3 prompts and n is 2,\n                it will generate two completions for each of the three prompts, ending up with 6 completions in total.\n            - `stop`: One or more sequences after which the LLM should stop generating tokens.\n            - `presence_penalty`: What penalty to apply if a token is already present at all. Bigger values mean\n                the model will be less likely to repeat the same token in the text.\n            - `frequency_penalty`: What penalty to apply if a token has already been generated in the text.\n                Bigger values mean the model will be less likely to repeat the same token in the text.\n            - `logit_bias`: Add a logit bias to specific tokens. The keys of the dictionary are tokens, and the\n                values are the bias to add to that token.\n            - `response_format`: A JSON schema or a Pydantic model that enforces the structure of the model's response.\n                If provided, the output will always be validated against this\n                format (unless the model returns a tool call).\n                For details, see the [OpenAI Structured Outputs documentation](https://platform.openai.com/docs/guides/structured-outputs).\n                Notes:\n                - This parameter accepts Pydantic models and JSON schemas for latest models starting from GPT-4o.\n                  Older models only support basic version of structured outputs through `{\"type\": \"json_object\"}`.\n                  For detailed information on JSON mode, see the [OpenAI Structured Outputs documentation](https://platform.openai.com/docs/guides/structured-outputs#json-mode).\n                - For structured outputs with streaming,\n                  the `response_format` must be a JSON schema and not a Pydantic model.\n        :param timeout:\n            Timeout for OpenAI client calls. If not set, it defaults to either the\n            `OPENAI_TIMEOUT` environment variable, or 30 seconds.\n        :param max_retries:\n            Maximum number of retries to contact OpenAI after an internal error.\n            If not set, it defaults to either the `OPENAI_MAX_RETRIES` environment variable, or set to 5.\n        :param tools:\n            A list of Tool and/or Toolset objects, or a single Toolset for which the model can prepare calls.\n        :param tools_strict:\n            Whether to enable strict schema adherence for tool calls. If set to `True`, the model will follow exactly\n            the schema provided in the `parameters` field of the tool definition, but this may increase latency.\n        :param http_client_kwargs:\n            A dictionary of keyword arguments to configure a custom `httpx.Client`or `httpx.AsyncClient`.\n            For more information, see the [HTTPX documentation](https://www.python-httpx.org/api/#client).\n\n        ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai_responses.py",
+      "line": 48,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n    Completes chats using OpenAI's Responses API.\n\n    It works with the gpt-4 and o-series models and supports streaming responses\n    from OpenAI API. It uses [ChatMessage](https://docs.haystack.deepset.ai/docs/chatmessage)\n    format in input and output.\n\n    You can customize how the text is generated by passing parameters to the\n    OpenAI API. Use the `**generation_kwargs` argument when you initialize\n    the component or when you run it. Any parameter that works with\n    `openai.Responses.create` will work here too.\n\n    For details on OpenAI API parameters, see\n    [OpenAI documentation](https://platform.openai.com/docs/api-reference/responses).\n\n    ### Usage example\n\n    ```python\n    from haystack.components.generators.chat import OpenAIResponsesChatGenerator\n    from haystack.dataclasses import ChatMessage\n\n    messages = [ChatMessage.from_user(\"What's Natural Language Processing?\")]\n\n    client = OpenAIResponsesChatGenerator(generation_kwargs={\"reasoning\": {\"effort\": \"low\", \"summary\": \"auto\"}})\n    response = client.run(messages)\n    print(response)\n    ```\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai_responses.py",
+      "line": 86,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai_responses.py",
+      "line": 87,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai_responses.py",
+      "line": 88,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-nano' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai_responses.py",
+      "line": 89,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai_responses.py",
+      "line": 90,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\openai_responses.py",
+      "line": 117,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n        Creates an instance of OpenAIResponsesChatGenerator. Uses OpenAI's gpt-5-mini by default.\n\n        Before initializing the component, you can set the 'OPENAI_TIMEOUT' and 'OPENAI_MAX_RETRIES'\n        environment variables to override the `timeout` and `max_retries` parameters respectively\n        in the OpenAI client.\n\n        :param api_key: The OpenAI API key.\n            You can set it with an environment variable `OPENAI_API_KEY`, or pass with this parameter\n            during initialization.\n        :param model: The name of the model to use.\n        :param streaming_callback: A callback function that is called when a new token is received from the stream.\n            The callback function accepts [StreamingChunk](https://docs.haystack.deepset.ai/docs/data-classes#streamingchunk)\n            as an argument.\n        :param api_base_url: An optional base URL.\n        :param organization: Your organization ID, defaults to `None`. See\n        [production best practices](https://platform.openai.com/docs/guides/production-best-practices/setting-up-your-organization).\n        :param generation_kwargs: Other parameters to use for the model. These parameters are sent\n           directly to the OpenAI endpoint.\n           See OpenAI [documentation](https://platform.openai.com/docs/api-reference/responses) for\n            more details.\n            Some of the supported parameters:\n            - `temperature`: What sampling temperature to use. Higher values like 0.8 will make the output more random,\n                while lower values like 0.2 will make it more focused and deterministic.\n            - `top_p`: An alternative to sampling with temperature, called nucleus sampling, where the model\n                considers the results of the tokens with top_p probability mass. For example, 0.1 means only the tokens\n                comprising the top 10% probability mass are considered.\n            - `previous_response_id`: The ID of the previous response.\n                Use this to create multi-turn conversations.\n            - `text_format`: A Pydantic model that enforces the structure of the model's response.\n                If provided, the output will always be validated against this\n                format (unless the model returns a tool call).\n                For details, see the [OpenAI Structured Outputs documentation](https://platform.openai.com/docs/guides/structured-outputs).\n            - `text`: A JSON schema that enforces the structure of the model's response.\n                If provided, the output will always be validated against this\n                format (unless the model returns a tool call).\n                Notes:\n                - Both JSON Schema and Pydantic models are supported for latest models starting from GPT-4o.\n                - If both are provided, `text_format` takes precedence and json schema passed to `text` is ignored.\n                - Currently, this component doesn't support streaming for structured outputs.\n                - Older models only support basic version of structured outputs through `{\"type\": \"json_object\"}`.\n                    For detailed information on JSON mode, see the [OpenAI Structured Outputs documentation](https://platform.openai.com/docs/guides/structured-outputs#json-mode).\n            - `reasoning`: A dictionary of parameters for reasoning. For example:\n                - `summary`: The summary of the reasoning.\n                - `effort`: The level of effort to put into the reasoning. Can be `low`, `medium` or `high`.\n                - `generate_summary`: Whether to generate a summary of the reasoning.\n                Note: OpenAI does not return the reasoning tokens, but we can view summary if its enabled.\n                For details, see the [OpenAI Reasoning documentation](https://platform.openai.com/docs/guides/reasoning).\n        :param timeout:\n            Timeout for OpenAI client calls. If not set, it defaults to either the\n            `OPENAI_TIMEOUT` environment variable, or 30 seconds.\n        :param max_retries:\n            Maximum number of retries to contact OpenAI after an internal error.\n            If not set, it defaults to either the `OPENAI_MAX_RETRIES` environment variable, or set to 5.\n        :param tools:\n            The tools that the model can use to prepare calls. This parameter can accept either a\n            mixed list of Haystack `Tool` objects and Haystack `Toolset`. Or you can pass a dictionary of\n            OpenAI/MCP tool definitions.\n            Note: You cannot pass OpenAI/MCP tools and Haystack tools together.\n            For details on tool support, see [OpenAI documentation](https://platform.openai.com/docs/api-reference/responses/create#responses-create-tools).\n        :param tools_strict:\n            Whether to enable strict schema adherence for tool calls. If set to `False`, the model may not exactly\n            follow the schema provided in the `parameters` field of the tool definition. In Response API, tool calls\n            are strict by default.\n        :param http_client_kwargs:\n            A dictionary of keyword arguments to configure a custom `httpx.Client`or `httpx.AsyncClient`.\n            For more information, see the [HTTPX documentation](https://www.python-httpx.org/api/#client).\n\n        ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\joiners\\branch.py",
+      "line": 14,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n    A component that merges multiple input branches of a pipeline into a single output stream.\n\n    `BranchJoiner` receives multiple inputs of the same data type and forwards the first received value\n    to its output. This is useful for scenarios where multiple branches need to converge before proceeding.\n\n    ### Common Use Cases:\n    - **Loop Handling:** `BranchJoiner` helps close loops in pipelines. For example, if a pipeline component validates\n      or modifies incoming data and produces an error-handling branch, `BranchJoiner` can merge both branches and send\n      (or resend in the case of a loop) the data to the component that evaluates errors. See \"Usage example\" below.\n\n    - **Decision-Based Merging:** `BranchJoiner` reconciles branches coming from Router components (such as\n      `ConditionalRouter`, `TextLanguageRouter`). Suppose a `TextLanguageRouter` directs user queries to different\n      Retrievers based on the detected language. Each Retriever processes its assigned query and passes the results\n      to `BranchJoiner`, which consolidates them into a single output before passing them to the next component, such\n      as a `PromptBuilder`.\n\n    ### Example Usage:\n    ```python\n    import json\n\n    from haystack import Pipeline\n    from haystack.components.generators.chat import OpenAIChatGenerator\n    from haystack.components.joiners import BranchJoiner\n    from haystack.components.validators import JsonSchemaValidator\n    from haystack.dataclasses import ChatMessage\n\n    # Define a schema for validation\n    person_schema = {\n        \"type\": \"object\",\n        \"properties\": {\n            \"first_name\": {\"type\": \"string\", \"pattern\": \"^[A-Z][a-z]+$\"},\n            \"last_name\": {\"type\": \"string\", \"pattern\": \"^[A-Z][a-z]+$\"},\n            \"nationality\": {\"type\": \"string\", \"enum\": [\"Italian\", \"Portuguese\", \"American\"]},\n        },\n        \"required\": [\"first_name\", \"last_name\", \"nationality\"]\n    }\n\n    # Initialize a pipeline\n    pipe = Pipeline()\n\n    # Add components to the pipeline\n    pipe.add_component(\"joiner\", BranchJoiner(list[ChatMessage]))\n    pipe.add_component(\"generator\", OpenAIChatGenerator(model=\"gpt-4.1-mini\"))\n    pipe.add_component(\"validator\", JsonSchemaValidator(json_schema=person_schema))\n\n    # And connect them\n    pipe.connect(\"joiner\", \"generator\")\n    pipe.connect(\"generator.replies\", \"validator.messages\")\n    pipe.connect(\"validator.validation_error\", \"joiner\")\n\n    result = pipe.run(\n        data={\n        \"generator\": {\"generation_kwargs\": {\"response_format\": {\"type\": \"json_object\"}}},\n        \"joiner\": {\"value\": [ChatMessage.from_user(\"Create json from Peter Parker\")]}}\n    )\n\n    print(json.loads(result[\"validator\"][\"validated\"][0].text))\n\n\n    # >> {'first_name': 'Peter', 'last_name': 'Parker', 'nationality': 'American', 'name': 'Spider-Man', 'occupation':\n    # >> 'Superhero', 'age': 23, 'location': 'New York City'}\n    ```\n\n    Note that `BranchJoiner` can manage only one data type at a time. In this case, `BranchJoiner` is created for\n    passing `list[ChatMessage]`. This determines the type of data that `BranchJoiner` will receive from the upstream\n    connected components and also the type of data that `BranchJoiner` will send through its output.\n\n    In the code example, `BranchJoiner` receives a looped back `list[ChatMessage]` from the `JsonSchemaValidator` and\n    sends it down to the `OpenAIChatGenerator` for re-generation. We can have multiple loopback connections in the\n    pipeline. In this instance, the downstream component is only one (the `OpenAIChatGenerator`), but the pipeline could\n    have more than one downstream component.\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\query\\query_expander.py",
+      "line": 55,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n    A component that returns a list of semantically similar queries to improve retrieval recall in RAG systems.\n\n    The component uses a chat generator to expand queries. The chat generator is expected to return a JSON response\n    with the following structure:\n    ```json\n    {\"queries\": [\"expanded query 1\", \"expanded query 2\", \"expanded query 3\"]}\n    ```\n\n    ### Usage example\n\n    ```python\n    from haystack.components.generators.chat.openai import OpenAIChatGenerator\n    from haystack.components.query import QueryExpander\n\n    expander = QueryExpander(\n        chat_generator=OpenAIChatGenerator(model=\"gpt-4.1-mini\"),\n        n_expansions=3\n    )\n\n    result = expander.run(query=\"green energy sources\")\n    print(result[\"queries\"])\n    # Output: ['alternative query 1', 'alternative query 2', 'alternative query 3', 'green energy sources']\n    # Note: Up to 3 additional queries + 1 original query (if include_original_query=True)\n\n    # To control total number of queries:\n    expander = QueryExpander(n_expansions=2, include_original_query=True)  # Up to 3 total\n    # or\n    expander = QueryExpander(n_expansions=3, include_original_query=False)  # Exactly 3 total\n    ```\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\query\\query_expander.py",
+      "line": 95,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n        Initialize the QueryExpander component.\n\n        :param chat_generator: The chat generator component to use for query expansion.\n            If None, a default OpenAIChatGenerator with gpt-4.1-mini model is used.\n        :param prompt_template: Custom [PromptBuilder](https://docs.haystack.deepset.ai/docs/promptbuilder)\n            template for query expansion. The template should instruct the LLM to return a JSON response with the\n            structure: `{\"queries\": [\"query1\", \"query2\", \"query3\"]}`. The template should include 'query' and\n            'n_expansions' variables.\n        :param n_expansions: Number of alternative queries to generate (default: 4).\n        :param include_original_query: Whether to include the original query in the output.\n        ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\query\\query_expander.py",
+      "line": 115,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\rankers\\llm_ranker.py",
+      "line": 21,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4.1-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\rankers\\llm_ranker.py",
+      "line": 83,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n    Ranks documents for a query using a Large Language Model.\n\n    The LLM is expected to return a JSON object containing ranked document indices.\n\n    Usage example:\n\n    ```python\n    from haystack import Document\n    from haystack.components.generators.chat import OpenAIChatGenerator\n    from haystack.components.rankers import LLMRanker\n\n    chat_generator = OpenAIChatGenerator(\n        model=\"gpt-4.1-mini\",\n        generation_kwargs={\n            \"temperature\": 0.0,\n            \"response_format\": {\n                \"type\": \"json_schema\",\n                \"json_schema\": {\n                    \"name\": \"document_ranking\",\n                    \"schema\": {\n                        \"type\": \"object\",\n                        \"properties\": {\n                            \"documents\": {\n                                \"type\": \"array\",\n                                \"items\": {\n                                    \"type\": \"object\",\n                                    \"properties\": {\"index\": {\"type\": \"integer\"}},\n                                    \"required\": [\"index\"],\n                                    \"additionalProperties\": False,\n                                },\n                            }\n                        },\n                        \"required\": [\"documents\"],\n                        \"additionalProperties\": False,\n                    },\n                },\n            },\n        },\n    )\n\n    ranker = LLMRanker(chat_generator=chat_generator)\n\n    documents = [\n        Document(id=\"paris\", content=\"Paris is the capital of France.\"),\n        Document(id=\"berlin\", content=\"Berlin is the capital of Germany.\"),\n    ]\n\n    result = ranker.run(query=\"capital of Germany\", documents=documents)\n    print(result[\"documents\"][0].id)\n    ```\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\tools\\tool_invoker.py",
+      "line": 652,
+      "severity": "HIGH",
+      "dimension": "D15",
+      "message": "Tool result assigned directly without verification",
+      "remediation": "Verify tool result status/validity before using",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\tools\\tool_invoker.py",
+      "line": 789,
+      "severity": "HIGH",
+      "dimension": "D15",
+      "message": "Tool result assigned directly without verification",
+      "remediation": "Verify tool result status/validity before using",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\core\\type_utils.py",
+      "line": 113,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\core\\component\\sockets.py",
+      "line": 131,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\human_in_the_loop\\user_interfaces.py",
+      "line": 144,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\human_in_the_loop\\user_interfaces.py",
+      "line": 155,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\human_in_the_loop\\user_interfaces.py",
+      "line": 156,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\human_in_the_loop\\user_interfaces.py",
+      "line": 157,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\human_in_the_loop\\user_interfaces.py",
+      "line": 158,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\human_in_the_loop\\user_interfaces.py",
+      "line": 161,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\human_in_the_loop\\user_interfaces.py",
+      "line": 163,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\human_in_the_loop\\user_interfaces.py",
+      "line": 164,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\human_in_the_loop\\user_interfaces.py",
+      "line": 194,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\human_in_the_loop\\user_interfaces.py",
+      "line": 211,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\tools\\pipeline_tool.py",
+      "line": 22,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: '\n    A Tool that wraps Haystack Pipelines, allowing them to be used as tools by LLMs.\n\n    PipelineTool automatically generates LLM-compatible tool schemas from pipeline input sockets,\n    which are derived from the underlying components in the pipeline.\n\n    Key features:\n    - Automatic LLM tool calling schema generation from pipeline inputs\n    - Description extraction of pipeline inputs based on the underlying component docstrings\n\n    To use PipelineTool, you first need a Haystack pipeline.\n    Below is an example of creating a PipelineTool\n\n    ## Usage Example:\n\n    ```python\n    from haystack import Document, Pipeline\n    from haystack.dataclasses import ChatMessage\n    from haystack.document_stores.in_memory import InMemoryDocumentStore\n    from haystack.components.embedders.sentence_transformers_text_embedder import SentenceTransformersTextEmbedder\n    from haystack.components.embedders.sentence_transformers_document_embedder import (\n        SentenceTransformersDocumentEmbedder\n    )\n    from haystack.components.generators.chat import OpenAIChatGenerator\n    from haystack.components.retrievers import InMemoryEmbeddingRetriever\n    from haystack.components.agents import Agent\n    from haystack.tools import PipelineTool\n\n    # Initialize a document store and add some documents\n    document_store = InMemoryDocumentStore()\n    document_embedder = SentenceTransformersDocumentEmbedder(model=\"sentence-transformers/all-MiniLM-L6-v2\")\n    documents = [\n        Document(content=\"Nikola Tesla was a Serbian-American inventor and electrical engineer.\"),\n        Document(\n            content=\"He is best known for his contributions to the design of the modern alternating current (AC) \"\n                    \"electricity supply system.\"\n        ),\n    ]\n    docs_with_embeddings = document_embedder.run(documents=documents)[\"documents\"]\n    document_store.write_documents(docs_with_embeddings)\n\n    # Build a simple retrieval pipeline\n    retrieval_pipeline = Pipeline()\n    retrieval_pipeline.add_component(\n        \"embedder\", SentenceTransformersTextEmbedder(model=\"sentence-transformers/all-MiniLM-L6-v2\")\n    )\n    retrieval_pipeline.add_component(\"retriever\", InMemoryEmbeddingRetriever(document_store=document_store))\n\n    retrieval_pipeline.connect(\"embedder.embedding\", \"retriever.query_embedding\")\n\n    # Wrap the pipeline as a tool\n    retriever_tool = PipelineTool(\n        pipeline=retrieval_pipeline,\n        input_mapping={\"query\": [\"embedder.text\"]},\n        output_mapping={\"retriever.documents\": \"documents\"},\n        name=\"document_retriever\",\n        description=\"For any questions about Nikola Tesla, always use this tool\",\n    )\n\n    # Create an Agent with the tool\n    agent = Agent(\n        chat_generator=OpenAIChatGenerator(model=\"gpt-4.1-mini\"),\n        tools=[retriever_tool]\n    )\n\n    # Let the Agent handle a query\n    result = agent.run([ChatMessage.from_user(\"Who was Nikola Tesla?\")])\n\n    # Print result of the tool call\n    print(\"Tool Call Result:\")\n    print(result[\"messages\"][2].tool_call_result.result)\n    print(\"\")\n\n    # Print answer\n    print(\"Answer:\")\n    print(result[\"messages\"][-1].text)\n    ```\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\tools\\tool.py",
+      "line": 219,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\tracing\\tracer.py",
+      "line": 223,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\tracing\\tracer.py",
+      "line": 238,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\utils\\jupyter.py",
+      "line": 18,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 284,
+      "severity": "CRITICAL",
+      "dimension": "D3",
+      "message": "Agent with unrestricted tool access — all tools passed without allowlist",
+      "remediation": "Scope tools to only what the agent needs",
+      "compliance": {
+        "eu_ai_act": "Article 15"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent_hitl.py",
+      "line": 58,
+      "severity": "CRITICAL",
+      "dimension": "D3",
+      "message": "Agent with unrestricted tool access — all tools passed without allowlist",
+      "remediation": "Scope tools to only what the agent needs",
+      "compliance": {
+        "eu_ai_act": "Article 15"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent_hitl.py",
+      "line": 132,
+      "severity": "CRITICAL",
+      "dimension": "D3",
+      "message": "Agent with unrestricted tool access — all tools passed without allowlist",
+      "remediation": "Scope tools to only what the agent needs",
+      "compliance": {
+        "eu_ai_act": "Article 15"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent_hitl.py",
+      "line": 150,
+      "severity": "CRITICAL",
+      "dimension": "D3",
+      "message": "Agent with unrestricted tool access — all tools passed without allowlist",
+      "remediation": "Scope tools to only what the agent needs",
+      "compliance": {
+        "eu_ai_act": "Article 15"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent_hitl.py",
+      "line": 172,
+      "severity": "CRITICAL",
+      "dimension": "D3",
+      "message": "Agent with unrestricted tool access — all tools passed without allowlist",
+      "remediation": "Scope tools to only what the agent needs",
+      "compliance": {
+        "eu_ai_act": "Article 15"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\tools\\test_searchable_toolset.py",
+      "line": 769,
+      "severity": "CRITICAL",
+      "dimension": "D3",
+      "message": "Agent with unrestricted tool access — all tools passed without allowlist",
+      "remediation": "Scope tools to only what the agent needs",
+      "compliance": {
+        "eu_ai_act": "Article 15"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\tools\\test_toolset_wrapper.py",
+      "line": 101,
+      "severity": "CRITICAL",
+      "dimension": "D3",
+      "message": "Agent with unrestricted tool access — all tools passed without allowlist",
+      "remediation": "Scope tools to only what the agent needs",
+      "compliance": {
+        "eu_ai_act": "Article 15"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\labeler.yml",
+      "line": 15,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: tok...N }}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference\\integrations-api\\cohere.md",
+      "line": 803,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference\\integrations-api\\pgvector.md",
+      "line": 353,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: pos...NAME",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference\\integrations-api\\mongodb_atlas.md",
+      "line": 319,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference\\integrations-api\\mongodb_atlas.md",
+      "line": 372,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference\\integrations-api\\qdrant.md",
+      "line": 581,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...key>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.18\\integrations-api\\cohere.md",
+      "line": 803,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.18\\integrations-api\\pgvector.md",
+      "line": 364,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: pos...NAME",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.18\\integrations-api\\qdrant.md",
+      "line": 581,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...key>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.18\\integrations-api\\mongodb_atlas.md",
+      "line": 343,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.18\\integrations-api\\mongodb_atlas.md",
+      "line": 394,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.19\\integrations-api\\cohere.md",
+      "line": 803,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.19\\integrations-api\\mongodb_atlas.md",
+      "line": 319,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.19\\integrations-api\\mongodb_atlas.md",
+      "line": 372,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.19\\integrations-api\\pgvector.md",
+      "line": 353,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: pos...NAME",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.19\\integrations-api\\qdrant.md",
+      "line": 581,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...key>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.20\\integrations-api\\cohere.md",
+      "line": 803,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.20\\integrations-api\\pgvector.md",
+      "line": 353,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: pos...NAME",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.20\\integrations-api\\mongodb_atlas.md",
+      "line": 319,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.20\\integrations-api\\mongodb_atlas.md",
+      "line": 372,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.20\\integrations-api\\qdrant.md",
+      "line": 581,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...key>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.21\\integrations-api\\cohere.md",
+      "line": 803,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.21\\integrations-api\\mongodb_atlas.md",
+      "line": 319,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.21\\integrations-api\\mongodb_atlas.md",
+      "line": 372,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.21\\integrations-api\\qdrant.md",
+      "line": 581,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...key>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.21\\integrations-api\\pgvector.md",
+      "line": 353,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: pos...NAME",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.22\\integrations-api\\cohere.md",
+      "line": 803,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.22\\integrations-api\\mongodb_atlas.md",
+      "line": 319,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.22\\integrations-api\\mongodb_atlas.md",
+      "line": 372,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.22\\integrations-api\\qdrant.md",
+      "line": 581,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...key>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.22\\integrations-api\\pgvector.md",
+      "line": 353,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: pos...NAME",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.23\\integrations-api\\mongodb_atlas.md",
+      "line": 319,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.23\\integrations-api\\mongodb_atlas.md",
+      "line": 372,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.23\\integrations-api\\cohere.md",
+      "line": 803,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.23\\integrations-api\\qdrant.md",
+      "line": 581,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...key>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.23\\integrations-api\\pgvector.md",
+      "line": 353,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: pos...NAME",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.24\\integrations-api\\cohere.md",
+      "line": 803,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.24\\integrations-api\\mongodb_atlas.md",
+      "line": 319,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.24\\integrations-api\\mongodb_atlas.md",
+      "line": 372,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.24\\integrations-api\\qdrant.md",
+      "line": 581,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...key>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.24\\integrations-api\\pgvector.md",
+      "line": 353,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: pos...NAME",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.25\\integrations-api\\cohere.md",
+      "line": 803,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.25\\integrations-api\\mongodb_atlas.md",
+      "line": 319,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.25\\integrations-api\\mongodb_atlas.md",
+      "line": 372,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.25\\integrations-api\\pgvector.md",
+      "line": 353,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: pos...NAME",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.25\\integrations-api\\qdrant.md",
+      "line": 581,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...key>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.26\\integrations-api\\cohere.md",
+      "line": 803,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.26\\integrations-api\\mongodb_atlas.md",
+      "line": 319,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.26\\integrations-api\\mongodb_atlas.md",
+      "line": 372,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.26\\integrations-api\\qdrant.md",
+      "line": 581,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...key>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.26\\integrations-api\\pgvector.md",
+      "line": 353,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: pos...NAME",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.27\\haystack-api\\connectors_api.md",
+      "line": 173,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: tok...oken",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.27\\haystack-api\\pipeline_api.md",
+      "line": 423,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.27\\integrations-api\\cohere.md",
+      "line": 803,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...-key",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.27\\integrations-api\\mongodb_atlas.md",
+      "line": 319,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.27\\integrations-api\\mongodb_atlas.md",
+      "line": 372,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: mon...ing}",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.27\\integrations-api\\qdrant.md",
+      "line": 581,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...key>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docs-website\\reference_versioned_docs\\version-2.27\\integrations-api\\pgvector.md",
+      "line": 353,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: pos...NAME",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\telemetry\\_telemetry.py",
+      "line": 55,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: api...rJgP",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\releasenotes\\notes\\add-TEI-embedders-8c76593bc25a7219.yaml",
+      "line": 11,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: tok...ken>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\releasenotes\\notes\\add-TEI-embedders-8c76593bc25a7219.yaml",
+      "line": 23,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Generic Secret: tok...ken>",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\releasenotes\\notes\\secret-handling-for-components-d576a28135a224db.yaml",
+      "line": 35,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed OpenAI API Key: sk-...d32e",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D5",
+      "message": "No audit logging for tool calls detected",
+      "remediation": "Add audit logging for all tool/agent executions",
+      "compliance": {
+        "eu_ai_act": "Article 12"
+      }
+    },
+    {
+      "layer": 3,
+      "scanner": "infra_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\docker\\Dockerfile.base",
+      "line": 1,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Container runs as root — no USER directive in Dockerfile",
+      "remediation": "Add USER directive to run as non-root user",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\llm.py",
+      "line": 19,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'LLM' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 186,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'TestAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 190,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 199,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 284,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 348,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 580,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 619,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 637,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 640,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 644,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 657,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 682,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 709,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 729,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 733,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 755,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 775,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 801,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 822,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 828,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 854,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 879,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 894,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 902,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 908,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 916,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 947,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 972,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 988,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 1015,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 1034,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 1045,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent.py",
+      "line": 1053,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent_hitl.py",
+      "line": 55,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'TestAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent_hitl.py",
+      "line": 55,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'TestAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent_hitl.py",
+      "line": 58,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent_hitl.py",
+      "line": 132,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent_hitl.py",
+      "line": 150,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\agents\\test_agent_hitl.py",
+      "line": 172,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent spawns sub-agents without depth limit",
+      "remediation": "Add max_depth or spawn limit to prevent recursive agent creation",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\core\\pipeline\\features\\test_run.py",
+      "line": 5057,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'FakeAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\core\\pipeline\\features\\test_run.py",
+      "line": 5057,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'FakeAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\core\\pipeline\\features\\test_run.py",
+      "line": 5057,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'FakeAgent' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\pyproject.toml",
+      "line": 1,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Possible typosquat: 'transformer' is 1 edit from 'transformers'",
+      "remediation": "Verify this is the intended package, not a typosquat of 'transformers'",
+      "compliance": {
+        "mitre_atlas": "AML.T0010"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\auto_approve_api_ref_sync.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\auto_approve_api_ref_sync.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\branch_off.yml",
+      "line": 39,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\branch_off.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\branch_off.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\check_api_ref.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\check_api_ref.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\ci_metrics.yml",
+      "line": 21,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\ci_metrics.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\ci_metrics.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docker_release.yml",
+      "line": 39,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docker_release.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docker_release.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docker_release.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Push trigger without branch protection guard",
+      "remediation": "Add if: github.ref == 'refs/heads/main' or restrict push trigger branches",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docs-website-test-docs-snippets.yml",
+      "line": 23,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docs-website-test-docs-snippets.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docs-website-test-docs-snippets.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docstring_labeler.yml",
+      "line": 58,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docstring_labeler.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docstring_labeler.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docs_search_sync.yml",
+      "line": 45,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docs_search_sync.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docusaurus_sync.yml",
+      "line": 51,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docusaurus_sync.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docusaurus_sync.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\docusaurus_sync.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Push trigger without branch protection guard",
+      "remediation": "Add if: github.ref == 'refs/heads/main' or restrict push trigger branches",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\e2e.yml",
+      "line": 19,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\e2e.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\e2e.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\github_release.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\github_release.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\github_release.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Push trigger without branch protection guard",
+      "remediation": "Add if: github.ref == 'refs/heads/main' or restrict push trigger branches",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\labeler.yml",
+      "line": 15,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\labeler.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\labeler.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\license_compliance.yml",
+      "line": 39,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\license_compliance.yml",
+      "line": 51,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "continue-on-error: true — pipeline failures silently suppressed",
+      "remediation": "Remove continue-on-error or scope it to non-critical steps only",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\license_compliance.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\license_compliance.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\nightly_testpypi_release.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\project.yml",
+      "line": 16,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\project.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\project.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\promote_unstable_docs.yml",
+      "line": 46,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\promote_unstable_docs.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\promote_unstable_docs.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\promote_unstable_docs.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Push trigger without branch protection guard",
+      "remediation": "Add if: github.ref == 'refs/heads/main' or restrict push trigger branches",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\push_release_notes_to_website.yml",
+      "line": 12,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\push_release_notes_to_website.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\push_release_notes_to_website.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\pypi_release.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\pypi_release.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Push trigger without branch protection guard",
+      "remediation": "Add if: github.ref == 'refs/heads/main' or restrict push trigger branches",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\release.yml",
+      "line": 55,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\release.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\release_notes.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\release_notes.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\release_notes_skipper.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\release_notes_skipper.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\slow.yml",
+      "line": 14,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\slow.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\slow.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\slow.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Push trigger without branch protection guard",
+      "remediation": "Add if: github.ref == 'refs/heads/main' or restrict push trigger branches",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\stale.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\stale.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\tests.yml",
+      "line": 29,
+      "severity": "HIGH",
+      "dimension": "D4",
+      "message": "Secret used without OIDC — long-lived credential in workflow",
+      "remediation": "Use OIDC (id-token: write) for cloud auth instead of static secrets",
+      "compliance": {
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\tests.yml",
+      "line": 146,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "continue-on-error: true — pipeline failures silently suppressed",
+      "remediation": "Remove continue-on-error or scope it to non-critical steps only",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\tests.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\tests.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\tests.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Push trigger without branch protection guard",
+      "remediation": "Add if: github.ref == 'refs/heads/main' or restrict push trigger branches",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\workflows_linting.yml",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D3",
+      "message": "No concurrency block — parallel deployments possible",
+      "remediation": "Add concurrency: group with cancel-in-progress to prevent parallel deploys",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "cicd_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\.github\\workflows\\workflows_linting.yml",
+      "line": 1,
+      "severity": "LOW",
+      "dimension": "D14",
+      "message": "No environment: block — no required reviewers for deployments",
+      "remediation": "Add environment: production with required reviewers in GitHub settings",
+      "compliance": {
+        "eu_ai_act": "Article 14"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\converters\\azure.py",
+      "line": 22,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\embedders\\azure_document_embedder.py",
+      "line": 8,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\embedders\\azure_text_embedder.py",
+      "line": 8,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\embedders\\__init__.py",
+      "line": 11,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\azure.py",
+      "line": 8,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\__init__.py",
+      "line": 12,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure.py",
+      "line": 9,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\azure_responses.py",
+      "line": 20,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\haystack\\components\\generators\\chat\\__init__.py",
+      "line": 13,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\audio\\test_whisper_remote.py",
+      "line": 112,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\converters\\test_azure_ocr_doc_converter.py",
+      "line": 14,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\embedders\\test_azure_document_embedder.py",
+      "line": 12,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\embedders\\test_azure_document_embedder.py",
+      "line": 206,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\embedders\\test_azure_text_embedder.py",
+      "line": 9,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\generators\\test_azure.py",
+      "line": 11,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\generators\\test_openai_dalle.py",
+      "line": 44,
+      "severity": "MEDIUM",
+      "dimension": "D1",
+      "message": "Cloud AI endpoint URL hardcoded in source — hinders environment portability",
+      "remediation": "Move AI service endpoints to environment variables or configuration files",
+      "compliance": {
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\generators\\chat\\test_azure.py",
+      "line": 15,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack\\test\\components\\generators\\chat\\test_azure_responses.py",
+      "line": 14,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D17",
+      "message": "No content injection defense — hidden HTML/CSS/zero-width instructions pass to agents undetected. (86% attack success rate)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D17",
+      "message": "No RAG poisoning protection — knowledge base documents not scanned for embedded instructions. (<0.1% contamination = >80% attack success)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0049"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack",
+      "line": 0,
+      "severity": "HIGH",
+      "dimension": "D17",
+      "message": "No behavioral trap detection — post-execution behavioral changes not monitored. (10/10 M365 Copilot attacks succeeded)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 14",
+        "owasp_llm": "LLM07",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack",
+      "line": 0,
+      "severity": "HIGH",
+      "dimension": "D17",
+      "message": "No approval integrity verification -- agent summaries for approval not cross-checked against actual actions. (Approval fatigue exploitation)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 14",
+        "owasp_llm": "LLM07",
+        "mitre_atlas": "AML.T0048"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No adversarial testing evidence — no red team, no prompt injection tests",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No tool-call attack simulation — agent tool calls not tested against adversarial inputs",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\haystack",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No multi-agent chaos engineering — agent swarms not stress tested",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    }
+  ],
+  "competitors_detected": [],
+  "gtm_signal": "",
+  "trap_defense": {
+    "content_injection": false,
+    "rag_poisoning": false,
+    "behavioral_traps": false,
+    "approval_integrity": false,
+    "adversarial_testing": false,
+    "tool_attack_simulation": false,
+    "chaos_engineering": false,
+    "before_after_comparison": true,
+    "deepmind_citation": "Franklin, Tomašev, Jacobs, Leibo, Osindero. \"AI Agent Traps.\" Google DeepMind, March 2026."
+  }
+}

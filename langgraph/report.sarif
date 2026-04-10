@@ -1,0 +1,2005 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/main/sarif-2.1/schema/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "warden-ai",
+          "version": "1.6.0",
+          "informationUri": "https://github.com/SharkRouter/warden",
+          "rules": [
+            {
+              "id": "code_analyzer/D5",
+              "shortDescription": {
+                "text": "code_analyzer/D5"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "text": "Use logging.* or structlog.* for structured, searchable logs"
+              }
+            },
+            {
+              "id": "code_analyzer/D9",
+              "shortDescription": {
+                "text": "code_analyzer/D9"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Log the exception or handle it explicitly"
+              }
+            },
+            {
+              "id": "code_analyzer/D15",
+              "shortDescription": {
+                "text": "code_analyzer/D15"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Verify tool result status/validity before using"
+              }
+            },
+            {
+              "id": "code_analyzer/D2",
+              "shortDescription": {
+                "text": "code_analyzer/D2"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Add max_iterations, timeout, or explicit break condition"
+              }
+            },
+            {
+              "id": "audit_scanner/D5",
+              "shortDescription": {
+                "text": "audit_scanner/D5"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Add audit logging for all tool/agent executions"
+              }
+            },
+            {
+              "id": "dependency_scanner/D14",
+              "shortDescription": {
+                "text": "dependency_scanner/D14"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "text": "Pin version: langchain==<specific_version>"
+              }
+            },
+            {
+              "id": "framework_scanner/D6",
+              "shortDescription": {
+                "text": "framework_scanner/D6"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Add CallbackManager with on_tool_start/on_chain_start handlers"
+              }
+            },
+            {
+              "id": "trap_defense_scanner/D17",
+              "shortDescription": {
+                "text": "trap_defense_scanner/D17"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Deploy trap defense layer on tool results"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bench/fanout_to_subgraph.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 134
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bench/pydantic_state.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 324
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bench/sequential.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 48
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bench/wide_dict.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 148
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bench/wide_state.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 160
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/config.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 24
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/constants.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 61
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/graph/state.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 745
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/graph/_branch.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 77
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/graph/_branch.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 115
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D15",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool result assigned directly without verification"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/graph/_branch.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 166
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/main.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3645
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D5",
+          "ruleIndex": 0,
+          "level": "warning",
+          "message": {
+            "text": "print() used instead of structured logging"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/main.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3655
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_call.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 74
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_executor.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 85
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_executor.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 118
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_executor.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 210
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_io.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 51
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/_internal/_fields.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 150
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/_internal/_fields.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 160
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/_internal/_future.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 24
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "Agent loop with LLM call has no exit condition — potential infinite loop"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/_internal/_queue.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 23
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/_internal/_queue.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 33
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/_internal/_runnable.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 275
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/_internal/_runnable.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 280
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/_internal/_runnable.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 363
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/_internal/_runnable.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 435
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D15",
+          "ruleIndex": 2,
+          "level": "error",
+          "message": {
+            "text": "Tool result assigned directly without verification"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/_internal/_runnable.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 658
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "No audit logging for tool calls detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 37
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 38
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 39
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 40
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 41
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 42
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 43
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 128
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/example_app/requirements.txt",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "bench/__main__.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/config.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/types.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 19
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/graph/state.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 27
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/graph/ui.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/graph/_branch.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 21
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/graph/_node.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/debug.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 8
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/main.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 32
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/protocol.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/remote.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 15
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_algo.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 21
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_call.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 13
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_draw.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_executor.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 16
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_loop.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 24
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_read.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 9
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_retry.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 12
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_runner.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 25
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_utils.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 10
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/pregel/_write.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 11
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/_internal/_replay.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 10
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/_internal/_runnable.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 28
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "langgraph/_internal/_serde.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 19
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/fake_tracer.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/memory_assert.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/messages.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 12
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_deprecation.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_large_cases_async.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 12
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_messages_state.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_parent_command_async.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_pregel.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 18
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_pregel_async.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 22
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_remote_graph.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 9
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_runnable.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_serde_allowlist.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 82
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_state.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 9
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_stream_v2.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 15
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_subgraph_persistence.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 13
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_subgraph_persistence_async.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 15
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_time_travel.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 22
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_time_travel_async.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 24
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_tracing_interops.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 10
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_type_checking.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 6,
+          "level": "error",
+          "message": {
+            "text": "LangChain used without CallbackManager — no tool/chain observability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/example_app/example_graph.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "No content injection defense — hidden HTML/CSS/zero-width instructions pass to agents undetected. (86% attack success rate)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "No RAG poisoning protection — knowledge base documents not scanned for embedded instructions. (<0.1% contamination = >80% attack success)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "No behavioral trap detection — post-execution behavioral changes not monitored. (10/10 M365 Copilot attacks succeeded)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "No approval integrity verification -- agent summaries for approval not cross-checked against actual actions. (Approval fatigue exploitation)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 7,
+          "level": "warning",
+          "message": {
+            "text": "No adversarial testing evidence — no red team, no prompt injection tests"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 7,
+          "level": "warning",
+          "message": {
+            "text": "No tool-call attack simulation — agent tool calls not tested against adversarial inputs"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 7,
+          "level": "warning",
+          "message": {
+            "text": "No multi-agent chaos engineering — agent swarms not stress tested"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

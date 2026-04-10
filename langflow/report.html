@@ -1,0 +1,1927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warden Governance Report — 18/100</title>
+<style>
+:root {
+  --bg:#0a0c10;--surface:#10131a;--surface2:#161b24;
+  --border:#1e2535;--border2:#252d3d;
+  --text:#e2e8f0;--text2:#94a3b8;--muted:#4b5563;
+  --critical:#ff3b3b;--high:#ff8c00;--medium:#f5c518;--low:#4ade80;
+  --info:#60a5fa;--purple:#a78bfa;--teal:#00bcd4;
+  --mono:'SF Mono','Cascadia Code','JetBrains Mono','Fira Code',Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+
+.hdr{background:var(--surface);border-bottom:1px solid var(--border);padding:22px 40px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.logo-name{font-family:var(--mono);font-size:15px;font-weight:700;color:var(--info);letter-spacing:1px}
+.logo-tag{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.meta{font-family:var(--mono);font-size:11px;color:var(--text2);line-height:2.1}
+.meta strong{color:var(--text)}
+.priv{font-family:var(--mono);font-size:10px;color:var(--text2);background:rgba(96,165,250,.06);border:1px solid rgba(96,165,250,.15);border-radius:4px;padding:8px 12px;line-height:2;max-width:280px}
+
+.body{max-width:1100px;margin:0 auto;padding:28px 40px 80px;display:flex;flex-direction:column;gap:22px}
+
+/* --- Section cards --- */
+.sec{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.sec-head{display:flex;align-items:center;justify-content:space-between;padding:13px 24px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.01)}
+.sec-title{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text2)}
+.sec-count{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.sec-body{padding:0}
+
+/* --- Hero --- */
+.hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;padding:28px 32px}
+.hero-left{display:flex;flex-direction:column;align-items:center;gap:12px}
+.gauge{position:relative;width:150px;height:150px}
+.gauge svg{transform:rotate(-90deg)}
+.gauge-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.g-num{font-family:var(--mono);font-size:38px;font-weight:700;line-height:1}
+.g-denom{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.g-raw{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:2px}
+.lvl-badge{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:2px;padding:4px 14px;border-radius:20px}
+.lvl-governed{background:rgba(74,222,128,.1);color:var(--low);border:1px solid rgba(74,222,128,.3)}
+.lvl-partial{background:rgba(255,140,0,.1);color:var(--high);border:1px solid rgba(255,140,0,.3)}
+.lvl-at_risk{background:rgba(255,59,59,.1);color:var(--critical);border:1px solid rgba(255,59,59,.3)}
+.lvl-ungoverned{background:rgba(255,59,59,.1);color:var(--critical);border:1px solid rgba(255,59,59,.3)}
+
+.dims{display:flex;flex-direction:column;gap:0}
+.dim-group{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;padding:10px 0 4px;border-top:1px solid var(--border);margin-top:4px}
+.dim-group:first-child{border-top:none;margin-top:0;padding-top:0}
+.dim-row{display:grid;grid-template-columns:190px 1fr 58px;align-items:center;gap:10px;padding:3px 0}
+.dim-label{font-size:12px;color:var(--text2);display:flex;align-items:center;gap:5px}
+.bar-track{height:5px;background:var(--border2);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px}
+.dim-val{font-family:var(--mono);font-size:11px;color:var(--text2);text-align:right}
+.dim-details{cursor:pointer}.dim-details summary{list-style:none}.dim-details summary::-webkit-details-marker{display:none}
+.dim-details summary .dim-label::after{content:'\25B8';font-size:9px;color:var(--muted);transition:transform 0.15s}
+.dim-details[open] summary .dim-label::after{transform:rotate(90deg)}
+.dim-detail-body{padding:4px 0 8px 12px;border-left:2px solid var(--border2);margin:2px 0 6px 8px}
+.dim-detail-item{font-size:11px;color:var(--text2);padding:2px 0;line-height:1.5}
+.dim-subtotal{font-family:var(--mono);font-size:10px;color:var(--info);text-align:right;margin:3px 0}
+.caveat{font-size:11px;color:var(--text2);font-style:italic;margin-top:14px;padding-top:12px;border-top:1px solid var(--border)}
+
+/* --- Summary grid --- */
+.sum-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--border)}
+.sum-cell{background:var(--surface);padding:18px 22px}
+.sum-label{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px}
+.sum-val{font-family:var(--mono);font-size:24px;font-weight:700;line-height:1;margin-bottom:4px}
+.sum-sub{font-size:11px;color:var(--text2)}
+
+/* --- Discovered tools --- */
+.tool-item{display:grid;grid-template-columns:22px 1fr;gap:0 14px;padding:16px 24px;border-bottom:1px solid var(--border);align-items:start}
+.tool-item:last-child{border-bottom:none}
+.rdot{width:9px;height:9px;border-radius:50%;margin-top:6px;flex-shrink:0}
+.rdot.critical{background:var(--critical);box-shadow:0 0 5px var(--critical)}
+.rdot.high{background:var(--high)}
+.rdot.medium{background:var(--medium)}
+.rdot.low{background:var(--low)}
+.rdot.info{background:var(--info)}
+.tname{font-family:var(--mono);font-size:13px;font-weight:600;margin-bottom:3px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.tdesc{font-size:13px;color:var(--text2);margin-bottom:7px;line-height:1.5}
+.ttags{display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:3px;border:1px solid}
+.tag.d{color:var(--critical);border-color:rgba(255,59,59,.3);background:rgba(255,59,59,.06)}
+.tag.f{color:var(--high);border-color:rgba(255,140,0,.3);background:rgba(255,140,0,.06)}
+.tag.e{color:var(--high);border-color:rgba(255,140,0,.3);background:rgba(255,140,0,.06)}
+.tag.w{color:var(--medium);border-color:rgba(245,197,24,.3);background:rgba(245,197,24,.06)}
+.tag.r{color:var(--low);border-color:rgba(74,222,128,.3);background:rgba(74,222,128,.06)}
+.tag.u{color:var(--critical);border-color:rgba(255,59,59,.3);background:rgba(255,59,59,.06)}
+.tag.n{color:var(--info);border-color:rgba(96,165,250,.3);background:rgba(96,165,250,.06)}
+.rbadge{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:1px}
+.rbadge.critical{background:rgba(255,59,59,.12);color:var(--critical)}
+.rbadge.high{background:rgba(255,140,0,.12);color:var(--high)}
+.rbadge.medium{background:rgba(245,197,24,.12);color:var(--medium)}
+.rbadge.low{background:rgba(74,222,128,.12);color:var(--low)}
+
+/* --- Governance detection --- */
+.gov-row{display:flex;align-items:flex-start;gap:14px;padding:15px 24px;border-bottom:1px solid var(--border)}
+.gov-row:last-child{border-bottom:none}
+.gov-ico{font-size:16px;flex-shrink:0;width:22px;margin-top:2px}
+.gov-name{font-family:var(--mono);font-size:13px;font-weight:600;margin-bottom:3px}
+.gov-desc{font-size:12px;color:var(--text2);margin-bottom:7px;line-height:1.5}
+.gov-pts{font-family:var(--mono);font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;flex-shrink:0;white-space:nowrap}
+.gov-pts.pos{color:var(--low);background:rgba(74,222,128,.1)}
+.gov-pts.zero{color:var(--muted);background:var(--border)}
+
+/* --- Findings --- */
+.fg-hdr{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;display:flex;align-items:center;gap:8px;padding:8px 24px;user-select:none}
+.fg-cnt{padding:2px 9px;border-radius:10px;font-size:11px}
+.fg-body{display:none;padding:0 24px 8px}.fg-body.open{display:block}
+.f-card{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:6px;cursor:pointer}
+.f-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.f-sev{font-family:var(--mono);font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.f-dim{font-family:var(--mono);font-size:10px;color:var(--text2);background:var(--surface);padding:2px 6px;border-radius:3px}
+.f-msg{font-size:13px;color:var(--text);margin:6px 0 2px}
+.f-loc{font-family:var(--mono);font-size:11px;color:var(--info)}
+.f-detail{font-size:12px;color:var(--text2);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);display:none}
+.f-card.exp .f-detail{display:block}
+.f-rem{color:var(--low)}
+.f-compliance{font-family:var(--mono);font-size:10px;color:var(--text2);margin-top:4px}
+.f-compliance span{background:rgba(96,165,250,.08);color:var(--info);padding:1px 6px;border-radius:3px;margin-right:4px}
+.arrow{transition:transform .2s;display:inline-block}.arrow.open{transform:rotate(90deg)}
+
+/* --- Recommendations --- */
+.rec{display:grid;grid-template-columns:30px 1fr;gap:0 14px;padding:18px 24px;border-bottom:1px solid var(--border);align-items:start}
+.rec:last-child{border-bottom:none}
+.rec-n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--info);margin-top:2px}
+.rec-title{font-weight:600;margin-bottom:5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rec-body{font-size:13px;color:var(--text2);line-height:1.6}
+.rec-pts{font-family:var(--mono);font-size:11px;color:var(--low);padding:2px 8px;border:1px solid rgba(74,222,128,.25);border-radius:3px;background:rgba(74,222,128,.06)}
+
+/* --- Workaround tax --- */
+.workaround-box{margin-top:14px;padding:16px 20px;background:rgba(255,140,0,0.05);border:1px solid rgba(255,140,0,0.25);border-left:3px solid var(--high);border-radius:6px}
+.workaround-label{font-family:var(--mono);font-size:10px;color:var(--high);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.workaround-text{font-size:13px;color:var(--text2);line-height:1.6}
+.workaround-text strong{color:var(--text)}
+
+/* --- Comparison card --- */
+.cmp{border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:18px}
+.cmp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border)}
+.cmp-col{padding:18px 20px}
+.cmp-cur{background:var(--surface2)}
+.cmp-sr{background:#090f0a;border-left:2px solid rgba(74,222,128,.35)}
+.cmp-lbl{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.cmp-lbl.c{color:var(--muted)}
+.cmp-lbl.s{color:rgba(74,222,128,.6)}
+.cmp-score{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1}
+.cmp-score.c{color:var(--critical)}
+.cmp-score.s{color:var(--low)}
+.cmp-denom{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.cmp-lvl{font-family:var(--mono);font-size:10px;letter-spacing:1px;margin-top:4px;margin-bottom:14px}
+.cmp-lvl.c{color:var(--critical)}
+.cmp-lvl.w{color:var(--medium)}
+.cmp-lvl.s{color:var(--low)}
+.cmp-grp{font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;padding:8px 0 3px;border-top:1px solid var(--border);margin-top:4px}
+.cmp-grp:first-child{border-top:none;margin-top:0;padding-top:0}
+.cmp-dim{display:grid;grid-template-columns:140px 1fr 50px;align-items:center;gap:8px;padding:3px 0;font-size:11px}
+.cmp-dim-lbl{color:var(--text2)}
+.cmp-bt{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.cmp-bf{height:100%;border-radius:3px}
+.cmp-val{font-family:var(--mono);font-size:10px;text-align:right}
+.cmp-val.c{color:var(--muted)}
+.cmp-val.s{color:var(--low);font-weight:700}
+.delta{color:rgba(74,222,128,.5);font-weight:400;font-size:9px}
+.cmp-foot{background:rgba(74,222,128,.04);border-top:1px solid var(--border);padding:10px 20px;font-family:var(--mono);font-size:11px;color:var(--text2);display:flex;justify-content:space-between;align-items:center}
+.cmp-foot a{color:var(--info);text-decoration:none}
+.cmp-delta{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--low)}
+
+/* --- Solutions table --- */
+.sol-table{border-collapse:collapse;font-size:12px;font-family:var(--mono);white-space:nowrap;width:100%}
+.sol-table th{text-align:center;padding:8px 12px;color:var(--text2);font-weight:600;border-bottom:1px solid var(--border2)}
+.sol-table th:first-child{text-align:left}
+.sol-table td{text-align:center;padding:7px 12px;border-bottom:1px solid var(--border)}
+.sol-table td:first-child{text-align:left;color:var(--text2)}
+.sol-table tr.sr{background:rgba(74,222,128,0.06)}
+.sol-table tr.sr td{color:var(--low);font-weight:700}
+.sol-table tfoot td{font-weight:700;border-top:2px solid var(--border2)}
+
+/* --- Email form --- */
+.email-wrap{display:grid;grid-template-columns:1fr auto;gap:24px;padding:28px 32px;align-items:center}
+.email-info{font-size:13px;color:var(--text2);line-height:1.6}
+.email-cols{display:flex;gap:32px;margin-top:16px}
+.email-col-hdr{font-family:var(--mono);font-size:10px;letter-spacing:1px;margin-bottom:6px}
+.email-col li{list-style:none;font-size:12px;color:var(--text2);padding:2px 0}
+.email-form{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:24px;min-width:280px;display:flex;flex-direction:column;gap:10px}
+.email-input{background:#0a0c10;border:1px solid var(--border2);border-radius:5px;padding:10px 14px;font-family:var(--mono);font-size:13px;color:var(--text);outline:none;width:100%}
+.email-input:focus{border-color:var(--info)}
+.email-btn{background:var(--info);color:#000;border:none;border-radius:5px;padding:10px 20px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;width:100%;transition:background 0.2s}
+.email-btn:hover{background:#93c5fd}
+.email-bar{padding:12px 32px;background:rgba(0,0,0,0.2);border-top:1px solid var(--border);font-size:12px;color:var(--text2);display:flex;align-items:center;justify-content:space-between}
+
+/* --- Footer --- */
+.foot{text-align:center;padding:28px 40px;font-family:var(--mono);font-size:11px;color:var(--text2);line-height:2.2;max-width:1100px;margin:0 auto}
+.foot a{color:var(--info);text-decoration:none}
+.foot-cta{display:inline-block;margin-top:12px;background:#fff;color:#000 !important;padding:10px 24px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none !important;letter-spacing:0.5px}
+.foot-cta:hover{background:#e2e8f0;color:#000 !important}
+.foot-priv{color:var(--muted);font-size:10px;margin-top:8px}
+
+/* --- Responsive --- */
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr}
+  .sum-grid{grid-template-columns:repeat(2,1fr)}
+  .cmp-grid{grid-template-columns:1fr}
+  .dim-row{grid-template-columns:140px 1fr 50px}
+  .email-wrap{grid-template-columns:1fr}
+  .hdr{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="hdr">
+
+  <div>
+    <div class="logo">
+      <span style="font-size:20px">&#129416;</span>
+      <div><div class="logo-name">WARDEN</div><div class="logo-tag">AI Agent Governance Report</div></div>
+    </div>
+    <div class="meta">
+      <strong>Scan path:</strong> C:\Users\gilad\Projects\warden\gallery\repos\langflow\src\backend\base<br>
+      <strong>Scanned:</strong> 2026-04-10 23:11 UTC<br>
+      <strong>Warden:</strong> v1.6.0 &middot; Scoring model v4.3 &middot; 17 dimensions (weighted) &middot; 235 pts
+    </div>
+  </div>
+  <div class="priv">&#128274; Privacy guarantee<br>All data collected locally &mdash; nothing left this machine.<br>API keys: partial hashes only.<br>Log content: never stored.</div>
+</div>
+
+  <div style="font-family:var(--mono);font-size:11px;color:var(--text2);padding:10px 32px;border-bottom:1px solid var(--border);background:var(--surface)">
+    &#128202; Scanned 474 files (474 Python) in <strong style="color:var(--text)">base</strong> across 6 scan layers
+  </div>
+<div class="body">
+
+  <div class="sec">
+    <div class="hero">
+      <div class="hero-left">
+        <div class="gauge">
+      <svg width="150" height="150" viewBox="0 0 150 150">
+        <circle cx="75" cy="75" r="60" fill="none" stroke="#1e2535" stroke-width="8"/>
+        <circle cx="75" cy="75" r="60" fill="none" stroke="#ff3b3b" stroke-width="8" stroke-dasharray="68 377" stroke-linecap="round"/>
+      </svg>
+      <div class="gauge-center">
+        <div class="g-num" style="color:#ff3b3b">18</div>
+        <div class="g-denom">/ 100</div>
+        <div class="g-raw">43 / 235 raw</div>
+      </div>
+    </div>
+        <div class="lvl-badge lvl-ungoverned">UNGOVERNED</div>
+      </div>
+      <div class="dims">
+        <div class="dim-group">Core Governance (13 / 100)</div><div class="dim-row"><div class="dim-label">D1 Tool Inventory</div><div class="bar-track"><div class="bar-fill" style="width:8%;background:var(--critical)"></div></div><div class="dim-val">2 / 25</div></div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D2 Risk Detection</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 20</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> Tool function without input validation</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> Tool function without input validation</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> Tool function without input validation</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> Tool function without input validation</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> Tool function without input validation</div><div class="dim-detail-item" style="color:var(--text2)">+ 11 more findings</div></div></details><div class="dim-row"><div class="dim-label">D3 Policy Coverage</div><div class="bar-track"><div class="bar-fill" style="width:30%;background:var(--critical)"></div></div><div class="dim-val">6 / 20</div></div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D4 Credential Management</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:var(--critical)"></div></div><div class="dim-val">2 / 20</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Exposed Database URL (no credentials): red...t}/0</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Exposed Database URL (no credentials): red...t}/0</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> Exposed Database URL with credentials: amq...72//</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Exposed Database URL (no credentials): red...79/0</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> Possible typosquat: 'ctransformers' is 1 edit from 'transformers'</div><div class="dim-detail-item" style="color:var(--text2)">+ 1 more findings</div></div></details><details class="dim-details"><summary class="dim-row"><div class="dim-label">D5 Log Hygiene</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:var(--critical)"></div></div><div class="dim-val">2 / 10</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> print() used instead of structured logging</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> print() used instead of structured logging</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> print() used instead of structured logging</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> print() used instead of structured logging</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> print() used instead of structured logging</div><div class="dim-detail-item" style="color:var(--text2)">+ 23 more findings</div></div></details><details class="dim-details"><summary class="dim-row"><div class="dim-label">D6 Framework Coverage</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:var(--critical)"></div></div><div class="dim-val">1 / 5</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> LangChain used without CallbackManager — no tool/chain observability</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> LangChain used without CallbackManager — no tool/chain observability</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> LangChain used without CallbackManager — no tool/chain observability</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> LangChain used without CallbackManager — no tool/chain observability</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> LangChain used without CallbackManager — no tool/chain observability</div><div class="dim-detail-item" style="color:var(--text2)">+ 5 more findings</div></div></details><div class="dim-group">Advanced Controls (9 / 50)</div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D7 Human-in-the-Loop</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 15</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> CrewAI agent without guardrail — no output validation gate</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> CrewAI agent without guardrail — no output validation gate</div></div></details><div class="dim-row"><div class="dim-label">D8 Agent Identity</div><div class="bar-track"><div class="bar-fill" style="width:60%;background:var(--info)"></div></div><div class="dim-val">9 / 15</div></div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D9 Threat Detection</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 20</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Empty exception handler — errors silently swallowed</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Empty exception handler — errors silently swallowed</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Empty exception handler — errors silently swallowed</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Empty exception handler — errors silently swallowed</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> Empty exception handler — errors silently swallowed</div><div class="dim-detail-item" style="color:var(--text2)">+ 21 more findings</div></div></details><div class="dim-group">Ecosystem (18 / 55)</div><div class="dim-row"><div class="dim-label">D10 Prompt Security</div><div class="bar-track"><div class="bar-fill" style="width:13%;background:var(--critical)"></div></div><div class="dim-val">2 / 15</div></div><div class="dim-row"><div class="dim-label">D11 Cloud / Platform</div><div class="bar-track"><div class="bar-fill" style="width:40%;background:var(--high)"></div></div><div class="dim-val">4 / 10</div></div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D12 LLM Observability</div><div class="bar-track"><div class="bar-fill" style="width:40%;background:var(--high)"></div></div><div class="dim-val">4 / 10</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Hardcoded model name: 'TranslationFlow - Language Detection, Translation, and Intent Classification.
+
+This flow translat</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Hardcoded model name: 'Create and return the TranslationFlow graph.
+
+    Args:
+        provider: Model provider (e.g., &quot;</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Hardcoded model name: 'gpt-4o-mini' — no routing/fallback</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Hardcoded model name: 'Inject model configuration into the flow's Agent component.
+
+    Args:
+        flow_data: The flo</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Hardcoded model name: 'Load a Graph from a Python flow file.
+
+    The Python file must define a function `get_graph()` t</div><div class="dim-detail-item" style="color:var(--text2)">+ 11 more findings</div></div></details><div class="dim-row"><div class="dim-label">D13 Data Recovery</div><div class="bar-track"><div class="bar-fill" style="width:40%;background:var(--high)"></div></div><div class="dim-val">4 / 10</div></div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D14 Compliance Maturity</div><div class="bar-track"><div class="bar-fill" style="width:40%;background:var(--high)"></div></div><div class="dim-val">4 / 10</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Unpinned AI dependency: openai</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Unpinned AI dependency: langchain</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Unpinned AI dependency: openai</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Unpinned AI dependency: anthropic</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> Unpinned AI dependency: litellm</div><div class="dim-detail-item" style="color:var(--text2)">+ 3 more findings</div></div></details><div class="dim-group">Unique Capabilities (3 / 30)</div><div class="dim-row"><div class="dim-label">D15 Post-Exec Verification</div><div class="bar-track"><div class="bar-fill" style="width:20%;background:var(--critical)"></div></div><div class="dim-val">2 / 10</div></div><div class="dim-row"><div class="dim-label">D16 Data Flow Governance</div><div class="bar-track"><div class="bar-fill" style="width:0%;background:var(--muted)"></div></div><div class="dim-val" style="color:var(--critical)">0 / 10</div></div><details class="dim-details"><summary class="dim-row"><div class="dim-label">D17 Adversarial Resilience</div><div class="bar-track"><div class="bar-fill" style="width:10%;background:var(--critical)"></div></div><div class="dim-val">1 / 10</div></summary><div class="dim-detail-body"><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> No content injection defense — hidden HTML/CSS/zero-width instructions pass to agents undetected. (86% attack success ra</div><div class="dim-detail-item"><span style="color:#ff3b3b;font-weight:600">CRITICAL</span> No RAG poisoning protection — knowledge base documents not scanned for embedded instructions. (&lt;0.1% contamination = &gt;80</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> No behavioral trap detection — post-execution behavioral changes not monitored. (10/10 M365 Copilot attacks succeeded)</div><div class="dim-detail-item"><span style="color:#ff8c00;font-weight:600">HIGH</span> No approval integrity verification -- agent summaries for approval not cross-checked against actual actions. (Approval f</div><div class="dim-detail-item"><span style="color:#f5c518;font-weight:600">MEDIUM</span> No adversarial testing evidence — no red team, no prompt injection tests</div><div class="dim-detail-item" style="color:var(--text2)">+ 2 more findings</div></div></details>
+        <div class="caveat">Score reflects only what Warden can observe locally. Undetected controls are scored as 0, not assumed good. Dimensions are weighted by governance impact. Methodology: <a href="https://github.com/sharkrouter/warden/blob/main/SCORING.md" style="color:var(--info);text-decoration:none">SCORING.md</a></div>
+      </div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sum-grid">
+      <div class="sum-cell"><div class="sum-label">Total Findings</div><div class="sum-val" style="color:var(--high)">119</div><div class="sum-sub">21 CRITICAL &middot; 47 HIGH</div></div><div class="sum-cell"><div class="sum-label">Tools Detected</div><div class="sum-val" style="color:var(--low)">0</div><div class="sum-sub">None detected</div></div><div class="sum-cell"><div class="sum-label">Credentials</div><div class="sum-val" style="color:var(--high)">4</div><div class="sum-sub">In source code</div></div><div class="sum-cell"><div class="sum-label">Governance Gaps</div><div class="sum-val" style="color:var(--critical)">4</div><div class="sum-sub">of 17 dimensions</div></div><div class="sum-cell"><div class="sum-label">Compliance Refs</div><div class="sum-val" style="color:var(--info)">11</div><div class="sum-sub">EU AI Act / OWASP / MITRE</div></div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><span class="sec-title">&#128737; Governance Layer Detection</span><span class="sec-count">0 tools detected &middot; 17 dimensions</span></div>
+    <div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D2: Risk Detection &mdash; none detected</div>
+    <div class="gov-desc">Risk classification, semantic analysis, intent-parameter consistency</div>
+  </div>
+  <div class="gov-pts zero">0 / 20 pts</div>
+</div><div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D7: Human-in-the-Loop &mdash; none detected</div>
+    <div class="gov-desc">Approval gates, dry-run preview, plan-execute separation</div>
+  </div>
+  <div class="gov-pts zero">0 / 15 pts</div>
+</div><div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D9: Threat Detection &mdash; none detected</div>
+    <div class="gov-desc">Behavioral baselines, anomaly detection, cross-session tracking, kill switch</div>
+  </div>
+  <div class="gov-pts zero">0 / 20 pts</div>
+</div><div class="gov-row">
+  <div class="gov-ico">&#10060;</div>
+  <div style="flex:1">
+    <div class="gov-name">D16: Data Flow Governance &mdash; none detected</div>
+    <div class="gov-desc">Taint labels, data classification, cross-tool leakage prevention</div>
+  </div>
+  <div class="gov-pts zero">0 / 10 pts</div>
+</div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><span class="sec-title">&#128202; Solutions Comparison</span><span class="sec-count">2 rows &middot; 17 dimensions &middot; 235 max pts</span></div>
+    <div style="padding:16px 24px 8px;overflow-x:auto">
+      <table class="sol-table">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border2)">
+            <th style="text-align:left;padding:6px 10px;color:var(--muted);font-weight:400">Tool</th>
+            <th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Tool Inventory /25">D1</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Risk Detection /20">D2</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Policy Coverage /20">D3</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Credential Management /20">D4</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Log Hygiene /10">D5</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Framework Coverage /5">D6</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Human-in-the-Loop /15">D7</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Agent Identity /15">D8</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Threat Detection /20">D9</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Prompt Security /15">D10</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Cloud / Platform /10">D11</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="LLM Observability /10">D12</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Data Recovery /10">D13</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Compliance Maturity /10">D14</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Post-Exec Verification /10">D15</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Data Flow Governance /10">D16</th><th style="text-align:center;padding:6px 4px;color:var(--muted);font-weight:400" title="Adversarial Resilience /10">D17</th>
+            <th style="text-align:center;padding:6px 8px;color:var(--text2);font-weight:700;border-left:1px solid var(--border2)">/235</th>
+            <th style="text-align:center;padding:6px 8px;color:var(--text2);font-weight:700">/100</th>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border)"><th style="text-align:left;padding:3px 10px;font-size:10px;color:var(--muted)">Max pts</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">25</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">20</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">20</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">20</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">5</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">15</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">15</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">20</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">15</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted)">10</th><th style="text-align:center;padding:3px 4px;font-size:10px;color:var(--muted);border-left:1px solid var(--border2)">235</th><th></th></tr>
+        </thead>
+        <tbody>
+          <tr style="background:rgba(74,222,128,0.06);border-bottom:2px solid rgba(74,222,128,0.2)"><td style="padding:7px 10px;color:var(--low);font-weight:700">SharkRouter</td><td style="text-align:center;color:var(--low)">23</td><td style="text-align:center;color:var(--low)">18</td><td style="text-align:center;color:var(--low)">18</td><td style="text-align:center;color:var(--low)">18</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">5</td><td style="text-align:center;color:var(--low)">14</td><td style="text-align:center;color:var(--low)">14</td><td style="text-align:center;color:var(--low)">18</td><td style="text-align:center;color:var(--low)">14</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low)">9</td><td style="text-align:center;color:var(--low);font-weight:700;border-left:1px solid var(--border2)">214</td><td style="text-align:center;color:var(--low);font-weight:700">91</td></tr>
+          <tr style="border-bottom:1px solid var(--border)"><td style="padding:7px 10px;color:#ff3b3b;font-weight:700">Your Scan</td><td style="text-align:center;color:var(--critical)">2</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--critical)">6</td><td style="text-align:center;color:var(--critical)">2</td><td style="text-align:center;color:var(--critical)">2</td><td style="text-align:center;color:var(--critical)">1</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--info)">9</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--critical)">2</td><td style="text-align:center;color:var(--high)">4</td><td style="text-align:center;color:var(--high)">4</td><td style="text-align:center;color:var(--high)">4</td><td style="text-align:center;color:var(--high)">4</td><td style="text-align:center;color:var(--critical)">2</td><td style="text-align:center;color:var(--critical)">0</td><td style="text-align:center;color:var(--critical)">1</td><td style="text-align:center;font-weight:700;border-left:1px solid var(--border2);color:#ff3b3b">43</td><td style="text-align:center;font-weight:700;color:#ff3b3b">18</td></tr>
+          
+        </tbody>
+      </table>
+    </div>
+    <div style="font-size:11px;color:var(--muted);font-style:italic;padding:12px 24px;font-family:var(--mono)">SharkRouter per-dimension scores are proportional estimates from total score. Detected tool scores are totals only (per-dimension breakdown not available). Methodology: <a href="https://github.com/sharkrouter/warden/blob/main/SCORING.md" style="color:var(--info);text-decoration:none">SCORING.md</a></div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><span class="sec-title">&#128270; Findings</span><span class="sec-count">119 total</span></div>
+    <div>
+  <div class="fg-hdr" style="color:#ff3b3b" onclick="toggleGroup('fg-critical')">
+    <span id="fg-critical-arrow" class="arrow open">&#9654;</span>
+    CRITICAL <span class="fg-cnt" style="background:rgba(255,59,59,.12);color:#ff3b3b">21</span>
+  </div>
+  <div id="fg-critical" class="fg-body open"><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:91</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:114</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:129</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><details style="margin-top:4px">
+    <summary style="cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--text2);margin-bottom:8px;padding-left:24px">Show 18 more CRITICAL findings</summary>
+    <div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:144</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:231</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:262</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:278</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:332</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:366</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:390</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:422</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:455</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:491</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:525</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Tool function without input validation</div>
+  <div class="f-loc">...\langflow\src\backend\base\langflow\agentic\mcp\server.py:569</div>
+  <div class="f-detail">
+    <div class="f-rem">Add input validation (pydantic, jsonschema, or manual checks)</div>
+    <div class="f-compliance"><span>OWASP LLM01</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D2</span>
+  </div>
+  <div class="f-msg">Agent loop with LLM call has no exit condition — potential infinite loop</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\api\v1\voice_mode.py:1244</div>
+  <div class="f-detail">
+    <div class="f-rem">Add max_iterations, timeout, or explicit break condition</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D4</span>
+  </div>
+  <div class="f-msg">Exposed Database URL with credentials: amq...72//</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\core\celeryconfig.py:15</div>
+  <div class="f-detail">
+    <div class="f-rem">Move to secrets manager or .env file (excluded from VCS)</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM09</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D4</span>
+  </div>
+  <div class="f-msg">Possible typosquat: 'ctransformers' is 1 edit from 'transformers'</div>
+  <div class="f-loc">...en\gallery\repos\langflow\src\backend\base\pyproject.toml:1</div>
+  <div class="f-detail">
+    <div class="f-rem">Verify this is the intended package, not a typosquat of 'transformers'</div>
+    <div class="f-compliance"><span>MITRE AML.T0010</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D4</span>
+  </div>
+  <div class="f-msg">Possible typosquat: 'ctransformers' is 1 edit from 'transformers'</div>
+  <div class="f-loc">...en\gallery\repos\langflow\src\backend\base\pyproject.toml:1</div>
+  <div class="f-detail">
+    <div class="f-rem">Verify this is the intended package, not a typosquat of 'transformers'</div>
+    <div class="f-compliance"><span>MITRE AML.T0010</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No content injection defense — hidden HTML/CSS/zero-width instructions pass to agents undetected. (86% attack success rate)</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Deploy trap defense layer on tool results</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM01</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,59,59,.12);color:#ff3b3b">CRITICAL</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No RAG poisoning protection — knowledge base documents not scanned for embedded instructions. (&lt;0.1% contamination = &gt;80% attack success)</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Deploy trap defense layer on tool results</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM01</span><span>MITRE AML.T0049</span></div>
+  </div>
+</div>
+  </details></div>
+</div><div>
+  <div class="fg-hdr" style="color:#ff8c00" onclick="toggleGroup('fg-high')">
+    <span id="fg-high-arrow" class="arrow">&#9654;</span>
+    HIGH <span class="fg-cnt" style="background:rgba(255,140,0,.12);color:#ff8c00">47</span>
+  </div>
+  <div id="fg-high" class="fg-body"><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\langflow_launcher.py:9</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...lery\repos\langflow\src\backend\base\langflow\__main__.py:58</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...\base\langflow\agentic\services\helpers\event_consumer.py:59</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><details style="margin-top:4px">
+    <summary style="cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--text2);margin-bottom:8px;padding-left:24px">Show 44 more HIGH findings</summary>
+    <div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...ns\369268b9af8b_add_job_id_to_vertex_build_create_job_.py:73</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...e\langflow\alembic\versions\7843803a87b5_store_updates.py:32</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...e\langflow\alembic\versions\7843803a87b5_store_updates.py:38</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...angflow\src\backend\base\langflow\api\utils\kb_helpers.py:64</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...angflow\src\backend\base\langflow\api\utils\kb_helpers.py:94</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...os\langflow\src\backend\base\langflow\api\v1\endpoints.py:717</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...gflow\src\backend\base\langflow\api\v1\knowledge_bases.py:457</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...repos\langflow\src\backend\base\langflow\api\v1\models.py:366</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...repos\langflow\src\backend\base\langflow\api\v1\models.py:399</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...repos\langflow\src\backend\base\langflow\api\v1\models.py:744</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...repos\langflow\src\backend\base\langflow\api\v1\models.py:855</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\api\v1\voice_mode.py:971</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\api\v1\voice_mode.py:1088</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...gflow\src\backend\base\langflow\services\event_manager.py:215</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...gflow\src\backend\base\langflow\services\store\service.py:397</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...gflow\src\backend\base\langflow\services\store\service.py:434</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...w\src\backend\base\langflow\services\tracing\openlayer.py:328</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...w\src\backend\base\langflow\services\tracing\openlayer.py:677</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...w\src\backend\base\langflow\services\tracing\openlayer.py:687</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...w\src\backend\base\langflow\services\tracing\openlayer.py:784</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...angflow\src\backend\base\langflow\utils\data_structure.py:52</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...ow\src\backend\base\langflow\utils\template_validation.py:191</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D9</span>
+  </div>
+  <div class="f-msg">Empty exception handler — errors silently swallowed</div>
+  <div class="f-loc">...repos\langflow\src\backend\base\langflow\utils\version.py:38</div>
+  <div class="f-detail">
+    <div class="f-rem">Log the exception or handle it explicitly</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...ckend\base\langflow\agentic\services\assistant_service.py:156</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\api\v1\voice_mode.py:605</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\api\v1\voice_mode.py:618</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\api\v1\voice_mode.py:586</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\api\v1\voice_mode.py:591</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...langflow\src\backend\base\langflow\api\v2\registration.py:126</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...langflow\src\backend\base\langflow\api\v2\registration.py:136</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...langflow\src\backend\base\langflow\api\v2\registration.py:88</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">Potential PII/sensitive data logged via f-string</div>
+  <div class="f-loc">...langflow\src\backend\base\langflow\api\v2\registration.py:82</div>
+  <div class="f-detail">
+    <div class="f-rem">Redact sensitive fields before logging</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM06</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">LangChain used without CallbackManager — no tool/chain observability</div>
+  <div class="f-loc">...\gallery\repos\langflow\src\backend\base\langflow\main.py:60</div>
+  <div class="f-detail">
+    <div class="f-rem">Add CallbackManager with on_tool_start/on_chain_start handlers</div>
+    <div class="f-compliance"><span>EU AI Act Article 13</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">LangChain used without CallbackManager — no tool/chain observability</div>
+  <div class="f-loc">...allery\repos\langflow\src\backend\base\langflow\memory.py:6</div>
+  <div class="f-detail">
+    <div class="f-rem">Add CallbackManager with on_tool_start/on_chain_start handlers</div>
+    <div class="f-compliance"><span>EU AI Act Article 13</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">LangChain used without CallbackManager — no tool/chain observability</div>
+  <div class="f-loc">...angflow\src\backend\base\langflow\api\utils\kb_helpers.py:17</div>
+  <div class="f-detail">
+    <div class="f-rem">Add CallbackManager with on_tool_start/on_chain_start handlers</div>
+    <div class="f-compliance"><span>EU AI Act Article 13</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">LangChain used without CallbackManager — no tool/chain observability</div>
+  <div class="f-loc">...gflow\src\backend\base\langflow\api\v1\knowledge_bases.py:11</div>
+  <div class="f-detail">
+    <div class="f-rem">Add CallbackManager with on_tool_start/on_chain_start handlers</div>
+    <div class="f-compliance"><span>EU AI Act Article 13</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">LangChain used without CallbackManager — no tool/chain observability</div>
+  <div class="f-loc">...\repos\langflow\src\backend\base\langflow\helpers\data.py:7</div>
+  <div class="f-detail">
+    <div class="f-rem">Add CallbackManager with on_tool_start/on_chain_start handlers</div>
+    <div class="f-compliance"><span>EU AI Act Article 13</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">LangChain used without CallbackManager — no tool/chain observability</div>
+  <div class="f-loc">...\repos\langflow\src\backend\base\langflow\helpers\flow.py:303</div>
+  <div class="f-detail">
+    <div class="f-rem">Add CallbackManager with on_tool_start/on_chain_start handlers</div>
+    <div class="f-compliance"><span>EU AI Act Article 13</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">CrewAI agent without guardrail — no output validation gate</div>
+  <div class="f-loc">...\langflow\initial_setup\starter_projects\complex_agent.py:1</div>
+  <div class="f-detail">
+    <div class="f-rem">Add guardrail= parameter to agent/task config for output validation</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D7</span>
+  </div>
+  <div class="f-msg">CrewAI agent without guardrail — no output validation gate</div>
+  <div class="f-loc">...nitial_setup\starter_projects\hierarchical_tasks_agent.py:1</div>
+  <div class="f-detail">
+    <div class="f-rem">Add guardrail= parameter to agent/task config for output validation</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">LangChain used without CallbackManager — no tool/chain observability</div>
+  <div class="f-loc">...\src\backend\base\langflow\serialization\serialization.py:10</div>
+  <div class="f-detail">
+    <div class="f-rem">Add CallbackManager with on_tool_start/on_chain_start handlers</div>
+    <div class="f-compliance"><span>EU AI Act Article 13</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">LangChain used without CallbackManager — no tool/chain observability</div>
+  <div class="f-loc">...repos\langflow\src\backend\base\langflow\utils\schemas.py:5</div>
+  <div class="f-detail">
+    <div class="f-rem">Add CallbackManager with on_tool_start/on_chain_start handlers</div>
+    <div class="f-compliance"><span>EU AI Act Article 13</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No behavioral trap detection — post-execution behavioral changes not monitored. (10/10 M365 Copilot attacks succeeded)</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Deploy trap defense layer on tool results</div>
+    <div class="f-compliance"><span>EU AI Act Article 14</span><span>OWASP LLM07</span><span>MITRE AML.T0051</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(255,140,0,.12);color:#ff8c00">HIGH</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No approval integrity verification -- agent summaries for approval not cross-checked against actual actions. (Approval fatigue exploitation)</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Deploy trap defense layer on tool results</div>
+    <div class="f-compliance"><span>EU AI Act Article 14</span><span>OWASP LLM07</span><span>MITRE AML.T0048</span></div>
+  </div>
+</div>
+  </details></div>
+</div><div>
+  <div class="fg-hdr" style="color:#f5c518" onclick="toggleGroup('fg-medium')">
+    <span id="fg-medium-arrow" class="arrow">&#9654;</span>
+    MEDIUM <span class="fg-cnt" style="background:rgba(245,197,24,.12);color:#f5c518">51</span>
+  </div>
+  <div id="fg-medium" class="fg-body"><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'TranslationFlow - Language Detection, Translation, and Intent Classification.
+
+This flow translates user input to English and classifies intent as either
+'generate_component' or 'question'.
+
+Usage:
+    from langflow.agentic.flows.translation_flow import get_graph
+    graph = await get_graph(provider=&quot;OpenAI&quot;, model_name=&quot;gpt-4o-mini&quot;)
+' — no routing/fallback</div>
+  <div class="f-loc">...c\backend\base\langflow\agentic\flows\translation_flow.py:1</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'Create and return the TranslationFlow graph.
+
+    Args:
+        provider: Model provider (e.g., &quot;OpenAI&quot;, &quot;Anthropic&quot;). Defaults to OpenAI.
+        model_name: Model name (e.g., &quot;gpt-4o-mini&quot;). Defaults to gpt-4o-mini.
+        api_key_var: Optional API key variable name (e.g., &quot;OPENAI_API_KEY&quot;).
+
+    Returns:
+        Graph: The configured translation flow graph.
+    ' — no routing/fallback</div>
+  <div class="f-loc">...c\backend\base\langflow\agentic\flows\translation_flow.py:79</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-4o-mini' — no routing/fallback</div>
+  <div class="f-loc">...c\backend\base\langflow\agentic\flows\translation_flow.py:91</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><details style="margin-top:4px">
+    <summary style="cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--text2);margin-bottom:8px;padding-left:24px">Show 48 more MEDIUM findings</summary>
+    <div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'Inject model configuration into the flow's Agent component.
+
+    Args:
+        flow_data: The flow JSON as a dict
+        provider: The provider name (e.g., &quot;OpenAI&quot;, &quot;Anthropic&quot;)
+        model_name: The model name (e.g., &quot;gpt-4o&quot;, &quot;claude-sonnet-4-5-20250929&quot;)
+        api_key_var: Optional API key variable name. If not provided, uses provider's default.
+
+    Returns:
+        Modified flow data with the model configuration injected
+
+    Raises:
+        ValueError: If provider is unknown
+    ' — no routing/fallback</div>
+  <div class="f-loc">...ackend\base\langflow\agentic\services\flow_preparation.py:16</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'Load a Graph from a Python flow file.
+
+    The Python file must define a function `get_graph()` that returns a Graph.
+    The function can optionally accept provider, model_name, and api_key_var parameters.
+
+    Args:
+        flow_path: Path to the Python flow file.
+        provider: Optional model provider (e.g., &quot;OpenAI&quot;).
+        model_name: Optional model name (e.g., &quot;gpt-4o-mini&quot;).
+        api_key_var: Optional API key variable name.
+
+    Returns:
+        Graph: The loaded and configured graph.
+
+    Raises:
+        HTTPException: If the flow file cannot be loaded or executed.
+    ' — no routing/fallback</div>
+  <div class="f-loc">...end\base\langflow\agentic\services\helpers\flow_loader.py:119</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...w\alembic\versions\006b3990db50_add_unique_constraints.py:39</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...w\alembic\versions\006b3990db50_add_unique_constraints.py:62</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...sions\0882f9657f22_encrypt_existing_mcp_auth_settings_.py:68</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...sions\0882f9657f22_encrypt_existing_mcp_auth_settings_.py:72</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...sions\0882f9657f22_encrypt_existing_mcp_auth_settings_.py:118</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...sions\0882f9657f22_encrypt_existing_mcp_auth_settings_.py:122</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...ow\alembic\versions\2ac71eb9c3ae_adds_credential_table.py:41</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...ow\alembic\versions\2ac71eb9c3ae_adds_credential_table.py:51</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...alembic\versions\67cc006d50bf_add_profile_image_column.py:39</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...alembic\versions\67cc006d50bf_add_profile_image_column.py:54</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...e\langflow\alembic\versions\7843803a87b5_store_updates.py:52</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...\versions\7d2162acc8b2_adds_updated_at_and_folder_cols.py:34</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...\versions\7d2162acc8b2_adds_updated_at_and_folder_cols.py:43</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...\versions\7d2162acc8b2_adds_updated_at_and_folder_cols.py:60</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...\versions\7d2162acc8b2_adds_updated_at_and_folder_cols.py:66</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...mbic\versions\f5ee9749d1a6_user_id_can_be_null_in_flow.py:27</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...mbic\versions\f5ee9749d1a6_user_id_can_be_null_in_flow.py:38</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...low\alembic\versions\fd531f8868b1_fix_credential_table.py:36</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D5</span>
+  </div>
+  <div class="f-msg">print() used instead of structured logging</div>
+  <div class="f-loc">...low\alembic\versions\fd531f8868b1_fix_credential_table.py:55</div>
+  <div class="f-detail">
+    <div class="f-rem">Use logging.* or structlog.* for structured, searchable logs</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'Expand a compact flow format to full flow format.
+
+    This endpoint takes a minimal flow representation (as generated by AI agents)
+    and expands it to the full format expected by the Langflow UI.
+
+    The compact format only requires:
+    - nodes: list of {id, type, values?}
+    - edges: list of {source, source_output, target, target_input}
+
+    The endpoint returns the full flow data with complete component templates.
+
+    Example input:
+    ```json
+    {
+        &quot;nodes&quot;: [
+            {&quot;id&quot;: &quot;1&quot;, &quot;type&quot;: &quot;ChatInput&quot;},
+            {&quot;id&quot;: &quot;2&quot;, &quot;type&quot;: &quot;OpenAIModel&quot;, &quot;values&quot;: {&quot;model_name&quot;: &quot;gpt-4&quot;}}
+        ],
+        &quot;edges&quot;: [
+            {&quot;source&quot;: &quot;1&quot;, &quot;source_output&quot;: &quot;message&quot;, &quot;target&quot;: &quot;2&quot;, &quot;target_input&quot;: &quot;input_value&quot;}
+        ]
+    }
+    ```
+    ' — no routing/fallback</div>
+  <div class="f-loc">...\repos\langflow\src\backend\base\langflow\api\v1\flows.py:905</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-4o-transcribe' — no routing/fallback</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\api\v1\voice_mode.py:220</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'wss://api.openai.com/v1/realtime?model=gpt-4o-mini-realtime-preview' — no routing/fallback</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\api\v1\voice_mode.py:753</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-4o-mini-tts' — no routing/fallback</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\api\v1\voice_mode.py:1300</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-4o-mini' — no routing/fallback</div>
+  <div class="f-loc">...\langflow\initial_setup\starter_projects\complex_agent.py:12</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-4o' — no routing/fallback</div>
+  <div class="f-loc">...\langflow\initial_setup\starter_projects\complex_agent.py:13</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-4o-mini' — no routing/fallback</div>
+  <div class="f-loc">...nitial_setup\starter_projects\hierarchical_tasks_agent.py:12</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'gpt-4o' — no routing/fallback</div>
+  <div class="f-loc">...nitial_setup\starter_projects\hierarchical_tasks_agent.py:13</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'Expand a compact flow format to full flow format.
+
+    Args:
+        compact_data: The compact flow data with nodes and edges
+        all_types_dict: The component types dictionary from component_cache
+
+    Returns:
+        Full flow data structure ready for Langflow UI
+
+    Example compact input:
+        {
+            &quot;nodes&quot;: [
+                {&quot;id&quot;: &quot;1&quot;, &quot;type&quot;: &quot;ChatInput&quot;},
+                {&quot;id&quot;: &quot;2&quot;, &quot;type&quot;: &quot;OpenAIModel&quot;, &quot;values&quot;: {&quot;model_name&quot;: &quot;gpt-4&quot;}}
+            ],
+            &quot;edges&quot;: [
+                {&quot;source&quot;: &quot;1&quot;, &quot;source_output&quot;: &quot;message&quot;, &quot;target&quot;: &quot;2&quot;, &quot;target_input&quot;: &quot;input_value&quot;}
+            ]
+        }
+    ' — no routing/fallback</div>
+  <div class="f-loc">...gflow\src\backend\base\langflow\processing\expand_flow.py:252</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'The source of the message. Normally used to display the model name (e.g. 'gpt-4o')' — no routing/fallback</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\schema\properties.py:11</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D12</span>
+  </div>
+  <div class="f-msg">Hardcoded model name: 'Format a span name following the OTel semantic convention ``&quot;{operation} {model}&quot;``.
+
+        Args:
+            operation: Human-readable operation name (e.g. ``&quot;ChatOpenAI&quot;``).
+            model_name: Optional model identifier (e.g. ``&quot;gpt-4o&quot;``).
+
+        Returns:
+            ``&quot;{operation} {model_name}&quot;`` when model is known, otherwise just
+            ``operation``.
+        ' — no routing/fallback</div>
+  <div class="f-loc">...backend\base\langflow\services\tracing\native_callback.py:139</div>
+  <div class="f-detail">
+    <div class="f-rem">Use model routing or configuration instead of hardcoded names</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D4</span>
+  </div>
+  <div class="f-msg">Exposed Database URL (no credentials): red...t}/0</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\core\celeryconfig.py:9</div>
+  <div class="f-detail">
+    <div class="f-rem">Move to secrets manager or .env file (excluded from VCS)</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM09</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D4</span>
+  </div>
+  <div class="f-msg">Exposed Database URL (no credentials): red...t}/0</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\core\celeryconfig.py:10</div>
+  <div class="f-detail">
+    <div class="f-rem">Move to secrets manager or .env file (excluded from VCS)</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM09</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D4</span>
+  </div>
+  <div class="f-msg">Exposed Database URL (no credentials): red...79/0</div>
+  <div class="f-loc">...s\langflow\src\backend\base\langflow\core\celeryconfig.py:16</div>
+  <div class="f-detail">
+    <div class="f-rem">Move to secrets manager or .env file (excluded from VCS)</div>
+    <div class="f-compliance"><span>EU AI Act Article 15</span><span>OWASP LLM09</span></div>
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: openai</div>
+  <div class="f-loc">...en\gallery\repos\langflow\src\backend\base\pyproject.toml:7</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: openai==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: langchain</div>
+  <div class="f-loc">...en\gallery\repos\langflow\src\backend\base\pyproject.toml:7</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: langchain==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: openai</div>
+  <div class="f-loc">...en\gallery\repos\langflow\src\backend\base\pyproject.toml:385</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: openai==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: anthropic</div>
+  <div class="f-loc">...en\gallery\repos\langflow\src\backend\base\pyproject.toml:386</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: anthropic==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: litellm</div>
+  <div class="f-loc">...en\gallery\repos\langflow\src\backend\base\pyproject.toml:425</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: litellm==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: langchain</div>
+  <div class="f-loc">...en\gallery\repos\langflow\src\backend\base\pyproject.toml:449</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: langchain==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: langchain</div>
+  <div class="f-loc">...en\gallery\repos\langflow\src\backend\base\pyproject.toml:450</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: langchain==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D14</span>
+  </div>
+  <div class="f-msg">Unpinned AI dependency: langchain</div>
+  <div class="f-loc">...en\gallery\repos\langflow\src\backend\base\pyproject.toml:452</div>
+  <div class="f-detail">
+    <div class="f-rem">Pin version: langchain==&lt;specific_version&gt;</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">CrewAI agent without max_iter or timeout — unbounded execution</div>
+  <div class="f-loc">...\langflow\initial_setup\starter_projects\complex_agent.py:1</div>
+  <div class="f-detail">
+    <div class="f-rem">Set max_iter= and/or timeout= to prevent runaway agent loops</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D6</span>
+  </div>
+  <div class="f-msg">CrewAI agent without max_iter or timeout — unbounded execution</div>
+  <div class="f-loc">...nitial_setup\starter_projects\hierarchical_tasks_agent.py:1</div>
+  <div class="f-detail">
+    <div class="f-rem">Set max_iter= and/or timeout= to prevent runaway agent loops</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No adversarial testing evidence — no red team, no prompt injection tests</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Implement adversarial testing for agent systems</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No tool-call attack simulation — agent tool calls not tested against adversarial inputs</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Implement adversarial testing for agent systems</div>
+    
+  </div>
+</div><div class="f-card" onclick="toggleFinding(this)">
+  <div class="f-top">
+    <span class="f-sev" style="background:rgba(245,197,24,.12);color:#f5c518">MEDIUM</span>
+    <span class="f-dim">D17</span>
+  </div>
+  <div class="f-msg">No multi-agent chaos engineering — agent swarms not stress tested</div>
+  
+  <div class="f-detail">
+    <div class="f-rem">Implement adversarial testing for agent systems</div>
+    
+  </div>
+</div>
+  </details></div>
+</div>
+  </div>
+  <div class="sec">
+    <div class="sec-head"><span class="sec-title">&#128161; Recommendations</span><span class="sec-count">ordered by score impact</span></div>
+    <div class="rec">
+  <div class="rec-n">#1</div>
+  <div>
+    <div class="rec-title">Establish a live tool inventory <span class="rec-pts">+23 pts</span></div>
+    <div class="rec-body">No tool catalog detected. Without a centralized inventory of MCP tools and their schemas, governance policies have nothing to enforce against. Deploy a tool registry with auto-discovery.</div>
+    <div class="workaround-box">
+  <div class="workaround-label">&#9888; The Workaround Tax</div>
+  <div class="workaround-text">
+    <strong>Stop paying the Workaround Tax.</strong>
+    Relying on prompt-filters and out-of-band monitoring forces your developers to write
+    manual security logic scattered across every agent and service.
+    A centralized gateway enforces policy automatically &mdash; at the interception layer,
+    on every tool call, without code changes in your agents.
+  </div>
+</div><div class="cmp">
+  <div class="cmp-grid">
+    <div class="cmp-col cmp-cur">
+      <div class="cmp-lbl c">Current state</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
+        <span class="cmp-score c">18</span><span class="cmp-denom">/ 100</span>
+      </div>
+      <div class="cmp-lvl c">&#10007; UNGOVERNED</div>
+      <div class="cmp-dim"><span class="cmp-dim-lbl">D1 Tool Inventory</span><div class="cmp-bt"><div class="cmp-bf" style="width:8%;background:var(--critical)"></div></div><span class="cmp-val">2/25</span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D2 Risk Detection</span><div class="cmp-bt"><div class="cmp-bf" style="width:0%;background:var(--muted)"></div></div><span class="cmp-val" style="color:var(--critical)">0/20</span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D9 Threat Detection</span><div class="cmp-bt"><div class="cmp-bf" style="width:0%;background:var(--muted)"></div></div><span class="cmp-val" style="color:var(--critical)">0/20</span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D4 Credential Management</span><div class="cmp-bt"><div class="cmp-bf" style="width:10%;background:var(--critical)"></div></div><span class="cmp-val">2/20</span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D7 Human-in-the-Loop</span><div class="cmp-bt"><div class="cmp-bf" style="width:0%;background:var(--muted)"></div></div><span class="cmp-val" style="color:var(--critical)">0/15</span></div>
+    </div>
+    <div class="cmp-col cmp-sr">
+      <div class="cmp-lbl s">+ SharkRouter (full deployment)</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
+        <span class="cmp-score s">91</span><span class="cmp-denom">/ 100</span>
+      </div>
+      <div class="cmp-lvl s">&#10003; GOVERNED</div>
+      <div class="cmp-dim"><span class="cmp-dim-lbl">D1 Tool Inventory</span><div class="cmp-bt"><div class="cmp-bf" style="width:92%;background:var(--low)"></div></div><span class="cmp-val s">23 <span class="delta">+21</span></span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D2 Risk Detection</span><div class="cmp-bt"><div class="cmp-bf" style="width:90%;background:var(--low)"></div></div><span class="cmp-val s">18 <span class="delta">+18</span></span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D9 Threat Detection</span><div class="cmp-bt"><div class="cmp-bf" style="width:90%;background:var(--low)"></div></div><span class="cmp-val s">18 <span class="delta">+18</span></span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D4 Credential Management</span><div class="cmp-bt"><div class="cmp-bf" style="width:90%;background:var(--low)"></div></div><span class="cmp-val s">18 <span class="delta">+16</span></span></div><div class="cmp-dim"><span class="cmp-dim-lbl">D7 Human-in-the-Loop</span><div class="cmp-bt"><div class="cmp-bf" style="width:93%;background:var(--low)"></div></div><span class="cmp-val s">14 <span class="delta">+14</span></span></div>
+    </div>
+  </div>
+  <div class="cmp-foot">
+    <span>* Projection based on SharkRouter's estimated score. Actual results may vary.&nbsp;&nbsp;<a href="https://sharkrouter.ai">sharkrouter.ai &rarr;</a></span>
+    <span class="cmp-delta">18 &rarr; 91 &middot; +73 pts</span>
+  </div>
+</div>
+  </div>
+</div><div class="rec">
+  <div class="rec-n">#2</div>
+  <div>
+    <div class="rec-title">Deploy risk classification for tool calls <span class="rec-pts">+20 pts</span></div>
+    <div class="rec-body">No risk scoring on tool invocations. Every tool call carries the same implicit trust level. Classify tools by risk (destructive, financial, exfiltration) and enforce approval gates for high-risk categories. (16 findings in this dimension)</div>
+    
+  </div>
+</div><div class="rec">
+  <div class="rec-n">#3</div>
+  <div>
+    <div class="rec-title">Deploy behavioral detection and kill switch <span class="rec-pts">+20 pts</span></div>
+    <div class="rec-body">No behavioral baselines, no anomaly detection, no auto-suspend capability. A compromised agent can operate indefinitely. Salami slicing across sessions is undetectable. (26 findings in this dimension)</div>
+    
+  </div>
+</div><div class="rec">
+  <div class="rec-n">#4</div>
+  <div>
+    <div class="rec-title">Move credentials to a secrets manager <span class="rec-pts">+18 pts</span></div>
+    <div class="rec-body">API keys or credentials found in source code. Move to HashiCorp Vault, AWS Secrets Manager, or environment-level secret stores. Rotate all exposed keys immediately. Add .env to .gitignore. (6 findings in this dimension)</div>
+    
+  </div>
+</div><div class="rec">
+  <div class="rec-n">#5</div>
+  <div>
+    <div class="rec-title">Add human-in-the-loop approval gates <span class="rec-pts">+15 pts</span></div>
+    <div class="rec-body">No approval gates or dry-run preview detected. Agents can execute irreversible operations with no confirmation. Deploy plan-execute separation with mandatory human approval for destructive actions. (2 findings in this dimension)</div>
+    
+  </div>
+</div>
+  </div>
+  <div class="sec" style="border-color:rgba(96,165,250,0.25)">
+    <div class="email-wrap">
+      <div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--info);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px">&#9993; Get your remediation guide</div>
+        <div style="font-size:18px;font-weight:700;margin-bottom:6px">Personalized remediation plan for your <span style="color:var(--critical);font-weight:600">21 CRITICAL</span> findings</div>
+        <div class="email-info">
+          We'll email you a prioritized remediation guide with the exact steps to fix your
+          biggest governance gaps — ranked by point impact, with actionable instructions per dimension.
+        </div>
+        <div class="email-cols">
+          <div>
+            <div class="email-col-hdr" style="color:var(--low)">&#10003; WE SEND</div>
+            <ul>
+              <li>&rarr; Your score (18/100)</li>
+              <li>&rarr; Top dimension gaps + fixes</li>
+              <li>&rarr; Finding counts by severity</li>
+              <li>&rarr; Detected tools summary</li>
+            </ul>
+          </div>
+          <div>
+            <div class="email-col-hdr" style="color:var(--critical)">&#10007; WE NEVER SEND</div>
+            <ul>
+              <li>&rarr; API key values</li>
+              <li>&rarr; Log file content</li>
+              <li>&rarr; File paths or hostnames</li>
+              <li>&rarr; Any PII</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="email-form">
+        <div style="font-size:13px;color:var(--text2);margin-bottom:4px;line-height:1.5">Enter your work email to receive the report and remediation guide.</div>
+        <input type="email" class="email-input" placeholder="you@company.com">
+        <input type="text" id="warden-company" class="email-input" placeholder="Company (optional)">
+        <button class="email-btn" onclick="submitEmail(this)">SEND REPORT &rarr;</button>
+        <div id="email-status" style="font-family:var(--mono);font-size:11px;color:var(--muted);text-align:center;min-height:16px"></div>
+        <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);line-height:1.7">
+          Max 3 emails total. Unsubscribe anytime.<br>
+          <a href="https://sharkrouter.ai/privacy" style="color:var(--info);text-decoration:none">Privacy policy &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <div class="email-bar">
+      <span>Prefer to keep it local? Report saved at <span style="font-family:var(--mono);color:var(--text)">./warden_report.html</span></span>
+      <span style="font-family:var(--mono);font-size:10px">warden scan --no-email for CI/headless use</span>
+    </div>
+    <script type="application/json" id="warden-data">{"score": 18, "level": "UNGOVERNED", "total_findings": 119, "critical_count": 21, "finding_counts": {"CRITICAL": 21, "HIGH": 47, "MEDIUM": 51, "LOW": 0, "INFO": 0}, "detected_tools": [], "mcp_tool_count": 0, "dimensions": {"D1": 2, "D2": 0, "D3": 6, "D4": 2, "D5": 2, "D6": 1, "D7": 0, "D8": 9, "D9": 0, "D10": 2, "D11": 4, "D12": 4, "D13": 4, "D14": 4, "D15": 2, "D16": 0, "D17": 1}, "warden_version": "1.6.0", "scoring_model": "4.3", "source": "html_report"}</script>
+  </div>
+  <div class="foot">
+    Generated by <strong>Warden v1.6.0</strong> &middot; Open Source &middot; MIT License &middot;
+    <a href="https://github.com/SharkRouter/warden">github.com/sharkrouter/warden</a><br>
+    Scoring model v4.3 &middot; 17 weighted dimensions &middot; 235 pts &middot; methodology in SCORING.md<br>
+    <div class="foot-priv">Scan data stays on your machine. Email delivery is opt-in only.<br>
+    When opted in: score + metadata only. Never: keys, logs, paths, or PII.</div>
+    <a href="https://sharkrouter.ai/privacy" style="font-size:10px">Privacy policy</a> &middot;
+    To enforce policies on what Warden found &rarr; <a href="https://sharkrouter.ai" class="foot-cta">Explore what 91/100 looks like &rarr;</a>
+  </div>
+</div>
+<script>
+function toggleGroup(id){
+  var b=document.getElementById(id);
+  var a=document.getElementById(id+'-arrow');
+  if(b){b.classList.toggle('open');if(a)a.classList.toggle('open')}
+}
+function toggleFinding(el){el.classList.toggle('exp')}
+function submitEmail(btn){
+  var input=btn.parentElement.querySelector('input[type=email]');
+  var status=document.getElementById('email-status');
+  var email=input.value.trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    status.style.color='var(--critical)';
+    status.textContent='Please enter a valid email address.';
+    return;
+  }
+  btn.disabled=true;btn.textContent='SENDING...';
+  var data=JSON.parse(document.getElementById('warden-data').textContent);
+  data.email=email;
+  var company=document.getElementById('warden-company');
+  if(company&&company.value)data.company=company.value;
+  fetch('https://api.sharkrouter.ai/v1/warden/submit',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(data)
+  }).then(function(r){
+    if(r.ok){btn.style.background='var(--low)';btn.style.color='#000';btn.textContent='\u2713 SENT';input.disabled=true;
+      status.style.color='var(--low)';status.textContent='Check your inbox \u2014 report and guide on their way.';}
+    else{btn.textContent='SEND REPORT \u2192';btn.disabled=false;
+      status.style.color='var(--critical)';status.textContent='Failed to send. Try again.';}
+  }).catch(function(){btn.textContent='SEND REPORT \u2192';btn.disabled=false;
+    status.style.color='var(--critical)';status.textContent='Network error. Try again.';});
+}
+</script>
+</body>
+</html>

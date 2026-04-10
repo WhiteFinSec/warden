@@ -1,0 +1,2162 @@
+{
+  "version": "1.6.0",
+  "scoring_model": "v4.3",
+  "scoring_version": "4.3",
+  "timestamp": "2026-04-10T23:08:34.310296+00:00",
+  "target_path": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core",
+  "file_counts": {
+    "python": 92,
+    "js": 0,
+    "other": 0
+  },
+  "coverage_warning": false,
+  "score": {
+    "total": 6,
+    "max": 100,
+    "level": "UNGOVERNED",
+    "raw_total": 15,
+    "raw_max": 235,
+    "dimensions": {
+      "D1": {
+        "name": "Tool Inventory",
+        "raw": 4,
+        "max": 25,
+        "pct": 16
+      },
+      "D2": {
+        "name": "Risk Detection",
+        "raw": 0,
+        "max": 20,
+        "pct": 0
+      },
+      "D3": {
+        "name": "Policy Coverage",
+        "raw": 2,
+        "max": 20,
+        "pct": 10
+      },
+      "D4": {
+        "name": "Credential Management",
+        "raw": 3,
+        "max": 20,
+        "pct": 15
+      },
+      "D5": {
+        "name": "Log Hygiene",
+        "raw": 0,
+        "max": 10,
+        "pct": 0
+      },
+      "D6": {
+        "name": "Framework Coverage",
+        "raw": 0,
+        "max": 5,
+        "pct": 0
+      },
+      "D7": {
+        "name": "Human-in-the-Loop",
+        "raw": 0,
+        "max": 15,
+        "pct": 0
+      },
+      "D8": {
+        "name": "Agent Identity",
+        "raw": 2,
+        "max": 15,
+        "pct": 13
+      },
+      "D9": {
+        "name": "Threat Detection",
+        "raw": 0,
+        "max": 20,
+        "pct": 0
+      },
+      "D10": {
+        "name": "Prompt Security",
+        "raw": 0,
+        "max": 15,
+        "pct": 0
+      },
+      "D11": {
+        "name": "Cloud / Platform",
+        "raw": 1,
+        "max": 10,
+        "pct": 10
+      },
+      "D12": {
+        "name": "LLM Observability",
+        "raw": 0,
+        "max": 10,
+        "pct": 0
+      },
+      "D13": {
+        "name": "Data Recovery",
+        "raw": 0,
+        "max": 10,
+        "pct": 0
+      },
+      "D14": {
+        "name": "Compliance Maturity",
+        "raw": 3,
+        "max": 10,
+        "pct": 30
+      },
+      "D15": {
+        "name": "Post-Exec Verification",
+        "raw": 0,
+        "max": 10,
+        "pct": 0
+      },
+      "D16": {
+        "name": "Data Flow Governance",
+        "raw": 0,
+        "max": 10,
+        "pct": 0
+      },
+      "D17": {
+        "name": "Adversarial Resilience",
+        "raw": 0,
+        "max": 10,
+        "pct": 0
+      }
+    }
+  },
+  "findings": [
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_base_agent.py",
+      "line": 204,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_queue.py",
+      "line": 118,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Agent loop with LLM call has no exit condition — potential infinite loop",
+      "remediation": "Add max_iterations, timeout, or explicit break condition",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_queue.py",
+      "line": 165,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Agent loop with LLM call has no exit condition — potential infinite loop",
+      "remediation": "Add max_iterations, timeout, or explicit break condition",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_queue.py",
+      "line": 130,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_queue.py",
+      "line": 177,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 22,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-41' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 23,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-45' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 24,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 28,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 31,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gemini-1.5-flash' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 32,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gemini-1.5-pro' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 36,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'claude-3-haiku' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 37,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'claude-3-sonnet' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 38,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'claude-3-opus' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 39,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'claude-3-5-haiku' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 40,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'claude-3-5-sonnet' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 41,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'claude-3-7-sonnet' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 58,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-41' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 59,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-45' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 60,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 64,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 68,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gemini-1.5-flash' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 69,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gemini-1.5-pro' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 74,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'claude-3-haiku' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 75,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'claude-3-sonnet' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 76,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'claude-3-opus' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 77,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'claude-3-5-haiku' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 78,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'claude-3-5-sonnet' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\models\\_model_client.py",
+      "line": 79,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'claude-3-7-sonnet' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\tool_agent\\_caller_loop.py",
+      "line": 46,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Agent loop with LLM call has no exit condition — potential infinite loop",
+      "remediation": "Add max_iterations, timeout, or explicit break condition",
+      "compliance": {}
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_routed_agent.py",
+      "line": 491,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_single_threaded_agent_runtime.py",
+      "line": 369,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_single_threaded_agent_runtime.py",
+      "line": 405,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_single_threaded_agent_runtime.py",
+      "line": 648,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_single_threaded_agent_runtime.py",
+      "line": 475,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_single_threaded_agent_runtime.py",
+      "line": 571,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D5",
+      "message": "No audit logging for tool calls detected",
+      "remediation": "Add audit logging for all tool/agent executions",
+      "compliance": {
+        "eu_ai_act": "Article 12"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "No log retention policy detected",
+      "remediation": "Configure log rotation and retention periods",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_agent.py",
+      "line": 13,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'Agent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_agent.py",
+      "line": 13,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'Agent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_base_agent.py",
+      "line": 60,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'BaseAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_base_agent.py",
+      "line": 60,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'BaseAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_closure_agent.py",
+      "line": 76,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'ClosureAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_closure_agent.py",
+      "line": 76,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'ClosureAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_routed_agent.py",
+      "line": 415,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'RoutedAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_routed_agent.py",
+      "line": 415,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'RoutedAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_routed_agent.py",
+      "line": 415,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'RoutedAgent' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\tool_agent\\_tool_agent.py",
+      "line": 40,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'ToolAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\tool_agent\\_tool_agent.py",
+      "line": 40,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'ToolAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\tool_agent\\_tool_agent.py",
+      "line": 40,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'ToolAgent' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_cancellation.py",
+      "line": 25,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'LongRunningAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_cancellation.py",
+      "line": 25,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'LongRunningAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_cancellation.py",
+      "line": 25,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'LongRunningAgent' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_cancellation.py",
+      "line": 44,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'NestingLongRunningAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_cancellation.py",
+      "line": 44,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'NestingLongRunningAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_cancellation.py",
+      "line": 44,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'NestingLongRunningAgent' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_routed_agent.py",
+      "line": 28,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'CounterAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_routed_agent.py",
+      "line": 28,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'CounterAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_routed_agent.py",
+      "line": 28,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'CounterAgent' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_routed_agent.py",
+      "line": 130,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'EventAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_routed_agent.py",
+      "line": 130,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'EventAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_routed_agent.py",
+      "line": 130,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'EventAgent' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_routed_agent.py",
+      "line": 176,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'RPCAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_routed_agent.py",
+      "line": 176,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'RPCAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_routed_agent.py",
+      "line": 176,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'RPCAgent' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_runtime.py",
+      "line": 332,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'FailingAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_runtime.py",
+      "line": 332,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'FailingAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_runtime.py",
+      "line": 332,
+      "severity": "MEDIUM",
+      "dimension": "D8",
+      "message": "Agent class 'FailingAgent' has no defined lifecycle states",
+      "remediation": "Add state machine (ACTIVE/SUSPENDED/RETIRED) for agent lifecycle",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_state.py",
+      "line": 7,
+      "severity": "HIGH",
+      "dimension": "D8",
+      "message": "Agent class 'StatefulAgent' has no permission model",
+      "remediation": "Add role/permission checks before tool dispatch",
+      "compliance": {}
+    },
+    {
+      "layer": 5,
+      "scanner": "agent_arch_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_state.py",
+      "line": 7,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Agent class 'StatefulAgent' has no cost tracking",
+      "remediation": "Track token usage and costs per agent execution",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 6,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: autogen",
+      "remediation": "Pin version: autogen==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 9,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: autogen",
+      "remediation": "Pin version: autogen==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 31,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: autogen",
+      "remediation": "Pin version: autogen==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 35,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 35,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: openai",
+      "remediation": "Pin version: openai==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 37,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: llama-index",
+      "remediation": "Pin version: llama-index==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 37,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: openai",
+      "remediation": "Pin version: openai==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 38,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: llama-index",
+      "remediation": "Pin version: llama-index==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 38,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: openai",
+      "remediation": "Pin version: openai==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 39,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: llama-index",
+      "remediation": "Pin version: llama-index==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 40,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: llama-index",
+      "remediation": "Pin version: llama-index==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 41,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: llama-index",
+      "remediation": "Pin version: llama-index==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 42,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: llama-index",
+      "remediation": "Pin version: llama-index==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 65,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: autogen",
+      "remediation": "Pin version: autogen==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 71,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: autogen",
+      "remediation": "Pin version: autogen==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\pyproject.toml",
+      "line": 86,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: autogen",
+      "remediation": "Pin version: autogen==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\logging.py",
+      "line": 33,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\logging.py",
+      "line": 33,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_agent_instantiation.py",
+      "line": 26,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_agent_instantiation.py",
+      "line": 26,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_agent_runtime.py",
+      "line": 94,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_agent_runtime.py",
+      "line": 94,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_closure_agent.py",
+      "line": 162,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_closure_agent.py",
+      "line": 162,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_component_config.py",
+      "line": 214,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_image.py",
+      "line": 25,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_image.py",
+      "line": 25,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_intervention.py",
+      "line": 33,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_intervention.py",
+      "line": 33,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_routed_agent.py",
+      "line": 427,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_routed_agent.py",
+      "line": 427,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_single_threaded_agent_runtime.py",
+      "line": 175,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_single_threaded_agent_runtime.py",
+      "line": 175,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_type_prefix_subscription.py",
+      "line": 19,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_type_prefix_subscription.py",
+      "line": 19,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_type_subscription.py",
+      "line": 19,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_type_subscription.py",
+      "line": 19,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\code_executor\\_func_with_reqs.py",
+      "line": 179,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\code_executor\\_func_with_reqs.py",
+      "line": 179,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\memory\\_list_memory.py",
+      "line": 37,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\memory\\_list_memory.py",
+      "line": 37,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\model_context\\_chat_completion_context.py",
+      "line": 28,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\model_context\\_chat_completion_context.py",
+      "line": 28,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\tools\\_function_tool.py",
+      "line": 59,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\tools\\_function_tool.py",
+      "line": 59,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\utils\\_json_to_pydantic.py",
+      "line": 411,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\utils\\_json_to_pydantic.py",
+      "line": 411,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_base_agent.py",
+      "line": 2,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_base_agent.py",
+      "line": 2,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_cache_store.py",
+      "line": 3,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_cache_store.py",
+      "line": 3,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_cancellation.py",
+      "line": 5,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_cancellation.py",
+      "line": 5,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_closure_agent.py",
+      "line": 5,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_closure_agent.py",
+      "line": 5,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_code_executor.py",
+      "line": 4,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_code_executor.py",
+      "line": 4,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_component_config.py",
+      "line": 7,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_component_config.py",
+      "line": 7,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_intervention.py",
+      "line": 4,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_intervention.py",
+      "line": 4,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_json_extraction.py",
+      "line": 2,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_json_extraction.py",
+      "line": 2,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_json_to_pydantic.py",
+      "line": 6,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_json_to_pydantic.py",
+      "line": 6,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_memory.py",
+      "line": 4,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_memory.py",
+      "line": 4,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_models.py",
+      "line": 2,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_models.py",
+      "line": 2,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_model_context.py",
+      "line": 4,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_model_context.py",
+      "line": 4,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_routed_agent.py",
+      "line": 6,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_routed_agent.py",
+      "line": 6,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_runtime.py",
+      "line": 4,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_runtime.py",
+      "line": 4,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_serialization.py",
+      "line": 5,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_serialization.py",
+      "line": 5,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_state.py",
+      "line": 4,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_state.py",
+      "line": 4,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_static_workbench_overrides.py",
+      "line": 4,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_static_workbench_overrides.py",
+      "line": 4,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_subscription.py",
+      "line": 2,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_subscription.py",
+      "line": 2,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_tools.py",
+      "line": 7,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_tools.py",
+      "line": 7,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_tool_agent.py",
+      "line": 7,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_tool_agent.py",
+      "line": 7,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_types.py",
+      "line": 5,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_types.py",
+      "line": 5,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_workbench.py",
+      "line": 4,
+      "severity": "CRITICAL",
+      "dimension": "D6",
+      "message": "AutoGen code execution without Docker sandboxing",
+      "remediation": "Set code_execution_config={'use_docker': True} for safe code execution",
+      "compliance": {
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\tests\\test_workbench.py",
+      "line": 4,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "AutoGen agent without is_termination_msg — no conversation exit condition",
+      "remediation": "Define is_termination_msg function to control when agents stop",
+      "compliance": {}
+    },
+    {
+      "layer": 12,
+      "scanner": "cloud_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core\\src\\autogen_core\\_component_config.py",
+      "line": 48,
+      "severity": "HIGH",
+      "dimension": "D10",
+      "message": "Azure AI used without ContentSafetyClient — no content moderation",
+      "remediation": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM02"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D17",
+      "message": "No content injection defense — hidden HTML/CSS/zero-width instructions pass to agents undetected. (86% attack success rate)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D17",
+      "message": "No RAG poisoning protection — knowledge base documents not scanned for embedded instructions. (<0.1% contamination = >80% attack success)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0049"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core",
+      "line": 0,
+      "severity": "HIGH",
+      "dimension": "D17",
+      "message": "No behavioral trap detection — post-execution behavioral changes not monitored. (10/10 M365 Copilot attacks succeeded)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 14",
+        "owasp_llm": "LLM07",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core",
+      "line": 0,
+      "severity": "HIGH",
+      "dimension": "D17",
+      "message": "No approval integrity verification -- agent summaries for approval not cross-checked against actual actions. (Approval fatigue exploitation)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 14",
+        "owasp_llm": "LLM07",
+        "mitre_atlas": "AML.T0048"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No adversarial testing evidence — no red team, no prompt injection tests",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No tool-call attack simulation — agent tool calls not tested against adversarial inputs",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No multi-agent chaos engineering — agent swarms not stress tested",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\autogen\\python\\packages\\autogen-core",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No before/after governance comparison — no A/B testing of governance effectiveness",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    }
+  ],
+  "competitors_detected": [],
+  "gtm_signal": "",
+  "trap_defense": {
+    "content_injection": false,
+    "rag_poisoning": false,
+    "behavioral_traps": false,
+    "approval_integrity": false,
+    "adversarial_testing": false,
+    "tool_attack_simulation": false,
+    "chaos_engineering": false,
+    "before_after_comparison": false,
+    "deepmind_citation": "Franklin, Tomašev, Jacobs, Leibo, Osindero. \"AI Agent Traps.\" Google DeepMind, March 2026."
+  }
+}

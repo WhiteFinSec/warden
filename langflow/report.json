@@ -1,0 +1,1553 @@
+{
+  "version": "1.6.0",
+  "scoring_model": "v4.3",
+  "scoring_version": "4.3",
+  "timestamp": "2026-04-10T23:11:33.078809+00:00",
+  "target_path": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base",
+  "file_counts": {
+    "python": 474,
+    "js": 0,
+    "other": 0
+  },
+  "coverage_warning": false,
+  "score": {
+    "total": 18,
+    "max": 100,
+    "level": "UNGOVERNED",
+    "raw_total": 43,
+    "raw_max": 235,
+    "dimensions": {
+      "D1": {
+        "name": "Tool Inventory",
+        "raw": 2,
+        "max": 25,
+        "pct": 8
+      },
+      "D2": {
+        "name": "Risk Detection",
+        "raw": 0,
+        "max": 20,
+        "pct": 0
+      },
+      "D3": {
+        "name": "Policy Coverage",
+        "raw": 6,
+        "max": 20,
+        "pct": 30
+      },
+      "D4": {
+        "name": "Credential Management",
+        "raw": 2,
+        "max": 20,
+        "pct": 10
+      },
+      "D5": {
+        "name": "Log Hygiene",
+        "raw": 2,
+        "max": 10,
+        "pct": 20
+      },
+      "D6": {
+        "name": "Framework Coverage",
+        "raw": 1,
+        "max": 5,
+        "pct": 20
+      },
+      "D7": {
+        "name": "Human-in-the-Loop",
+        "raw": 0,
+        "max": 15,
+        "pct": 0
+      },
+      "D8": {
+        "name": "Agent Identity",
+        "raw": 9,
+        "max": 15,
+        "pct": 60
+      },
+      "D9": {
+        "name": "Threat Detection",
+        "raw": 0,
+        "max": 20,
+        "pct": 0
+      },
+      "D10": {
+        "name": "Prompt Security",
+        "raw": 2,
+        "max": 15,
+        "pct": 13
+      },
+      "D11": {
+        "name": "Cloud / Platform",
+        "raw": 4,
+        "max": 10,
+        "pct": 40
+      },
+      "D12": {
+        "name": "LLM Observability",
+        "raw": 4,
+        "max": 10,
+        "pct": 40
+      },
+      "D13": {
+        "name": "Data Recovery",
+        "raw": 4,
+        "max": 10,
+        "pct": 40
+      },
+      "D14": {
+        "name": "Compliance Maturity",
+        "raw": 4,
+        "max": 10,
+        "pct": 40
+      },
+      "D15": {
+        "name": "Post-Exec Verification",
+        "raw": 2,
+        "max": 10,
+        "pct": 20
+      },
+      "D16": {
+        "name": "Data Flow Governance",
+        "raw": 0,
+        "max": 10,
+        "pct": 0
+      },
+      "D17": {
+        "name": "Adversarial Resilience",
+        "raw": 1,
+        "max": 10,
+        "pct": 10
+      }
+    }
+  },
+  "findings": [
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\langflow_launcher.py",
+      "line": 9,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\__main__.py",
+      "line": 58,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\flows\\translation_flow.py",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'TranslationFlow - Language Detection, Translation, and Intent Classification.\n\nThis flow translates user input to English and classifies intent as either\n'generate_component' or 'question'.\n\nUsage:\n    from langflow.agentic.flows.translation_flow import get_graph\n    graph = await get_graph(provider=\"OpenAI\", model_name=\"gpt-4o-mini\")\n' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\flows\\translation_flow.py",
+      "line": 79,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'Create and return the TranslationFlow graph.\n\n    Args:\n        provider: Model provider (e.g., \"OpenAI\", \"Anthropic\"). Defaults to OpenAI.\n        model_name: Model name (e.g., \"gpt-4o-mini\"). Defaults to gpt-4o-mini.\n        api_key_var: Optional API key variable name (e.g., \"OPENAI_API_KEY\").\n\n    Returns:\n        Graph: The configured translation flow graph.\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\flows\\translation_flow.py",
+      "line": 91,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 91,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 114,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 129,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 144,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 231,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 262,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 278,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 332,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 366,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 390,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 422,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 455,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 491,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 525,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\mcp\\server.py",
+      "line": 569,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Tool function without input validation",
+      "remediation": "Add input validation (pydantic, jsonschema, or manual checks)",
+      "compliance": {
+        "owasp_llm": "LLM01"
+      }
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\services\\flow_preparation.py",
+      "line": 16,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'Inject model configuration into the flow's Agent component.\n\n    Args:\n        flow_data: The flow JSON as a dict\n        provider: The provider name (e.g., \"OpenAI\", \"Anthropic\")\n        model_name: The model name (e.g., \"gpt-4o\", \"claude-sonnet-4-5-20250929\")\n        api_key_var: Optional API key variable name. If not provided, uses provider's default.\n\n    Returns:\n        Modified flow data with the model configuration injected\n\n    Raises:\n        ValueError: If provider is unknown\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\services\\helpers\\event_consumer.py",
+      "line": 59,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\services\\helpers\\flow_loader.py",
+      "line": 119,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'Load a Graph from a Python flow file.\n\n    The Python file must define a function `get_graph()` that returns a Graph.\n    The function can optionally accept provider, model_name, and api_key_var parameters.\n\n    Args:\n        flow_path: Path to the Python flow file.\n        provider: Optional model provider (e.g., \"OpenAI\").\n        model_name: Optional model name (e.g., \"gpt-4o-mini\").\n        api_key_var: Optional API key variable name.\n\n    Returns:\n        Graph: The loaded and configured graph.\n\n    Raises:\n        HTTPException: If the flow file cannot be loaded or executed.\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\006b3990db50_add_unique_constraints.py",
+      "line": 39,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\006b3990db50_add_unique_constraints.py",
+      "line": 62,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\0882f9657f22_encrypt_existing_mcp_auth_settings_.py",
+      "line": 68,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\0882f9657f22_encrypt_existing_mcp_auth_settings_.py",
+      "line": 72,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\0882f9657f22_encrypt_existing_mcp_auth_settings_.py",
+      "line": 118,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\0882f9657f22_encrypt_existing_mcp_auth_settings_.py",
+      "line": 122,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\2ac71eb9c3ae_adds_credential_table.py",
+      "line": 41,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\2ac71eb9c3ae_adds_credential_table.py",
+      "line": 51,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\369268b9af8b_add_job_id_to_vertex_build_create_job_.py",
+      "line": 73,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\67cc006d50bf_add_profile_image_column.py",
+      "line": 39,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\67cc006d50bf_add_profile_image_column.py",
+      "line": 54,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\7843803a87b5_store_updates.py",
+      "line": 32,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\7843803a87b5_store_updates.py",
+      "line": 38,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\7843803a87b5_store_updates.py",
+      "line": 52,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\7d2162acc8b2_adds_updated_at_and_folder_cols.py",
+      "line": 34,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\7d2162acc8b2_adds_updated_at_and_folder_cols.py",
+      "line": 43,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\7d2162acc8b2_adds_updated_at_and_folder_cols.py",
+      "line": 60,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\7d2162acc8b2_adds_updated_at_and_folder_cols.py",
+      "line": 66,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\f5ee9749d1a6_user_id_can_be_null_in_flow.py",
+      "line": 27,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\f5ee9749d1a6_user_id_can_be_null_in_flow.py",
+      "line": 38,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\fd531f8868b1_fix_credential_table.py",
+      "line": 36,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\alembic\\versions\\fd531f8868b1_fix_credential_table.py",
+      "line": 55,
+      "severity": "MEDIUM",
+      "dimension": "D5",
+      "message": "print() used instead of structured logging",
+      "remediation": "Use logging.* or structlog.* for structured, searchable logs",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\utils\\kb_helpers.py",
+      "line": 64,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\utils\\kb_helpers.py",
+      "line": 94,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\endpoints.py",
+      "line": 717,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\flows.py",
+      "line": 905,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'Expand a compact flow format to full flow format.\n\n    This endpoint takes a minimal flow representation (as generated by AI agents)\n    and expands it to the full format expected by the Langflow UI.\n\n    The compact format only requires:\n    - nodes: list of {id, type, values?}\n    - edges: list of {source, source_output, target, target_input}\n\n    The endpoint returns the full flow data with complete component templates.\n\n    Example input:\n    ```json\n    {\n        \"nodes\": [\n            {\"id\": \"1\", \"type\": \"ChatInput\"},\n            {\"id\": \"2\", \"type\": \"OpenAIModel\", \"values\": {\"model_name\": \"gpt-4\"}}\n        ],\n        \"edges\": [\n            {\"source\": \"1\", \"source_output\": \"message\", \"target\": \"2\", \"target_input\": \"input_value\"}\n        ]\n    }\n    ```\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\knowledge_bases.py",
+      "line": 457,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\models.py",
+      "line": 366,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\models.py",
+      "line": 399,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\models.py",
+      "line": 744,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\models.py",
+      "line": 855,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\voice_mode.py",
+      "line": 1244,
+      "severity": "CRITICAL",
+      "dimension": "D2",
+      "message": "Agent loop with LLM call has no exit condition — potential infinite loop",
+      "remediation": "Add max_iterations, timeout, or explicit break condition",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\voice_mode.py",
+      "line": 971,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\voice_mode.py",
+      "line": 1088,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\voice_mode.py",
+      "line": 220,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o-transcribe' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\voice_mode.py",
+      "line": 753,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'wss://api.openai.com/v1/realtime?model=gpt-4o-mini-realtime-preview' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\voice_mode.py",
+      "line": 1300,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o-mini-tts' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\initial_setup\\starter_projects\\complex_agent.py",
+      "line": 12,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\initial_setup\\starter_projects\\complex_agent.py",
+      "line": 13,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\initial_setup\\starter_projects\\hierarchical_tasks_agent.py",
+      "line": 12,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o-mini' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\initial_setup\\starter_projects\\hierarchical_tasks_agent.py",
+      "line": 13,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'gpt-4o' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\processing\\expand_flow.py",
+      "line": 252,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'Expand a compact flow format to full flow format.\n\n    Args:\n        compact_data: The compact flow data with nodes and edges\n        all_types_dict: The component types dictionary from component_cache\n\n    Returns:\n        Full flow data structure ready for Langflow UI\n\n    Example compact input:\n        {\n            \"nodes\": [\n                {\"id\": \"1\", \"type\": \"ChatInput\"},\n                {\"id\": \"2\", \"type\": \"OpenAIModel\", \"values\": {\"model_name\": \"gpt-4\"}}\n            ],\n            \"edges\": [\n                {\"source\": \"1\", \"source_output\": \"message\", \"target\": \"2\", \"target_input\": \"input_value\"}\n            ]\n        }\n    ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\schema\\properties.py",
+      "line": 11,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'The source of the message. Normally used to display the model name (e.g. 'gpt-4o')' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\services\\event_manager.py",
+      "line": 215,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\services\\store\\service.py",
+      "line": 397,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\services\\store\\service.py",
+      "line": 434,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\services\\tracing\\native_callback.py",
+      "line": 139,
+      "severity": "MEDIUM",
+      "dimension": "D12",
+      "message": "Hardcoded model name: 'Format a span name following the OTel semantic convention ``\"{operation} {model}\"``.\n\n        Args:\n            operation: Human-readable operation name (e.g. ``\"ChatOpenAI\"``).\n            model_name: Optional model identifier (e.g. ``\"gpt-4o\"``).\n\n        Returns:\n            ``\"{operation} {model_name}\"`` when model is known, otherwise just\n            ``operation``.\n        ' — no routing/fallback",
+      "remediation": "Use model routing or configuration instead of hardcoded names",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\services\\tracing\\openlayer.py",
+      "line": 328,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\services\\tracing\\openlayer.py",
+      "line": 677,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\services\\tracing\\openlayer.py",
+      "line": 687,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\services\\tracing\\openlayer.py",
+      "line": 784,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\utils\\data_structure.py",
+      "line": 52,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\utils\\template_validation.py",
+      "line": 191,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 1,
+      "scanner": "code_analyzer",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\utils\\version.py",
+      "line": 38,
+      "severity": "HIGH",
+      "dimension": "D9",
+      "message": "Empty exception handler — errors silently swallowed",
+      "remediation": "Log the exception or handle it explicitly",
+      "compliance": {}
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\core\\celeryconfig.py",
+      "line": 9,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Database URL (no credentials): red...t}/0",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\core\\celeryconfig.py",
+      "line": 10,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Database URL (no credentials): red...t}/0",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\core\\celeryconfig.py",
+      "line": 15,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Exposed Database URL with credentials: amq...72//",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 4,
+      "scanner": "secrets_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\core\\celeryconfig.py",
+      "line": 16,
+      "severity": "MEDIUM",
+      "dimension": "D4",
+      "message": "Exposed Database URL (no credentials): red...79/0",
+      "remediation": "Move to secrets manager or .env file (excluded from VCS)",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM09"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\agentic\\services\\assistant_service.py",
+      "line": 156,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\voice_mode.py",
+      "line": 605,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\voice_mode.py",
+      "line": 618,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\voice_mode.py",
+      "line": 586,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\voice_mode.py",
+      "line": 591,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v2\\registration.py",
+      "line": 126,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v2\\registration.py",
+      "line": 136,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v2\\registration.py",
+      "line": 88,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 7,
+      "scanner": "audit_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v2\\registration.py",
+      "line": 82,
+      "severity": "HIGH",
+      "dimension": "D5",
+      "message": "Potential PII/sensitive data logged via f-string",
+      "remediation": "Redact sensitive fields before logging",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM06"
+      }
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\pyproject.toml",
+      "line": 7,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: openai",
+      "remediation": "Pin version: openai==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\pyproject.toml",
+      "line": 7,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\pyproject.toml",
+      "line": 385,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: openai",
+      "remediation": "Pin version: openai==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\pyproject.toml",
+      "line": 386,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: anthropic",
+      "remediation": "Pin version: anthropic==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\pyproject.toml",
+      "line": 425,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: litellm",
+      "remediation": "Pin version: litellm==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\pyproject.toml",
+      "line": 449,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\pyproject.toml",
+      "line": 450,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\pyproject.toml",
+      "line": 452,
+      "severity": "MEDIUM",
+      "dimension": "D14",
+      "message": "Unpinned AI dependency: langchain",
+      "remediation": "Pin version: langchain==<specific_version>",
+      "compliance": {}
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\pyproject.toml",
+      "line": 1,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Possible typosquat: 'ctransformers' is 1 edit from 'transformers'",
+      "remediation": "Verify this is the intended package, not a typosquat of 'transformers'",
+      "compliance": {
+        "mitre_atlas": "AML.T0010"
+      }
+    },
+    {
+      "layer": 6,
+      "scanner": "dependency_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\pyproject.toml",
+      "line": 1,
+      "severity": "CRITICAL",
+      "dimension": "D4",
+      "message": "Possible typosquat: 'ctransformers' is 1 edit from 'transformers'",
+      "remediation": "Verify this is the intended package, not a typosquat of 'transformers'",
+      "compliance": {
+        "mitre_atlas": "AML.T0010"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\main.py",
+      "line": 60,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\memory.py",
+      "line": 6,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\utils\\kb_helpers.py",
+      "line": 17,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\api\\v1\\knowledge_bases.py",
+      "line": 11,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\helpers\\data.py",
+      "line": 7,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\helpers\\flow.py",
+      "line": 303,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\initial_setup\\starter_projects\\complex_agent.py",
+      "line": 1,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "CrewAI agent without guardrail — no output validation gate",
+      "remediation": "Add guardrail= parameter to agent/task config for output validation",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\initial_setup\\starter_projects\\complex_agent.py",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D6",
+      "message": "CrewAI agent without max_iter or timeout — unbounded execution",
+      "remediation": "Set max_iter= and/or timeout= to prevent runaway agent loops",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\initial_setup\\starter_projects\\hierarchical_tasks_agent.py",
+      "line": 1,
+      "severity": "HIGH",
+      "dimension": "D7",
+      "message": "CrewAI agent without guardrail — no output validation gate",
+      "remediation": "Add guardrail= parameter to agent/task config for output validation",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\initial_setup\\starter_projects\\hierarchical_tasks_agent.py",
+      "line": 1,
+      "severity": "MEDIUM",
+      "dimension": "D6",
+      "message": "CrewAI agent without max_iter or timeout — unbounded execution",
+      "remediation": "Set max_iter= and/or timeout= to prevent runaway agent loops",
+      "compliance": {}
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\serialization\\serialization.py",
+      "line": 10,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 10,
+      "scanner": "framework_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base\\langflow\\utils\\schemas.py",
+      "line": 5,
+      "severity": "HIGH",
+      "dimension": "D6",
+      "message": "LangChain used without CallbackManager — no tool/chain observability",
+      "remediation": "Add CallbackManager with on_tool_start/on_chain_start handlers",
+      "compliance": {
+        "eu_ai_act": "Article 13"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D17",
+      "message": "No content injection defense — hidden HTML/CSS/zero-width instructions pass to agents undetected. (86% attack success rate)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base",
+      "line": 0,
+      "severity": "CRITICAL",
+      "dimension": "D17",
+      "message": "No RAG poisoning protection — knowledge base documents not scanned for embedded instructions. (<0.1% contamination = >80% attack success)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 15",
+        "owasp_llm": "LLM01",
+        "mitre_atlas": "AML.T0049"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base",
+      "line": 0,
+      "severity": "HIGH",
+      "dimension": "D17",
+      "message": "No behavioral trap detection — post-execution behavioral changes not monitored. (10/10 M365 Copilot attacks succeeded)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 14",
+        "owasp_llm": "LLM07",
+        "mitre_atlas": "AML.T0051"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base",
+      "line": 0,
+      "severity": "HIGH",
+      "dimension": "D17",
+      "message": "No approval integrity verification -- agent summaries for approval not cross-checked against actual actions. (Approval fatigue exploitation)",
+      "remediation": "Deploy trap defense layer on tool results",
+      "compliance": {
+        "eu_ai_act": "Article 14",
+        "owasp_llm": "LLM07",
+        "mitre_atlas": "AML.T0048"
+      }
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No adversarial testing evidence — no red team, no prompt injection tests",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No tool-call attack simulation — agent tool calls not tested against adversarial inputs",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    },
+    {
+      "layer": 8,
+      "scanner": "trap_defense_scanner",
+      "file": "C:\\Users\\gilad\\Projects\\warden\\gallery\\repos\\langflow\\src\\backend\\base",
+      "line": 0,
+      "severity": "MEDIUM",
+      "dimension": "D17",
+      "message": "No multi-agent chaos engineering — agent swarms not stress tested",
+      "remediation": "Implement adversarial testing for agent systems",
+      "compliance": {}
+    }
+  ],
+  "competitors_detected": [],
+  "gtm_signal": "",
+  "trap_defense": {
+    "content_injection": false,
+    "rag_poisoning": false,
+    "behavioral_traps": false,
+    "approval_integrity": false,
+    "adversarial_testing": false,
+    "tool_attack_simulation": false,
+    "chaos_engineering": false,
+    "before_after_comparison": true,
+    "deepmind_citation": "Franklin, Tomašev, Jacobs, Leibo, Osindero. \"AI Agent Traps.\" Google DeepMind, March 2026."
+  }
+}

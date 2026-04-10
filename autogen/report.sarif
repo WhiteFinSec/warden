@@ -1,0 +1,3721 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/main/sarif-2.1/schema/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "warden-ai",
+          "version": "1.6.0",
+          "informationUri": "https://github.com/SharkRouter/warden",
+          "rules": [
+            {
+              "id": "code_analyzer/D9",
+              "shortDescription": {
+                "text": "code_analyzer/D9"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Log the exception or handle it explicitly"
+              }
+            },
+            {
+              "id": "code_analyzer/D2",
+              "shortDescription": {
+                "text": "code_analyzer/D2"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Add max_iterations, timeout, or explicit break condition"
+              }
+            },
+            {
+              "id": "code_analyzer/D12",
+              "shortDescription": {
+                "text": "code_analyzer/D12"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "text": "Use model routing or configuration instead of hardcoded names"
+              }
+            },
+            {
+              "id": "audit_scanner/D5",
+              "shortDescription": {
+                "text": "audit_scanner/D5"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Redact sensitive fields before logging"
+              }
+            },
+            {
+              "id": "agent_arch_scanner/D8",
+              "shortDescription": {
+                "text": "agent_arch_scanner/D8"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Add role/permission checks before tool dispatch"
+              }
+            },
+            {
+              "id": "agent_arch_scanner/D12",
+              "shortDescription": {
+                "text": "agent_arch_scanner/D12"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "text": "Track token usage and costs per agent execution"
+              }
+            },
+            {
+              "id": "dependency_scanner/D14",
+              "shortDescription": {
+                "text": "dependency_scanner/D14"
+              },
+              "defaultConfiguration": {
+                "level": "warning"
+              },
+              "help": {
+                "text": "Pin version: autogen==<specific_version>"
+              }
+            },
+            {
+              "id": "framework_scanner/D6",
+              "shortDescription": {
+                "text": "framework_scanner/D6"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Set code_execution_config={'use_docker': True} for safe code execution"
+              }
+            },
+            {
+              "id": "framework_scanner/D7",
+              "shortDescription": {
+                "text": "framework_scanner/D7"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Define is_termination_msg function to control when agents stop"
+              }
+            },
+            {
+              "id": "cloud_scanner/D10",
+              "shortDescription": {
+                "text": "cloud_scanner/D10"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Add Azure ContentSafetyClient to analyse prompts/responses for harmful content"
+              }
+            },
+            {
+              "id": "trap_defense_scanner/D17",
+              "shortDescription": {
+                "text": "trap_defense_scanner/D17"
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "help": {
+                "text": "Deploy trap defense layer on tool results"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_base_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 204
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Agent loop with LLM call has no exit condition — potential infinite loop"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_queue.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 118
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Agent loop with LLM call has no exit condition — potential infinite loop"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_queue.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 165
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_queue.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 130
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D9",
+          "ruleIndex": 0,
+          "level": "error",
+          "message": {
+            "text": "Empty exception handler — errors silently swallowed"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_queue.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 177
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-41' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 22
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-45' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 23
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-4o' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 24
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-4' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 28
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gemini-1.5-flash' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 31
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gemini-1.5-pro' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 32
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'claude-3-haiku' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 36
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'claude-3-sonnet' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 37
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'claude-3-opus' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 38
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'claude-3-5-haiku' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 39
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'claude-3-5-sonnet' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 40
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'claude-3-7-sonnet' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 41
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-41' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 58
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-45' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 59
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-4o' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 60
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gpt-4' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 64
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gemini-1.5-flash' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 68
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'gemini-1.5-pro' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 69
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'claude-3-haiku' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 74
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'claude-3-sonnet' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 75
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'claude-3-opus' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 76
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'claude-3-5-haiku' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 77
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'claude-3-5-sonnet' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 78
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D12",
+          "ruleIndex": 2,
+          "level": "warning",
+          "message": {
+            "text": "Hardcoded model name: 'claude-3-7-sonnet' — no routing/fallback"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/models/_model_client.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 79
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "code_analyzer/D2",
+          "ruleIndex": 1,
+          "level": "error",
+          "message": {
+            "text": "Agent loop with LLM call has no exit condition — potential infinite loop"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/tool_agent/_caller_loop.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 46
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 491
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_single_threaded_agent_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 369
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_single_threaded_agent_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 405
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_single_threaded_agent_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 648
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_single_threaded_agent_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 475
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "Potential PII/sensitive data logged via f-string"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_single_threaded_agent_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 571
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 3,
+          "level": "error",
+          "message": {
+            "text": "No audit logging for tool calls detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "audit_scanner/D5",
+          "ruleIndex": 3,
+          "level": "warning",
+          "message": {
+            "text": "No log retention policy detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Agent class 'Agent' has no permission model"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 13
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D12",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'Agent' has no cost tracking"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 13
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Agent class 'BaseAgent' has no permission model"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_base_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 60
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D12",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'BaseAgent' has no cost tracking"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_base_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 60
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Agent class 'ClosureAgent' has no permission model"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_closure_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 76
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D12",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'ClosureAgent' has no cost tracking"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_closure_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 76
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Agent class 'RoutedAgent' has no permission model"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 415
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D12",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'RoutedAgent' has no cost tracking"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 415
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'RoutedAgent' has no defined lifecycle states"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 415
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Agent class 'ToolAgent' has no permission model"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/tool_agent/_tool_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 40
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D12",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'ToolAgent' has no cost tracking"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/tool_agent/_tool_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 40
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'ToolAgent' has no defined lifecycle states"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/tool_agent/_tool_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 40
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Agent class 'LongRunningAgent' has no permission model"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_cancellation.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 25
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D12",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'LongRunningAgent' has no cost tracking"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_cancellation.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 25
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'LongRunningAgent' has no defined lifecycle states"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_cancellation.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 25
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Agent class 'NestingLongRunningAgent' has no permission model"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_cancellation.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 44
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D12",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'NestingLongRunningAgent' has no cost tracking"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_cancellation.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 44
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'NestingLongRunningAgent' has no defined lifecycle states"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_cancellation.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 44
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Agent class 'CounterAgent' has no permission model"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 28
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D12",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'CounterAgent' has no cost tracking"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 28
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'CounterAgent' has no defined lifecycle states"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 28
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Agent class 'EventAgent' has no permission model"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 130
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D12",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'EventAgent' has no cost tracking"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 130
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'EventAgent' has no defined lifecycle states"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 130
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Agent class 'RPCAgent' has no permission model"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 176
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D12",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'RPCAgent' has no cost tracking"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 176
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'RPCAgent' has no defined lifecycle states"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 176
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Agent class 'FailingAgent' has no permission model"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 332
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D12",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'FailingAgent' has no cost tracking"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 332
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'FailingAgent' has no defined lifecycle states"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 332
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D8",
+          "ruleIndex": 4,
+          "level": "error",
+          "message": {
+            "text": "Agent class 'StatefulAgent' has no permission model"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_state.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "agent_arch_scanner/D12",
+          "ruleIndex": 5,
+          "level": "warning",
+          "message": {
+            "text": "Agent class 'StatefulAgent' has no cost tracking"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_state.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: autogen"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: autogen"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 9
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: autogen"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 31
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: langchain"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 35
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: openai"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 35
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: llama-index"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 37
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: openai"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 37
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: llama-index"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 38
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: openai"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 38
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: llama-index"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 39
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: llama-index"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 40
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: llama-index"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 41
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: llama-index"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 42
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: autogen"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 65
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: autogen"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 71
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "dependency_scanner/D14",
+          "ruleIndex": 6,
+          "level": "warning",
+          "message": {
+            "text": "Unpinned AI dependency: autogen"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "pyproject.toml",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 86
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/logging.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 33
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/logging.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 33
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_agent_instantiation.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 26
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_agent_instantiation.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 26
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_agent_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 94
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_agent_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 94
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_closure_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 162
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_closure_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 162
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_component_config.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 214
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_image.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 25
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_image.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 25
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_intervention.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 33
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_intervention.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 33
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 427
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 427
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_single_threaded_agent_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 175
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_single_threaded_agent_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 175
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_type_prefix_subscription.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 19
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_type_prefix_subscription.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 19
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_type_subscription.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 19
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_type_subscription.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 19
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/code_executor/_func_with_reqs.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 179
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/code_executor/_func_with_reqs.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 179
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/memory/_list_memory.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 37
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/memory/_list_memory.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 37
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/model_context/_chat_completion_context.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 28
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/model_context/_chat_completion_context.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 28
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/tools/_function_tool.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 59
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/tools/_function_tool.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 59
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/utils/_json_to_pydantic.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 411
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/utils/_json_to_pydantic.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 411
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_base_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_base_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_cache_store.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_cache_store.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 3
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_cancellation.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_cancellation.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_closure_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_closure_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_code_executor.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_code_executor.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_component_config.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_component_config.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_intervention.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_intervention.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_json_extraction.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_json_extraction.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_json_to_pydantic.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_json_to_pydantic.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_memory.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_memory.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_models.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_models.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_model_context.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_model_context.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_routed_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 6
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_runtime.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_serialization.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_serialization.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_state.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_state.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_static_workbench_overrides.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_static_workbench_overrides.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_subscription.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_subscription.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 2
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_tools.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_tools.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_tool_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_tool_agent.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 7
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_types.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_types.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D6",
+          "ruleIndex": 7,
+          "level": "error",
+          "message": {
+            "text": "AutoGen code execution without Docker sandboxing"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_workbench.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "framework_scanner/D7",
+          "ruleIndex": 8,
+          "level": "error",
+          "message": {
+            "text": "AutoGen agent without is_termination_msg — no conversation exit condition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tests/test_workbench.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 4
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cloud_scanner/D10",
+          "ruleIndex": 9,
+          "level": "error",
+          "message": {
+            "text": "Azure AI used without ContentSafetyClient — no content moderation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/autogen_core/_component_config.py",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 48
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "No content injection defense — hidden HTML/CSS/zero-width instructions pass to agents undetected. (86% attack success rate)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "No RAG poisoning protection — knowledge base documents not scanned for embedded instructions. (<0.1% contamination = >80% attack success)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "No behavioral trap detection — post-execution behavioral changes not monitored. (10/10 M365 Copilot attacks succeeded)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "error",
+          "message": {
+            "text": "No approval integrity verification -- agent summaries for approval not cross-checked against actual actions. (Approval fatigue exploitation)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "warning",
+          "message": {
+            "text": "No adversarial testing evidence — no red team, no prompt injection tests"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "warning",
+          "message": {
+            "text": "No tool-call attack simulation — agent tool calls not tested against adversarial inputs"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "warning",
+          "message": {
+            "text": "No multi-agent chaos engineering — agent swarms not stress tested"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "trap_defense_scanner/D17",
+          "ruleIndex": 10,
+          "level": "warning",
+          "message": {
+            "text": "No before/after governance comparison — no A/B testing of governance effectiveness"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": ".",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
