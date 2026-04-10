@@ -129,24 +129,30 @@ def clone_or_update(target: Target) -> str:
     Returns the current commit SHA.
     """
     REPOS_DIR.mkdir(parents=True, exist_ok=True)
+    # `-c core.longpaths=true` lets git succeed on Windows even when a target
+    # has files whose absolute path exceeds MAX_PATH (260 chars). Haystack's
+    # docs-website/ has URL-encoded image filenames that trip this; without
+    # the flag, clone and reset --hard both abort with exit 128. Applied to
+    # every git invocation here so both fresh clones and updates are covered.
+    LP = ["-c", "core.longpaths=true"]
     if target.clone_dir.exists():
         # Update existing clone. Use fetch + reset rather than pull to avoid
         # merge commits and to survive force-pushes on the default branch.
         print(f"  [update] {target.slug}")
-        _run(["git", "-C", str(target.clone_dir), "fetch", "--depth=1", "origin"], check=False)
+        _run(["git", *LP, "-C", str(target.clone_dir), "fetch", "--depth=1", "origin"], check=False)
         # Determine the default branch from origin/HEAD; fall back to main/master.
         head = _run(
-            ["git", "-C", str(target.clone_dir), "symbolic-ref", "refs/remotes/origin/HEAD"],
+            ["git", *LP, "-C", str(target.clone_dir), "symbolic-ref", "refs/remotes/origin/HEAD"],
             check=False,
         )
         if head.returncode == 0 and head.stdout.strip():
             ref = head.stdout.strip().split("/")[-1]
         else:
             ref = "main"
-        _run(["git", "-C", str(target.clone_dir), "reset", "--hard", f"origin/{ref}"], check=False)
+        _run(["git", *LP, "-C", str(target.clone_dir), "reset", "--hard", f"origin/{ref}"], check=False)
     else:
         print(f"  [clone]  {target.slug} from {target.clone_url}")
-        _run(["git", "clone", "--depth=1", target.clone_url, str(target.clone_dir)])
+        _run(["git", *LP, "clone", "--depth=1", target.clone_url, str(target.clone_dir)])
 
     sha = _run(["git", "-C", str(target.clone_dir), "rev-parse", "HEAD"]).stdout.strip()
     return sha
