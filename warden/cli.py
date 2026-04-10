@@ -58,8 +58,9 @@ LAYER_NAMES = {
 
 @cli.command()
 @click.argument("path", type=click.Path(exists=True), default=".")
-@click.option("--format", "output_format", type=click.Choice(["json", "html", "sarif", "all"]),
-              default="all", help="Output format (default: all)")
+@click.option("--format", "output_format", type=click.Choice(["json", "html", "sarif", "pdf", "all"]),
+              default="all",
+              help="Output format (default: all). `pdf` requires `pip install warden-ai[pdf]`")
 @click.option("--output-dir", type=click.Path(), default=None,
               help="Directory for report files (default: current directory)")
 @click.option("--skip", "skip_layers", default=None,
@@ -443,6 +444,23 @@ def scan(
         console.print(
             f"  SARIF:     [bright_cyan][link={file_url}]"
             f"{sarif_path}[/link][/bright_cyan]"
+        )
+
+    # PDF is opt-in only — not produced by `--format all` because weasyprint
+    # brings native deps that most users don't want. Requires `pip install
+    # warden-ai[pdf]`.
+    if output_format == "pdf":
+        from warden.report.pdf_writer import PdfDependencyMissing, write_pdf_report
+
+        pdf_path = out_dir / "warden_report.pdf"
+        try:
+            write_pdf_report(result, pdf_path)
+        except PdfDependencyMissing as exc:
+            raise click.UsageError(str(exc)) from exc
+        file_url = pdf_path.as_uri()
+        console.print(
+            f"  PDF:       [bright_cyan][link={file_url}]"
+            f"{pdf_path}[/link][/bright_cyan]"
         )
 
     console.print("[bright_blue]" + "-" * 50 + "[/bright_blue]")

@@ -16,7 +16,7 @@ Warden is an open-source, local-only CLI scanner that evaluates AI agent governa
 |--------|-------|
 | Total source lines | ~7,200 |
 | Test lines | ~1,230 |
-| Tests passing | 113 |
+| Tests passing | 116 |
 | Scanner modules | 14 |
 | Scoring dimensions | 17 |
 | Scan layers | 12 |
@@ -70,6 +70,7 @@ Warden is an open-source, local-only CLI scanner that evaluates AI agent governa
 | File | Lines | Purpose |
 |------|-------|---------|
 | `html_writer.py` | 1,094 | Self-contained HTML report — SVG gauge, dimension bars, findings, recommendations, comparison card, email form |
+| `pdf_writer.py` | 55 | Optional PDF output — renders `_build_html()` via weasyprint, gated behind the `warden-ai[pdf]` extra with a friendly `PdfDependencyMissing` raise |
 | `json_writer.py` | 89 | JSON report with `scoring_version`, dimension scores, findings, trap defense |
 | `sarif_writer.py` | 113 | SARIF output for GitHub Code Scanning integration |
 | `terminal.py` | 103 | Rich-formatted CLI output with progress bars and per-layer timing |
@@ -237,7 +238,7 @@ GitHub Code Scanning compatible. Each finding becomes a SARIF `result` with `rul
 | Command | Description |
 |---------|-------------|
 | `warden scan <path>` | Run all 12 layers (parallel), generate reports |
-| `warden scan <path> --format json\|html\|sarif\|all` | Specific output format |
+| `warden scan <path> --format json\|html\|sarif\|pdf\|all` | Specific output format (`pdf` requires `pip install warden-ai[pdf]`) |
 | `warden scan <path> --skip secrets,deps` | Skip named layers |
 | `warden scan <path> --only code,mcp` | Run only named layers |
 | `warden scan <path> --output-dir <dir>` | Custom output directory |

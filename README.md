@@ -17,6 +17,9 @@ uvx --from warden-ai warden scan /path/to/your-agent-project
 # With pip
 pip install warden-ai
 warden scan /path/to/your-agent-project
+
+# Optional extras
+pip install 'warden-ai[pdf]'   # adds `--format pdf` (weasyprint)
 ```
 
 From zero to governance score in under 60 seconds.
@@ -54,6 +57,7 @@ Warden scores your AI agent project across **17 governance dimensions** (out of 
 warden scan .
 warden scan /path/to/project --format json
 warden scan /path/to/project --format sarif
+warden scan /path/to/project --format pdf       # requires pip install 'warden-ai[pdf]'
 warden scan /path/to/project --output-dir /path/to/reports
 
 # Skip specific layers

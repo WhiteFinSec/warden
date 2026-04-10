@@ -26,6 +26,7 @@ Status tags:
 - **`warden diff`** — compare two JSON reports, show score delta + new/resolved findings
 - **`warden fix`** — auto-remediation for .gitignore, dep pinning, Dockerfile USER
 - **`.warden.toml` / `[tool.warden]` config** — project-level defaults for format, skip, only, min_score, baseline, output_dir, ci. CLI flags override. Discovered by walking upward from the scan path until a VCS root
+- **PDF reports** — `pip install warden-ai[pdf]` adds `--format pdf`; renders the existing HTML report via weasyprint for boardroom/auditor use. Core install stays lean (deps behind an extra)
 - **GitHub Action** — composite `action.yml` at repo root with inputs for path/format/min-score/fail-on-level/baseline/skip/only, outputs for score/level/findings counts, and automatic SARIF upload to GitHub Code Scanning
 - **Competitor detection** — 17 vendors, cross-checked scores (Zenity 55, Portkey 32, Noma 40 per 2026-04-10 research)
 
@@ -34,11 +35,6 @@ Status tags:
 ## Product Work
 
 ### TODO
-
-- **[C] PDF reports** (behind optional `pip install warden-ai[pdf]` extra)
-  Boardroom-ready governance posture. CISOs and auditors don't read HTML files —
-  they email PDFs. Heavy deps (weasyprint) stay behind an extra so the core install
-  remains lean.
 
 - **[F] Parallel secrets scanning**
   Secrets is still the single biggest per-layer bottleneck (~17-33s). ThreadPool
@@ -174,7 +170,7 @@ Status tags:
 
 1. ~~**G** — GitHub Action~~ (shipped 2026-04-10)
 2. ~~**B** — Config file~~ (shipped 2026-04-10 — `.warden.toml` + `[tool.warden]`)
-3. **C** — PDF reports (unlocks enterprise/compliance buyer)
+3. ~~**C** — PDF reports~~ (shipped 2026-04-10 — `warden-ai[pdf]` extra)
 4. **J** — Sample gallery site (SEO + social proof compounds)
 5. **F** — Parallel secrets scanning (last perf polish)
 6. **E** — Add Protect AI + HiddenLayer (surgical competitor additions)
