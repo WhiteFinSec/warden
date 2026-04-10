@@ -8,10 +8,13 @@ from unittest.mock import patch
 from warden.scanner.competitors import COMPETITORS, detect_competitors
 
 
-def test_registry_has_18_entries():
-    """17 competitors + SharkRouter (self-detection) = 18 total."""
-    assert len(COMPETITORS) == 18
+def test_registry_has_20_entries():
+    """19 competitors + SharkRouter (self-detection) = 20 total."""
+    assert len(COMPETITORS) == 20
     assert "sharkrouter" in COMPETITORS
+    # Spot-check the most recent additions so regressions surface immediately.
+    assert "protect_ai" in COMPETITORS
+    assert "hiddenlayer" in COMPETITORS
 
 
 def test_no_signals_no_matches():
@@ -51,6 +54,31 @@ def test_package_detection():
         matches, _ = detect_competitors(Path(tmpdir))
         portkey = [m for m in matches if m.id == "portkey"]
         assert len(portkey) > 0
+
+
+def test_protect_ai_detection():
+    """Protect AI should detect via modelscan package + code pattern."""
+    with tempfile.TemporaryDirectory() as tmpdir:
+        (Path(tmpdir) / "requirements.txt").write_text("modelscan==0.7.0\n")
+        (Path(tmpdir) / "scan.py").write_text("from modelscan import ModelScan\n")
+        matches, _ = detect_competitors(Path(tmpdir))
+        hits = [m for m in matches if m.id == "protect_ai"]
+        assert len(hits) > 0
+        assert hits[0].confidence in ("medium", "high")
+        assert hits[0].warden_score == 32
+
+
+def test_hiddenlayer_detection():
+    """HiddenLayer should detect via package + env var."""
+    with tempfile.TemporaryDirectory() as tmpdir:
+        (Path(tmpdir) / "requirements.txt").write_text("hiddenlayer-sdk==1.0.0\n")
+        (Path(tmpdir) / "main.py").write_text("import hiddenlayer\n")
+        with patch.dict(os.environ, {"HIDDENLAYER_API_KEY": "test-key"}):
+            matches, _ = detect_competitors(Path(tmpdir))
+            hits = [m for m in matches if m.id == "hiddenlayer"]
+            assert len(hits) > 0
+            assert hits[0].confidence in ("medium", "high")
+            assert hits[0].warden_score == 34
 
 
 def test_sharkrouter_detection():

@@ -1,4 +1,4 @@
-"""Competitor detection registry — 17 tools across 5 signal layers.
+"""Competitor detection registry — 19 tools across 5 signal layers.
 
 Detection requires 2+ signals from different layers to classify as "present."
 Single-signal matches are confidence: "low" and do NOT trigger GTM routing.
@@ -244,6 +244,56 @@ COMPETITORS: dict[str, CompetitorProfile] = {
         strengths=["AI firewall concept"],
         weaknesses=["Early stage", "Limited features"],
         gtm_signal="warm_security_vendor",
+    ),
+    "protect_ai": CompetitorProfile(
+        id="protect_ai", display_name="Protect AI (Palo Alto Networks)", category="ML_SECURITY",
+        env_vars=["PROTECTAI_API_KEY", "PROTECT_AI_TOKEN", "MODELSCAN_API_KEY"],
+        packages=["protectai", "modelscan", "nbdefense", "llm-guard"],
+        processes=["modelscan"],
+        config_files=[".modelscan.yaml", ".protectai.yaml"],
+        code_patterns=[
+            r"protectai", r"protect_ai", r"modelscan", r"nb_defense", r"llm[_\-]guard",
+        ],
+        warden_score=32,
+        strengths=[
+            "ModelScan — open-source unsafe-serialization detection (pickle, H5, ONNX)",
+            "NB Defense for Jupyter notebook security",
+            "LLM Guard — input/output scanners (prompt injection, toxicity, PII)",
+            "Huntr AI/ML bug bounty + vulnerability DB (Sightline)",
+            "Backed by Palo Alto Networks (July 2024 acquisition)",
+        ],
+        weaknesses=[
+            "Model/supply-chain focus — no agent tool-call gateway",
+            "Scan-time + prompt-level only, no cryptographic agent identity",
+            "No Dry-Run Preview, no post-exec verification, no Kill Switch",
+            "LLM Guard runs in-process; no centralized enforcement or audit chain",
+        ],
+        gtm_signal="warm_ml_security",
+    ),
+    "hiddenlayer": CompetitorProfile(
+        id="hiddenlayer", display_name="HiddenLayer", category="ML_SECURITY",
+        env_vars=["HIDDENLAYER_API_KEY", "HIDDENLAYER_CLIENT_ID", "HIDDENLAYER_TOKEN"],
+        packages=["hiddenlayer", "hiddenlayer-sdk", "hiddenlayer-ml"],
+        processes=["hiddenlayer-agent"],
+        config_files=[".hiddenlayer.yaml", "hiddenlayer.yml"],
+        code_patterns=[
+            r"hiddenlayer", r"HiddenLayer", r"hiddenlayer\.ai", r"hl_sdk",
+        ],
+        warden_score=34,
+        strengths=[
+            "AISec Platform — inference-time MLDR (Machine Learning Detection & Response)",
+            "Model Scanner — detects malicious models in supply chain",
+            "Automated Red Teaming for LLMs and classical ML",
+            "Adversarial ML expertise (founded by Tanium / Cylance alums)",
+            "Threat intel feed specifically for AI attacks",
+        ],
+        weaknesses=[
+            "Model-inference focus, not agent tool-call governance",
+            "No agent passport / cryptographic identity",
+            "No Dry-Run Preview or Causal Chain across tool calls",
+            "No Trap Defense (D17) for agent-loop attacks",
+        ],
+        gtm_signal="warm_ml_security",
     ),
     "rubrik": CompetitorProfile(
         id="rubrik", display_name="Rubrik", category="DATA_RECOVERY",
