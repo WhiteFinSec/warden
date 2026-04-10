@@ -268,7 +268,7 @@ GitHub Code Scanning compatible. Each finding becomes a SARIF `result` with `rul
 
 ## Test Suite
 
-118 tests across 5 test directories:
+124 tests across 5 test directories:
 
 | Directory | Tests | Coverage |
 |-----------|-------|----------|

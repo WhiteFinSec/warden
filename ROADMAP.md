@@ -1,17 +1,18 @@
 # Warden Roadmap
 
-Status as of **v1.5.6** (2026-04-10).
+Status as of **v1.5.6 shipped, v1.6.0 in prep** (2026-04-11).
 
 Status tags:
 - **TODO** — committed, will build soon
 - **DEFER** — good idea, wait for demand or for a prerequisite to land
 - **SKIP** — evaluated and rejected; listed here so we don't re-debate it
+- **NEXT** — not code, unblocked, do it without debate
 
 ---
 
 ## What's Solid (shipped)
 
-- 12 scan layers, 17 scoring dimensions, 102 tests
+- 12 scan layers, 17 scoring dimensions, 124 tests
 - Scoring model v4.3 with 6 anti-inflation mechanisms, no absence=compliance
 - Privacy-first: zero network calls, secrets masked, self-contained HTML reports
 - 3 output formats: HTML, JSON, SARIF (GitHub Code Scanning)
@@ -34,22 +35,98 @@ Status tags:
 
 ---
 
+## Release & Distribution (v1.6.0)
+
+### TODO
+
+- **Push the current batch to origin/main**
+  9 commits ahead as of 2026-04-11. Nothing downstream of `main` will
+  see the shipped v1.5.6 items (G/B/C/F/E/J) or the VigIA-surfaced fix
+  batch until this lands. One-liner, no debate.
+
+- **Version bump 1.5.6 → 1.6.0, tag `v1.6.0`, publish to PyPI**
+  Six shipped roadmap items (GitHub Action, `.warden.toml` config, PDF
+  extras, parallel secrets, 20-vendor registry, gallery builder) plus
+  the VigIA fix batch are user-visible. That's a minor bump, not a
+  patch. Users need `pip install -U warden-ai` / `uvx warden-ai@1.6.0`
+  to pick up PDF extras, the config file reader, and the fixed
+  registry count. Tag drives the GitHub Marketplace listing below —
+  Marketplace resolves `@v1` to the latest `v1.x.y` tag, so nothing
+  further is needed on the action side once the tag exists.
+
+- **GitHub Marketplace listing for the composite Action**
+  `action.yml` at repo root is ready and tests green. The listing is
+  a one-time click-through on the release page once `v1.6.0` is
+  tagged: pick a category ("Security"), write a short description,
+  upload the icon. Unlocks `uses: JordanCT/warden-ai@v1` for any
+  GitHub workflow and opens the passive-lead-gen channel Web-Claude
+  flagged as the main GTM lever.
+
+---
+
 ## Product Work
 
 ### TODO
 
-- **C# / .NET scanner (Layer 13: Multi-Language, second batch)**
+- **C# / .NET scanner (Layer 13: Multi-Language, second batch)** — **HIGHEST PRIORITY**
   Surfaced 2026-04-10 while scanning `JordanCT/VigIA-Orchestrator`, a
   pure-C# agent project. Warden indexed 0 files, fired absence-based
   CRITICAL findings on an empty scan, and scored 2/100 — punishing the
-  project for a scanner blind spot, not a governance gap. C# / .NET is a
-  primary AI agent stack (Semantic Kernel, MCP C# SDK, Copilot Studio),
-  so this is the single highest-value language addition.
+  project for a scanner blind spot, not a governance gap. C# / .NET is
+  a primary AI agent stack (Semantic Kernel, MCP C# SDK, Copilot
+  Studio), so this is the single highest-value language addition.
+
   Minimum viable scope: regex detection of `Microsoft.SemanticKernel`
   imports, `[KernelFunction]` attribute auditing, `ILogger`-based audit
   logging, `IChatCompletionService` usage, approval-gate patterns, and
   hardcoded credentials in `.config`/`.json`/`appsettings*.json`.
   Same architecture as `multilang_scanner.py` (regex, not AST).
+
+  **Extended scope (from reading VigIA source):** detect `Result<T, E>`
+  monadic error handling, `ImmutableDictionary` / `readonly record
+  struct` for state invariants, C# Source Generator JSON contexts
+  (`JsonSerializerContext`), `ChatResponseFormat.CreateJsonSchemaFormat`
+  strict schema enforcement, and command interceptor / FSM transition
+  patterns. These map directly onto D1 (policy enforcement), D7 (kill
+  switch / hard block), D8 (agent identity), D14 (compliance), and
+  D17 (trap defense) — so a well-governed .NET project like VigIA
+  should score comparably to a well-governed Python project, not 2/100.
+
+  **Test fixture:** VigIA itself. It's small, well-structured, uses
+  `Microsoft.Extensions.AI` (canonical .NET LLM SDK), and already has
+  InvariantEnforcer + 3-strike NACK + snapshot rollbacks as real
+  governance patterns to detect. Target: VigIA should score ≥ 60
+  (PARTIAL) once the scanner lands, ideally higher.
+
+- **Absence-vs-coverage scoring fix (architectural)**
+  The VigIA coverage warning shipped in the fix batch is a band-aid
+  at the CLI layer. The real bug is in `scoring/engine.py`: absence-
+  based findings fire even when the relevant language wasn't scanned
+  at all. A pure C# project gets CRITICAL findings like "No audit
+  logging for tool calls detected" because Warden didn't find any
+  Python `logging` calls — but it never had a chance to.
+
+  Fix: gate absence-based findings on `result.file_counts[lang] > 0`
+  for the language a dimension actually scans. Add a `coverage_gate`
+  flag per dimension (or per finding template) so "we didn't look"
+  becomes an `INFO`-level "not scanned" entry, not a CRITICAL finding.
+  The overall score for an unscanned project should clamp to "N/A —
+  coverage failure" instead of a number.
+
+  This is the real fix for the "2/100 on any non-Python project"
+  foot-gun, and it's independent of the C# scanner — but both should
+  land in v1.7.0 together, because they're two halves of the same
+  problem: "Warden needs to tell coverage failures apart from
+  governance failures, and it needs to fix the coverage gaps for the
+  languages that matter."
+
+- **Add VigIA to the gallery target list (after the C# scanner lands)**
+  Proof-by-example that Warden now handles .NET. `gallery/targets.toml`
+  already has 10 Python/JS targets; adding VigIA as target #11 once
+  the C# scanner is in gives a concrete "before 2/100, after ≥60"
+  narrative for the blog post series. One line in `targets.toml`, one
+  paragraph in the blog post. Blocked on the C# scanner, not on
+  anything else.
 
 ### DEFER
 
@@ -132,23 +209,16 @@ Status tags:
 
 ## Distribution & GTM
 
-### TODO
+Distribution TODOs are now consolidated under **Release & Distribution
+(v1.6.0)** above — the gallery deploy, PyPI tag, and Marketplace listing
+all live in the Tier 0 block so they get shipped as a single coherent
+release, not as drifting GTM notes. Blog posts and the conference talk
+live under **Execution Order → Tier 3** for the same reason.
 
-_(No outstanding GTM TODOs — all distribution items shipped. Next move is
-deploying `gallery/out/` to a public host and announcing.)_
-
-### NEXT (not code, not blocked on code)
-
-- **Run a full 10-target gallery build**, iron out per-target scan_path
-  quirks, then scp the `gallery/out/` tree to the Caddy host at
-  `/opt/sharkagent/gallery/` (or push to GitHub Pages). One-time manual
-  deploy — see `gallery/README.md` for the deploy options.
-
-- **Blog post series** — "Why LangChain scores X/100" walkthroughs that feed
-  the gallery. Gallery is live now; this is the next write-up task.
-
-- **Conference talk / paper** — methodology writeup for security conferences.
-  Valuable for credibility but needs a concrete target venue.
+This section previously held scattered NEXT items; they have been moved
+into the structured Tier 0 / Tier 3 blocks to avoid having two places
+that could disagree. If you're looking for "what's the next GTM move" —
+check **Execution Order** at the bottom of this file.
 
 ### SKIP
 
@@ -173,12 +243,36 @@ deploying `gallery/out/` to a public host and announcing.)_
 
 ## Execution Order (current)
 
+### Shipped in v1.5.6 (committed 2026-04-10, tagged next as v1.6.0)
+
 1. ~~**G** — GitHub Action~~ (shipped 2026-04-10)
 2. ~~**B** — Config file~~ (shipped 2026-04-10 — `.warden.toml` + `[tool.warden]`)
 3. ~~**C** — PDF reports~~ (shipped 2026-04-10 — `warden-ai[pdf]` extra)
 4. ~~**F** — Parallel secrets scanning~~ (shipped 2026-04-10 — `ThreadPoolExecutor` over `_scan_file`)
 5. ~~**E** — Add Protect AI + HiddenLayer~~ (shipped 2026-04-10 — 20-vendor registry)
 6. ~~**J** — Sample gallery site~~ (shipped 2026-04-10 — `gallery/` builder with 10 targets, 3 validated, SEO landing pages ready to deploy)
+7. ~~**VigIA fix batch**~~ (committed 2026-04-11 — coverage warning, dynamic competitor count, `file_counts` + `coverage_warning` in JSON report)
 
-**All six committed TODO items from the start of this roadmap are now shipped.**
-Next: manual gallery deploy + blog post series.
+**All six committed TODO items plus the VigIA fix batch are now on `main`, ahead of origin.**
+
+### Next up (in order, not time — decision gates, not calendar days)
+
+1. **Tier 0 — Ship v1.6.0**
+   - `git push origin main` (9 commits ahead)
+   - Bump version 1.5.6 → 1.6.0, tag `v1.6.0`, publish to PyPI
+   - Click-through GitHub Marketplace listing for the composite Action
+   - Full 10-target gallery build, deploy `gallery/out/` to Caddy (or GH Pages)
+
+2. **Tier 1 — C#/.NET scanner + absence-vs-coverage fix (v1.7.0)**
+   - Implement C# / .NET regex scanner in `warden/scanner/multilang_scanner.py` extension
+   - Ship absence-vs-coverage scoring fix in `scoring/engine.py` at the same time
+   - Validate both against VigIA-Orchestrator as the test fixture — target: VigIA scores ≥ 60 (PARTIAL), down from the current 2/100 coverage-failure artifact
+   - Add VigIA as gallery target #11 as proof-by-example
+
+3. **Tier 3 — Blog post series**
+   - Post #1: "Why LangChain scores X/100" — walkthrough of the first validated gallery target, using the fresh gallery site as evidence
+   - Post #2: "How we fixed the 2/100 problem — C# scanner + coverage gating"
+     (only possible after Tier 1 lands, uses VigIA as the before/after case study)
+   - Post #3+: one per gallery target, rolling cadence
+
+4. **Conference talk / paper** — methodology writeup for a security venue. No concrete target yet; unblocked but waiting for a venue, not for code.
