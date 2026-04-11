@@ -161,28 +161,31 @@ def scan(
     from warden.scanner.code_analyzer import _walk_files
 
     with console.status("[bright_cyan]Indexing files...[/bright_cyan]"):
-        _py_files, _js_files, _other_files = _walk_files(target)
+        _py_files, _js_files, _other_files, _cs_files = _walk_files(target)
         py_count = len(_py_files)
         js_count = len(_js_files)
         other_count = len(_other_files)
+        cs_count = len(_cs_files)
     found_parts = [f"{py_count} Python", f"{js_count} JS/TS"]
     if other_count:
         found_parts.append(f"{other_count} Go/Rust/Java")
+    if cs_count:
+        found_parts.append(f"{cs_count} C#")
     console.print(f"  Found: {', '.join(found_parts)} files")
 
     # Coverage warning: if no files in any supported language were found,
     # the score reflects scanner blind spots, not governance gaps. Warn
     # loudly so users don't read "2/100 UNGOVERNED" as a verdict on their
-    # actual posture. Known blind spots as of v1.5.6: C#/.NET, Ruby, PHP,
-    # Kotlin, Swift.
-    total_scannable = py_count + js_count + other_count
+    # actual posture. Known blind spots as of v1.7.0: Ruby, PHP, Kotlin,
+    # Swift (C#/.NET landed in v1.7.0).
+    total_scannable = py_count + js_count + other_count + cs_count
     if total_scannable == 0:
         console.print(
             "  [yellow]WARNING:[/yellow] No files in a supported language "
-            "were found (Python/JS/TS/Go/Rust/Java). Warden will still run, "
-            "but findings will reflect scanner coverage limits, not your "
-            "governance posture. C#/.NET, Ruby, PHP, Kotlin, and Swift are "
-            "not yet supported."
+            "were found (Python/JS/TS/Go/Rust/Java/C#). Warden will still "
+            "run, but findings will reflect scanner coverage limits, not "
+            "your governance posture. Ruby, PHP, Kotlin, and Swift are not "
+            "yet supported."
         )
     console.print("[bright_blue]" + "-" * 50 + "[/bright_blue]")
 
@@ -213,7 +216,12 @@ def scan(
 
     secrets_file_count = len(_iter_scannable_files(target))
     result = ScanResult(target_path=str(target))
-    result.file_counts = {"python": py_count, "js": js_count, "other": other_count}
+    result.file_counts = {
+        "python": py_count,
+        "js": js_count,
+        "other": other_count,
+        "csharp": cs_count,
+    }
     raw_scores: dict[str, int] = {}
 
     # Layers with per-file progress support (run sequentially with progress bars)
@@ -223,6 +231,14 @@ def scan(
         "audit": py_count,
     }
 
+    # Pre-bind file_counts into scan_audit so the Python-only scanner
+    # can early-exit on pure non-Python projects (see audit_scanner's
+    # docstring). functools.partial keeps the generic layer dispatcher
+    # loop unchanged — it still calls the layer as scanner_fn(target,
+    # on_file=advance).
+    from functools import partial
+    scan_audit_bound = partial(scan_audit, file_counts=result.file_counts)
+
     # All layers in order
     all_layers = [
         ("Layer 1: Code Patterns", scan_code, "code"),
@@ -231,7 +247,7 @@ def scan(
         ("Layer 4: Secrets", scan_secrets, "secrets"),
         ("Layer 5: Agent Architecture", scan_agent_arch, "agent"),
         ("Layer 6: Supply Chain", scan_dependencies, "deps"),
-        ("Layer 7: Audit & Compliance", scan_audit, "audit"),
+        ("Layer 7: Audit & Compliance", scan_audit_bound, "audit"),
         ("Layer 8: CI/CD Governance", scan_cicd, "cicd"),
         ("Layer 9: IaC Security", scan_iac, "iac"),
         ("Layer 10: Framework Governance", scan_frameworks, "frameworks"),
@@ -347,7 +363,9 @@ def scan(
         console=console,
         spinner="dots",
     ):
-        trap_findings, trap_scores, trap_status = scan_trap_defense(target)
+        trap_findings, trap_scores, trap_status = scan_trap_defense(
+            target, file_counts=result.file_counts,
+        )
     result.findings.extend(trap_findings)
     result.trap_defense = trap_status
     for dim_id, score in trap_scores.items():
@@ -806,12 +824,14 @@ def _run_scan(target: Path, skip_layers: str | None = None, only_layers: str | N
 
     warnings.filterwarnings("ignore", category=SyntaxWarning)
 
+    from functools import partial
+
     from warden.models import ScanResult
     from warden.scanner.agent_arch_scanner import scan_agent_arch
     from warden.scanner.audit_scanner import scan_audit
     from warden.scanner.cicd_scanner import scan_cicd
     from warden.scanner.cloud_scanner import scan_cloud
-    from warden.scanner.code_analyzer import scan_code
+    from warden.scanner.code_analyzer import _walk_files, scan_code
     from warden.scanner.competitors import detect_competitors
     from warden.scanner.dependency_scanner import scan_dependencies
     from warden.scanner.framework_scanner import scan_frameworks
@@ -824,7 +844,19 @@ def _run_scan(target: Path, skip_layers: str | None = None, only_layers: str | N
     from warden.scoring.engine import apply_scores
 
     result = ScanResult(target_path=str(target))
+    # Populate file_counts so Python-only scanners can gate themselves
+    # and the scoring engine can drop language-excluded dimensions from
+    # the denominator. Mirrors what the main CLI flow does at line ~219.
+    _py_files, _js_files, _other_files, _cs_files = _walk_files(target)
+    result.file_counts = {
+        "python": len(_py_files),
+        "js": len(_js_files),
+        "other": len(_other_files),
+        "csharp": len(_cs_files),
+    }
     raw_scores: dict[str, int] = {}
+
+    scan_audit_bound = partial(scan_audit, file_counts=result.file_counts)
 
     all_scan_layers = [
         (scan_code, "code"),
@@ -833,7 +865,7 @@ def _run_scan(target: Path, skip_layers: str | None = None, only_layers: str | N
         (scan_secrets, "secrets"),
         (scan_agent_arch, "agent"),
         (scan_dependencies, "deps"),
-        (scan_audit, "audit"),
+        (scan_audit_bound, "audit"),
         (scan_cicd, "cicd"),
         (scan_iac, "iac"),
         (scan_frameworks, "frameworks"),
@@ -858,8 +890,10 @@ def _run_scan(target: Path, skip_layers: str | None = None, only_layers: str | N
         for dim_id, score in scores.items():
             raw_scores[dim_id] = raw_scores.get(dim_id, 0) + score
 
-    # D17 trap defense
-    trap_findings, trap_scores, trap_status = scan_trap_defense(target)
+    # D17 trap defense — gated on python file presence
+    trap_findings, trap_scores, trap_status = scan_trap_defense(
+        target, file_counts=result.file_counts,
+    )
     result.findings.extend(trap_findings)
     result.trap_defense = trap_status
     for dim_id, score in trap_scores.items():

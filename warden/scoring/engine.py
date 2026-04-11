@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from warden.models import DimensionScore, ScanResult, ScoreLevel
-from warden.scoring.dimensions import ALL_DIMENSIONS, TOTAL_RAW_MAX
+from warden.scoring.dimensions import ALL_DIMENSIONS, TOTAL_RAW_MAX, Dimension
 
 
 def get_score_level(score: int) -> ScoreLevel:
@@ -18,9 +18,42 @@ def get_score_level(score: int) -> ScoreLevel:
         return ScoreLevel.UNGOVERNED
 
 
-def normalize_score(raw_total: int) -> int:
-    """Convert raw score (/235) to normalized score (/100)."""
-    return round(raw_total / TOTAL_RAW_MAX * 100)
+def normalize_score(raw_total: int, raw_max: int = TOTAL_RAW_MAX) -> int:
+    """Convert raw score to normalized score (/100).
+
+    ``raw_max`` defaults to the full 235-point total. When coverage
+    gating drops dimensions (e.g. a pure C# project has D9/D10/D13/D15/
+    D16 excluded because Warden has no C# scanners for them), callers
+    pass the reduced ``raw_max`` so the score reflects only dimensions
+    the scanner could actually assess.
+    """
+    if raw_max <= 0:
+        return 0
+    return round(raw_total / raw_max * 100)
+
+
+def _has_coverage(dim: Dimension, file_counts: dict[str, int] | None) -> bool:
+    """Decide whether a dimension was actually scanned for this project.
+
+    A dimension is considered "covered" if:
+    - It's language-agnostic (``supported_langs is None``), OR
+    - The project has at least one file in any of the supported languages.
+
+    ``file_counts`` comes from ``ScanResult.file_counts`` which cli.py
+    populates with keys ``python``, ``js``, ``other``, ``csharp``. If
+    ``file_counts`` is missing or empty we fall back to the old behavior
+    (all dims covered) so existing callers that don't populate it still
+    work unchanged.
+    """
+    if dim.supported_langs is None:
+        return True
+    if not file_counts:
+        # Back-compat: no file_counts → assume everything is in scope.
+        return True
+    for lang in dim.supported_langs:
+        if file_counts.get(lang, 0) > 0:
+            return True
+    return False
 
 
 def _apply_finding_deductions(
@@ -71,6 +104,7 @@ def _apply_finding_deductions(
 def calculate_scores(
     raw_scores: dict[str, int],
     findings: list | None = None,
+    file_counts: dict[str, int] | None = None,
 ) -> tuple[dict[str, DimensionScore], int, ScoreLevel]:
     """Calculate dimension scores and total from raw scores.
 
@@ -79,6 +113,12 @@ def calculate_scores(
                     Missing dimensions default to 0.
         findings: Optional list of Finding objects. If provided, CRITICAL/HIGH
                   findings will deduct from dimension scores.
+        file_counts: Optional per-language file counts (``python``,
+                    ``js``, ``csharp``, ``other``). When provided, drives
+                    coverage gating: dimensions whose scanners had no
+                    applicable files are excluded from the normalization
+                    denominator. Without this (back-compat), all 17 dims
+                    stay in the denominator.
 
     Returns:
         Tuple of (dimension_scores dict, total_normalized, score_level).
@@ -90,18 +130,24 @@ def calculate_scores(
 
     dimension_scores: dict[str, DimensionScore] = {}
     raw_total = 0
+    effective_max = 0
 
     for dim in ALL_DIMENSIONS:
         raw = min(effective_scores.get(dim.id, 0), dim.max_score)  # Cap at max
         raw = max(raw, 0)  # Floor at 0
+
+        covered = _has_coverage(dim, file_counts)
         dimension_scores[dim.id] = DimensionScore(
             name=dim.name,
             raw=raw,
             max=dim.max_score,
+            covered=covered,
         )
-        raw_total += raw
+        if covered:
+            raw_total += raw
+            effective_max += dim.max_score
 
-    total = normalize_score(raw_total)
+    total = normalize_score(raw_total, effective_max or TOTAL_RAW_MAX)
     level = get_score_level(total)
 
     return dimension_scores, total, level
@@ -110,5 +156,7 @@ def calculate_scores(
 def apply_scores(result: ScanResult, raw_scores: dict[str, int]) -> None:
     """Apply calculated scores to a ScanResult in-place."""
     result.dimension_scores, result.total_score, result.level = calculate_scores(
-        raw_scores, findings=result.findings,
+        raw_scores,
+        findings=result.findings,
+        file_counts=result.file_counts,
     )

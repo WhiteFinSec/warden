@@ -390,22 +390,29 @@ def _scan_js_file(filepath: Path) -> list[Finding]:
 
 def _walk_files(
     target: Path,
-) -> tuple[list[Path], list[Path], list[Path]]:
-    """Walk the tree ONCE and return (python_files, js_ts_files, other_lang_files).
+) -> tuple[list[Path], list[Path], list[Path], list[Path]]:
+    """Walk the tree ONCE and return (py, js_ts, other_lang, cs) file lists.
 
     Uses os.walk to prune skip_dirs at the directory level — avoids
     traversing node_modules, .git, etc. entirely.
-    other_lang_files includes Go, Rust, and Java files.
+
+    - ``other_lang_files``: Go, Rust, Java — handled by the multilang scanner
+    - ``cs_files``: C# — handled by the multilang scanner's C# path.
+      C# is split out so ``ScanResult.file_counts["csharp"]`` can power
+      the coverage gate (don't fire absence-based C# findings if zero
+      ``.cs`` files were indexed).
     """
     import os
 
     py_exts = {".py"}
     js_exts = {".js", ".ts", ".jsx", ".tsx"}
     other_exts = {".go", ".rs", ".java"}
+    cs_exts = {".cs"}
 
     py_files: list[Path] = []
     js_files: list[Path] = []
     other_files: list[Path] = []
+    cs_files: list[Path] = []
 
     for dirpath, dirnames, filenames in os.walk(target):
         # Prune skip dirs IN-PLACE so os.walk doesn't descend into them
@@ -418,8 +425,10 @@ def _walk_files(
                 js_files.append(Path(dirpath) / fname)
             elif ext in other_exts:
                 other_files.append(Path(dirpath) / fname)
+            elif ext in cs_exts:
+                cs_files.append(Path(dirpath) / fname)
 
-    return py_files, js_files, other_files
+    return py_files, js_files, other_files, cs_files
 
 
 def scan_code(
@@ -434,7 +443,7 @@ def scan_code(
     findings: list[Finding] = []
     _progress = on_file if callable(on_file) else None
 
-    py_files, js_files, _other = _walk_files(target)
+    py_files, js_files, _other, _cs = _walk_files(target)
 
     # Read all Python files in parallel (I/O-bound — threads help a lot)
     from concurrent.futures import ThreadPoolExecutor

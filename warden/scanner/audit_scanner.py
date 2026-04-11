@@ -20,12 +20,23 @@ COMPLIANCE_KEYWORDS = {
 def scan_audit(
     target: Path,
     on_file: object = None,
+    file_counts: dict[str, int] | None = None,
 ) -> tuple[list[Finding], dict[str, int]]:
     """Layer 7: Scan for audit logging and compliance patterns.
 
     Returns (findings, raw_dimension_scores).
     on_file: optional callable invoked per file scanned (for progress).
+    file_counts: optional per-language file counts. When provided and
+        the project has zero Python files, this scanner returns an
+        empty result — every pattern below walks ``.py`` files only,
+        so firing absence-based findings on a pure C#/.NET project
+        would just penalize the target for a gap the scanner never
+        had a chance to look for. D5/D14 are still scored by other
+        scanners (multilang C# analyzer contributes to both).
     """
+    if file_counts is not None and file_counts.get("python", 0) == 0:
+        return [], {}
+
     _progress = on_file if callable(on_file) else None
     findings: list[Finding] = []
     has_audit_logging = False

@@ -48,6 +48,7 @@ class DimensionScore:
     raw: int
     max: int
     signals: list[str] = field(default_factory=list)
+    covered: bool = True  # False = dim excluded from /100 denominator (not scanned)
 
     @property
     def pct(self) -> int:

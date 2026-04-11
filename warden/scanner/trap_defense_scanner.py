@@ -162,11 +162,28 @@ TESTING_CHECKS = [
 ]
 
 
-def scan_trap_defense(target: Path) -> tuple[list[Finding], dict[str, int], TrapDefenseStatus]:
+def scan_trap_defense(
+    target: Path,
+    file_counts: dict[str, int] | None = None,
+) -> tuple[list[Finding], dict[str, int], TrapDefenseStatus]:
     """D17: Scan for trap defense and adversarial testing capabilities.
 
     Returns (findings, raw_dimension_scores, trap_defense_status).
+
+    ``file_counts`` is optional for back-compat. When provided and the
+    project has zero Python files, this scanner returns no findings and
+    a zero D17 score, because all of its detection patterns target
+    Python source. Without this gate, a pure C#/.NET project would
+    receive 8 absence-based CRITICAL/HIGH/MEDIUM findings against D17
+    (the 2026-04-11 VigIA scoring foot-gun) even though the scanner
+    never had a chance to observe the relevant code. The multilang
+    scanner's C# analyzer is responsible for scoring D17 on .NET
+    projects; trap_defense_scanner stays out of its way.
     """
+    # Coverage gate — skip entirely when there's no Python to scan.
+    if file_counts is not None and file_counts.get("python", 0) == 0:
+        return [], {"D17": 0}, TrapDefenseStatus()
+
     findings: list[Finding] = []
     status = TrapDefenseStatus()
     d17_score = 0
