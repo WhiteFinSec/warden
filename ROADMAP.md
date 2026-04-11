@@ -1,6 +1,6 @@
 # Warden Roadmap
 
-Status as of **v1.5.6 shipped, v1.6.0 in prep** (2026-04-11).
+Status as of **v1.7.0 in release** (2026-04-11).
 
 Status tags:
 - **TODO** — committed, will build soon
@@ -31,7 +31,9 @@ Status tags:
 - **PDF reports** — `pip install warden-ai[pdf]` adds `--format pdf`; renders the existing HTML report via weasyprint for boardroom/auditor use. Core install stays lean (deps behind an extra)
 - **GitHub Action** — composite `action.yml` at repo root with inputs for path/format/min-score/fail-on-level/baseline/skip/only, outputs for score/level/findings counts, and automatic SARIF upload to GitHub Code Scanning
 - **Competitor detection** — 20 vendors, cross-checked scores (Zenity 55, Portkey 32, Noma 40, HiddenLayer 34, Protect AI 32 per 2026-04-10 research)
-- **Sample report gallery** — `gallery/` builder scaffolds a static site of governance audits for 10 popular OSS AI frameworks (LangChain, LangGraph, CrewAI, AutoGen, Haystack, LlamaIndex, Semantic Kernel, PydanticAI, MetaGPT, Langflow). Stdlib-only build script, idempotent clones, per-target SEO landing pages with JSON-LD + OpenGraph, merged master index. Deploys to any static host (GitHub Pages / Caddy / Netlify)
+- **Sample report gallery** — `gallery/` builder scaffolds a static site of governance audits for 11 popular OSS AI frameworks (LangChain, LangGraph, CrewAI, AutoGen, Haystack, LlamaIndex, Semantic Kernel, PydanticAI, MetaGPT, Langflow, VigIA-Orchestrator). Stdlib-only build script, idempotent clones, per-target SEO landing pages with JSON-LD + OpenGraph, merged master index. Deploys to any static host (GitHub Pages / Caddy / Netlify)
+- **C# / .NET scanner (Layer 13, second batch)** — regex detection of `Microsoft.Extensions.AI`, `Microsoft.SemanticKernel`, `IChatClient`, `[KernelFunction]`, `Result<T, E>`, `InvariantEnforcer`, `AuthorizationPolicyBuilder`, `ChatResponseFormat.CreateJsonSchemaFormat`, `ImmutableDictionary`, `readonly record struct`, `CancellationToken`, `DefaultAzureCredential`, `IHttpClientFactory`, and FSM-guarded state transitions. Scores C#/.NET projects on D1 / D7 / D8 / D14 / D17 without a Python bias
+- **Absence-vs-coverage scoring fix** — absence-based findings are gated on `file_counts[lang] > 0` so pure C#/.NET projects no longer fire Python-scanner CRITICALs. Denominator exclusion at the scoring layer + finding-emission gating at the scanner layer (`trap_defense_scanner`, `audit_scanner`) via `file_counts` kwarg. VigIA-Orchestrator now scores 61/100 PARTIAL (was 2/100 UNGOVERNED coverage-failure artifact)
 
 ---
 
@@ -68,65 +70,7 @@ Status tags:
 
 ### TODO
 
-- **C# / .NET scanner (Layer 13: Multi-Language, second batch)** — **HIGHEST PRIORITY**
-  Surfaced 2026-04-10 while scanning `JordanCT/VigIA-Orchestrator`, a
-  pure-C# agent project. Warden indexed 0 files, fired absence-based
-  CRITICAL findings on an empty scan, and scored 2/100 — punishing the
-  project for a scanner blind spot, not a governance gap. C# / .NET is
-  a primary AI agent stack (Semantic Kernel, MCP C# SDK, Copilot
-  Studio), so this is the single highest-value language addition.
-
-  Minimum viable scope: regex detection of `Microsoft.SemanticKernel`
-  imports, `[KernelFunction]` attribute auditing, `ILogger`-based audit
-  logging, `IChatCompletionService` usage, approval-gate patterns, and
-  hardcoded credentials in `.config`/`.json`/`appsettings*.json`.
-  Same architecture as `multilang_scanner.py` (regex, not AST).
-
-  **Extended scope (from reading VigIA source):** detect `Result<T, E>`
-  monadic error handling, `ImmutableDictionary` / `readonly record
-  struct` for state invariants, C# Source Generator JSON contexts
-  (`JsonSerializerContext`), `ChatResponseFormat.CreateJsonSchemaFormat`
-  strict schema enforcement, and command interceptor / FSM transition
-  patterns. These map directly onto D1 (policy enforcement), D7 (kill
-  switch / hard block), D8 (agent identity), D14 (compliance), and
-  D17 (trap defense) — so a well-governed .NET project like VigIA
-  should score comparably to a well-governed Python project, not 2/100.
-
-  **Test fixture:** VigIA itself. It's small, well-structured, uses
-  `Microsoft.Extensions.AI` (canonical .NET LLM SDK), and already has
-  InvariantEnforcer + 3-strike NACK + snapshot rollbacks as real
-  governance patterns to detect. Target: VigIA should score ≥ 60
-  (PARTIAL) once the scanner lands, ideally higher.
-
-- **Absence-vs-coverage scoring fix (architectural)**
-  The VigIA coverage warning shipped in the fix batch is a band-aid
-  at the CLI layer. The real bug is in `scoring/engine.py`: absence-
-  based findings fire even when the relevant language wasn't scanned
-  at all. A pure C# project gets CRITICAL findings like "No audit
-  logging for tool calls detected" because Warden didn't find any
-  Python `logging` calls — but it never had a chance to.
-
-  Fix: gate absence-based findings on `result.file_counts[lang] > 0`
-  for the language a dimension actually scans. Add a `coverage_gate`
-  flag per dimension (or per finding template) so "we didn't look"
-  becomes an `INFO`-level "not scanned" entry, not a CRITICAL finding.
-  The overall score for an unscanned project should clamp to "N/A —
-  coverage failure" instead of a number.
-
-  This is the real fix for the "2/100 on any non-Python project"
-  foot-gun, and it's independent of the C# scanner — but both should
-  land in v1.7.0 together, because they're two halves of the same
-  problem: "Warden needs to tell coverage failures apart from
-  governance failures, and it needs to fix the coverage gaps for the
-  languages that matter."
-
-- **Add VigIA to the gallery target list (after the C# scanner lands)**
-  Proof-by-example that Warden now handles .NET. `gallery/targets.toml`
-  already has 10 Python/JS targets; adding VigIA as target #11 once
-  the C# scanner is in gives a concrete "before 2/100, after ≥60"
-  narrative for the blog post series. One line in `targets.toml`, one
-  paragraph in the blog post. Blocked on the C# scanner, not on
-  anything else.
+_(empty — Tier 1 shipped in v1.7.0, see Execution Order → Shipped in v1.7.0)_
 
 ### DEFER
 
@@ -260,18 +204,59 @@ check **Execution Order** at the bottom of this file.
 **Gallery scores captured for blog post series:**
 langchain 13, langgraph 14, crewai 19, autogen 6, haystack 15, llamaindex 13, semantic-kernel 14, pydantic-ai 24, metagpt 11, langflow 18 — all UNGOVERNED.
 
+### Shipped in v1.7.0 (tagged and released 2026-04-11)
+
+1. ~~**Tier 1 #1 — C# / .NET scanner (Layer 13, second batch)**~~
+   Shipped in commit `6a6144f`. Detects `Microsoft.Extensions.AI`,
+   `IChatClient`, `[KernelFunction]`, `Result<T, E>`,
+   `InvariantEnforcer`, `AuthorizationPolicyBuilder`,
+   `ChatResponseFormat.CreateJsonSchemaFormat`, `ImmutableDictionary`,
+   `readonly record struct`, `CancellationToken`, `DefaultAzureCredential`,
+   `IHttpClientFactory`, and FSM-guarded state transitions. Scores
+   C#/.NET projects on D1 / D7 / D8 / D14 / D17.
+2. ~~**Tier 1 #2 — Absence-vs-coverage scoring fix**~~
+   Shipped in commit `6a6144f`. Two-halves fix: denominator exclusion
+   in `scoring/engine.py` plus finding-emission gating in
+   `trap_defense_scanner` and `audit_scanner` via a `file_counts`
+   kwarg. `functools.partial` pre-binds `file_counts` into the layer
+   scanners at dispatch time. 6 new regression tests across
+   `test_trap_defense.py` and `test_audit.py`.
+3. ~~**Tier 1 #3 — VigIA gallery target #11**~~
+   Shipped in commit `cfb2726`. `gallery/targets.toml` adds
+   VigIA-Orchestrator as the first non-Python gallery target. VigIA
+   now scores **61/100 PARTIAL** end-to-end (was 2/100 UNGOVERNED
+   coverage-failure artifact before Tier 1 #1 and #2 landed). Proof
+   that the C# scanner + coverage gate are both working on real
+   .NET code, not just synthetic fixtures.
+4. ~~**Version bump 1.6.0 → 1.7.0, tag `v1.7.0`, PyPI publish**~~
+   Required because blog post #13 ("Why Every Python Agent Framework
+   Scores UNGOVERNED") tells readers `pip install warden-ai` gets
+   them the C#/.NET scanner and the coverage gate. Shipped as one
+   release so that claim is true end-to-end the moment the post is
+   live.
+5. ~~**GitHub Release v1.7.0 with release notes**~~
+   Covers the Tier 1 bundle, the VigIA before/after, and the scoring
+   model hardening. Marketplace listing checkbox carried over from
+   v1.6.0 (one-click manual step — still unchecked as of this release,
+   same constraint as v1.6.0).
+6. ~~**Full 11-target gallery rebuild + redeploy**~~
+   First gallery run with VigIA + C# scanner + coverage gate all on.
+   Published to `gh-pages` branch, live at
+   `https://sharkrouter.github.io/warden/vigia-orchestrator/`.
+7. ~~**Blog post #13 — "Why Every Python Agent Framework Scores UNGOVERNED"**~~
+   Shipped in `sharkagent@2aafcb63` and deployed to sharkrouter.ai.
+   Uses the 10-target Python gallery scores as the hook and the VigIA
+   61/100 result as the counter-example. Gated on v1.7.0 being live
+   on PyPI so the `pip install warden-ai` claim in the post is
+   accurate.
+
 ### Next up (in order, not time — decision gates, not calendar days)
 
-1. **Tier 1 — C#/.NET scanner + absence-vs-coverage fix (v1.7.0)**
-   - Implement C# / .NET regex scanner in `warden/scanner/multilang_scanner.py` extension
-   - Ship absence-vs-coverage scoring fix in `scoring/engine.py` at the same time
-   - Validate both against VigIA-Orchestrator as the test fixture — target: VigIA scores ≥ 60 (PARTIAL), down from the current 2/100 coverage-failure artifact
-   - Add VigIA as gallery target #11 as proof-by-example
-
-2. **Tier 3 — Blog post series**
-   - Post #1: "Why LangChain scores X/100" — walkthrough of the first validated gallery target, using the fresh gallery site as evidence
+1. **Tier 3 — Blog post series (continued)**
    - Post #2: "How we fixed the 2/100 problem — C# scanner + coverage gating"
-     (only possible after Tier 1 lands, uses VigIA as the before/after case study)
-   - Post #3+: one per gallery target, rolling cadence
+     (VigIA before/after case study, drafted alongside v1.7.0)
+   - Post #3+: one per gallery target (LangChain deep-dive, AutoGen 6/100 anatomy, etc.), rolling cadence
 
-3. **Conference talk / paper** — methodology writeup for a security venue. No concrete target yet; unblocked but waiting for a venue, not for code.
+2. **Conference talk / paper** — methodology writeup for a security venue. No concrete target yet; unblocked but waiting for a venue, not for code.
+
+3. **GitHub Marketplace listing** — carryover from v1.6.0 and v1.7.0. One-click manual step on a GitHub release page. Still unchecked. Flag to user; can't be automated.
