@@ -6,23 +6,93 @@
 
 Open-source, local-only CLI scanner that evaluates AI agent governance posture across **12 scan layers** and **17 dimensions**. Scans code patterns, MCP configs, infrastructure, secrets, agent architecture, dependencies, audit compliance, CI/CD pipelines, IaC security, framework-specific governance, multi-language code, and cloud AI services. **No data leaves the machine.**
 
-**Website:** [sharkrouter.ai](https://sharkrouter.ai) · **PyPI:** [warden-ai](https://pypi.org/project/warden-ai/)
+**Website:** [sharkrouter.ai](https://sharkrouter.ai) · **PyPI:** [warden-ai](https://pypi.org/project/warden-ai/) · **GitHub Action:** [Marketplace listing](https://github.com/marketplace/actions/warden-ai-governance-scan)
 
-## Quick Start
+> **For security teams / CISOs:** zero local install required. Scan any GitHub repo by adding the [Warden GitHub Action](#tier-1--zero-install-github-action) to its workflows — runs on GitHub's infrastructure, posts findings to your Code Scanning tab.
+
+## Install
+
+Pick the tier that matches your environment. **Zero Python required for Tier 1** — scanning runs on GitHub's runners.
+
+### Tier 1 — Zero install (GitHub Action)
+
+For security teams, CISOs, and anyone who wants governance scoring in CI without touching local Python. Drop a workflow file into any repo:
+
+```yaml
+# .github/workflows/warden.yml
+name: Warden governance scan
+on: [push, pull_request]
+permissions:
+  contents: read
+  security-events: write   # for SARIF upload to Code Scanning
+jobs:
+  warden:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: SharkRouter/warden@v1
+        with:
+          path: .
+          # Optional: fail the build on poor posture
+          # min-score: 60
+          # fail-on-level: at_risk
+```
+
+Findings show up in your repo's **Security → Code scanning** tab, scoped per file and line. Full input/output reference in the [GitHub Action — Reference](#github-action--reference) section below.
+
+### Tier 2 — One-shot local scan
+
+For a quick local audit. No persistent install — `uvx` runs Warden in a throwaway environment.
 
 ```bash
-# With uv (zero setup, one-shot — recommended)
+# Install uv first if you don't have it (one-time, ~10 MB):
+#   curl -LsSf https://astral.sh/uv/install.sh | sh        # macOS / Linux
+#   powershell -c "irm https://astral.sh/uv/install.ps1 | iex"   # Windows
+
 uvx --from warden-ai warden scan /path/to/your-agent-project
+```
 
-# With pip
-pip install warden-ai
+Note: the package is `warden-ai` but the CLI is `warden` — that's why the `--from` flag is needed for `uvx`.
+
+### Tier 3 — Persistent CLI install
+
+For repeated use or scripting. Recommended for developers.
+
+```bash
+# pipx (recommended — isolated env, `warden` on PATH everywhere)
+pipx install warden-ai
+
+# Or pip into your user site
+pip install --user warden-ai
+
+# Then:
 warden scan /path/to/your-agent-project
+warden --version
+```
 
-# Optional extras
-pip install 'warden-ai[pdf]'   # adds `--format pdf` (weasyprint)
+**Optional extras:**
+```bash
+pipx install 'warden-ai[pdf]'   # adds `--format pdf` (weasyprint)
 ```
 
 From zero to governance score in under 60 seconds.
+
+### Windows notes
+
+- If `pip install` or `uv tool install` hangs silently for minutes, **add Defender exclusions** for your Python and uv directories (admin PowerShell):
+  ```powershell
+  Add-MpPreference -ExclusionPath "$env:APPDATA\Python"
+  Add-MpPreference -ExclusionPath "$env:LOCALAPPDATA\uv"
+  Add-MpPreference -ExclusionPath "$env:APPDATA\uv"
+  Add-MpPreference -ExclusionProcess "python.exe"
+  Add-MpPreference -ExclusionProcess "py.exe"
+  Add-MpPreference -ExclusionProcess "uv.exe"
+  ```
+- If `uvx` hangs after "Acquired shared lock", a previous run left a stale lock. Clear it:
+  ```powershell
+  Get-Process uv,uvx,uvw,python -ErrorAction SilentlyContinue | Stop-Process -Force
+  Remove-Item "$env:LOCALAPPDATA\uv\cache\.lock" -Force -ErrorAction SilentlyContinue
+  ```
 
 ## HTML Report
 
@@ -114,9 +184,9 @@ skip = ["multilang"]
 
 Warden searches upward from the scan path until it finds a config file or hits a VCS root (`.git`, `.hg`, `.svn`). Paths like `output_dir` and `baseline` are resolved relative to the config file. Pass `--no-config` to ignore any discovered config.
 
-### GitHub Action
+### GitHub Action — Reference
 
-Warden ships as a GitHub Action so every push and PR scores governance posture and publishes findings to Code Scanning.
+Full input/output interface for the [Tier 1 GitHub Action](#tier-1--zero-install-github-action) above. Every push and PR scores governance posture and publishes findings to Code Scanning.
 
 ```yaml
 # .github/workflows/warden.yml
